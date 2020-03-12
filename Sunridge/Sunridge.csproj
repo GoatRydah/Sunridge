@@ -14,4 +14,11 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sunridge.DataAccess\Sunridge.DataAccess.csproj" />
+    <ProjectReference Include="..\Sunridge.Models\Sunridge.Models.csproj" />
+    <ProjectReference Include="..\Sunridge.Utility\Sunridge.Utility.csproj" />
+  </ItemGroup>
+
 </Project>
