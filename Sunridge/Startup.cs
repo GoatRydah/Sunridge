@@ -12,6 +12,8 @@ using Sunridge.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Sunridge.DataAccess.Data.Repository.IRepository;
+using Sunridge.DataAccess.Data.Repository;
 
 namespace Sunridge
 {
@@ -27,12 +29,25 @@ namespace Sunridge
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddRazorPages();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddMvc(options => options.EnableEndpointRouting = false)
+                .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+            //services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));//Stripe goes to appsettings
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
+            Configuration.GetConnectionString("DefaultConnection")));
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+            //.AddDefaultUI(UIFramework.Bootstrap4);
+            //services.AddSingleton < IEmailSender, IEmailSender>();
+            services.AddRazorPages().AddRazorRuntimeCompilation(); //runtimecomp
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,16 +67,16 @@ namespace Sunridge
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseSession();
 
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapRazorPages();
-            });
+            app.UseMvc();
+            //StripeConfiguration.ApiKey = Configuration.GetSection("Stripe")["SecretKey"];
+
         }
     }
 }
