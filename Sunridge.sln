@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sunridge", "Sunridge\Sunridge.csproj", "{BB036AC0-612B-454E-96CD-836E66AC8738}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BB036AC0-612B-454E-96CD-836E66AC8738}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB036AC0-612B-454E-96CD-836E66AC8738}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB036AC0-612B-454E-96CD-836E66AC8738}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB036AC0-612B-454E-96CD-836E66AC8738}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {11BFD0A7-4E75-4D35-B138-EBC1E104D2D9}
+	EndGlobalSection
+EndGlobal
