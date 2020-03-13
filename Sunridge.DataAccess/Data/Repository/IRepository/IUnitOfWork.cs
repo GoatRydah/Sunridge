@@ -6,7 +6,7 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
 {
     public interface IUnitOfWork : IDisposable
     {
-
+        IApplicationUserRepository ApplicationUser { get; }
         void Save();
     }
 }

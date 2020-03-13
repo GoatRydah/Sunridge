@@ -16,5 +16,6 @@ namespace Sunridge.Data
         }
 
         public DbSet<Key> Key { get; set; }
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
     }
 }
