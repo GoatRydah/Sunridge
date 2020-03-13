@@ -1,13 +1,14 @@
-﻿﻿table {
+﻿table {
     font-family: sans-serif;
     margin-top: 10px;
     width: 100%;
     font-size: 15px;
-    text-align: center;
+    text-align: center;    
 }
 
 table, td, th {
     /*border: 1px solid black;*/
+
 }
 
 
@@ -60,7 +61,7 @@ tr {
     justify-content: center;
 }
 
-h2 {
+h2{
     margin-top: 10px;
     margin-left: 10px;
 }
@@ -82,9 +83,11 @@ th.shrink-responsive {
 /*#bannerHead {
     width:15%;
 }
+
 #bannerBody {
     width:40%;
 }
+
 #bannerImage {
     width:25%;
 }*/
@@ -108,9 +111,10 @@ th.shrink-responsive {
     margin-left: auto;
     margin-right: auto;
     /*width: 50%;*/
-}
-*/
+}*/
 /*.btn-secondary {
     margin: 0px;
     padding: 0px;
 }*/
+
+

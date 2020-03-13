@@ -1,11 +1,11 @@
-﻿﻿div#titleDiv p#title {
+﻿div#titleDiv p#title {
     font-size: 25px;
     color: #6ca6ca;
-    float: left;
+    float:left;
 }
 
 #titleDiv p {
-    margin-top: 12px;
+    margin-top:12px;
     display: inline-block;
     font-family: Abel;
     font-size: 16px;
@@ -17,5 +17,6 @@
 div#titleDiv p#money {
     color: forestgreen;
     font-size: 18px;
-    margin-left: 5px;
+    margin-left:5px;
 }
+
