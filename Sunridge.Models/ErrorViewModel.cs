@@ -1,6 +1,6 @@
 using System;
 
-namespace SunridgeHOA.Models
+namespace Sunridge.Models
 {
     public class ErrorViewModel
     {

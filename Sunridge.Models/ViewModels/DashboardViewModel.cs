@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SunridgeHOA.Models.ViewModels
+namespace Sunridge.Models.ViewModels
 {
     public class DashboardViewModel
     {

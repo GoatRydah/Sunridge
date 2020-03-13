@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 // Courtesy of other Sunridge Team
-namespace SunridgeHOA.Models
+namespace Sunridge.Models
 {
     public class ScheduledEvent
     {

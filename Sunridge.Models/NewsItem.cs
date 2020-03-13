@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SunridgeHOA.Models
+namespace Sunridge.Models
 {
     //public class NewsItem : DbItem
     public class NewsItem

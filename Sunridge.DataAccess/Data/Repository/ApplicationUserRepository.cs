@@ -1,6 +1,6 @@
 ﻿using Sunridge.Data;
 using Sunridge.DataAccess.Data.Repository.IRepository;
-using SunridgeHOA.Models;
+using Sunridge.Models;
 
 namespace Sunridge.DataAccess.Data.Repository
 {
