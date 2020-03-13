@@ -29,7 +29,21 @@ namespace Sunridge.DataAccess.Data.Repository
 
         public void Update(KeyHistory keyHistory)
         {
-            throw new NotImplementedException();
+              var objFromDb = _db.KeyHistory.FirstOrDefault(s => s.KeyHistoryId == keyHistory.KeyHistoryId);
+
+            objFromDb.IsArchive = keyHistory.IsArchive;
+            objFromDb.DateIssued = keyHistory.DateIssued;
+            objFromDb.DateReturned = keyHistory.DateReturned;
+            objFromDb.Key = keyHistory.Key;
+            objFromDb.KeyId = keyHistory.KeyId;
+            objFromDb.LastModifiedBy = keyHistory.LastModifiedBy;
+            objFromDb.LastModifiedDate = keyHistory.LastModifiedDate;
+            objFromDb.Lot = keyHistory.Lot;
+            objFromDb.LotId = keyHistory.LotId;
+            objFromDb.PaidAmount = keyHistory.PaidAmount;
+            objFromDb.Status = keyHistory.Status;
+
+            _db.SaveChanges();
         }
     }
 }
