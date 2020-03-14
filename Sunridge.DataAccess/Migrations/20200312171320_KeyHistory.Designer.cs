@@ -217,7 +217,7 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.Address", b =>
+            modelBuilder.Entity("Sunridge.Models.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -254,7 +254,7 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("Address");
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.ClassifiedCategory", b =>
+            modelBuilder.Entity("Sunridge.Models.ClassifiedCategory", b =>
                 {
                     b.Property<int>("ClassifiedCategoryId")
                         .ValueGeneratedOnAdd()
@@ -278,7 +278,7 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("ClassifiedCategory");
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.ClassifiedImage", b =>
+            modelBuilder.Entity("Sunridge.Models.ClassifiedImage", b =>
                 {
                     b.Property<int>("ClassifiedImageId")
                         .ValueGeneratedOnAdd()
@@ -304,7 +304,7 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("ClassifiedImage");
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.ClassifiedListing", b =>
+            modelBuilder.Entity("Sunridge.Models.ClassifiedListing", b =>
                 {
                     b.Property<int>("ClassifiedListingId")
                         .ValueGeneratedOnAdd()
@@ -357,7 +357,7 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("ClassifiedListing");
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.Comment", b =>
+            modelBuilder.Entity("Sunridge.Models.Comment", b =>
                 {
                     b.Property<int>("CommentId")
                         .ValueGeneratedOnAdd()
@@ -393,7 +393,7 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("Comment");
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.File", b =>
+            modelBuilder.Entity("Sunridge.Models.File", b =>
                 {
                     b.Property<int>("FileId")
                         .ValueGeneratedOnAdd()
@@ -433,7 +433,7 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("File");
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.FormResponse", b =>
+            modelBuilder.Entity("Sunridge.Models.FormResponse", b =>
                 {
                     b.Property<int>("FormResponseId")
                         .ValueGeneratedOnAdd()
@@ -481,7 +481,7 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("FormResponse");
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.InKindWorkHours", b =>
+            modelBuilder.Entity("Sunridge.Models.InKindWorkHours", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -507,7 +507,7 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("InKindWorkHours");
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.Inventory", b =>
+            modelBuilder.Entity("Sunridge.Models.Inventory", b =>
                 {
                     b.Property<int>("InventoryId")
                         .ValueGeneratedOnAdd()
@@ -531,7 +531,7 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("Inventory");
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.Key", b =>
+            modelBuilder.Entity("Sunridge.Models.Key", b =>
                 {
                     b.Property<int>("KeyId")
                         .ValueGeneratedOnAdd()
@@ -560,7 +560,7 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("Key");
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.KeyHistory", b =>
+            modelBuilder.Entity("Sunridge.Models.KeyHistory", b =>
                 {
                     b.Property<int>("KeyHistoryId")
                         .ValueGeneratedOnAdd()
@@ -608,7 +608,7 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("KeyHistory");
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.Lot", b =>
+            modelBuilder.Entity("Sunridge.Models.Lot", b =>
                 {
                     b.Property<int>("LotId")
                         .ValueGeneratedOnAdd()
@@ -641,7 +641,7 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("Lot");
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.LotHistory", b =>
+            modelBuilder.Entity("Sunridge.Models.LotHistory", b =>
                 {
                     b.Property<int>("LotHistoryId")
                         .ValueGeneratedOnAdd()
@@ -670,7 +670,7 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("LotHistory");
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.LotInventory", b =>
+            modelBuilder.Entity("Sunridge.Models.LotInventory", b =>
                 {
                     b.Property<int>("LotInventoryId")
                         .ValueGeneratedOnAdd()
@@ -704,7 +704,7 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("LotInventory");
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.Owner", b =>
+            modelBuilder.Entity("Sunridge.Models.Owner", b =>
                 {
                     b.Property<int>("OwnerId")
                         .ValueGeneratedOnAdd()
@@ -762,7 +762,7 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("Owner");
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.OwnerLot", b =>
+            modelBuilder.Entity("Sunridge.Models.OwnerLot", b =>
                 {
                     b.Property<int>("OwnerLotId")
                         .ValueGeneratedOnAdd()
@@ -802,7 +802,7 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("OwnerLot");
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.Transaction", b =>
+            modelBuilder.Entity("Sunridge.Models.Transaction", b =>
                 {
                     b.Property<int>("TransactionId")
                         .ValueGeneratedOnAdd()
@@ -853,7 +853,7 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("Transaction");
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.TransactionType", b =>
+            modelBuilder.Entity("Sunridge.Models.TransactionType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -928,173 +928,173 @@ namespace Sunridge.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.ClassifiedImage", b =>
+            modelBuilder.Entity("Sunridge.Models.ClassifiedImage", b =>
                 {
-                    b.HasOne("SunridgeHOA.Models.ClassifiedListing", null)
+                    b.HasOne("Sunridge.Models.ClassifiedListing", null)
                         .WithMany("Images")
                         .HasForeignKey("ClassifiedListingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.ClassifiedListing", b =>
+            modelBuilder.Entity("Sunridge.Models.ClassifiedListing", b =>
                 {
-                    b.HasOne("SunridgeHOA.Models.ClassifiedCategory", "ClassifiedCategory")
+                    b.HasOne("Sunridge.Models.ClassifiedCategory", "ClassifiedCategory")
                         .WithMany()
                         .HasForeignKey("ClassifiedCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SunridgeHOA.Models.Owner", "Owner")
+                    b.HasOne("Sunridge.Models.Owner", "Owner")
                         .WithMany("ClassifiedListings")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.Comment", b =>
+            modelBuilder.Entity("Sunridge.Models.Comment", b =>
                 {
-                    b.HasOne("SunridgeHOA.Models.FormResponse", "FormResponse")
+                    b.HasOne("Sunridge.Models.FormResponse", "FormResponse")
                         .WithMany("Comments")
                         .HasForeignKey("FormResponseId");
 
-                    b.HasOne("SunridgeHOA.Models.LotHistory", "LotHistory")
+                    b.HasOne("Sunridge.Models.LotHistory", "LotHistory")
                         .WithMany("Comments")
                         .HasForeignKey("LotHistoryId");
 
-                    b.HasOne("SunridgeHOA.Models.Owner", "Owner")
+                    b.HasOne("Sunridge.Models.Owner", "Owner")
                         .WithMany()
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.File", b =>
+            modelBuilder.Entity("Sunridge.Models.File", b =>
                 {
-                    b.HasOne("SunridgeHOA.Models.FormResponse", null)
+                    b.HasOne("Sunridge.Models.FormResponse", null)
                         .WithMany("Files")
                         .HasForeignKey("FormResponseId");
 
-                    b.HasOne("SunridgeHOA.Models.LotHistory", "LotHistory")
+                    b.HasOne("Sunridge.Models.LotHistory", "LotHistory")
                         .WithMany("Files")
                         .HasForeignKey("LotHistoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.FormResponse", b =>
+            modelBuilder.Entity("Sunridge.Models.FormResponse", b =>
                 {
-                    b.HasOne("SunridgeHOA.Models.Lot", "Lot")
+                    b.HasOne("Sunridge.Models.Lot", "Lot")
                         .WithMany()
                         .HasForeignKey("LotId");
 
-                    b.HasOne("SunridgeHOA.Models.Owner", "Owner")
+                    b.HasOne("Sunridge.Models.Owner", "Owner")
                         .WithMany("FormResponses")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.InKindWorkHours", b =>
+            modelBuilder.Entity("Sunridge.Models.InKindWorkHours", b =>
                 {
-                    b.HasOne("SunridgeHOA.Models.FormResponse", null)
+                    b.HasOne("Sunridge.Models.FormResponse", null)
                         .WithMany("InKindWorkHours")
                         .HasForeignKey("FormResponseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.KeyHistory", b =>
+            modelBuilder.Entity("Sunridge.Models.KeyHistory", b =>
                 {
-                    b.HasOne("SunridgeHOA.Models.Key", "Key")
+                    b.HasOne("Sunridge.Models.Key", "Key")
                         .WithMany()
                         .HasForeignKey("KeyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SunridgeHOA.Models.Lot", "Lot")
+                    b.HasOne("Sunridge.Models.Lot", "Lot")
                         .WithMany()
                         .HasForeignKey("LotId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SunridgeHOA.Models.Owner", null)
+                    b.HasOne("Sunridge.Models.Owner", null)
                         .WithMany("KeyHistories")
                         .HasForeignKey("OwnerId");
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.Lot", b =>
+            modelBuilder.Entity("Sunridge.Models.Lot", b =>
                 {
-                    b.HasOne("SunridgeHOA.Models.Address", "Address")
+                    b.HasOne("Sunridge.Models.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.LotHistory", b =>
+            modelBuilder.Entity("Sunridge.Models.LotHistory", b =>
                 {
-                    b.HasOne("SunridgeHOA.Models.Lot", "Lot")
+                    b.HasOne("Sunridge.Models.Lot", "Lot")
                         .WithMany("LotHistories")
                         .HasForeignKey("LotId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.LotInventory", b =>
+            modelBuilder.Entity("Sunridge.Models.LotInventory", b =>
                 {
-                    b.HasOne("SunridgeHOA.Models.Inventory", "Inventory")
+                    b.HasOne("Sunridge.Models.Inventory", "Inventory")
                         .WithMany("LotInventories")
                         .HasForeignKey("InventoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SunridgeHOA.Models.Lot", "Lot")
+                    b.HasOne("Sunridge.Models.Lot", "Lot")
                         .WithMany("LotInventories")
                         .HasForeignKey("LotId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.Owner", b =>
+            modelBuilder.Entity("Sunridge.Models.Owner", b =>
                 {
-                    b.HasOne("SunridgeHOA.Models.Address", "Address")
+                    b.HasOne("Sunridge.Models.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.OwnerLot", b =>
+            modelBuilder.Entity("Sunridge.Models.OwnerLot", b =>
                 {
-                    b.HasOne("SunridgeHOA.Models.Lot", "Lot")
+                    b.HasOne("Sunridge.Models.Lot", "Lot")
                         .WithMany("OwnerLots")
                         .HasForeignKey("LotId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SunridgeHOA.Models.Owner", "Owner")
+                    b.HasOne("Sunridge.Models.Owner", "Owner")
                         .WithMany("OwnerLots")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.Transaction", b =>
+            modelBuilder.Entity("Sunridge.Models.Transaction", b =>
                 {
-                    b.HasOne("SunridgeHOA.Models.Lot", "Lot")
+                    b.HasOne("Sunridge.Models.Lot", "Lot")
                         .WithMany("Transactions")
                         .HasForeignKey("LotId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SunridgeHOA.Models.Owner", "Owner")
+                    b.HasOne("Sunridge.Models.Owner", "Owner")
                         .WithMany("Transactions")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SunridgeHOA.Models.TransactionType", "TransactionType")
+                    b.HasOne("Sunridge.Models.TransactionType", "TransactionType")
                         .WithMany()
                         .HasForeignKey("TransactionTypeId")
                         .OnDelete(DeleteBehavior.Cascade)

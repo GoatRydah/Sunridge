@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using SunridgeHOA.Models;
+using Sunridge.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,10 +7,10 @@ using System.Transactions;
 
 namespace Sunridge.DataAccess.Data.Repository.IRepository
 {
-    public interface ITransactionRepository : IRepository<SunridgeHOA.Models.Transaction>
+    public interface ITransactionRepository : IRepository<Sunridge.Models.Transaction>
     {
         IEnumerable<SelectListItem> GetTransactionListOrDropdown();
 
-        void Update(SunridgeHOA.Models.Transaction transaction);
+        void Update(Sunridge.Models.Transaction transaction);
     }
 }

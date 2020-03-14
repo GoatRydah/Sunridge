@@ -217,7 +217,7 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("SunridgeHOA.Models.Key", b =>
+            modelBuilder.Entity("Sunridge.Models.Key", b =>
                 {
                     b.Property<int>("KeyId")
                         .ValueGeneratedOnAdd()

@@ -5,12 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Transactions;
-using SunridgeHOA.Models;
+using Sunridge.Models;
 using System.Linq;
 
 namespace Sunridge.DataAccess.Data.Repository
 {
-    public class TransactionRepository : Repository<SunridgeHOA.Models.Transaction>, ITransactionRepository
+    public class TransactionRepository : Repository<Sunridge.Models.Transaction>, ITransactionRepository
     {
         private readonly ApplicationDbContext _db;
 
@@ -28,7 +28,7 @@ namespace Sunridge.DataAccess.Data.Repository
             });
         }
 
-        public void Update(SunridgeHOA.Models.Transaction transaction)
+        public void Update(Sunridge.Models.Transaction transaction)
         {
             var objFromDb = _db.Transaction.FirstOrDefault(s => s.TransactionId == transaction.TransactionId);
 
