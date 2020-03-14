@@ -6,6 +6,7 @@ namespace Sunridge.DataAccess.Data.Repository
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _db;
+        public IApplicationUserRepository ApplicationUser { get; private set; }
 
         public IKeyRepository Key { get; private set; }
         public IKeyHistoryRepository KeyHistory { get; private set; }
@@ -23,6 +24,8 @@ namespace Sunridge.DataAccess.Data.Repository
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
+            ApplicationUser = new ApplicationUserRepository(_db);
+
             Key = new KeyRepository(_db);
             KeyHistory = new KeyHistoryRepository(_db);
             Lot = new LotRepository(_db);

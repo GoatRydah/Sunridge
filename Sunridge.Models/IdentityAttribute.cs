@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SunridgeHOA.Models
+namespace Sunridge.Models
 {
     internal class IdentityAttribute : Attribute
     {

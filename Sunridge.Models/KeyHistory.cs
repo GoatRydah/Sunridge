@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
 
-namespace SunridgeHOA.Models
+namespace Sunridge.Models
 {
     public class KeyHistory: DbItem
     {
