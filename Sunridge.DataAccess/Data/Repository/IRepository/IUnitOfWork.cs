@@ -10,6 +10,13 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         IKeyHistoryRepository KeyHistory { get; }
         ILotRepository Lot { get; }
         ILotHistoryRepository LotHistory { get; }
+        ILotInventoryRepository LotInventory { get; }
+        IMaintenanceRepository Maintenance { get; }
+        INewsItemRepository NewsItem { get; }
+        IPhotoRepository Photo { get; }
+        IScheduledEventsRepository ScheduledEvents { get; }
+        ITransactionRepository Transaction { get; }
+        ITransactionTypeRepository TransactionType { get; }
 
         void Save();
     }
