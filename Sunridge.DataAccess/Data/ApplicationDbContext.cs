@@ -17,6 +17,8 @@ namespace Sunridge.Data
 
         public DbSet<Key> Key { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
+        public DbSet<Address> Address { get; set; }
+        public DbSet<Banner> Banner { get; set; }
         public DbSet<KeyHistory> KeyHistory { get; set; }
         public DbSet<Lot> Lot { get; set; }
         public DbSet<LotHistory> LotHistory { get; set; }
