@@ -48,7 +48,7 @@ namespace Sunridge.DataAccess.Data.Repository
             objFromDb.Transactions = applicationUser.Transactions;
             objFromDb.FormResponses = applicationUser.FormResponses;
             objFromDb.ClassifiedListings = applicationUser.ClassifiedListings;
-            objFromDb.KeyHistories = applicationUser.KeyHistories;
+            objFromDb.KeyHistories = applicationUser.KeyHistories;//
 
             _db.SaveChanges();
         }
