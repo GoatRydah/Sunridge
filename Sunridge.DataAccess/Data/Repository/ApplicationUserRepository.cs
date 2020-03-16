@@ -21,7 +21,7 @@ namespace Sunridge.DataAccess.Data.Repository
             return _db.ApplicationUser.Select(i => new SelectListItem()
             {
                 Value = i.Id.ToString(),
-                Text = i.Id.ToString()
+                Text = i.FullName
             });
         }
 

@@ -20,8 +20,8 @@ namespace Sunridge.DataAccess.Data.Repository
         {
             return _db.Banner.Select(i => new SelectListItem()
             {
-                Value = i.Header,
-                Text = i.Id.ToString()
+                Value = i.Id.ToString(),
+                Text = i.Header
             });
         }
 

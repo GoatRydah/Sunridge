@@ -21,6 +21,12 @@ namespace Sunridge.Data
         public DbSet<Banner> Banner { get; set; }
         public DbSet<ClassifiedCategory> ClassifiedCategory { get; set; }
         public DbSet<ClassifiedImage> ClassifiedImage { get; set; }
+        public DbSet<ClassifiedListing> ClassifiedListing { get; set; }
+        public DbSet<Comment> Comment { get; set; }
+        public DbSet<CommonAreaAsset> CommonAreaAsset { get; set; }
+        public DbSet<DbItem> DbItem { get; set; }
+        public DbSet<ErrorViewModel> ErrorViewModel { get; set; }
+        public DbSet<File> File { get; set; }
         public DbSet<KeyHistory> KeyHistory { get; set; }
         public DbSet<Lot> Lot { get; set; }
         public DbSet<LotHistory> LotHistory { get; set; }

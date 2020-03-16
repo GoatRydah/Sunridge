@@ -11,6 +11,12 @@ namespace Sunridge.DataAccess.Data.Repository
         public IBannerRepository Banner { get; private set; }
         public IClassifiedCategoryRepository ClassifiedCategory { get; private set; }
         public IClassifiedImageRepository ClassifiedImage { get; private set; }
+        public IClassifiedListingRepository ClassifiedListing { get; private set; }
+        public ICommentRepository Comment { get; private set; }
+        public ICommonAreaAssetRepository CommonAreaAsset { get; private set; }
+        public IDbItemRepository DbItem { get; private set; }
+        public IErrorViewModelRepository ErrorViewModel { get; private set; }
+        public IFileRepository File { get; private set; }
 
         public IKeyRepository Key { get; private set; }
         public IKeyHistoryRepository KeyHistory { get; private set; }
@@ -33,6 +39,12 @@ namespace Sunridge.DataAccess.Data.Repository
             Banner = new BannerRepository(_db);
             ClassifiedCategory = new ClassifiedCategoryRepository(_db);
             ClassifiedImage = new ClassifiedImageRepository(_db);
+            ClassifiedListing = new ClassifiedListingRepository(_db);
+            Comment = new CommentRepository(_db);
+            CommonAreaAsset = new CommonAreaAssetRepository(_db);
+            DbItem = new DbItemRepository(_db);
+            ErrorViewModel = new ErrorViewModelRepository(_db);
+            File = new FileRepository(_db);
 
             Key = new KeyRepository(_db);
             KeyHistory = new KeyHistoryRepository(_db);
