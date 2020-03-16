@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Sunridge.Models;
+using Sunridge.Models.ViewModels;
 
 namespace Sunridge.Data
 {
@@ -30,6 +31,9 @@ namespace Sunridge.Data
         public DbSet<FormResponse> FormResponse { get; set; }
         public DbSet<InKindWorkHours> InKindWorkHours { get; set; }
         public DbSet<Inventory> Inventory { get; set; }
+        public DbSet<AdminPhotoViewModels> AdminPhotoViewModels { get; set; }
+        public DbSet<ClassifiedListingViewModel> ClassifiedListingViewModel { get; set; }
+        public DbSet<DashboardViewModel> DashboardViewModel { get; set; }
 
 
         public DbSet<KeyHistory> KeyHistory { get; set; }

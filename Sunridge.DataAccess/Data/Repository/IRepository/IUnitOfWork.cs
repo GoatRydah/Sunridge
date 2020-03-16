@@ -19,7 +19,10 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         IFileRepository File { get; }
         IFormResponseRepository FormResponse { get; }
         IInKindWorkHoursRepository InKindWorkHours { get; }
-        IInventoryRepository InventoryRepository { get; }
+        IInventoryRepository Inventory { get; }
+        IAdminPhotoViewModelsRepository AdminPhotoViewModels { get; }
+        IClassifiedListingViewModelRepository ClassifiedListingViewModel { get; }
+        IDashboardViewModelRepository DashboardViewModel { get; }
 
 
         IKeyRepository Key { get; }
