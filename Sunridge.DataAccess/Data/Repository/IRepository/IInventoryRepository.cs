@@ -8,6 +8,6 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
     {
         IEnumerable<SelectListItem> GetInventoryListOrDropdown();
 
-        void Update(Inventory address);
+        void Update(Inventory address);//
     }
 }
