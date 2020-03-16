@@ -17,6 +17,9 @@ namespace Sunridge.DataAccess.Data.Repository
         public IDbItemRepository DbItem { get; private set; }
         public IErrorViewModelRepository ErrorViewModel { get; private set; }
         public IFileRepository File { get; private set; }
+        public IFormResponseRepository FormResponse { get; private set; }
+        public IInKindWorkHoursRepository InKindWorkHours { get; private set; }
+        public IInventoryRepository Inventory { get; private set; }
 
         public IKeyRepository Key { get; private set; }
         public IKeyHistoryRepository KeyHistory { get; private set; }
@@ -45,6 +48,9 @@ namespace Sunridge.DataAccess.Data.Repository
             DbItem = new DbItemRepository(_db);
             ErrorViewModel = new ErrorViewModelRepository(_db);
             File = new FileRepository(_db);
+            FormResponse = new FormResponseRepository(_db);
+            InKindWorkHours = new InKindWorkHoursRepository(_db);
+            Inventory = new InventoryRepository(_db);
 
             Key = new KeyRepository(_db);
             KeyHistory = new KeyHistoryRepository(_db);

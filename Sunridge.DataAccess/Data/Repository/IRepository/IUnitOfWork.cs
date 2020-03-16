@@ -17,6 +17,11 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         IDbItemRepository DbItem { get; }
         IErrorViewModelRepository ErrorViewModel { get; }
         IFileRepository File { get; }
+        IFormResponseRepository FormResponse { get; }
+        IInKindWorkHoursRepository InKindWorkHours { get; }
+        IInventoryRepository InventoryRepository { get; }
+
+
         IKeyRepository Key { get; }
         IKeyHistoryRepository KeyHistory { get; }
         ILotRepository Lot { get; }

@@ -27,6 +27,11 @@ namespace Sunridge.Data
         public DbSet<DbItem> DbItem { get; set; }
         public DbSet<ErrorViewModel> ErrorViewModel { get; set; }
         public DbSet<File> File { get; set; }
+        public DbSet<FormResponse> FormResponse { get; set; }
+        public DbSet<InKindWorkHours> InKindWorkHours { get; set; }
+        public DbSet<Inventory> Inventory { get; set; }
+
+
         public DbSet<KeyHistory> KeyHistory { get; set; }
         public DbSet<Lot> Lot { get; set; }
         public DbSet<LotHistory> LotHistory { get; set; }

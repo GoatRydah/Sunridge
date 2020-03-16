@@ -21,7 +21,7 @@ namespace Sunridge.DataAccess.Data.Repository
             return _db.Comment.Select(i => new SelectListItem()
             {
                 Value = i.CommentId.ToString(),
-                Text = i.FormResponse.ToString()
+                Text = i.Content.ToString()
             });
         }
 
