@@ -7,6 +7,10 @@ namespace Sunridge.DataAccess.Data.Repository
     {
         private readonly ApplicationDbContext _db;
         public IApplicationUserRepository ApplicationUser { get; private set; }
+        public IAddressRepository Address { get; private set; }
+        public IBannerRepository Banner { get; private set; }
+        public IClassifiedCategoryRepository ClassifiedCategory { get; private set; }
+        public IClassifiedImageRepository ClassifiedImage { get; private set; }
 
         public IKeyRepository Key { get; private set; }
         public IKeyHistoryRepository KeyHistory { get; private set; }
@@ -25,6 +29,10 @@ namespace Sunridge.DataAccess.Data.Repository
         {
             _db = db;
             ApplicationUser = new ApplicationUserRepository(_db);
+            Address = new AddressRepository(_db);
+            Banner = new BannerRepository(_db);
+            ClassifiedCategory = new ClassifiedCategoryRepository(_db);
+            ClassifiedImage = new ClassifiedImageRepository(_db);
 
             Key = new KeyRepository(_db);
             KeyHistory = new KeyHistoryRepository(_db);
