@@ -23,6 +23,7 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         IAdminPhotoViewModelsRepository AdminPhotoViewModels { get; }
         IClassifiedListingViewModelRepository ClassifiedListingViewModel { get; }
         IDashboardViewModelRepository DashboardViewModel { get; }
+        ILostAndFoundItemRepository LostAndFoundItem { get; }
 
 
         IKeyRepository Key { get; }

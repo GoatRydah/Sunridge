@@ -23,6 +23,7 @@ namespace Sunridge.DataAccess.Data.Repository
         public IAdminPhotoViewModelsRepository AdminPhotoViewModels { get; private set; }
         public IClassifiedListingViewModelRepository ClassifiedListingViewModel { get; private set; }
         public IDashboardViewModelRepository DashboardViewModel { get; private set; }
+        public ILostAndFoundItemRepository LostAndFoundItem { get; private set; }
 
         public IKeyRepository Key { get; private set; }
         public IKeyHistoryRepository KeyHistory { get; private set; }
@@ -57,6 +58,7 @@ namespace Sunridge.DataAccess.Data.Repository
             AdminPhotoViewModels = new AdminPhotoViewModelsRepository(_db);
             ClassifiedListingViewModel = new ClassifiedListingViewModelRepository(_db);
             DashboardViewModel = new DashboardViewModelRepository(_db);
+            LostAndFoundItem = new LostAndFoundItemRepository(_db);
 
             Key = new KeyRepository(_db);
             KeyHistory = new KeyHistoryRepository(_db);
