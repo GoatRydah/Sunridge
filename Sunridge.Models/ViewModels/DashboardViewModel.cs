@@ -7,6 +7,7 @@ namespace Sunridge.Models.ViewModels
 {
     public class DashboardViewModel
     {
+        public int DashboardViewModelId { get; set; }
         public Owner Owner { get; set; }
         public List<Lot> Lots{ get; set; }
         //public List<LotInventory> LotInventories { get; set; }

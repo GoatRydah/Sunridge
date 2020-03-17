@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,7 +18,9 @@ namespace Sunridge.Models
         public DateTime? EndDate { get; set; }
 
         // Nav properties
-        public Owner Owner { get; set; }
+        [ForeignKey("OwnerId")]
+        public ApplicationUser ApplicationUser { get; set; }
+        [ForeignKey("LotId")]
         public Lot Lot { get; set; }
 
     }
