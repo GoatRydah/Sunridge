@@ -16,10 +16,12 @@
         </div>
     </div>
 </section>
-@if (User.IsInRole(SD.AdminEndUser))
-{
+
+@*@if (User.IsInRole(SD.AdminEndUser))
+{*@
     <a class="nav-link" asp-area="Admin" asp-controller="ScheduledEvents" asp-action="Index"><i class="far fa-edit"></i> Edit Events</a>
-}
+@*}*@
+
 <!-- Calendar -->
 <section class="calendar text-center">
     <div class="container">
@@ -42,10 +44,10 @@
                 <p id="eventDetails"></p>
             </div>
             <div class="modal-footer">
-                @if (User.IsInRole(SD.AdminEndUser))
-                {
+                @*@if (User.IsInRole(SD.AdminEndUser))
+                {*@
                     <button type="button" class="btn btn-primary" onclick="editEvent()">Edit Event</button>
-                }
+                @*}*@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>

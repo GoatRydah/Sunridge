@@ -6,10 +6,10 @@
 
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="7000">
     <div class="carousel-inner">
-        @foreach (var item in Model)
+        @foreach (var item in Model.Banners)
         {
             if (item ==
-                Model.First())
+                Model.Banners.First())
             {
                 <div class="carousel-item active">
                     <img class="masthead9 bg-primary" src="..@Html.DisplayFor(modelItem => item.Image)" />

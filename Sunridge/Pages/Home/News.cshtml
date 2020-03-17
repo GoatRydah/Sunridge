@@ -44,7 +44,7 @@
                 </div>
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
-                        @foreach (var news in Model)
+                        @foreach (var news in Model.NewsItems)
                         {
                             @if (news.Year == 2019)
                             {
@@ -69,7 +69,7 @@
                 </div>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                     <div class="card-body">
-                        @foreach (var news in Model)
+                        @foreach (var news in Model.NewsItems)
                         {
                             @if (news.Year == 2018)
                             {
@@ -94,7 +94,7 @@
                 </div>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                     <div class="card-body">
-                        @foreach (var news in Model)
+                        @foreach (var news in Model.NewsItems)
                         {
                             @if (news.Year == 2017)
                             {
@@ -119,7 +119,7 @@
                 </div>
                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
                     <div class="card-body">
-                        @foreach (var news in Model)
+                        @foreach (var news in Model.NewsItems)
                         {
                             @if (news.Year == 2016)
                             {
