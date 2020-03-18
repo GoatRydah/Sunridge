@@ -20,6 +20,7 @@ namespace Sunridge.Data
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<Address> Address { get; set; }
         public DbSet<Banner> Banner { get; set; }
+        public DbSet<BoardMember> BoardMember { get; set; }
         public DbSet<ClassifiedCategory> ClassifiedCategory { get; set; }
         public DbSet<ClassifiedImage> ClassifiedImage { get; set; }
         public DbSet<ClassifiedListing> ClassifiedListing { get; set; }
@@ -34,8 +35,6 @@ namespace Sunridge.Data
         public DbSet<ClassifiedListingViewModel> ClassifiedListingViewModel { get; set; }
         public DbSet<DashboardViewModel> DashboardViewModel { get; set; }
         public DbSet<LostAndFoundItem> LostAndFoundItem { get; set; }
-
-
         public DbSet<KeyHistory> KeyHistory { get; set; }
         public DbSet<Lot> Lot { get; set; }
         public DbSet<LotHistory> LotHistory { get; set; }
