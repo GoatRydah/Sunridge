@@ -14,7 +14,6 @@ namespace Sunridge.DataAccess.Data.Repository
         public IClassifiedListingRepository ClassifiedListing { get; private set; }
         public ICommentRepository Comment { get; private set; }
         public ICommonAreaAssetRepository CommonAreaAsset { get; private set; }
-        public IDbItemRepository DbItem { get; private set; }
         public IErrorViewModelRepository ErrorViewModel { get; private set; }
         public IFileRepository File { get; private set; }
         public IFormResponseRepository FormResponse { get; private set; }
@@ -49,7 +48,6 @@ namespace Sunridge.DataAccess.Data.Repository
             ClassifiedListing = new ClassifiedListingRepository(_db);
             Comment = new CommentRepository(_db);
             CommonAreaAsset = new CommonAreaAssetRepository(_db);
-            DbItem = new DbItemRepository(_db);
             ErrorViewModel = new ErrorViewModelRepository(_db);
             File = new FileRepository(_db);
             FormResponse = new FormResponseRepository(_db);

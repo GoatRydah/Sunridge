@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Sunridge.Models
 {
-    public class ApplicationUser
+    public class ApplicationUser : IdentityUser
     {
         //The below came from Owner.cs in models which has since been deleted
         public int AddressId { get; set; }
