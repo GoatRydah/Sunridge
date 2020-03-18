@@ -14,7 +14,7 @@ namespace Sunridge.Models
         public string Type { get; set; }
         public int FormResponseId { get; set; }
 
-        [ForeignKey("OwnerId")]
+        [ForeignKey("FormResponseId")]
         public FormResponse FormResponse { get; set; }
     }
 }

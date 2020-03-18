@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,8 +19,10 @@ namespace Sunridge.Models
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime Date { get; set; }
+        public int MaintenancesId { get; set; }
 
         // Nav properties
+        [ForeignKey("MaintenanceId")]
         public ICollection<Maintenance> Maintenances { get; set; }
 
 

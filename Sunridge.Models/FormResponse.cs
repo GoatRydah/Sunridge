@@ -46,16 +46,21 @@ namespace Sunridge.Models
 
         [Display(Name = "Resolved by")]
         public string ResolveUser { get; set; }
-
+        public int CommentsId { get; set; }
+        public int FilesId { get; set; }
+        public int InKindWorkHoursId { get; set; }
 
 
         // Nav properties
         [ForeignKey("OwnerId")]
         public ApplicationUser Owner { get; set; }
+        [ForeignKey("CommentsId")]
         public virtual ICollection<Comment> Comments { get; set; }
+        [ForeignKey("FilesId")]
         public virtual ICollection<File> Files { get; set; }
         [ForeignKey("LotId")]
         public virtual Lot Lot { get; set; }
+        [ForeignKey("InKindWorkHoursId")]
         public virtual List<InKindWorkHours> InKindWorkHours { get; set; }
 
         // Calculated properties

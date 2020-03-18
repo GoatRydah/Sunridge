@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,8 +17,10 @@ namespace Sunridge.Models
         public string LastModifiedBy { get; set; }
         [Display(Name = "Last Modified Date")]
         public DateTime LastModifiedDate { get; set; }
+        public int LotInventoriesId { get; set; }
 
         //Nav props
+        [ForeignKey("LotInventoriesId")]
         public virtual ICollection<LotInventory> LotInventories { get; set; }
     }
 }

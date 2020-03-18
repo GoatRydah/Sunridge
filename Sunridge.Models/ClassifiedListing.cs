@@ -30,13 +30,14 @@ namespace Sunridge.Models
         public DateTime ListingDate { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+        public string ImagesId { get; set; }
 
         //Nav properties
         [ForeignKey("OwnerId")]
         public ApplicationUser Owner { get; set; }
         [ForeignKey("ClassifiedCategoryId")]
         public ClassifiedCategory ClassifiedCategory { get; set; }
-
+        [ForeignKey("ImagesId")]
         public List<ClassifiedImage> Images { get; set; }
     }
 }
