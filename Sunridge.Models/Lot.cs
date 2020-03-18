@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,6 +25,7 @@ namespace Sunridge.Models
         public DateTime LastModifiedDate { get; set; }
 
         //NavigationalProperties
+        [ForeignKey("AddressId")]
         public virtual Address Address { get; set; }
         //public virtual Owner Owner { get; set; }
         public virtual ICollection<OwnerLot> OwnerLots { get; set; }

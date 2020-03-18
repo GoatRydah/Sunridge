@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sunridge.Models
 {
@@ -30,7 +30,9 @@ namespace Sunridge.Models
 
 
         //Nav properties
+        [ForeignKey("KeyId")]
         public Key Key { get; set; }
+        [ForeignKey("LotId")]
         public Lot Lot { get; set; }
 
     }

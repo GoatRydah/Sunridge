@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sunridge.Data;
 
 namespace Sunridge.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200317153106_AllTheRemainingTablesForModels3")]
+    partial class AllTheRemainingTablesForModels3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -452,15 +454,12 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<double?>("Hours")
                         .HasColumnType("float");
 
-                    b.Property<int?>("OwnerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OwnerId");
+                    b.HasIndex("FormResponseId");
 
                     b.ToTable("InKindWorkHours");
                 });
@@ -1168,7 +1167,7 @@ namespace Sunridge.DataAccess.Migrations
 
             modelBuilder.Entity("Sunridge.Models.ClassifiedImage", b =>
                 {
-                    b.HasOne("Sunridge.Models.ClassifiedListing", "ClassifiedListing")
+                    b.HasOne("Sunridge.Models.ClassifiedListing", null)
                         .WithMany("Images")
                         .HasForeignKey("ClassifiedListingId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1207,9 +1206,11 @@ namespace Sunridge.DataAccess.Migrations
 
             modelBuilder.Entity("Sunridge.Models.InKindWorkHours", b =>
                 {
-                    b.HasOne("Sunridge.Models.FormResponse", "FormResponse")
+                    b.HasOne("Sunridge.Models.FormResponse", null)
                         .WithMany("InKindWorkHours")
-                        .HasForeignKey("OwnerId");
+                        .HasForeignKey("FormResponseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Sunridge.Models.LostAndFoundItem", b =>

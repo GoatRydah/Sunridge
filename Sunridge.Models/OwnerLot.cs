@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace Sunridge.Models
     public class OwnerLot : DbItem
     {
         public int OwnerLotId { get; set; }
-        public int OwnerId { get; set; }
+        public string OwnerId { get; set; }
         public int LotId { get; set; }
 
         public bool IsPrimary { get; set; }

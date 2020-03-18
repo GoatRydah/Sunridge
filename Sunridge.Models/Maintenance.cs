@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,6 +19,7 @@ namespace Sunridge.Models
         public string Description { get; set; }
 
         //Nav properties
+        [ForeignKey("CommonAreaAssetId")]
         public CommonAreaAsset CommonAreaAsset { get; set; }
 
     }

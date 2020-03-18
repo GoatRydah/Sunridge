@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace Sunridge.Models
     {
         public int TransactionId { get; set; }
         public int LotId { get; set; }
-        public int OwnerId { get; set; }
+        public string OwnerId { get; set; }
         public int TransactionTypeId { get; set; }
 
         public string Description { get; set; }
@@ -19,8 +20,11 @@ namespace Sunridge.Models
         public string Status { get; set; }
 
         //Nav properties
+        [ForeignKey("LotId")]
         public Lot Lot { get; set; }
-        public Owner Owner { get; set; }
+        [ForeignKey("OwnerId")]
+        public ApplicationUser Owner { get; set; }
+        [ForeignKey("TransactionTypeId")]
         public TransactionType TransactionType { get; set; }
 
     }

@@ -11,7 +11,7 @@ namespace Sunridge.Models.ViewModels
         public int ClassifiedListingViewModelId { get; set; }
         public ClassifiedListing ClassifiedListing { get; set; }
         public IEnumerable<ClassifiedCategory> ClassifiedCategory { get; set; }
-        public IEnumerable<Owner> Owner { get; set; }
+        public IEnumerable<ApplicationUser> Owner { get; set; }
         public IEnumerable<ClassifiedImage> ClassifiedImages { get; set; }
     }
 
