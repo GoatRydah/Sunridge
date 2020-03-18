@@ -17,10 +17,8 @@ namespace Sunridge.Models
         public string LastModifiedBy { get; set; }
         [Display(Name = "Last Modified Date")]
         public DateTime LastModifiedDate { get; set; }
-        public int LotInventoriesId { get; set; }
 
         //Nav props
-        [ForeignKey("LotInventoriesId")]
         public virtual ICollection<LotInventory> LotInventories { get; set; }
     }
 }

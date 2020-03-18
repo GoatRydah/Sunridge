@@ -11,7 +11,7 @@ namespace Sunridge.Models
     {
         public int LotId { get; set; }
         public int AddressId { get; set; }
-        public string OwnerId { get; set; }
+        //public string OwnerId { get; set; }
 
         [Display(Name = "Lot Number")]
         [Required]
@@ -23,22 +23,15 @@ namespace Sunridge.Models
         public bool IsArchive { get; set; }
         public string LastModifiedBy { get; set; }
         public DateTime LastModifiedDate { get; set; }
-        public int OWnerLotsId { get; set; }
-        public int LotHistoriesId { get; set; }
-        public int TransactionsId { get; set; }
 
         //NavigationalProperties
         [ForeignKey("AddressId")]
         public virtual Address Address { get; set; }
-        [ForeignKey("OwnerId")]
-        public virtual ApplicationUser Owner { get; set; }
-        [ForeignKey("OwnerLotsId")]
+        //[ForeignKey("OwnerId")]
+        //public virtual ApplicationUser Owner { get; set; }
         public virtual ICollection<OwnerLot> OwnerLots { get; set; }
-        [ForeignKey("LotInventoriesId")]
         public virtual ICollection<LotInventory> LotInventories { get; set; }
-        [ForeignKey("LotHistoriesId")]
         public virtual ICollection<LotHistory> LotHistories { get; set; }
-        [ForeignKey("TransactionsId")]
         public virtual ICollection<Transaction> Transactions { get; set; }
 
         public int CompareTo(Lot lot)

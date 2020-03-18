@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Sunridge.Models
 {
-    public class ClassifiedListing : DbItem
+    public class ClassifiedListing
     {
         public int ClassifiedListingId { get; set; }
         public string OwnerId { get; set; }
@@ -30,14 +30,15 @@ namespace Sunridge.Models
         public DateTime ListingDate { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public string ImagesId { get; set; }
+        public bool IsArchive { get; set; }
+        public string LastModifiedBy { get; set; }
+        public DateTime LastModifiedDate { get; set; }
 
         //Nav properties
         [ForeignKey("OwnerId")]
         public ApplicationUser Owner { get; set; }
         [ForeignKey("ClassifiedCategoryId")]
         public ClassifiedCategory ClassifiedCategory { get; set; }
-        [ForeignKey("ImagesId")]
         public List<ClassifiedImage> Images { get; set; }
     }
 }

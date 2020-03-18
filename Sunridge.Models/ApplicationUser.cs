@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Sunridge.Models
 {
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser
     {
         //The below came from Owner.cs in models which has since been deleted
         public int AddressId { get; set; }
@@ -55,27 +55,15 @@ namespace Sunridge.Models
 
         public string LastModifiedBy { get; set; }
         public DateTime LastModifiedDate { get; set; }
-        public int OwnerLotsId { get; set; }
-        public int TransactionsId { get; set; }
-        public int FormResponsesId { get; set; }
-        public int ClassifiedListingsId { get; set; }
-        public int KeyHistoriesId { get; set; }
-        public int LostAndFoundItemsId { get; set; }
 
         //Navigation properties
         [ForeignKey("AddressId")]
         public virtual Address Address { get; set; }
-        [ForeignKey("OwnerLotsId")]
         public virtual ICollection<OwnerLot> OwnerLots { get; set; }
-        [ForeignKey("TransactionsId")]
         public virtual ICollection<Transaction> Transactions { get; set; }
-        [ForeignKey("FormResponsesId")]
         public virtual ICollection<FormResponse> FormResponses { get; set; }
-        [ForeignKey("ClassifiedListingsId")]
         public virtual ICollection<ClassifiedListing> ClassifiedListings { get; set; }
-        [ForeignKey("KeyHistoriesId")]
         public virtual ICollection<KeyHistory> KeyHistories { get; set; }
-        [ForeignKey("LostAndFoundItemsId")]
         public virtual IEnumerable<LostAndFoundItem> LostAndFoundItems { get; set; }
 
         // Calculated properties

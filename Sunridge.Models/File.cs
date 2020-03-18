@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sunridge.Models
 {
-    public class File : DbItem
+    public class File
     {
         public int FileId { get; set; }
         public int LotHistoryId { get; set; }
@@ -19,5 +19,8 @@ namespace Sunridge.Models
         //Nav properties
         [ForeignKey("LotHistoryId")]
         public LotHistory LotHistory { get; set; }
+        public bool IsArchive { get; set; }
+        public string LastModifiedBy { get; set; }
+        public DateTime LastModifiedDate { get; set; }
     }
 }

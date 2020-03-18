@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Sunridge.Models
 {
-    public class CommonAreaAsset : DbItem
+    public class CommonAreaAsset
     {
         public int CommonAreaAssetId { get; set; }
         [Display(Name = "Asset Name")]
@@ -19,10 +19,11 @@ namespace Sunridge.Models
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime Date { get; set; }
-        public int MaintenancesId { get; set; }
+        public bool IsArchive { get; set; }
+        public string LastModifiedBy { get; set; }
+        public DateTime LastModifiedDate { get; set; }
 
         // Nav properties
-        [ForeignKey("MaintenanceId")]
         public ICollection<Maintenance> Maintenances { get; set; }
 
 
