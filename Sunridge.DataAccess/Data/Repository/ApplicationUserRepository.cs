@@ -30,7 +30,6 @@ namespace Sunridge.DataAccess.Data.Repository
             var objFromDb = _db.ApplicationUser.FirstOrDefault(s => s.Id == applicationUser.Id);
             objFromDb.FirstName = applicationUser.FirstName;
             objFromDb.LastName = applicationUser.LastName;
-            objFromDb.OwnerId = applicationUser.OwnerId;
             objFromDb.OwnerLots = applicationUser.OwnerLots;
             objFromDb.AddressId = applicationUser.AddressId;
             objFromDb.Occupation = applicationUser.Occupation;

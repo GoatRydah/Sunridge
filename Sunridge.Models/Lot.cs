@@ -11,7 +11,7 @@ namespace Sunridge.Models
     {
         public int LotId { get; set; }
         public int AddressId { get; set; }
-        public int OwnerId { get; set; }
+        public string OwnerId { get; set; }
 
         [Display(Name = "Lot Number")]
         [Required]

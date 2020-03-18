@@ -9,6 +9,7 @@ namespace Sunridge.Models
 {
     public class OwnerLot : DbItem
     {
+        [Key]
         public int OwnerLotId { get; set; }
         public string OwnerId { get; set; }
         public int LotId { get; set; }
