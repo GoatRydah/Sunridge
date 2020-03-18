@@ -27,11 +27,9 @@ namespace Sunridge.DataAccess.Data.Repository
 
         public void Update(ApplicationUser applicationUser)
         {
-            var objFromDb = _db.ApplicationUser.FirstOrDefault(s => s.ApplicationUserId == applicationUser.ApplicationUserId);
+            var objFromDb = _db.ApplicationUser.FirstOrDefault(s => s.Id == applicationUser.Id);
             objFromDb.FirstName = applicationUser.FirstName;
             objFromDb.LastName = applicationUser.LastName;
-            objFromDb.OwnerId = applicationUser.OwnerId;
-            objFromDb.Owner = applicationUser.Owner;
             objFromDb.OwnerLots = applicationUser.OwnerLots;
             objFromDb.AddressId = applicationUser.AddressId;
             objFromDb.Occupation = applicationUser.Occupation;
@@ -48,8 +46,8 @@ namespace Sunridge.DataAccess.Data.Repository
             objFromDb.Transactions = applicationUser.Transactions;
             objFromDb.FormResponses = applicationUser.FormResponses;
             objFromDb.ClassifiedListings = applicationUser.ClassifiedListings;
-            objFromDb.KeyHistories = applicationUser.KeyHistories;//
-            objFromDb.LostAndFoundItems = applicationUser.LostAndFoundItems;//
+            objFromDb.KeyHistories = applicationUser.KeyHistories;
+            objFromDb.LostAndFoundItems = applicationUser.LostAndFoundItems;
 
             _db.SaveChanges();
         }

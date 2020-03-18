@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,7 +11,7 @@ namespace Sunridge.Models
     {
         public int LotId { get; set; }
         public int AddressId { get; set; }
-        //public int OwnerId { get; set; }
+        //public string OwnerId { get; set; }
 
         [Display(Name = "Lot Number")]
         [Required]
@@ -24,8 +25,10 @@ namespace Sunridge.Models
         public DateTime LastModifiedDate { get; set; }
 
         //NavigationalProperties
+        [ForeignKey("AddressId")]
         public virtual Address Address { get; set; }
-        //public virtual Owner Owner { get; set; }
+        //[ForeignKey("OwnerId")]
+        //public virtual ApplicationUser Owner { get; set; }
         public virtual ICollection<OwnerLot> OwnerLots { get; set; }
         public virtual ICollection<LotInventory> LotInventories { get; set; }
         public virtual ICollection<LotHistory> LotHistories { get; set; }

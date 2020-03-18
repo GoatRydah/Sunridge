@@ -15,7 +15,6 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         IClassifiedListingRepository ClassifiedListing { get; }
         ICommentRepository Comment { get; }
         ICommonAreaAssetRepository CommonAreaAsset { get; }
-        IDbItemRepository DbItem { get; }
         IErrorViewModelRepository ErrorViewModel { get; }
         IFileRepository File { get; }
         IFormResponseRepository FormResponse { get; }
