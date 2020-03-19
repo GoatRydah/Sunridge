@@ -51,12 +51,12 @@ namespace Sunridge.Pages.LostAndFound
                 return Page();
             }
 
-            if (LostAndFoundItemObj.Id == 0) //new menu item
+            if (LostAndFoundItemObj.Id == 0) //new lostandfounditem
             {
                 //rename file user submits for image
                 string fileName = Guid.NewGuid().ToString();
                 //upload file to the path
-                var uploads = Path.Combine(webRootPath, @"images\menuItems");
+                var uploads = Path.Combine(webRootPath, @"images\lostAndFoundItems");
                 //preserve our extension
                 var extension = Path.GetExtension(files[0].FileName);
 

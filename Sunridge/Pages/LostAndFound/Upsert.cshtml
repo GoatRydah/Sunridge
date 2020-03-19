@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Upsert";
 }
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+
     <div class="col-8 pt-3">
         <div class="form-group row">
             <div class="col-3">
@@ -29,6 +31,7 @@
             </div>
         </div>
     </div>
-@section Scripts{
-    <script src="~/js/lostAndFound.js"></script>
-}
+    </form>
+    @section Scripts{
+        <script src="~/js/lostAndFound.js"></script>
+    }
