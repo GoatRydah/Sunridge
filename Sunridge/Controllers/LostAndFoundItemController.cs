@@ -1,10 +1,7 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Sunridge.DataAccess.Data.Repository.IRepository;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -12,11 +9,11 @@ namespace Sunridge.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MenuItemController : Controller
+    public class LostAndFoundItemController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _hostingEnvironment;
-        public MenuItemController(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment)
+        public LostAndFoundItemController(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment)
         {
             _unitOfWork = unitOfWork;
             _hostingEnvironment = hostingEnvironment;
