@@ -12,7 +12,7 @@ namespace Sunridge.Models
 
         [Display(Name = "Description")]
         [Required]
-        public string Description { get; set; }
+        public string Description { get; set; } //Must be lowercase when using .js for data
         public string Image { get; set; }
     }
 }
