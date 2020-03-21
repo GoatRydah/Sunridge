@@ -69,6 +69,7 @@
 
 
   <ItemGroup>
+    <Folder Include="Pages\Admin\" />
     <Folder Include="wwwroot\images\boardMembers\" />
   </ItemGroup>
 
