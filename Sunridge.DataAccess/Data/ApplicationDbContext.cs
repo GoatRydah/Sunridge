@@ -43,6 +43,7 @@ namespace Sunridge.Data
         public DbSet<NewsItem> NewsItem { get; set; }
         public DbSet<OwnerLot> OwnerLot { get; set; }
         public DbSet<Photo> Photo { get; set; }
+        public DbSet<PhotoCategories> PhotoCategories { get; set; }
         public DbSet<ScheduledEvent> ScheduledEvent { get; set; }
         public DbSet<Transaction> Transaction { get; set; }
         public DbSet<TransactionType> TransactionType { get; set; }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sunridge.Data;
 
 namespace Sunridge.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200321192941_PhotoCategories")]
+    partial class PhotoCategories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1110,6 +1112,23 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("TransactionType");
                 });
 
+            modelBuilder.Entity("Sunridge.Models.ViewModels.AdminPhotoViewModels", b =>
+                {
+                    b.Property<int>("AdminPhotoViewModelsId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("PhotoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AdminPhotoViewModelsId");
+
+                    b.HasIndex("PhotoId");
+
+                    b.ToTable("AdminPhotoViewModels");
+                });
+
             modelBuilder.Entity("Sunridge.Models.ViewModels.ClassifiedListingViewModel", b =>
                 {
                     b.Property<int>("ClassifiedListingViewModelId")
@@ -1151,6 +1170,9 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<int>("AddressId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("AdminPhotoViewModelsId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("Birthday")
                         .HasColumnType("datetime2");
 
@@ -1190,6 +1212,8 @@ namespace Sunridge.DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.HasIndex("AddressId");
+
+                    b.HasIndex("AdminPhotoViewModelsId");
 
                     b.HasIndex("ClassifiedListingViewModelId");
 
@@ -1452,6 +1476,13 @@ namespace Sunridge.DataAccess.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Sunridge.Models.ViewModels.AdminPhotoViewModels", b =>
+                {
+                    b.HasOne("Sunridge.Models.Photo", "Photo")
+                        .WithMany()
+                        .HasForeignKey("PhotoId");
+                });
+
             modelBuilder.Entity("Sunridge.Models.ViewModels.ClassifiedListingViewModel", b =>
                 {
                     b.HasOne("Sunridge.Models.ClassifiedListing", "ClassifiedListing")
@@ -1473,6 +1504,10 @@ namespace Sunridge.DataAccess.Migrations
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Sunridge.Models.ViewModels.AdminPhotoViewModels", null)
+                        .WithMany("Owner")
+                        .HasForeignKey("AdminPhotoViewModelsId");
 
                     b.HasOne("Sunridge.Models.ViewModels.ClassifiedListingViewModel", null)
                         .WithMany("Owner")

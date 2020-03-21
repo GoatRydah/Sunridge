@@ -72,8 +72,19 @@
 
 
   <ItemGroup>
-    <Folder Include="Pages\Admin\" />
+    <Folder Include="Pages\Admin\Keys\" />
+    <Folder Include="Pages\Admin\KeyHistory\" />
+    <Folder Include="Pages\Admin\HOALots\" />
+    <Folder Include="Pages\Admin\CommonAreaAssets\" />
+    <Folder Include="Pages\Admin\Classifieds\" />
+    <Folder Include="Pages\Admin\InventoryItems\" />
+    <Folder Include="Pages\Admin\BannerItems\" />
+    <Folder Include="Pages\Admin\Events\" />
+    <Folder Include="Pages\Admin\NewsItems\" />
+    <Folder Include="Pages\Admin\Reports\" />
+    <Folder Include="Pages\Admin\Owners\" />
     <Folder Include="wwwroot\images\boardMembers\" />
+    <Folder Include="wwwroot\img\photo-gal\" />
   </ItemGroup>
 
 

@@ -22,14 +22,14 @@ namespace Sunridge.DataAccess.Data.Repository
             return _db.AdminPhotoViewModels.Select(i => new SelectListItem()
             {
                 Value = i.Photo.ToString(),
-                Text = i.Owner.ToString()
+                Text = i.Categories.ToString()
             });
         }
 
         public void Update(AdminPhotoViewModels address)
         {
             var objFromDb = _db.AdminPhotoViewModels.FirstOrDefault(s => s.Photo == address.Photo);
-            objFromDb.Owner = address.Owner;
+            objFromDb.Categories = address.Categories;
 
 
 
