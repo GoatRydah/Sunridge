@@ -7,7 +7,8 @@ namespace Sunridge.Models.ViewModels
 {
     public class AdminPhotoViewModels
     {
+        public int AdminPhotoViewModelsId { get; set; }
         public Photo Photo { get; set; }
-        public IEnumerable<Owner> Owner { get; set; }
+        public IEnumerable<ApplicationUser> Owner { get; set; }
     }
 }

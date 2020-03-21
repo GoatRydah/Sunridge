@@ -38,7 +38,7 @@ namespace Sunridge.DataAccess.Data.Repository
             objFromDb.LastModifiedDate = ownerLot.LastModifiedDate;
             objFromDb.Lot = ownerLot.Lot;
             objFromDb.LotId = ownerLot.LotId;
-            objFromDb.Owner = ownerLot.Owner;
+            objFromDb.ApplicationUser = ownerLot.ApplicationUser;
             objFromDb.OwnerId = ownerLot.OwnerId;
             objFromDb.StartDate = ownerLot.StartDate;
 

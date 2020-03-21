@@ -7,6 +7,23 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
     public interface IUnitOfWork : IDisposable
     {
         IApplicationUserRepository ApplicationUser { get; }
+        IAddressRepository Address { get; }
+        IBannerRepository Banner { get; }
+        IBoardMemberRepository BoardMember { get; }
+        IClassifiedCategoryRepository ClassifiedCategory { get; }
+        IClassifiedImageRepository ClassifiedImage { get; }
+        IClassifiedListingRepository ClassifiedListing { get; }
+        ICommentRepository Comment { get; }
+        ICommonAreaAssetRepository CommonAreaAsset { get; }
+        IErrorViewModelRepository ErrorViewModel { get; }
+        IFileRepository File { get; }
+        IFormResponseRepository FormResponse { get; }
+        IInKindWorkHoursRepository InKindWorkHours { get; }
+        IInventoryRepository Inventory { get; }
+        IAdminPhotoViewModelsRepository AdminPhotoViewModels { get; }
+        IClassifiedListingViewModelRepository ClassifiedListingViewModel { get; }
+        IDashboardViewModelRepository DashboardViewModel { get; }
+        ILostAndFoundItemRepository LostAndFoundItem { get; }
         IKeyRepository Key { get; }
         IKeyHistoryRepository KeyHistory { get; }
         ILotRepository Lot { get; }

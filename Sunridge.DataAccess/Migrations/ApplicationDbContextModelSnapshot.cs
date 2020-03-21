@@ -82,6 +82,10 @@ namespace Sunridge.DataAccess.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -133,6 +137,8 @@ namespace Sunridge.DataAccess.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -252,12 +258,62 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("Address");
                 });
 
+            modelBuilder.Entity("Sunridge.Models.Banner", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Body")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Header")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Banner");
+                });
+
+            modelBuilder.Entity("Sunridge.Models.BoardMember", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BoardRole")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LotId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LotId");
+
+                    b.ToTable("BoardMember");
+                });
+
             modelBuilder.Entity("Sunridge.Models.ClassifiedCategory", b =>
                 {
                     b.Property<int>("ClassifiedCategoryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ClassifiedListingViewModelId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -273,6 +329,8 @@ namespace Sunridge.DataAccess.Migrations
 
                     b.HasKey("ClassifiedCategoryId");
 
+                    b.HasIndex("ClassifiedListingViewModelId");
+
                     b.ToTable("ClassifiedCategory");
                 });
 
@@ -284,6 +342,9 @@ namespace Sunridge.DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("ClassifiedListingId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ClassifiedListingViewModelId")
                         .HasColumnType("int");
 
                     b.Property<string>("ImageExtension")
@@ -298,6 +359,8 @@ namespace Sunridge.DataAccess.Migrations
                     b.HasKey("ClassifiedImageId");
 
                     b.HasIndex("ClassifiedListingId");
+
+                    b.HasIndex("ClassifiedListingViewModelId");
 
                     b.ToTable("ClassifiedImage");
                 });
@@ -337,8 +400,8 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<DateTime>("ListingDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("OwnerId")
-                        .HasColumnType("int");
+                    b.Property<string>("OwnerId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
@@ -374,8 +437,8 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<int?>("LotHistoryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("OwnerId")
-                        .HasColumnType("int");
+                    b.Property<string>("OwnerId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("Private")
                         .HasColumnType("bit");
@@ -425,6 +488,21 @@ namespace Sunridge.DataAccess.Migrations
                     b.HasKey("CommonAreaAssetId");
 
                     b.ToTable("CommonAreaAsset");
+                });
+
+            modelBuilder.Entity("Sunridge.Models.ErrorViewModel", b =>
+                {
+                    b.Property<int>("ErrorViewModelId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("RequestId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ErrorViewModelId");
+
+                    b.ToTable("ErrorViewModel");
                 });
 
             modelBuilder.Entity("Sunridge.Models.File", b =>
@@ -485,8 +563,8 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<int?>("LotId")
                         .HasColumnType("int");
 
-                    b.Property<int>("OwnerId")
-                        .HasColumnType("int");
+                    b.Property<string>("OwnerId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("PrivacyLevel")
                         .HasColumnType("nvarchar(max)");
@@ -601,6 +679,12 @@ namespace Sunridge.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("DashboardViewModelId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DateIssued")
                         .HasColumnType("datetime2");
 
@@ -622,9 +706,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<int>("LotId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OwnerId")
-                        .HasColumnType("int");
-
                     b.Property<float>("PaidAmount")
                         .HasColumnType("real");
 
@@ -633,13 +714,39 @@ namespace Sunridge.DataAccess.Migrations
 
                     b.HasKey("KeyHistoryId");
 
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("DashboardViewModelId");
+
                     b.HasIndex("KeyId");
 
                     b.HasIndex("LotId");
 
-                    b.HasIndex("OwnerId");
-
                     b.ToTable("KeyHistory");
+                });
+
+            modelBuilder.Entity("Sunridge.Models.LostAndFoundItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("LostAndFoundItem");
                 });
 
             modelBuilder.Entity("Sunridge.Models.Lot", b =>
@@ -650,6 +757,9 @@ namespace Sunridge.DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AddressId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DashboardViewModelId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsArchive")
@@ -671,6 +781,8 @@ namespace Sunridge.DataAccess.Migrations
                     b.HasKey("LotId");
 
                     b.HasIndex("AddressId");
+
+                    b.HasIndex("DashboardViewModelId");
 
                     b.ToTable("Lot");
                 });
@@ -803,64 +915,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("NewsItem");
                 });
 
-            modelBuilder.Entity("Sunridge.Models.Owner", b =>
-                {
-                    b.Property<int>("OwnerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AddressId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("Birthday")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EmergencyContactName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EmergencyContactPhone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsArchive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("LastModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Occupation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("ReceiveEmails")
-                        .HasColumnType("bit");
-
-                    b.HasKey("OwnerId");
-
-                    b.HasIndex("AddressId");
-
-                    b.ToTable("Owner");
-                });
-
             modelBuilder.Entity("Sunridge.Models.OwnerLot", b =>
                 {
                     b.Property<int>("OwnerLotId")
@@ -886,8 +940,8 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<int>("LotId")
                         .HasColumnType("int");
 
-                    b.Property<int>("OwnerId")
-                        .HasColumnType("int");
+                    b.Property<string>("OwnerId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -915,8 +969,8 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OwnerId")
-                        .HasColumnType("int");
+                    b.Property<string>("OwnerId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -997,8 +1051,8 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<int>("LotId")
                         .HasColumnType("int");
 
-                    b.Property<int>("OwnerId")
-                        .HasColumnType("int");
+                    b.Property<string>("OwnerId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
@@ -1039,6 +1093,114 @@ namespace Sunridge.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TransactionType");
+                });
+
+            modelBuilder.Entity("Sunridge.Models.ViewModels.AdminPhotoViewModels", b =>
+                {
+                    b.Property<int>("AdminPhotoViewModelsId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("PhotoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AdminPhotoViewModelsId");
+
+                    b.HasIndex("PhotoId");
+
+                    b.ToTable("AdminPhotoViewModels");
+                });
+
+            modelBuilder.Entity("Sunridge.Models.ViewModels.ClassifiedListingViewModel", b =>
+                {
+                    b.Property<int>("ClassifiedListingViewModelId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ClassifiedListingId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ClassifiedListingViewModelId");
+
+                    b.HasIndex("ClassifiedListingId");
+
+                    b.ToTable("ClassifiedListingViewModel");
+                });
+
+            modelBuilder.Entity("Sunridge.Models.ViewModels.DashboardViewModel", b =>
+                {
+                    b.Property<int>("DashboardViewModelId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("OwnerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("DashboardViewModelId");
+
+                    b.HasIndex("OwnerId");
+
+                    b.ToTable("DashboardViewModel");
+                });
+
+            modelBuilder.Entity("Sunridge.Models.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<int>("AddressId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("AdminPhotoViewModelsId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("Birthday")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("ClassifiedListingViewModelId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EmergencyContactName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmergencyContactPhone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsArchive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Occupation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("ReceiveEmails")
+                        .HasColumnType("bit");
+
+                    b.HasIndex("AddressId");
+
+                    b.HasIndex("AdminPhotoViewModelsId");
+
+                    b.HasIndex("ClassifiedListingViewModelId");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1092,13 +1254,33 @@ namespace Sunridge.DataAccess.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Sunridge.Models.BoardMember", b =>
+                {
+                    b.HasOne("Sunridge.Models.Lot", "Lot")
+                        .WithMany()
+                        .HasForeignKey("LotId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Sunridge.Models.ClassifiedCategory", b =>
+                {
+                    b.HasOne("Sunridge.Models.ViewModels.ClassifiedListingViewModel", null)
+                        .WithMany("ClassifiedCategory")
+                        .HasForeignKey("ClassifiedListingViewModelId");
+                });
+
             modelBuilder.Entity("Sunridge.Models.ClassifiedImage", b =>
                 {
-                    b.HasOne("Sunridge.Models.ClassifiedListing", null)
+                    b.HasOne("Sunridge.Models.ClassifiedListing", "ClassifiedListing")
                         .WithMany("Images")
                         .HasForeignKey("ClassifiedListingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Sunridge.Models.ViewModels.ClassifiedListingViewModel", null)
+                        .WithMany("ClassifiedImages")
+                        .HasForeignKey("ClassifiedListingViewModelId");
                 });
 
             modelBuilder.Entity("Sunridge.Models.ClassifiedListing", b =>
@@ -1109,11 +1291,9 @@ namespace Sunridge.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Sunridge.Models.Owner", "Owner")
+                    b.HasOne("Sunridge.Models.ApplicationUser", "Owner")
                         .WithMany("ClassifiedListings")
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OwnerId");
                 });
 
             modelBuilder.Entity("Sunridge.Models.Comment", b =>
@@ -1126,11 +1306,9 @@ namespace Sunridge.DataAccess.Migrations
                         .WithMany("Comments")
                         .HasForeignKey("LotHistoryId");
 
-                    b.HasOne("Sunridge.Models.Owner", "Owner")
+                    b.HasOne("Sunridge.Models.ApplicationUser", "Owner")
                         .WithMany()
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OwnerId");
                 });
 
             modelBuilder.Entity("Sunridge.Models.File", b =>
@@ -1152,16 +1330,14 @@ namespace Sunridge.DataAccess.Migrations
                         .WithMany()
                         .HasForeignKey("LotId");
 
-                    b.HasOne("Sunridge.Models.Owner", "Owner")
+                    b.HasOne("Sunridge.Models.ApplicationUser", "Owner")
                         .WithMany("FormResponses")
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OwnerId");
                 });
 
             modelBuilder.Entity("Sunridge.Models.InKindWorkHours", b =>
                 {
-                    b.HasOne("Sunridge.Models.FormResponse", null)
+                    b.HasOne("Sunridge.Models.FormResponse", "FormResponse")
                         .WithMany("InKindWorkHours")
                         .HasForeignKey("FormResponseId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1170,6 +1346,14 @@ namespace Sunridge.DataAccess.Migrations
 
             modelBuilder.Entity("Sunridge.Models.KeyHistory", b =>
                 {
+                    b.HasOne("Sunridge.Models.ApplicationUser", null)
+                        .WithMany("KeyHistories")
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("Sunridge.Models.ViewModels.DashboardViewModel", null)
+                        .WithMany("KeyHistories")
+                        .HasForeignKey("DashboardViewModelId");
+
                     b.HasOne("Sunridge.Models.Key", "Key")
                         .WithMany()
                         .HasForeignKey("KeyId")
@@ -1181,10 +1365,13 @@ namespace Sunridge.DataAccess.Migrations
                         .HasForeignKey("LotId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
 
-                    b.HasOne("Sunridge.Models.Owner", null)
-                        .WithMany("KeyHistories")
-                        .HasForeignKey("OwnerId");
+            modelBuilder.Entity("Sunridge.Models.LostAndFoundItem", b =>
+                {
+                    b.HasOne("Sunridge.Models.ApplicationUser", null)
+                        .WithMany("LostAndFoundItems")
+                        .HasForeignKey("ApplicationUserId");
                 });
 
             modelBuilder.Entity("Sunridge.Models.Lot", b =>
@@ -1194,6 +1381,10 @@ namespace Sunridge.DataAccess.Migrations
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Sunridge.Models.ViewModels.DashboardViewModel", null)
+                        .WithMany("Lots")
+                        .HasForeignKey("DashboardViewModelId");
                 });
 
             modelBuilder.Entity("Sunridge.Models.LotHistory", b =>
@@ -1229,15 +1420,6 @@ namespace Sunridge.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Sunridge.Models.Owner", b =>
-                {
-                    b.HasOne("Sunridge.Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Sunridge.Models.OwnerLot", b =>
                 {
                     b.HasOne("Sunridge.Models.Lot", "Lot")
@@ -1246,20 +1428,16 @@ namespace Sunridge.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Sunridge.Models.Owner", "Owner")
+                    b.HasOne("Sunridge.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("OwnerLots")
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OwnerId");
                 });
 
             modelBuilder.Entity("Sunridge.Models.Photo", b =>
                 {
-                    b.HasOne("Sunridge.Models.Owner", "Owner")
+                    b.HasOne("Sunridge.Models.ApplicationUser", "Owner")
                         .WithMany()
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OwnerId");
                 });
 
             modelBuilder.Entity("Sunridge.Models.Transaction", b =>
@@ -1270,17 +1448,53 @@ namespace Sunridge.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Sunridge.Models.Owner", "Owner")
+                    b.HasOne("Sunridge.Models.ApplicationUser", "Owner")
                         .WithMany("Transactions")
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OwnerId");
 
                     b.HasOne("Sunridge.Models.TransactionType", "TransactionType")
                         .WithMany()
                         .HasForeignKey("TransactionTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Sunridge.Models.ViewModels.AdminPhotoViewModels", b =>
+                {
+                    b.HasOne("Sunridge.Models.Photo", "Photo")
+                        .WithMany()
+                        .HasForeignKey("PhotoId");
+                });
+
+            modelBuilder.Entity("Sunridge.Models.ViewModels.ClassifiedListingViewModel", b =>
+                {
+                    b.HasOne("Sunridge.Models.ClassifiedListing", "ClassifiedListing")
+                        .WithMany()
+                        .HasForeignKey("ClassifiedListingId");
+                });
+
+            modelBuilder.Entity("Sunridge.Models.ViewModels.DashboardViewModel", b =>
+                {
+                    b.HasOne("Sunridge.Models.ApplicationUser", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId");
+                });
+
+            modelBuilder.Entity("Sunridge.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("Sunridge.Models.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Sunridge.Models.ViewModels.AdminPhotoViewModels", null)
+                        .WithMany("Owner")
+                        .HasForeignKey("AdminPhotoViewModelsId");
+
+                    b.HasOne("Sunridge.Models.ViewModels.ClassifiedListingViewModel", null)
+                        .WithMany("Owner")
+                        .HasForeignKey("ClassifiedListingViewModelId");
                 });
 #pragma warning restore 612, 618
         }

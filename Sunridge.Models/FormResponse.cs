@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace Sunridge.Models
     public class FormResponse
     {
         public int FormResponseId { get; set; }
-        public int OwnerId { get; set; }
+        public string OwnerId { get; set; }
     
 
         /*
@@ -47,11 +48,12 @@ namespace Sunridge.Models
         public string ResolveUser { get; set; }
 
 
-
         // Nav properties
-        public Owner Owner { get; set; }
+        [ForeignKey("OwnerId")]
+        public ApplicationUser Owner { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<File> Files { get; set; }
+        [ForeignKey("LotId")]
         public virtual Lot Lot { get; set; }
         public virtual List<InKindWorkHours> InKindWorkHours { get; set; }
 

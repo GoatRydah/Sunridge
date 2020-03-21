@@ -15,9 +15,9 @@
 <!-- Testimonials -->
 @*<section class="testimonials text-center">
 
-    @for (var index = 0; index < Model.Count; index++)
+    @for (var index = 0; index < Model.ClassifiedListings.Count; index++)
     {
-        var item = Model[index];
+        var item = Model.ClassifiedListings[index];
         <div class="container mb-5">
             <hr>
             <div class="container container-fluid bg-light p-5">

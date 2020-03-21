@@ -7,7 +7,23 @@ namespace Sunridge.DataAccess.Data.Repository
     {
         private readonly ApplicationDbContext _db;
         public IApplicationUserRepository ApplicationUser { get; private set; }
-
+        public IAddressRepository Address { get; private set; }
+        public IBannerRepository Banner { get; private set; }
+        public IBoardMemberRepository BoardMember { get; private set; }
+        public IClassifiedCategoryRepository ClassifiedCategory { get; private set; }
+        public IClassifiedImageRepository ClassifiedImage { get; private set; }
+        public IClassifiedListingRepository ClassifiedListing { get; private set; }
+        public ICommentRepository Comment { get; private set; }
+        public ICommonAreaAssetRepository CommonAreaAsset { get; private set; }
+        public IErrorViewModelRepository ErrorViewModel { get; private set; }
+        public IFileRepository File { get; private set; }
+        public IFormResponseRepository FormResponse { get; private set; }
+        public IInKindWorkHoursRepository InKindWorkHours { get; private set; }
+        public IInventoryRepository Inventory { get; private set; }
+        public IAdminPhotoViewModelsRepository AdminPhotoViewModels { get; private set; }
+        public IClassifiedListingViewModelRepository ClassifiedListingViewModel { get; private set; }
+        public IDashboardViewModelRepository DashboardViewModel { get; private set; }
+        public ILostAndFoundItemRepository LostAndFoundItem { get; private set; }
         public IKeyRepository Key { get; private set; }
         public IKeyHistoryRepository KeyHistory { get; private set; }
         public ILotRepository Lot { get; private set; }
@@ -20,12 +36,29 @@ namespace Sunridge.DataAccess.Data.Repository
         public ITransactionRepository Transaction { get; private set; }
         public ITransactionTypeRepository TransactionType { get; private set; }
 
+
         //Grabs a connection to the actual db to connect to this class
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
             ApplicationUser = new ApplicationUserRepository(_db);
-
+            Address = new AddressRepository(_db);
+            Banner = new BannerRepository(_db);
+            BoardMember = new BoardMemberRepository(_db);
+            ClassifiedCategory = new ClassifiedCategoryRepository(_db);
+            ClassifiedImage = new ClassifiedImageRepository(_db);
+            ClassifiedListing = new ClassifiedListingRepository(_db);
+            Comment = new CommentRepository(_db);
+            CommonAreaAsset = new CommonAreaAssetRepository(_db);
+            ErrorViewModel = new ErrorViewModelRepository(_db);
+            File = new FileRepository(_db);
+            FormResponse = new FormResponseRepository(_db);
+            InKindWorkHours = new InKindWorkHoursRepository(_db);
+            Inventory = new InventoryRepository(_db);
+            AdminPhotoViewModels = new AdminPhotoViewModelsRepository(_db);
+            ClassifiedListingViewModel = new ClassifiedListingViewModelRepository(_db);
+            DashboardViewModel = new DashboardViewModelRepository(_db);
+            LostAndFoundItem = new LostAndFoundItemRepository(_db);
             Key = new KeyRepository(_db);
             KeyHistory = new KeyHistoryRepository(_db);
             Lot = new LotRepository(_db);

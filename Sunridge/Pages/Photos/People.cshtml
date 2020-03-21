@@ -1,5 +1,5 @@
 ﻿@page
-@model List<Sunridge.Models.Photo>
+@model Sunridge.Pages.Photos.PeopleModel
 @{
     ViewData["Title"] = "People Pictures";
 }
@@ -18,7 +18,7 @@
 
     <div class="tz-gallery">
         <div class="row">
-            @foreach (var p in Model)
+            @foreach (var p in Model.photos)
             {
                 @if (p.Category == "People")
                 {

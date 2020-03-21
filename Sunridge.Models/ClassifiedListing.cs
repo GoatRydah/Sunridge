@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Sunridge.Models
 {
-    public class ClassifiedListing : DbItem
+    public class ClassifiedListing
     {
         public int ClassifiedListingId { get; set; }
-        public int OwnerId { get; set; }
+        public string OwnerId { get; set; }
         public int ClassifiedCategoryId { get; set; }
 
         [Required]
@@ -29,11 +30,15 @@ namespace Sunridge.Models
         public DateTime ListingDate { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+        public bool IsArchive { get; set; }
+        public string LastModifiedBy { get; set; }
+        public DateTime LastModifiedDate { get; set; }
 
         //Nav properties
-        public Owner Owner { get; set; }
+        [ForeignKey("OwnerId")]
+        public ApplicationUser Owner { get; set; }
+        [ForeignKey("ClassifiedCategoryId")]
         public ClassifiedCategory ClassifiedCategory { get; set; }
-
         public List<ClassifiedImage> Images { get; set; }
     }
 }
