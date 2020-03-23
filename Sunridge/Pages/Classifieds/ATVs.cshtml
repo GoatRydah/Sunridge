@@ -13,12 +13,8 @@
     </div>
 </section>
 <!-- Testimonials -->
-@*<section class="testimonials text-center">
-
-        @for (var index = 0; index < Model.Count; index++)
-        {
-            var item = Model[index];
-
+<section class="testimonials text-center">
+    @foreach (var item in Model.ClassifiedListings) { 
             <div class="container mb-5">
                 <hr>
                 <div class="container container-fluid bg-light p-5">
@@ -26,7 +22,7 @@
                         <div class="col-sm-6">
                             <div id="box" class="container">
                                 <!--Carousel Wrapper-->
-                                <div id="carousel-thumb @index" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel" data-interval="0">
+                                <div id="carousel-thumb" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel" data-interval="0">
                                     <!--Slides-->
                                     <div class="carousel-inner" role="listbox">
                                         @foreach (var image in item.Images)
@@ -48,11 +44,11 @@
                                     </div>
                                     <!--/.Slides-->
                                     <!--Controls-->
-                                    <a class="carousel-control-prev" href="#carousel-thumb @index" role="button" data-slide="prev">
+                                    <a class="carousel-control-prev" href="#carousel-thumb" role="button" data-slide="prev">
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                         <span class="sr-only">Previous</span>
                                     </a>
-                                    <a class="carousel-control-next" href="#carousel-thumb @index" role="button" data-slide="next">
+                                    <a class="carousel-control-next" href="#carousel-thumb" role="button" data-slide="next">
                                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                         <span class="sr-only">Next</span>
                                     </a>
@@ -63,13 +59,13 @@
                                             var image = item.Images[imgIndex];
                                             if (image.IsMainImage)
                                             {
-                                                <li data-target="#carousel-thumb @index" data-slide-to="@imgIndex" class="active list-inline-item">
+                                                <li data-target="#carousel-thumb" data-slide-to="@imgIndex" class="active list-inline-item">
                                                     <img id="thumbnail" class="img-fluid" src="@image.ImageURL">
                                                 </li>
                                             }
                                             else
                                             {
-                                                <li data-target="#carousel-thumb @index" data-slide-to="@imgIndex" class="list-inline-item">
+                                                <li data-target="#carousel-thumb" data-slide-to="@imgIndex" class="list-inline-item">
                                                     <img id="thumbnail" class="img-fluid" src="@image.ImageURL">
                                                 </li>
                                             }
@@ -96,4 +92,4 @@
                 </div>
             </div>
         }
-    </section>*@
+</section>

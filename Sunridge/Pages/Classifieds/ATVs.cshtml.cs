@@ -14,6 +14,7 @@ namespace Sunridge.Pages.Classifieds
 
         public readonly IUnitOfWork _unitOfWork;
 
+
         public ATVsModel(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -23,6 +24,7 @@ namespace Sunridge.Pages.Classifieds
 
         public void OnGet()
         {
+         //   ClassifiedListings = _unitOfWork.ClassifiedListing.GetAll(null, null, "ClassifiedType");
 
         }
     }
