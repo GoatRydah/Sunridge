@@ -30,7 +30,7 @@ namespace Sunridge.Controllers
         {
             try
             {
-                var objFromDb = _unitOfWork.Photo.GetFirstOrDefault(u => u.PhotoId == id);
+                var objFromDb = _unitOfWork.Photo.GetFirstOrDefault(u => u.Id == id);
                 if (objFromDb == null)
                 {
                     return Json(new { success = false, message = "Error while deleting" });
