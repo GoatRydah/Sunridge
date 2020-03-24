@@ -13,12 +13,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Sunridge.DataAccess.Data.Repository;
+using Sunridge.DataAccess.Data.Repository.IRepository;
+using Sunridge.Models;
+using Sunridge.Utility;
 
 namespace Sunridge.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
+        private readonly IUnitOfWork _unitOfWork;
+
+        public IEnumerable<Photo> photos { get; set; }
+
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
@@ -30,13 +38,15 @@ namespace Sunridge.Areas.Identity.Pages.Account
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             //IEmailSender emailSender,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            IUnitOfWork unitOfWork)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             //_emailSender = emailSender;
             _roleManager = roleManager;
+            _unitOfWork = unitOfWork;
         }
 
         [BindProperty]
@@ -62,7 +72,22 @@ namespace Sunridge.Areas.Identity.Pages.Account
 
             [Required]
             [Display(Name = "Address")]
-            public string Address { get; set; }
+            public string AddressValue { get; set; }
+
+            [Display(Name = "Apartment")]
+            public string ApartmentValue { get; set; }
+
+            [Required]
+            [Display(Name = "City")]
+            public string CityValue { get; set; }
+
+            [Required]
+            [Display(Name = "State")]
+            public string StateValue { get; set; }
+
+            [Required]
+            [Display(Name = "Zip Code")]
+            public string ZipValue { get; set; }
 
             [Required]
             [EmailAddress]
@@ -89,14 +114,47 @@ namespace Sunridge.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            string role = Request.Form["rdUserRole"].ToString();
+
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                var user = new ApplicationUser {
+                    UserName = Input.FirstName,
+                    Email = Input.Email,
+                    FirstName = Input.FirstName,
+                    LastName = Input.LastName,
+                    AddressValue = Input.AddressValue,
+                    ApartmentValue = Input.ApartmentValue,
+                    CityValue = Input.CityValue,
+                    StateValue = Input.StateValue,
+                    ZipValue = Input.ZipValue,
+                    PhoneNumber = Input.PhoneNumber
+                };
+
+                user.AddressId = _unitOfWork.ApplicationUser.AddAddressAndGetId(user);
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
+
+                //Add the role as well
+                if (!await _roleManager.RoleExistsAsync(SD.AdminRole))
+                {
+                    _roleManager.CreateAsync(new IdentityRole(SD.AdminRole)).GetAwaiter().GetResult();
+                    _roleManager.CreateAsync(new IdentityRole(SD.OwnerRole)).GetAwaiter().GetResult();
+                }
+
                 if (result.Succeeded)
                 {
+                    if (role == SD.OwnerRole)
+                    {
+                        await _userManager.AddToRoleAsync(user, SD.OwnerRole);
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, SD.AdminRole);
+                    }
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
