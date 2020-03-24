@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +34,7 @@ namespace Sunridge.Pages.Admin.Photos
             if (id != null) //edit
             {
                 PhotosObj = new AdminPhotoViewModels();
-                PhotosObj.Photo = _unitofWork.Photo.GetFirstOrDefault(u => u.PhotoId == id);
+                PhotosObj.Photo = _unitofWork.Photo.GetFirstOrDefault(u => u.Id == id);
                 PhotosObj.Categories = _unitofWork.PhotoCategories.GetPhotoCategoriesListOrDropdown();
 
                 if (PhotosObj == null)
@@ -57,12 +58,16 @@ namespace Sunridge.Pages.Admin.Photos
             //Grab the file(s) from the form
             var files = HttpContext.Request.Form.Files;
 
+            string userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = _unitofWork.ApplicationUser.GetFirstOrDefault(s => s.Id == userId);
+            PhotosObj.Photo.Name = user.FirstName + " " + user.LastName;
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            if (PhotosObj.Photo.PhotoId == 0) //new photo object
+            if (PhotosObj.Photo.Id == 0) //new photo object
             {
                 //rename file user submits for image
                 string fileName = Guid.NewGuid().ToString();
@@ -83,7 +88,7 @@ namespace Sunridge.Pages.Admin.Photos
             else //else we edit
             {
                 var objFromDb =
-                    _unitofWork.Photo.Get(PhotosObj.Photo.PhotoId);
+                    _unitofWork.Photo.Get(PhotosObj.Photo.Id);
                 //checks if there are files submitted
                 if (files.Count > 0)
                 {

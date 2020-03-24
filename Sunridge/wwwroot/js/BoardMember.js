@@ -1,34 +1,34 @@
 ﻿var dataTable;
 
+//do not call this funtion until the page is fully loaded
 $(document).ready(function () {
-    LoadList();
+    loadList();
 });
 
-function LoadList() {
-    dataTable = $('#DT_Load').DataTable({
+//this is for the Category loading
+function loadList() {
+    dataTable = $('#DT_load').DataTable({
         "ajax": {
-            "url": "/api/adminPhotoIndex/",
+            "url": "/api/boardmember/",
             "type": "GET",
             "datatype": "json"
         },
         "columns": [
-            { "data": "category", "width": "15%" },
-            { "data": "title", "width": "15%" },
-            { "data": "name", "width": "15%" },
-            { "data": "year", "width": "15%" },
-            { "data": "image", "width": "15%" },
+            { "data": "applicationUser.fullname", "width": "40%" },
+            { "data": "boardRole", "width": "30%" },
+
             {
                 "data": "id",
                 "render": function (data) {
                     return ` <div class="text-center">
-                                <a href="/admin/photos/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
+                                <a href="/Home/upsertBoardMember?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                                     <i class="far fa-edit"></i> Edit
                                 </a>
-                                <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onClick=Delete('/api/adminPhotoIndex/'+${data})>
+                                <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/boardmember/'+${data})>
                                     <i class="far fa-trash-alt"></i> Delete
                                 </a>
-                             </div>`;
-                }, "width": "25%"
+                    </div>`;
+                }, "width": "30%"
             }
         ],
         "language": {
@@ -38,10 +38,11 @@ function LoadList() {
     });
 }
 
+
 function Delete(url) {
     swal({
-        title: "Are you sure you want to delete?",
-        text: "You will not be able to restore the data!",
+        title: "Are you sure you want to Delete?",
+        text: "You will not be able to restore data!",
         icon: "warning",
         buttons: true,
         dangerMode: true
@@ -54,7 +55,8 @@ function Delete(url) {
                     if (data.success) {
                         toastr.success(data.message);
                         dataTable.ajax.reload();
-                    } else {
+                    }
+                    else {
                         toastr.error(data.message);
                     }
                 }

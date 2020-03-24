@@ -1,5 +1,6 @@
 ﻿@page
 @model Sunridge.Pages.Home.BoardMembersModel
+@using Sunridge.Utility
 @{
     ViewData["Title"] = "Board Members";
 }
@@ -15,20 +16,20 @@
 
 
 
-
 <!-- Testimonials -->
 <section class="testimonials text-center">
     <div class="container">
         <div class="row">
             @foreach (var member in Model.BoardMemberList)
             {
-                <div class="mb-5 col-lg-4">
+                <div class="mb-5 col-xl-3 col-lg-4 col-md-6 col-sm-12">
                     <div class="testimonial-item mx-auto mb-5 mb-lg-0">
                         <img class="img-fluid rounded-circle mb-3" src="@member.Image">
                         <h5>@member.BoardRole: @member.ApplicationUser.FullName</h5>
                         <p class="font-weight-light mb-0">@member.ApplicationUser.OwnerLots</p>
                         <p class="font-weight-light mb-0">@member.ApplicationUser.PhoneNumber</p>
-                        <p class="font-weight-light mb-0">Email: <a href="mailto:"@member.ApplicationUser.Email>@member.ApplicationUser.FullName</a></p>
+                        @{string temp = "mailto:" + @member.ApplicationUser.Email;}
+                        <p class="font-weight-light mb-0">Email: <a href=@temp.ToString()>@member.ApplicationUser.FullName</a></p>
                     </div>
                 </div>
             }
@@ -36,13 +37,14 @@
     </div>
 </section>
 
-<h1>---------------------------------------------------------------------</h1>
 
-            <!-- Testimonials -->
-
-                        <div class="col-12">
-                            <div class="text-center">
-                                <a asp-page="UpsertBoardMember" class="btn btn-primary">Edit Board Members</a>
-                            </div>
-                        </div>
+<!-- Edit Board Members Page -->
+@if (User.IsInRole(SD.AdminRole))
+{
+    <div class="col-12">
+        <div class="text-center">
+            <a asp-page="BoardMemberEdit" class="btn btn-primary">Edit Board Members</a>
+        </div>
+    </div>
+}
 
