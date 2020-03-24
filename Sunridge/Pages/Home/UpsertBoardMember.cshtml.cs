@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Sunridge.Models;
 
 namespace Sunridge.Pages.Home.UpsertBoardMember
 {
@@ -63,6 +64,7 @@ namespace Sunridge.Pages.Home.UpsertBoardMember
             {
                 return Page();
             }
+
 
             //new menu item
             if (BoardMemberObj.BoardMember.Id == 0)

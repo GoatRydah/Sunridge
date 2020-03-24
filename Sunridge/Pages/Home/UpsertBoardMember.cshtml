@@ -1,9 +1,10 @@
 ﻿@page
 @model Sunridge.Pages.Home.UpsertBoardMember.UpsertBoardMemberModel
 @using Sunridge.Utility
-
+@if (User.IsInRole(SD.AdminRole))
+{
     <form method="post" asp-action="UpsertBoardMember" enctype="multipart/form-data">
-        <div class="container">
+        <div class="container mt-5">
             <div class="row px-2 mx-2 backgroundWhite border">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 @if (Model.BoardMemberObj.BoardMember.Id != 0)
@@ -20,7 +21,7 @@
                         </div>
                         <div class="col-9">
                             @Html.DropDownListFor(m => m.BoardMemberObj.BoardMember.ApplicationUserId, Model.BoardMemberObj.ApplicationUserList, "-Please select an Owner",
-                             new { @class = "form-control" })
+          new { @class = "form-control" })
                             <span class="text-danger" asp-validation-for="BoardMemberObj.BoardMember.ApplicationUserId"></span>
                         </div>
                     </div>
@@ -47,11 +48,11 @@
                                 <div class="col-6">
                                     @if (Model.BoardMemberObj.BoardMember.Id != 0)
                                     {
-                                        <button type="submit" class="btn btn-primary form-control">Update</button>
+                                        <button type="submit" asp-page="./BoardMembers" class="btn btn-primary form-control">Update</button>
                                     }
                                     else
                                     {
-                                        <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Add</button>
+                                        <button type="submit" asp-page="./BoardMembers" class="btn btn-primary form-control" onclick="return ValidateInput()">Add</button>
                                     }
                                 </div>
                                 <div class="col-6">
@@ -71,6 +72,13 @@
         </div>
 
     </form>
+}
+else
+{
+    <div>
+        <h1 class="danger">Access Denied</h1>
+    </div>
+}
 
 <!--
     <div>
