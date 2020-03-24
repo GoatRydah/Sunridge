@@ -59,7 +59,6 @@ namespace Sunridge.Pages.Home.UpsertBoardMember
             //grab the file(s) from the form
             var files = HttpContext.Request.Form.Files;
 
-
             if (!ModelState.IsValid)
             {
                 return Page();
