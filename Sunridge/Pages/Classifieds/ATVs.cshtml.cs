@@ -20,11 +20,11 @@ namespace Sunridge.Pages.Classifieds
             _unitOfWork = unitOfWork;
         }
 
-        public  List<ClassifiedListing> ClassifiedListings { get; set; }
+        public  IEnumerable<ClassifiedListing> ClassifiedListingsList { get; set; }
 
         public void OnGet()
         {
-         //   ClassifiedListings = _unitOfWork.ClassifiedListing.GetAll(null, null, "ClassifiedType");
+            ClassifiedListingsList = _unitOfWork.ClassifiedListing.GetAll();
 
         }
     }

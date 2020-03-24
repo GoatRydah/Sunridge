@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "ATVs";
 }
+   
 <link rel="Stylesheet" href="~/css/General/classifiedsSlider.css" type="text/css" />
 <!-- inro section Grid -->
 <section class="p-4">
@@ -12,8 +13,24 @@
         </div>
     </div>
 </section>
+<section class="testimonial text-center">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-primary">ATV</h2>
+        </div>
+        @foreach (var item in Model.ClassifiedListingsList)
+        {
+            <div class="col-lg-3 col-xl-3 col-md-6 pb-4">
+                <div class="card" border-radius:5px">
+                    <img src="@item.Images" class="card-img-top p-2 rounded" />
+                    <h3>@item.Description</h3>
+                </div>
+            </div>
+        }
+    </div>
+</section>
 <!-- Testimonials -->
-<section class="testimonials text-center">
+@*<section class="testimonials text-center">
     @foreach (var item in Model.ClassifiedListings) { 
             <div class="container mb-5">
                 <hr>
@@ -92,4 +109,4 @@
                 </div>
             </div>
         }
-</section>
+</section>*@
