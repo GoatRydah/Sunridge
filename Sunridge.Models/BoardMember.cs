@@ -19,9 +19,5 @@ namespace Sunridge.Models
         [ForeignKey("ApplicationUserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
         
-        [Display(Name = "Lot Name")]
-        public int LotId { get; set; }
-        [ForeignKey("LotId")]
-        public Lot Lot { get; set; }
     }
 }

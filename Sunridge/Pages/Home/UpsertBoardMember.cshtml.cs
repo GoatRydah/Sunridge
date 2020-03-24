@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Sunridge.Pages.Home.UpsertBoardMember
 {
-    //[Authorize(Roles = SD.ManagerRole)]//have to be admin to access this page
+    [Authorize(Roles = SD.AdminRole)]//have to be admin to access this page
     public class UpsertBoardMemberModel : PageModel
     {
         private readonly IUnitOfWork _unitOfWork;
