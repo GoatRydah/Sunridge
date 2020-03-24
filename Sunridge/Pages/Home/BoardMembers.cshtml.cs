@@ -23,12 +23,16 @@ namespace Sunridge.Pages.Home
         {
             BoardMemberList = _unitOfWork.BoardMember.GetAll();
             int count = 0;
-            foreach(var boardMember in BoardMemberList)
+            if(BoardMemberList.Any())
             {
-                ApplicationUser user = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == boardMember.ApplicationUserId);
-                BoardMemberList.ElementAt<BoardMember>(count).ApplicationUser = user;
-                count++;
+                foreach (var boardMember in BoardMemberList)
+                {
+                    ApplicationUser user = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == boardMember.ApplicationUserId);
+                    BoardMemberList.ElementAt<BoardMember>(count).ApplicationUser = user;
+                    count++;
+                }
             }
+
         }
     }
 }

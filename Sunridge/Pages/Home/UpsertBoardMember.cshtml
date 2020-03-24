@@ -48,11 +48,11 @@
                                 <div class="col-6">
                                     @if (Model.BoardMemberObj.BoardMember.Id != 0)
                                     {
-                                        <button type="submit" asp-page="./BoardMembers" class="btn btn-primary form-control">Update</button>
+                                        <button type="submit" asp-page="./BoardMemberEdit" class="btn btn-primary form-control">Update</button>
                                     }
                                     else
                                     {
-                                        <button type="submit" asp-page="./BoardMembers" class="btn btn-primary form-control" onclick="return ValidateInput()">Add</button>
+                                        <button type="submit" asp-page="./BoardMemberEdit" class="btn btn-primary form-control" onclick="return ValidateInput()">Add</button>
                                     }
                                 </div>
                                 <div class="col-6">

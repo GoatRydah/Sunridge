@@ -133,7 +133,7 @@ namespace Sunridge.Pages.Home.UpsertBoardMember
             //commit changes to the db
             _unitOfWork.Save();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./BoardMembers");
         }
     }
 }
