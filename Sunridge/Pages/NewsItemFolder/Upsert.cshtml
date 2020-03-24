@@ -1,0 +1,57 @@
+﻿@page
+@model Sunridge.Pages.NewsItemFolder.UpsertModel
+@{
+    ViewData["Title"] = "Upsert";
+}
+<br />
+<br />
+<table id="DT_load" class="table table-striped table-bordered" style="width:100%">
+    <thead>
+        <tr>
+            <th>Header</th>
+            <th>Content</th>
+            <th>Year</th>
+            <th></th>
+        </tr>
+    </thead>
+</table>
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+
+    <div class="col-8 pt-3">
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="NewsItemObj.Header"></label>
+            </div>
+            <div class="col-9">
+                <textarea class="form-control" asp-for="NewsItemObj.Header" id="txtDescription" style="height:200px"></textarea>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="NewsItemObj.Content"></label>
+            </div>
+            <div class="col-9">
+                <textarea class="form-control" asp-for="NewsItemObj.Content" id="txtDescription" style="height:200px"></textarea>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="NewsItemObj.Year"></label>
+            </div>
+            <div class="col-9">
+                <input type="text" class="form-control" asp-for="NewsItemObj.Year" id="txtDescription" style="height:200px"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <button type="submit" class="btn btn-primary form-control" onclick="return ValidInput()">Create</button>
+            </div>
+            <div class="col-6">
+                <a asp-page="./Index" type="submit" class="btn btn-success form-control">Back to List</a>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    <script src="~/js/newsItem.js"></script>
+}
