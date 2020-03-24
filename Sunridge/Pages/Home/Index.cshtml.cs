@@ -18,11 +18,11 @@ namespace Sunridge.Pages.Home
             _unitOfWork = unitOfWork;
         }
 
-        public List<Banner> Banners { get; set; }
+        public IEnumerable<Banner> Banners { get; set; }
 
         public void OnGet()
         {
-
+            Banners = _unitOfWork.Banner.GetAll();
         }
     }
 }
