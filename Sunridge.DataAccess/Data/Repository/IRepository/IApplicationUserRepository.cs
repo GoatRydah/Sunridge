@@ -8,6 +8,8 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
     {
         IEnumerable<SelectListItem> GetApplicationUserListOrDropdown();
 
+        public int AddAddressAndGetId(ApplicationUser applicationUser);
+
         void Update(ApplicationUser applicationUser);
     }
 }

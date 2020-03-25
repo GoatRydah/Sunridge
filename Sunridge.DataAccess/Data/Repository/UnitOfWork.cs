@@ -31,6 +31,7 @@ namespace Sunridge.DataAccess.Data.Repository
         public IMaintenanceRepository Maintenance { get; private set; }
         public INewsItemRepository NewsItem { get; private set; }
         public IPhotoRepository Photo { get; private set; }
+        public IPhotoCategoriesRepository PhotoCategories { get; private set; }
         public IScheduledEventsRepository ScheduledEvents { get; private set; }
         public ITransactionRepository Transaction { get; private set; }
         public ITransactionTypeRepository TransactionType { get; private set; }
@@ -65,6 +66,7 @@ namespace Sunridge.DataAccess.Data.Repository
             Maintenance = new MaintenanceRepository(_db);
             NewsItem = new NewsItemRepository(_db);
             Photo = new PhotoRepository(_db);
+            PhotoCategories = new PhotoCategoriesRepository(_db);
             ScheduledEvents = new ScheduledEventsRepository(_db);
             Transaction = new TransactionRepository(_db);
             TransactionType = new TransactionTypeRepository(_db);

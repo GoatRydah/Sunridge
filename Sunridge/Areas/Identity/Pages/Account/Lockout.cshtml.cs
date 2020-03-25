@@ -1,16 +1,18 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Sunridge.Pages.NewsItem
+namespace Sunridge.Areas.Identity.Pages.Account
 {
-    public class IndexModel : PageModel
+    [AllowAnonymous]
+    public class LockoutModel : PageModel
     {
         public void OnGet()
         {
+
         }
     }
 }

@@ -295,12 +295,7 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("LotId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("LotId");
 
                     b.ToTable("BoardMember");
                 });
@@ -929,7 +924,7 @@ namespace Sunridge.DataAccess.Migrations
 
             modelBuilder.Entity("Sunridge.Models.Photo", b =>
                 {
-                    b.Property<int>("PhotoId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -941,8 +936,8 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OwnerId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -951,11 +946,24 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<int>("Year")
                         .HasColumnType("int");
 
-                    b.HasKey("PhotoId");
-
-                    b.HasIndex("OwnerId");
+                    b.HasKey("Id");
 
                     b.ToTable("Photo");
+                });
+
+            modelBuilder.Entity("Sunridge.Models.PhotoCategories", b =>
+                {
+                    b.Property<int>("PhotoCategoriesId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PhotoCategoriesId");
+
+                    b.ToTable("PhotoCategories");
                 });
 
             modelBuilder.Entity("Sunridge.Models.ScheduledEvent", b =>
@@ -1067,23 +1075,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("TransactionType");
                 });
 
-            modelBuilder.Entity("Sunridge.Models.ViewModels.AdminPhotoViewModels", b =>
-                {
-                    b.Property<int>("AdminPhotoViewModelsId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("PhotoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AdminPhotoViewModelsId");
-
-                    b.HasIndex("PhotoId");
-
-                    b.ToTable("AdminPhotoViewModels");
-                });
-
             modelBuilder.Entity("Sunridge.Models.ViewModels.ClassifiedListingViewModel", b =>
                 {
                     b.Property<int>("ClassifiedListingViewModelId")
@@ -1125,9 +1116,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<int>("AddressId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("AdminPhotoViewModelsId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("Birthday")
                         .HasColumnType("datetime2");
 
@@ -1167,8 +1155,6 @@ namespace Sunridge.DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.HasIndex("AddressId");
-
-                    b.HasIndex("AdminPhotoViewModelsId");
 
                     b.HasIndex("ClassifiedListingViewModelId");
 
@@ -1222,15 +1208,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Sunridge.Models.BoardMember", b =>
-                {
-                    b.HasOne("Sunridge.Models.Lot", "Lot")
-                        .WithMany()
-                        .HasForeignKey("LotId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1392,13 +1369,6 @@ namespace Sunridge.DataAccess.Migrations
                         .HasForeignKey("OwnerId");
                 });
 
-            modelBuilder.Entity("Sunridge.Models.Photo", b =>
-                {
-                    b.HasOne("Sunridge.Models.ApplicationUser", "Owner")
-                        .WithMany()
-                        .HasForeignKey("OwnerId");
-                });
-
             modelBuilder.Entity("Sunridge.Models.Transaction", b =>
                 {
                     b.HasOne("Sunridge.Models.Lot", "Lot")
@@ -1416,13 +1386,6 @@ namespace Sunridge.DataAccess.Migrations
                         .HasForeignKey("TransactionTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Sunridge.Models.ViewModels.AdminPhotoViewModels", b =>
-                {
-                    b.HasOne("Sunridge.Models.Photo", "Photo")
-                        .WithMany()
-                        .HasForeignKey("PhotoId");
                 });
 
             modelBuilder.Entity("Sunridge.Models.ViewModels.ClassifiedListingViewModel", b =>
@@ -1446,10 +1409,6 @@ namespace Sunridge.DataAccess.Migrations
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Sunridge.Models.ViewModels.AdminPhotoViewModels", null)
-                        .WithMany("Owner")
-                        .HasForeignKey("AdminPhotoViewModelsId");
 
                     b.HasOne("Sunridge.Models.ViewModels.ClassifiedListingViewModel", null)
                         .WithMany("Owner")

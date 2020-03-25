@@ -9,8 +9,8 @@ namespace Sunridge.Models
 {
     public class Photo
     {
-        public int PhotoId { get; set; }
-        public string OwnerId { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
         [Required]
         public string Category { get; set; }
         [Required(ErrorMessage = "Please type a title")]
@@ -20,8 +20,8 @@ namespace Sunridge.Models
         
         public string Image { get; set; }
 
-        //Nav props
-        [ForeignKey("OwnerId")]
-        public virtual ApplicationUser Owner { get; set; }
+        ////Nav props
+        //[ForeignKey("OwnerId")]
+        //public virtual ApplicationUser Owner { get; set; }
     }
 }

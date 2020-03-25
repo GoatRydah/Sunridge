@@ -10,17 +10,18 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Sunridge.Models;
 
-namespace Sunridge.Pages.Home.UpsertBoardMember
+namespace Sunridge.Pages.Home.Upsert
 {
-    //[Authorize(Roles = SD.ManagerRole)]//have to be admin to access this page
-    public class UpsertBoardMemberModel : PageModel
+    [Authorize(Roles = SD.AdminRole)]//have to be admin to access this page
+    public class UpsertModel : PageModel
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _hostingEnvironment;
 
         //dependency injection
-        public UpsertBoardMemberModel(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment)
+        public UpsertModel(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment)
         {
             _unitOfWork = unitOfWork;
             _hostingEnvironment = hostingEnvironment;
@@ -59,11 +60,11 @@ namespace Sunridge.Pages.Home.UpsertBoardMember
             //grab the file(s) from the form
             var files = HttpContext.Request.Form.Files;
 
-
             if (!ModelState.IsValid)
             {
                 return Page();
             }
+
 
             //new menu item
             if (BoardMemberObj.BoardMember.Id == 0)
@@ -132,7 +133,7 @@ namespace Sunridge.Pages.Home.UpsertBoardMember
             //commit changes to the db
             _unitOfWork.Save();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./BoardMembers");
         }
     }
 }

@@ -31,6 +31,7 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         IMaintenanceRepository Maintenance { get; }
         INewsItemRepository NewsItem { get; }
         IPhotoRepository Photo { get; }
+        IPhotoCategoriesRepository PhotoCategories { get; }
         IScheduledEventsRepository ScheduledEvents { get; }
         ITransactionRepository Transaction { get; }
         ITransactionTypeRepository TransactionType { get; }

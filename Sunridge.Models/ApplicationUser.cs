@@ -66,6 +66,16 @@ namespace Sunridge.Models
         public virtual ICollection<KeyHistory> KeyHistories { get; set; }
         public virtual IEnumerable<LostAndFoundItem> LostAndFoundItems { get; set; }
 
+        [NotMapped]
+        public string ApartmentValue { get; set; }
+        [NotMapped]
+        public string CityValue { get; set; }
+        [NotMapped]
+        public string StateValue { get; set; }
+        [NotMapped]
+        public string ZipValue { get; set; }
+        [NotMapped]
+        public string AddressValue { get; set; }
         // Calculated properties
         [NotMapped]
         [Display(Name = "Name")]

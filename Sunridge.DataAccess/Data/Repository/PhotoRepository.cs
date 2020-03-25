@@ -22,18 +22,18 @@ namespace Sunridge.DataAccess.Data.Repository
         {
             return _db.Photo.Select(i => new SelectListItem()
             {
-                Text = i.PhotoId.ToString(),
+                Text = i.Id.ToString(),
                 Value = i.Title.ToString()
             });
         }
 
         public void Update(Photo photo)
         {
-            var objFromDb = _db.Photo.FirstOrDefault(s => s.PhotoId == photo.PhotoId);
+            var objFromDb = _db.Photo.FirstOrDefault(s => s.Id == photo.Id);
 
             objFromDb.Category = photo.Category;
             objFromDb.Image = photo.Image;
-            objFromDb.Owner = photo.Owner;
+            objFromDb.Name = photo.Name;
             objFromDb.Title = photo.Title;
             objFromDb.Year = photo.Year;
 

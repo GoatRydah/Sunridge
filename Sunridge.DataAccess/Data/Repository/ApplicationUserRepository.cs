@@ -2,6 +2,7 @@
 using Sunridge.Data;
 using Sunridge.DataAccess.Data.Repository.IRepository;
 using Sunridge.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -25,6 +26,34 @@ namespace Sunridge.DataAccess.Data.Repository
             });
         }
 
+        public int AddAddressAndGetId(ApplicationUser applicationUser)
+        {
+            Address addr = new Address();
+            addr.Apartment = applicationUser.ApartmentValue;
+            addr.City = applicationUser.CityValue;
+            addr.State = applicationUser.StateValue;
+            addr.StreetAddress = applicationUser.AddressValue;
+            addr.Zip = applicationUser.ZipValue;
+
+            _db.Address.Add(addr);
+
+            _db.SaveChanges();
+
+            int addrId;
+
+            try
+            {
+                addrId = _db.Address.Select(s => s.Id).Max();
+            }
+            catch(Exception e)
+            {
+                var pants = e;
+                addrId = 0;
+            }
+
+            return addrId;
+        }
+
         public void Update(ApplicationUser applicationUser)
         {
             var objFromDb = _db.ApplicationUser.FirstOrDefault(s => s.Id == applicationUser.Id);
@@ -32,6 +61,7 @@ namespace Sunridge.DataAccess.Data.Repository
             objFromDb.LastName = applicationUser.LastName;
             objFromDb.OwnerLots = applicationUser.OwnerLots;
             objFromDb.AddressId = applicationUser.AddressId;
+            objFromDb.Address = applicationUser.Address;
             objFromDb.Occupation = applicationUser.Occupation;
             objFromDb.Birthday = applicationUser.Birthday;
             objFromDb.Phone = applicationUser.Phone;
