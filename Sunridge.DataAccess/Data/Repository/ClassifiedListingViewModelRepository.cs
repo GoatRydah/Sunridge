@@ -30,8 +30,6 @@ namespace Sunridge.DataAccess.Data.Repository
             var objFromDb = _db.ClassifiedListingViewModel.FirstOrDefault(s => s.ClassifiedListing == address.ClassifiedListing);
             objFromDb.ClassifiedCategory = address.ClassifiedCategory;
             objFromDb.Owner = address.Owner;
-            objFromDb.ClassifiedImages = address.ClassifiedImages;
-
 
             _db.SaveChanges();
         }

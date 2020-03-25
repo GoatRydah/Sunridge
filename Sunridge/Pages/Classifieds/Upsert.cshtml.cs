@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Sunridge.DataAccess.Data.Repository.IRepository;
+using Sunridge.Models;
 
 namespace Sunridge.Pages.Classifieds
 {
@@ -22,14 +24,14 @@ namespace Sunridge.Pages.Classifieds
 
     //binds the model to the page
     [BindProperty]
-    public Classifieds ClassifiedsObj { get; set; }
+    public ClassifiedListing ClassifiedsObj { get; set; }
     public IActionResult OnGet(int? id) ///IActionResult return type is page, obj
     {
         //LostAndFoundItem = new LostAndFoundItem();
 
         if (id != null) //edit
         {
-                ClassifiedsObj = _unitofWork.LostAndFoundItem.GetFirstOrDefault(u => u.Id == id);
+                ClassifiedsObj = _unitofWork.ClassifiedListing.GetFirstOrDefault(u => u.ClassifiedListingId == id);
             if (ClassifiedsObj == null)
             {
                 return NotFound();
@@ -51,58 +53,58 @@ namespace Sunridge.Pages.Classifieds
             return Page();
         }
 
-        if (LostAndFoundItemObj.Id == 0) //new lostandfounditem
-        {
-            //rename file user submits for image
-            string fileName = Guid.NewGuid().ToString();
-            //upload file to the path
-            var uploads = Path.Combine(webRootPath, @"images\lostAndFoundItems");
-            //preserve our extension
-            var extension = Path.GetExtension(files[0].FileName);
+        //if (ClassifiedsObj.ClassifiedListingId == 0)
+        //{
+        //    //rename file user submits for image
+        //    string fileName = Guid.NewGuid().ToString();
+        //    //upload file to the path
+        //    var uploads = Path.Combine(webRootPath, @"images\classifieds");
+        //    //preserve our extension
+        //    var extension = Path.GetExtension(files[0].FileName);
 
-            using (var filestream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
-            {
-                files[0].CopyTo(filestream); //files variable comes from the razor page files id
-            }
+        //    using (var filestream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+        //    {
+        //        files[0].CopyTo(filestream); //files variable comes from the razor page files id
+        //    }
 
-            LostAndFoundItemObj.Image = @"\images\lostAndFoundItems\" + fileName + extension;
+        //        ClassifiedsObj.Images = @"\images\classifieds\" + fileName + extension;
 
-            _unitofWork.LostAndFoundItem.Add(LostAndFoundItemObj);
-        }
-        else //else we edit
-        {
-            var objFromDb =
-                _unitofWork.LostAndFoundItem.Get(LostAndFoundItemObj.Id);
-            //checks if there are files submitted
-            if (files.Count > 0)
-            {
-                //rename file user submits for image
-                string fileName = Guid.NewGuid().ToString();
-                //upload file to the path
-                var uploads = Path.Combine(webRootPath, @"images\lostAndFoundItems");
-                //preserve our extension
-                var extension = Path.GetExtension(files[0].FileName);
+        //    _unitofWork.LostAndFoundItem.Add(ClassifiedsObj);
+        //}
+        //else //else we edit
+        //{
+        //    var objFromDb =
+        //        _unitofWork.LostAndFoundItem.Get(ClassifiedsObj.ClassifiedListingId);
+        //    //checks if there are files submitted
+        //    if (files.Count > 0)
+        //    {
+        //        //rename file user submits for image
+        //        string fileName = Guid.NewGuid().ToString();
+        //        //upload file to the path
+        //        var uploads = Path.Combine(webRootPath, @"images\lostAndFoundItems");
+        //        //preserve our extension
+        //        var extension = Path.GetExtension(files[0].FileName);
 
-                var imagePath = Path.Combine(webRootPath, objFromDb.Image.TrimStart('\\'));
+        //        var imagePath = Path.Combine(webRootPath, objFromDb.Image.TrimStart('\\'));
 
-                if (System.IO.File.Exists(imagePath))
-                {
-                    System.IO.File.Delete(imagePath);
-                }
+        //        if (System.IO.File.Exists(imagePath))
+        //        {
+        //            System.IO.File.Delete(imagePath);
+        //        }
 
-                using (var filestream = new FileStream(Path.Combine(uploads, fileName, extension), FileMode.Create))
-                {
-                    files[0].CopyTo(filestream);
-                }
+        //        using (var filestream = new FileStream(Path.Combine(uploads, fileName, extension), FileMode.Create))
+        //        {
+        //            files[0].CopyTo(filestream);
+        //        }
 
-                LostAndFoundItemObj.Image = @"\images\lostAndFoundItem\" + fileName + extension;
-            }
-            else
-            {
-                LostAndFoundItemObj.Image = objFromDb.Image;
-            }
-            _unitofWork.LostAndFoundItem.Update(LostAndFoundItemObj);
-        }
+        //            ClassifiedsObj.Images = @"\images\lostAndFoundItem\" + fileName + extension;
+        //    }
+        //    else
+        //    {
+        //            ClassifiedsObj.Images = objFromDb.Image;
+        //    }
+        //    _unitofWork.LostAndFoundItem.Update(ClassifiedsObj);
+        //}
         _unitofWork.Save();
         return RedirectToPage("./Index");
     }

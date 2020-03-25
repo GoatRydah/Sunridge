@@ -39,6 +39,6 @@ namespace Sunridge.Models
         public ApplicationUser Owner { get; set; }
         [ForeignKey("ClassifiedCategoryId")]
         public ClassifiedCategory ClassifiedCategory { get; set; }
-        public List<ClassifiedImage> Images { get; set; }
+        public string Images { get; set; }
     }
 }

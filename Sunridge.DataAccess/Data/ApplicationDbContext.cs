@@ -22,7 +22,6 @@ namespace Sunridge.Data
         public DbSet<Banner> Banner { get; set; }
         public DbSet<BoardMember> BoardMember { get; set; }
         public DbSet<ClassifiedCategory> ClassifiedCategory { get; set; }
-        public DbSet<ClassifiedImage> ClassifiedImage { get; set; }
         public DbSet<ClassifiedListing> ClassifiedListing { get; set; }
         public DbSet<Comment> Comment { get; set; }
         public DbSet<CommonAreaAsset> CommonAreaAsset { get; set; }

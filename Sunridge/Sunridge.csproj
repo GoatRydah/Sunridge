@@ -74,6 +74,7 @@
   <ItemGroup>
     <Folder Include="Pages\Admin\" />
     <Folder Include="wwwroot\images\boardMembers\" />
+    <Folder Include="wwwroot\images\classifieds\" />
   </ItemGroup>
 
 
