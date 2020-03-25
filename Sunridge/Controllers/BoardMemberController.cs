@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Curry.Controllers
+namespace Sunridge.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

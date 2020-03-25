@@ -14,14 +14,14 @@ function loadList() {
             "datatype": "json"
         },
         "columns": [
-            { "data": "boardMember.applicationUser.fullName", "width": "40%" },
+            { "data": "applicationUser.fullname", "width": "40%" },
             { "data": "boardRole", "width": "30%" },
 
             {
                 "data": "id",
                 "render": function (data) {
                     return ` <div class="text-center">
-                                <a href="/Home/upsertBoardMember?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
+                                <a href="/Home/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                                     <i class="far fa-edit"></i> Edit
                                 </a>
                                 <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/boardmember/'+${data})>

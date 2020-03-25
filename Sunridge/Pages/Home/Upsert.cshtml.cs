@@ -12,16 +12,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Sunridge.Models;
 
-namespace Sunridge.Pages.Home.UpsertBoardMember
+namespace Sunridge.Pages.Home.Upsert
 {
     [Authorize(Roles = SD.AdminRole)]//have to be admin to access this page
-    public class UpsertBoardMemberModel : PageModel
+    public class UpsertModel : PageModel
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _hostingEnvironment;
 
         //dependency injection
-        public UpsertBoardMemberModel(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment)
+        public UpsertModel(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment)
         {
             _unitOfWork = unitOfWork;
             _hostingEnvironment = hostingEnvironment;

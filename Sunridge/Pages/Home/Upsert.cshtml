@@ -1,9 +1,9 @@
 ﻿@page
-@model Sunridge.Pages.Home.UpsertBoardMember.UpsertBoardMemberModel
+@model Sunridge.Pages.Home.Upsert.UpsertModel
 @using Sunridge.Utility
 @if (User.IsInRole(SD.AdminRole))
 {
-    <form method="post" asp-action="UpsertBoardMember" enctype="multipart/form-data">
+    <form method="post" asp-action="Upsert" enctype="multipart/form-data">
         <div class="container mt-5">
             <div class="row px-2 mx-2 backgroundWhite border">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -48,11 +48,11 @@
                                 <div class="col-6">
                                     @if (Model.BoardMemberObj.BoardMember.Id != 0)
                                     {
-                                        <button type="submit" asp-page="./BoardMemberEdit" class="btn btn-primary form-control">Update</button>
+                                        <button type="submit" class="btn btn-primary form-control">Update</button>
                                     }
                                     else
                                     {
-                                        <button type="submit" asp-page="./BoardMemberEdit" class="btn btn-primary form-control" onclick="return ValidateInput()">Add</button>
+                                        <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Add</button>
                                     }
                                 </div>
                                 <div class="col-6">
