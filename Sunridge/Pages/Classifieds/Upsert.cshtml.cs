@@ -26,8 +26,7 @@ namespace Sunridge.Pages.Classifieds
     [BindProperty]
     public ClassifiedListing ClassifiedsObj { get; set; }
     public IActionResult OnGet(int? id) ///IActionResult return type is page, obj
-    {
-        //LostAndFoundItem = new LostAndFoundItem();
+        { 
 
         if (id != null) //edit
         {
@@ -53,59 +52,59 @@ namespace Sunridge.Pages.Classifieds
             return Page();
         }
 
-        //if (ClassifiedsObj.ClassifiedListingId == 0)
-        //{
-        //    //rename file user submits for image
-        //    string fileName = Guid.NewGuid().ToString();
-        //    //upload file to the path
-        //    var uploads = Path.Combine(webRootPath, @"images\classifieds");
-        //    //preserve our extension
-        //    var extension = Path.GetExtension(files[0].FileName);
+            if (ClassifiedsObj.ClassifiedListingId == 0)
+            {
+                //rename file user submits for image
+                string fileName = Guid.NewGuid().ToString();
+                //upload file to the path
+                var uploads = Path.Combine(webRootPath, @"images\classifieds");
+                //preserve our extension
+                var extension = Path.GetExtension(files[0].FileName);
 
-        //    using (var filestream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
-        //    {
-        //        files[0].CopyTo(filestream); //files variable comes from the razor page files id
-        //    }
+                using (var filestream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+                {
+                    files[0].CopyTo(filestream); //files variable comes from the razor page files id
+                }
 
-        //        ClassifiedsObj.Images = @"\images\classifieds\" + fileName + extension;
+                ClassifiedsObj.Images = @"\images\classifieds\" + fileName + extension;
 
-        //    _unitofWork.LostAndFoundItem.Add(ClassifiedsObj);
-        //}
-        //else //else we edit
-        //{
-        //    var objFromDb =
-        //        _unitofWork.LostAndFoundItem.Get(ClassifiedsObj.ClassifiedListingId);
-        //    //checks if there are files submitted
-        //    if (files.Count > 0)
-        //    {
-        //        //rename file user submits for image
-        //        string fileName = Guid.NewGuid().ToString();
-        //        //upload file to the path
-        //        var uploads = Path.Combine(webRootPath, @"images\lostAndFoundItems");
-        //        //preserve our extension
-        //        var extension = Path.GetExtension(files[0].FileName);
+                _unitofWork.ClassifiedListing.Add(ClassifiedsObj);
+            }
+            else //else we edit
+            {
+                var objFromDb =
+                    _unitofWork.ClassifiedListing.Get(ClassifiedsObj.ClassifiedListingId);
+                //checks if there are files submitted
+                if (files.Count > 0)
+                {
+                    //rename file user submits for image
+                    string fileName = Guid.NewGuid().ToString();
+                    //upload file to the path
+                    var uploads = Path.Combine(webRootPath, @"images\classifieds");
+                    //preserve our extension
+                    var extension = Path.GetExtension(files[0].FileName);
 
-        //        var imagePath = Path.Combine(webRootPath, objFromDb.Image.TrimStart('\\'));
+                    var imagePath = Path.Combine(webRootPath, objFromDb.Images.TrimStart('\\'));
 
-        //        if (System.IO.File.Exists(imagePath))
-        //        {
-        //            System.IO.File.Delete(imagePath);
-        //        }
+                    if (System.IO.File.Exists(imagePath))
+                    {
+                        System.IO.File.Delete(imagePath);
+                    }
 
-        //        using (var filestream = new FileStream(Path.Combine(uploads, fileName, extension), FileMode.Create))
-        //        {
-        //            files[0].CopyTo(filestream);
-        //        }
+                    using (var filestream = new FileStream(Path.Combine(uploads, fileName, extension), FileMode.Create))
+                    {
+                        files[0].CopyTo(filestream);
+                    }
 
-        //            ClassifiedsObj.Images = @"\images\lostAndFoundItem\" + fileName + extension;
-        //    }
-        //    else
-        //    {
-        //            ClassifiedsObj.Images = objFromDb.Image;
-        //    }
-        //    _unitofWork.LostAndFoundItem.Update(ClassifiedsObj);
-        //}
-        _unitofWork.Save();
+                    ClassifiedsObj.Images = @"\images\classifieds\" + fileName + extension;
+                }
+                else
+                {
+                    ClassifiedsObj.Images = objFromDb.Images;
+                }
+                _unitofWork.ClassifiedListing.Update(ClassifiedsObj);
+            }
+            _unitofWork.Save();
         return RedirectToPage("./Index");
     }
 }
