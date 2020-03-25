@@ -23,8 +23,8 @@
                 @if (p.Category == "Winter")
                 {
                     <div class="col-sm-6 col-md-4 mb-4">
-                        <a class="lightbox" href="~/images/PhotoGallery/@(p.Id).png">
-                            <img src="@p.Image" alt="@p.Title" />
+                        <a class="lightbox" href="~/img/photo-gal/@(p.Image).png">
+                            <img style="max-width: 260px;" src="@p.Image" alt="@p.Title" />
                         </a>
                         <h5>@p.Title</h5>
                         <p class="font-weight-light mb-0"><i>@p.Name</i></p>
@@ -38,6 +38,6 @@
 
 @section Scripts
     {
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.0/baguetteBox.min.js"></script>
     <script>baguetteBox.run('.tz-gallery');</script>
 }

@@ -1,0 +1,23 @@
+{
+  "name": "sunridge",
+  "version": "1.0.0",
+  "description": "Sunridge Project",
+  "main": "index.js",
+  "dependencies": {
+    "baguettebox.js": "^1.11.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GoatRydah/Sunridge.git"
+  },
+  "author": "Students",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GoatRydah/Sunridge/issues"
+  },
+  "homepage": "https://github.com/GoatRydah/Sunridge#readme"
+}

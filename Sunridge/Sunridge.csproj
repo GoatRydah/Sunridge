@@ -84,7 +84,6 @@
     <Folder Include="Pages\Admin\Reports\" />
     <Folder Include="Pages\Admin\Owners\" />
     <Folder Include="wwwroot\images\boardMembers\" />
-    <Folder Include="wwwroot\img\photo-gal\" />
   </ItemGroup>
 
 
