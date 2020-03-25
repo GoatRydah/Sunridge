@@ -19,26 +19,71 @@
     </thead>
 </table>
 <form method="post" asp-action="Upsert" enctype="multipart/form-data">
-    @*<div class="form-group row">
-        <div class="col-3">
+    <div class="form-group row">
+        @*<div class="col-3">
             <label asp-for="ClassifiedsObj.ClassifiedCategory.ClassifiedCategoryId"></label>
         </div>
         <div class="col-9">
             @Html.DropDownListFor(m => m.ClassifiedsObj.ClassifiedCategory.ClassifiedCategoryId,
-            Model.ClassifiedsObj.ClassifiedCategory,
+            Model.ClassifiedsObj.ClassifiedCategoryList,
             "-Please select a Category",
             new { @class = "form-control" })
 
-            <span class="text-danger" asp-validation-for="ClassifiedsObj.MenuItem.CategoryId"></span>
-        </div>
-    </div>*@
+            <span class="text-danger" asp-validation-for="ClassifiedsObj.ClassifiedCategory.ClassifiedCategoryId"></span>
+        </div>*@
+    </div>
     <div class="col-8 pt-3">
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="ClassifiedsObj.ClassifiedCategory.Description"></label>
+            </div>
+            <div class="col-9">
+                <input class="form-control" asp-for="ClassifiedsObj.ClassifiedCategory.Description" />
+                <span class="text-danger" asp-validation-for="ClassifiedsObj.ClassifiedCategory.Description"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="ClassifiedsObj.ItemName"></label>
+            </div>
+            <div class="col-9">
+                <input class="form-control" asp-for="ClassifiedsObj.ItemName" />
+                <span class="text-danger" asp-validation-for="ClassifiedsObj.ItemName"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="ClassifiedsObj.Price"></label>
+            </div>
+            <div class="col-9">
+                <input class="form-control" asp-for="ClassifiedsObj.Price" />
+                <span class="text-danger" asp-validation-for="ClassifiedsObj.Price"></span>
+            </div>
+        </div>
         <div class="form-group row">
             <div class="col-3">
                 <label asp-for="ClassifiedsObj.Description"></label>
             </div>
             <div class="col-9">
                 <textarea class="form-control" asp-for="ClassifiedsObj.Description" id="txtDescription" style="height:200px"></textarea>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="ClassifiedsObj.Phone"></label>
+            </div>
+            <div class="col-9">
+                <input class="form-control" asp-for="ClassifiedsObj.Phone" />
+                <span class="text-danger" asp-validation-for="ClassifiedsObj.Phone"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="ClassifiedsObj.Email"></label>
+            </div>
+            <div class="col-9">
+                <input class="form-control" asp-for="ClassifiedsObj.Email" />
+                <span class="text-danger" asp-validation-for="ClassifiedsObj.Email"></span>
             </div>
         </div>
         <div class="form-group row">

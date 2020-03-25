@@ -36,9 +36,9 @@ namespace Sunridge.Models
 
         //Nav properties
         [ForeignKey("OwnerId")]
-        public ApplicationUser Owner { get; set; }
+        public virtual ApplicationUser Owner { get; set; }
         [ForeignKey("ClassifiedCategoryId")]
-        public ClassifiedCategory ClassifiedCategory { get; set; }
+        public virtual ClassifiedCategory ClassifiedCategory { get; set; }
         public string Images { get; set; }
     }
 }

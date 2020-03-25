@@ -8,49 +8,58 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Sunridge.DataAccess.Data.Repository.IRepository;
 using Sunridge.Models;
+using Sunridge.Models.ViewModels;
 
 namespace Sunridge.Pages.Classifieds
 {
     public class UpsertModel : PageModel
     {
         private readonly IUnitOfWork _unitofWork;
-    private readonly IWebHostEnvironment _hostingEnvironment;
+        private readonly IWebHostEnvironment _hostingEnvironment;
 
-    public UpsertModel(IUnitOfWork unitofWork, IWebHostEnvironment hostingEnvironment)
-    {
-        _unitofWork = unitofWork;
-        _hostingEnvironment = hostingEnvironment;
-    }
-
-    //binds the model to the page
-    [BindProperty]
-    public ClassifiedListing ClassifiedsObj { get; set; }
-    public IActionResult OnGet(int? id) ///IActionResult return type is page, obj
-        { 
-
-        if (id != null) //edit
+        public UpsertModel(IUnitOfWork unitofWork, IWebHostEnvironment hostingEnvironment)
         {
-                ClassifiedsObj = _unitofWork.ClassifiedListing.GetFirstOrDefault(u => u.ClassifiedListingId == id);
-            if (ClassifiedsObj == null)
-            {
-                return NotFound();
-            }
+            _unitofWork = unitofWork;
+            _hostingEnvironment = hostingEnvironment;
         }
 
-        return Page();
-    }
-
-    public IActionResult OnPost()
-    {
-        //find root path wwwroot
-        string webRootPath = _hostingEnvironment.WebRootPath;
-        //Grab the file(s) from the form
-        var files = HttpContext.Request.Form.Files;
-
-        if (!ModelState.IsValid)
+        //binds the model to the page
+        [BindProperty]
+        public ClassifiedListing ClassifiedsObj { get; set; }
+        public IActionResult OnGet(int? id) ///IActionResult return type is page, obj
         {
+            //ClassifiedsObj = new ClassifiedListingVM()
+            //{
+            //    ClassifiedCategoryList =
+            //   _unitofWork.ClassifiedCategory.GetClassifiedCategoryListOrDropdown(),
+            //    OwnerList =
+            //    _unitofWork.ApplicationUser.GetApplicationUserListOrDropdown(),
+            //    ClassifiedListing = new Models.ClassifiedListing()
+            //};
+
+            if (id != null) //edit
+            {
+                ClassifiedsObj = _unitofWork.ClassifiedListing.GetFirstOrDefault(u => u.ClassifiedListingId == id);
+                if (ClassifiedsObj == null)
+                {
+                    return NotFound();
+                }
+            }
+
             return Page();
         }
+
+        public IActionResult OnPost()
+        {
+            //find root path wwwroot
+            string webRootPath = _hostingEnvironment.WebRootPath;
+            //Grab the file(s) from the form
+            var files = HttpContext.Request.Form.Files;
+
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
 
             if (ClassifiedsObj.ClassifiedListingId == 0)
             {
@@ -105,7 +114,7 @@ namespace Sunridge.Pages.Classifieds
                 _unitofWork.ClassifiedListing.Update(ClassifiedsObj);
             }
             _unitofWork.Save();
-        return RedirectToPage("./Index");
+            return RedirectToPage("./Index");
+        }
     }
-}
 }

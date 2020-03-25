@@ -12,7 +12,12 @@ function loadList() {
             "datatype": "json"
         },
         "columns": [
-            { "data": "description", "width": "50%" },
+            { "data": "category", "width": "15%" },
+            { "data": "title", "width": "15%" },
+            { "data": "price", "width": "10%" },
+            { "data": "description", "width": "15%" },
+            { "data": "phone", "width": "15%" },
+            { "data": "email", "width": "15%" },
             {
                 "data": "id",
                 "render": function (data) {
@@ -24,7 +29,7 @@ function loadList() {
                                     <i class="far fa-trash-alt"></i> Delete
                                 </a>
                 </div>`;
-                }, "width": "30%"
+                }, "width": "15%"
             }
         ],
         "language": {
