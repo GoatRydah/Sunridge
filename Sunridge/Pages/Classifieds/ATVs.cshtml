@@ -15,8 +15,28 @@
 </section>
 <section class="testimonial text-center">
     <div class="row">
-        <div class="col-6">
-            <h2 class="text-primary">ATV</h2>
+        <div class="container container-fluid bg-light p-5">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div id="box" class="container">
+                        <!--Carousel Wrapper-->
+                        <div id="carousel-thumb 0" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel" data-interval="0">
+                            <!--Slides-->
+                            <div class="carousel-inner" role="listbox">
+                                <div class="carousel-item active">
+                                    <img id="itemImage" class="d-block w-100" src="~/images/classifieds/atv.jpg">
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.Carousel Wrapper-->
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <h1>ATV - $1000</h1>
+                    <p>Great quality, great price. Barely used.</p>
+                    <h4>Email: <a href="mailto:Test at test@gmail.com">Test at test@gmail.com</a></h4>
+                </div>
+            </div>
         </div>
         <div class="col-6 text-right">
             <a asp-page="Upsert" class="btn btn-primary"><i class="fas fa-plus"></i>&nbsp;Create New</a>

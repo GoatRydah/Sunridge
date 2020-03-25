@@ -15,8 +15,28 @@
 </section>
 <section class="testimonial text-center">
     <div class="row">
-        <div class="col-6">
-            <h2 class="text-primary">Lots</h2>
+        <div class="container container-fluid bg-light p-5">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div id="box" class="container">
+                        <!--Carousel Wrapper-->
+                        <div id="carousel-thumb 0" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel" data-interval="0">
+                            <!--Slides-->
+                            <div class="carousel-inner" role="listbox">
+                                <div class="carousel-item active">
+                                    <img id="itemImage" class="d-block w-100" src="~/images/classifieds/lot.jpg">
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.Carousel Wrapper-->
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <h1>Lot #1 - $100000</h1>
+                    <p>Spacious lot. 5 acres.</p>
+                    <h4>Email: <a href="mailto:Test at test@gmail.com">Test at test@gmail.com</a></h4>
+                </div>
+            </div>
         </div>
         @foreach (var item in Model.ClassifiedListingsList)
         {

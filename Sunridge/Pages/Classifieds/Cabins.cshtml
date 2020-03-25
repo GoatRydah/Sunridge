@@ -16,8 +16,51 @@
 <section class="testimonials text-center">
 
     <div class="row">
-        <div class="col-6">
-            <h2 class="text-primary">Cabins</h2>
+        <div class="container container-fluid bg-light p-5">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div id="box" class="container">
+                        <!--Carousel Wrapper-->
+                        <div id="carousel-thumb 0" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel" data-interval="0">
+                            <!--Slides-->
+                            <div class="carousel-inner" role="listbox">
+                                <div class="carousel-item active">
+                                    <img id="itemImage" class="d-block w-100" src="~/images/classifieds/cabin.jpg">
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.Carousel Wrapper-->
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <h1>Cabin #1 - $100000</h1>
+                    <p>1.066 hundred square ft. 2.3 acres. 2 bedroom (upstairs very large) big closet. Sleeps many people. Bedroom downstairs (master). Full bath. Nice size kitchen, lots of cabinet space. 15 cu. ft. propane refrigerator/freezer, excellent condition. Upgraded windows. 4000-watt electric start generator. Very little upkeep on the outside. Aluminum siding, front deck is Trex. Back deck and balcony are wood. Shed on property. Wood heat. The cabin is secluded and is bordered on two sides by common land.</p>
+                    <h4>Email: <a href="mailto:Test at test@gmail.com">Test at test@gmail.com</a></h4>
+                </div>
+            </div>
+        </div>
+        <div class="container container-fluid bg-light p-5">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div id="box" class="container">
+                        <!--Carousel Wrapper-->
+                        <div id="carousel-thumb 0" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel" data-interval="0">
+                            <!--Slides-->
+                            <div class="carousel-inner" role="listbox">
+                                <div class="carousel-item active">
+                                    <img id="itemImage" class="d-block w-100" src="~/images/classifieds/cabin 2.jpg">
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.Carousel Wrapper-->
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <h1>Cabin #2 - $200000</h1>
+                    <p>1.066 hundred square ft. 2.3 acres. 2 bedroom (upstairs very large) big closet. Sleeps many people. Bedroom downstairs (master). Full bath. Nice size kitchen, lots of cabinet space. 15 cu. ft. propane refrigerator/freezer, excellent condition. Upgraded windows. 4000-watt electric start generator. Very little upkeep on the outside. Aluminum siding, front deck is Trex. Back deck and balcony are wood. Shed on property. Wood heat. The cabin is secluded and is bordered on two sides by common land.</p>
+                    <h4>Email: <a href="mailto:Test at test@gmail.com">Test at test@gmail.com</a></h4>
+                </div>
+            </div>
         </div>
         @foreach (var item in Model.ClassifiedListingsList)
         {

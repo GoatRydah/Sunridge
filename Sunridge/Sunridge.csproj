@@ -85,7 +85,6 @@
     <Folder Include="Pages\Admin\Owners\" />
     <Folder Include="wwwroot\docs\NewsItemFiles\" />
     <Folder Include="wwwroot\images\boardMembers\" />
-    <Folder Include="wwwroot\images\classifieds\" />
   </ItemGroup>
 
 
