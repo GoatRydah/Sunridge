@@ -33,9 +33,13 @@
                             <hr class="mt-5 mb-5">
                             <h2>@item.Header</h2>
                             <p>@item.Content</p>
-                            @*<div style="box-shadow: 10px 10px 8px 10px #888888;" class="col-sm-12 text-center mb-5">
-                                <a class="lightbox" href="\images\News\Ridgerunner Spring 2019.pdf" target="_blank">Ridgerunner Spring 2019.pdf</a>
-                            </div>*@
+
+                            @if (item.FilePath != null)
+                            {
+                                <div style="box-shadow: 10px 10px 8px 10px #888888;" class="col-sm-12 text-center mb-5">
+                                    <a class="lightbox" href="@item.FilePath" target="_blank">@item.FilePath</a>
+                                </div>
+                            }
                         </div>
                     </div>
                 }
