@@ -13,40 +13,33 @@
     </div>
 </div>
 
-<div class="table-responsive-sm">
-    <table class="table table-sm table-hover">
-        <thead>
-            <tr id="headTr">
-                @*<th>@Html.DisplayNameFor(m => m.Year)</th>
-                    <th>@Html.DisplayNameFor(m => m.Header)</th>*@
-                <th></th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @*@foreach (var item in Model.NewsItemList)
+<div class="container">
+    <h1 class="mb-4">News History</h1>
+    <div id="accordion">
+        @foreach (var year in Model.numYears)
+        {
+            <div class="card">
+                <div class="card-header" id="@year">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse + @year" aria-expanded="true" aria-controls="collapse + @year">
+                            @year
+                        </button>
+                    </h5>
+                </div>
+                @foreach (var item in Model.NewsItemList.Where(i=> i.Year == year))
                 {
-                    <tr>
-                        <td>@Html.DisplayFor(m => item.Year)</td>
-                        <td>@Html.DisplayFor(m => item.Header)</td>
-                        <td>
-                            <div class="btn-group">
-                                <a asp-action="Edit" asp-route-id="@item.NewsItemId" class="btn btn-info btn-sm">
-                                    <span class="d-none d-lg-block">Edit</span>
-                                    <i class="fas fa-edit d-lg-none"></i>
-                                </a>
-                                <a asp-action="Details" asp-route-id="@item.NewsItemId" class="btn btn-warning btn-sm">
-                                    <span class="d-none d-lg-block">Details</span>
-                                    <i class="fas fa-info d-lg-none"></i>
-                                </a>
-                                <a asp-action="Delete" asp-route-id="@item.NewsItemId" class="btn btn-danger btn-sm">
-                                    <span class="d-none d-lg-block">Delete</span>
-                                    <i class="fas fa-trash d-lg-none"></i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                }*@
-        </tbody>
-    </table>
+                    <div id="collapse + @year" class="collapse show" aria-labelledby="@year" data-parent="#accordion" style="">
+                        <div class="card-body">
+                            <hr class="mt-5 mb-5">
+                            <h2>@item.Header</h2>
+                            <p>@item.Content</p>
+                            @*<div style="box-shadow: 10px 10px 8px 10px #888888;" class="col-sm-12 text-center mb-5">
+                                <a class="lightbox" href="\images\News\Ridgerunner Spring 2019.pdf" target="_blank">Ridgerunner Spring 2019.pdf</a>
+                            </div>*@
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
 </div>
