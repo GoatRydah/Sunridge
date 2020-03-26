@@ -26,14 +26,6 @@ namespace Sunridge.Pages.LostAndFound
             LostAndFoundItemList = _unitOfWork.LostAndFoundItem.GetAll(null, null, null);
             ApplicationUserList = _unitOfWork.ApplicationUser.GetAll(null, null, null);
 
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-
-            //if (claim != null)
-            //{
-            //    IEnumerable<Models.LostAndFoundItem> lfItem =
-            //        _unitOfWork.LostAndFoundItem.GetAll(c => c.OwnerId == claim.Value);//have to add owner id here
-            //}
         }
     }
 }

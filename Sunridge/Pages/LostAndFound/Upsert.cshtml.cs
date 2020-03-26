@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -41,40 +44,25 @@ namespace Sunridge.Pages.LostAndFound
 
         public IActionResult OnPost()
         {
-            //find root path wwwroot
-            string webRootPath = _hostingEnvironment.WebRootPath;
-            //Grab the file(s) from the form
-            var files = HttpContext.Request.Form.Files;
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
-            if (!ModelState.IsValid)
+            if (claim != null)
             {
-                return Page();
-            }
+                LostAndFoundItemObj.ApplicationUserId = claim.Value;
 
-            if (LostAndFoundItemObj.Id == 0) //new lostandfounditem
-            {
-                //rename file user submits for image
-                string fileName = Guid.NewGuid().ToString();
-                //upload file to the path
-                var uploads = Path.Combine(webRootPath, @"images\lostAndFoundItems");
-                //preserve our extension
-                var extension = Path.GetExtension(files[0].FileName);
 
-                using (var filestream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+                //find root path wwwroot
+                string webRootPath = _hostingEnvironment.WebRootPath;
+                //Grab the file(s) from the form
+                var files = HttpContext.Request.Form.Files;
+
+                if (!ModelState.IsValid)
                 {
-                    files[0].CopyTo(filestream); //files variable comes from the razor page files id
+                    return Page();
                 }
 
-                LostAndFoundItemObj.Image = @"\images\lostAndFoundItems\" + fileName + extension;
-
-                _unitofWork.LostAndFoundItem.Add(LostAndFoundItemObj);
-            }
-            else //else we edit
-            {
-                var objFromDb =
-                    _unitofWork.LostAndFoundItem.Get(LostAndFoundItemObj.Id);
-                //checks if there are files submitted
-                if (files.Count > 0)
+                if (LostAndFoundItemObj.Id == 0) //new lostandfounditem
                 {
                     //rename file user submits for image
                     string fileName = Guid.NewGuid().ToString();
@@ -83,25 +71,50 @@ namespace Sunridge.Pages.LostAndFound
                     //preserve our extension
                     var extension = Path.GetExtension(files[0].FileName);
 
-                    var imagePath = Path.Combine(webRootPath, objFromDb.Image.TrimStart('\\'));
-
-                    if (System.IO.File.Exists(imagePath))
+                    using (var filestream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
                     {
-                        System.IO.File.Delete(imagePath);
+                        files[0].CopyTo(filestream); //files variable comes from the razor page files id
                     }
 
-                    using (var filestream = new FileStream(Path.Combine(uploads, fileName, extension), FileMode.Create))
-                    {
-                        files[0].CopyTo(filestream);
-                    }
+                    LostAndFoundItemObj.Image = @"\images\lostAndFoundItems\" + fileName + extension;
 
-                    LostAndFoundItemObj.Image = @"\images\lostAndFoundItem\" + fileName + extension;
+                    _unitofWork.LostAndFoundItem.Add(LostAndFoundItemObj);
                 }
-                else
+                else //else we edit
                 {
-                    LostAndFoundItemObj.Image = objFromDb.Image;
+                    var objFromDb =
+                        _unitofWork.LostAndFoundItem.Get(LostAndFoundItemObj.Id);
+                    //checks if there are files submitted
+                    if (files.Count > 0)
+                    {
+                        //rename file user submits for image
+                        string fileName = Guid.NewGuid().ToString();
+                        //upload file to the path
+                        var uploads = Path.Combine(webRootPath, @"images\lostAndFoundItems");
+                        //preserve our extension
+                        var extension = Path.GetExtension(files[0].FileName);
+
+                        var imagePath = Path.Combine(webRootPath, objFromDb.Image.TrimStart('\\'));
+
+                        if (System.IO.File.Exists(imagePath))
+                        {
+                            System.IO.File.Delete(imagePath);
+                        }
+
+                        using (var filestream = new FileStream(Path.Combine(uploads, fileName, extension), FileMode.Create))
+                        {
+                            files[0].CopyTo(filestream);
+                        }
+
+                        LostAndFoundItemObj.Image = @"\images\lostAndFoundItem\" + fileName + extension;
+                    }
+                    else
+                    {
+                        LostAndFoundItemObj.Image = objFromDb.Image;
+                    }
+
+                    _unitofWork.LostAndFoundItem.Update(LostAndFoundItemObj);
                 }
-                _unitofWork.LostAndFoundItem.Update(LostAndFoundItemObj);
             }
             _unitofWork.Save();
             return RedirectToPage("./Index");
