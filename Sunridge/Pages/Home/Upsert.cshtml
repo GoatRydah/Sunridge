@@ -22,15 +22,7 @@
                         <div class="col-9">
                             @Html.DropDownListFor(m => m.BoardMemberObj.BoardMember.ApplicationUserId, Model.BoardMemberObj.ApplicationUserList, "-Please select an Owner",
           new { @class = "form-control" })
-                            <span class="text-danger" asp-validation-for="BoardMemberObj.BoardMember.ApplicationUserId"></span>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-3">
-                            <label asp-for="BoardMemberObj.BoardMember.Image"></label>
-                        </div>
-                        <div class="col-9">
-                            <input type="file" class="form-control" name="files" id="files" />
+                            <span class="text-danger" asp-validation-for="BoardMemberObj.BoardMember.ApplicationUser"></span>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -40,6 +32,23 @@
                         <div class="col-9">
                             <input class="form-control" asp-for="BoardMemberObj.BoardMember.BoardRole" />
                             <span class="text-danger" asp-validation-for="BoardMemberObj.BoardMember.BoardRole"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label asp-for="BoardMemberObj.BoardMember.DisplayOrder"></label>
+                        </div>
+                        <div class="col-9">
+                            <input class="form-control" asp-for="BoardMemberObj.BoardMember.DisplayOrder" />
+                            <span class="text-danger" asp-validation-for="BoardMemberObj.BoardMember.DisplayOrder"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label asp-for="BoardMemberObj.BoardMember.Image"></label>
+                        </div>
+                        <div class="col-9">
+                            <input type="file" class="form-control" name="files" id="files" />
                         </div>
                     </div>
                     <div class="form-group row">

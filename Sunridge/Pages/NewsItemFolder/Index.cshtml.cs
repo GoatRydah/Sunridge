@@ -14,6 +14,7 @@ namespace Sunridge.Pages.NewsItemFolder
         private readonly IUnitOfWork _unitOfWork;
 
         public IEnumerable<Models.NewsItem> NewsItemList { get; set; }
+        public List<int> numYears { get; set; }
         public IndexModel(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -22,6 +23,19 @@ namespace Sunridge.Pages.NewsItemFolder
         public void OnGet()
         {
             NewsItemList = _unitOfWork.NewsItem.GetAll(null, null, null);
+            numYears = new List<int>();
+            foreach(var item in NewsItemList)
+            {
+                if(numYears.Contains(item.Year))
+                {
+                    continue;
+                }
+                else
+                {
+                    numYears.Add(item.Year);
+                }
+            }
+
         }
     }
 }

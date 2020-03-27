@@ -3,7 +3,7 @@ using System.IO;
 using Sunridge.DataAccess.Data.Repository.IRepository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-
+using System.Security.Claims;
 
 namespace Sunridge.Controllers
 {
@@ -22,7 +22,10 @@ namespace Sunridge.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Json(new { data = _unitOfWork.LostAndFoundItem.GetAll(null, null, null) });
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            return Json(new { data = _unitOfWork.LostAndFoundItem.GetAll(u=>u.ApplicationUserId == claim.Value, null, null) });
         }
 
         [HttpDelete("{id}")]
