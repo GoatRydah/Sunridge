@@ -24,6 +24,8 @@ namespace Sunridge.DataAccess.Data.Repository
 
             BoardMemberFromDb.BoardRole = boardMember.BoardRole;
             BoardMemberFromDb.ApplicationUserId = boardMember.ApplicationUserId;
+            //BoardMemberFromDb.ApplicationUser = boardMember.ApplicationUser;
+            BoardMemberFromDb.DisplayOrder = boardMember.DisplayOrder;
             if (boardMember.Image != null)
             {
                 BoardMemberFromDb.Image = boardMember.Image;
