@@ -30,6 +30,8 @@ namespace Sunridge.DataAccess.Data.Repository
             var objFromDb = _db.LostAndFoundItem.FirstOrDefault(s => s.Id == lostAndFoundItem.Id);
             objFromDb.Description = lostAndFoundItem.Description;
             objFromDb.Image = lostAndFoundItem.Image;
+            objFromDb.ApplicationUserId = lostAndFoundItem.ApplicationUserId;
+            objFromDb.ApplicationUser = lostAndFoundItem.ApplicationUser;
 
             _db.SaveChanges();
         }
