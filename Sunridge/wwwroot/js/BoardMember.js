@@ -14,8 +14,9 @@ function loadList() {
             "datatype": "json"
         },
         "columns": [
-            { "data": "applicationUserId", "width": "40%" },
+            { "data": "applicationUser.fullName", "width": "30%" },
             { "data": "boardRole", "width": "30%" },
+            { "data": "displayOrder", "width": "10%" },
 
             {
                 "data": "id",

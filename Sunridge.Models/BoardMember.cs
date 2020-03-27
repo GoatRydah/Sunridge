@@ -18,6 +18,10 @@ namespace Sunridge.Models
         [NotMapped]
         [ForeignKey("ApplicationUserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
-        
+
+        //need order to display on page
+        [Display(Name = "Display  Order")]
+        public int DisplayOrder { get; set; }
+
     }
 }

@@ -21,7 +21,7 @@ namespace Sunridge.Pages.Home
 
         public void OnGet()
         {
-            BoardMemberList = _unitOfWork.BoardMember.GetAll();
+            BoardMemberList = _unitOfWork.BoardMember.GetAll(null, q => q.OrderBy(c => c.DisplayOrder), null);
             int count = 0;
             if(BoardMemberList.Any())
             {
