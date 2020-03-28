@@ -10,7 +10,7 @@ using Sunridge.DataAccess.Data.Repository.IRepository;
 using Sunridge.Models;
 using Sunridge.Models.ViewModels;
 
-namespace Sunridge.Pages.Classifieds
+namespace Sunridge.Pages.Admin.Classifieds
 {
     public class UpsertModel : PageModel
     {

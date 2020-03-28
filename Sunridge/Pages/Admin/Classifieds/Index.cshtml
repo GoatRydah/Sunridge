@@ -1,8 +1,35 @@
 ﻿@page
-@model Sunridge.IndexModel
+@model Sunridge.Pages.Admin.Photos.IndexModel
+
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Photos Index";
+    @*Layout = "~/Views/Shared/_AdminLayout.cshtml";*@
 }
 
-<h1>Index</h1>
+<h2>Admin Photo List</h2>
 
+<div class="row">
+    <div class="col-lg-3 col-md-6">
+        <a asp-page="/Admin/Classifieds/Upsert" class="btn btn-primary btn-sm">Add New Classified</a>
+    </div>
+</div>
+
+<div class="table-responsive-sm">
+    <table id="DT_Load" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@section Scripts {
+    <script src="~/js/adminClassifiedIndex.js"></script>
+}
