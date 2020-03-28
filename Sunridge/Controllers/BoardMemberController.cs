@@ -26,7 +26,7 @@ namespace Sunridge.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Json(new { data = _unitOfWork.BoardMember.GetAll(null, null, "ApplicationUser") }); 
+            return Json(new { data = _unitOfWork.BoardMember.GetAll(null, null, null) }); 
         }
 
         [HttpDelete("{id}")]

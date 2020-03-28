@@ -1,5 +1,5 @@
 ﻿@page
-@model Sunridge.Pages.Home.Upsert.UpsertModel
+@model Sunridge.Pages.Admin.BoardMembers.UpsertModel
 @using Sunridge.Utility
 @if (User.IsInRole(SD.AdminRole))
 {
@@ -65,7 +65,7 @@
                                     }
                                 </div>
                                 <div class="col-6">
-                                    <a asp-page="./BoardMembers" class="btn btn-success form-control">Back to Board Members</a>
+                                    <a asp-page="/Home/BoardMembers" class="btn btn-success form-control">Back to Board Members</a>
                                 </div>
                             </div>
                         </div>
