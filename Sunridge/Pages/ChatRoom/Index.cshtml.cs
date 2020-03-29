@@ -14,6 +14,7 @@ namespace Sunridge.Pages.ChatRoom
     {
         private readonly IUnitOfWork _unitOfWork;
 
+        [BindProperty]
         public ChatRoomModel ChatRoomObj { get; set; }
         public IEnumerable<ChatRoomModel> ChatRoomModelList { get; set; }
         public IEnumerable<ApplicationUser> ApplicationUserList { get; set; }
@@ -27,12 +28,12 @@ namespace Sunridge.Pages.ChatRoom
         {
             ChatRoomModelList = _unitOfWork.ChatRoomItem.GetAll(null, null, null);
             ApplicationUserList = _unitOfWork.ApplicationUser.GetAll(null, null, null);
+            ChatRoomObj = new ChatRoomModel();
             
         }
 
         public IActionResult OnPost()
         {
-            ChatRoomObj = new ChatRoomModel();
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
@@ -54,6 +55,7 @@ namespace Sunridge.Pages.ChatRoom
                 }
             }
             _unitOfWork.Save();
+            ChatRoomModelList = _unitOfWork.ChatRoomItem.GetAll(null, null, null);
             return Page();
         }
     }

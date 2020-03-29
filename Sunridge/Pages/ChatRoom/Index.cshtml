@@ -13,7 +13,8 @@
                     <label asp-for="ChatRoomObj.Post"></label>
                 </div>
                 <div class="col-9">
-                    <textarea class="form-control" asp-for="ChatRoomObj.Post" id="txtDescription" style="height:200px"></textarea>
+                    <input class="form-control" asp-for="ChatRoomObj.Post" />
+                    <span class="text-danger" asp-validation-for="ChatRoomObj.Post"></span>
                 </div>
             </div>
             <div class="row">
@@ -33,6 +34,4 @@
         </div>
     }
 }
-
-
 
