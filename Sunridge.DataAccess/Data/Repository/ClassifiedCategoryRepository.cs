@@ -21,14 +21,14 @@ namespace Sunridge.DataAccess.Data.Repository
             return _db.ClassifiedCategory.Select(i => new SelectListItem()
             {
                 Value = i.ClassifiedCategoryId.ToString(),
-                Text = i.Description.ToString()
+                Text = i.CategoryName.ToString()
             });
         }
 
         public void Update(ClassifiedCategory classifiedCategory)
         {
             var objFromDb = _db.ClassifiedCategory.FirstOrDefault(s => s.ClassifiedCategoryId == classifiedCategory.ClassifiedCategoryId);
-            objFromDb.Description = classifiedCategory.Description;
+            objFromDb.CategoryName = classifiedCategory.CategoryName;
 
             _db.SaveChanges();
         }

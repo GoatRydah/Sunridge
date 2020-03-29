@@ -8,7 +8,6 @@ namespace Sunridge.Models.ViewModels
     public class ClassifiedListingVM
     {
         public ClassifiedListing ClassifiedListing { get; set; }
-        public IEnumerable<SelectListItem> ClassifiedCategoryList { get; set; }
-        public IEnumerable<SelectListItem> OwnerList { get; set; }
+        public IEnumerable<SelectListItem> Category { get; set; }
     }
 }

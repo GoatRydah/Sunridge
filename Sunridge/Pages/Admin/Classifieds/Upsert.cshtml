@@ -18,19 +18,17 @@
         </tr>
     </thead>
 </table>
-<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+<@*form method="post" asp-action="Upsert" enctype="multipart/form-data">
     <div class="form-group row">
-        @*<div class="col-3">
-            <label asp-for="ClassifiedsObj.ClassifiedCategory.ClassifiedCategoryId"></label>
+        <div class="row form-group">
+            <div class="col-md-3">
+                <label asp-for="ClassifiedsObj.ClassifiedListing.Category"></label>
+            </div>
+            <div class="col-md-9">
+                @Html.DropDownListFor(m => m.ClassifiedsObj.Photo.Category, Model.ClassifiedsObj.Categories, "- Please select a Category", new { @class = "form-control" })
+                <span class="text-danger" asp-validation-for="ClassifiedsObj.Photo.Category"></span>
+            </div>
         </div>
-        <div class="col-9">
-            @Html.DropDownListFor(m => m.ClassifiedsObj.ClassifiedCategory.ClassifiedCategoryId,
-            Model.ClassifiedsObj.ClassifiedCategoryList,
-            "-Please select a Category",
-            new { @class = "form-control" })
-
-            <span class="text-danger" asp-validation-for="ClassifiedsObj.ClassifiedCategory.ClassifiedCategoryId"></span>
-        </div>*@
     </div>
     <div class="col-8 pt-3">
         <div class="form-group row">
@@ -103,7 +101,7 @@
             </div>
         </div>
     </div>
-</form>
+</form>*@
 @section Scripts{
     <script src="~/js/classifieds.js"></script>
 }
