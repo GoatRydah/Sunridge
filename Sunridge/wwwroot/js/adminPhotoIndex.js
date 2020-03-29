@@ -16,7 +16,11 @@ function LoadList() {
             { "data": "title", "width": "15%" },
             { "data": "name", "width": "15%" },
             { "data": "year", "width": "15%" },
-            { "data": "image", "width": "15%" },
+            {
+                "data": "image", "render": function (data) {
+                    return `<img  src="${data}" style="max-width:100px;" class="rounded-lg"/>`;
+                }, "width": "15%"
+            },
             {
                 "data": "id",
                 "render": function (data) {
