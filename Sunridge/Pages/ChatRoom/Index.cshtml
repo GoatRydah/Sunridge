@@ -42,8 +42,41 @@
         </div>
     </form>
     <script>
+        var timer = setInterval(timerTick, 100);
+
         var element = document.getElementById("chatDiv");
         element.scrollTop = element.scrollHeight;
+
+        function timerTick(){
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function() {
+				if(this.readyState == 4 && this.status == 200){
+					refreshPage();
+				}
+			}
+			xmlhttp.open("GET","/Index?action=refresh", true);
+			xmlhttp.send();
+        }
+
+        function refreshPage()
+        {
+            $("#chatDiv").empty();
+            Document.getElementById("chatDiv").innerHTML =         @foreach(var item in Model.ChatRoomModelList)
+        {
+            <div border-radius:5px">
+                <p>
+                    @foreach (var user in Model.ApplicationUserList) 
+                    { 
+                        if (item.ApplicationUserId == user.Id) 
+                        { 
+                            @user.FullName
+                        } 
+                    } : @item.Post
+                </p>
+            </div>
+        }
+        }
+
     </script>
 }
 

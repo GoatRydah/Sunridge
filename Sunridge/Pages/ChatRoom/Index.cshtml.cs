@@ -32,7 +32,7 @@ namespace Sunridge.Pages.ChatRoom
             
         }
 
-        public IActionResult OnPost()
+        public void OnPost()
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
@@ -42,7 +42,7 @@ namespace Sunridge.Pages.ChatRoom
                 ChatRoomObj.ApplicationUserId = claim.Value;
                 if (!ModelState.IsValid)
                 {
-                    return Page();
+                    //return Page();
                 }
 
                 if (ChatRoomObj.Id == 0) //new category
@@ -57,7 +57,7 @@ namespace Sunridge.Pages.ChatRoom
             _unitOfWork.Save();
             ChatRoomModelList = _unitOfWork.ChatRoomItem.GetAll(null, null, null);
             ApplicationUserList = _unitOfWork.ApplicationUser.GetAll(null, null, null);
-            return Page();
+            //return Page();
         }
     }
 }
