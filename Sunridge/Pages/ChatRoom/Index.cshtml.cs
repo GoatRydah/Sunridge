@@ -56,6 +56,7 @@ namespace Sunridge.Pages.ChatRoom
             }
             _unitOfWork.Save();
             ChatRoomModelList = _unitOfWork.ChatRoomItem.GetAll(null, null, null);
+            ApplicationUserList = _unitOfWork.ApplicationUser.GetAll(null, null, null);
             return Page();
         }
     }
