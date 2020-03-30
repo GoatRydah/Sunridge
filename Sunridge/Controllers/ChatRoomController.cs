@@ -1,23 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Sunridge.DataAccess.Data.Repository.IRepository;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Sunridge.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BoardMemberController : Controller
+    public class ChatRoomController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IWebHostEnvironment _hostingEnvironment; //know permissions and paths
-
-        public BoardMemberController(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment)
+        private readonly IWebHostEnvironment _hostingEnvironment;
+        public ChatRoomController(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment)
         {
             _unitOfWork = unitOfWork;
             _hostingEnvironment = hostingEnvironment;
@@ -26,7 +22,10 @@ namespace Sunridge.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Json(new { data = _unitOfWork.BoardMember.GetAll(null, null, null) }); 
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            return Json(new { data = _unitOfWork.LostAndFoundItem.GetAll(u=>u.ApplicationUserId == claim.Value, null, null) });
         }
 
         [HttpDelete("{id}")]
@@ -34,33 +33,27 @@ namespace Sunridge.Controllers
         {
             try
             {
-                var objFromDb = _unitOfWork.BoardMember.GetFirstOrDefault(u => u.Id == id);
+                var objFromDb = _unitOfWork.LostAndFoundItem.GetFirstOrDefault(u => u.Id == id);
                 if (objFromDb == null)
                 {
                     return Json(new { success = false, message = "Error while deleting" });
                 }
-
-                //physically delete the image in the wwwroot in this path:
-                var imagePath =
-                    Path.Combine(_hostingEnvironment.WebRootPath, objFromDb.Image.TrimStart('\\'));
-
-                //if path exists, delete it
+                //Physically Delete the image in wwwroot
+                var imagePath = Path.Combine(_hostingEnvironment.WebRootPath, objFromDb.Image.TrimStart('\\'));
                 if (System.IO.File.Exists(imagePath))
                 {
                     System.IO.File.Delete(imagePath);
                 }
 
-                _unitOfWork.BoardMember.Remove(objFromDb);
+                _unitOfWork.LostAndFoundItem.Remove(objFromDb);
                 _unitOfWork.Save();
-
             }
             catch (Exception)
             {
                 return Json(new { success = false, message = "Error while deleting" });
             }
-
             return Json(new { success = true, message = "Delete Successful" });
-            
+
         }
     }
 }

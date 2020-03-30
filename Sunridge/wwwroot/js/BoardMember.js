@@ -14,7 +14,7 @@ function loadList() {
             "datatype": "json"
         },
         "columns": [
-            { "data": "applicationUser.firstName", "width": "30%" },
+            { "data": "applicationUser.fullName", "width": "30%" },
             { "data": "boardRole", "width": "30%" },
             { "data": "displayOrder", "width": "10%" },
 
@@ -22,7 +22,7 @@ function loadList() {
                 "data": "id",
                 "render": function (data) {
                     return ` <div class="text-center">
-                                <a href="/Home/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
+                                <a href="/Admin/BoardMembers/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                                     <i class="far fa-edit"></i> Edit
                                 </a>
                                 <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/boardmember/'+${data})>
