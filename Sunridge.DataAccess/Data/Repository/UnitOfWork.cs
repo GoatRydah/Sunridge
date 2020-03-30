@@ -23,6 +23,7 @@ namespace Sunridge.DataAccess.Data.Repository
         public IClassifiedListingViewModelRepository ClassifiedListingViewModel { get; private set; }
         public IDashboardViewModelRepository DashboardViewModel { get; private set; }
         public ILostAndFoundItemRepository LostAndFoundItem { get; private set; }
+        public IChatRoomRepository ChatRoomItem { get; private set; }
         public IKeyRepository Key { get; private set; }
         public IKeyHistoryRepository KeyHistory { get; private set; }
         public ILotRepository Lot { get; private set; }
@@ -58,6 +59,7 @@ namespace Sunridge.DataAccess.Data.Repository
             ClassifiedListingViewModel = new ClassifiedListingViewModelRepository(_db);
             DashboardViewModel = new DashboardViewModelRepository(_db);
             LostAndFoundItem = new LostAndFoundItemRepository(_db);
+            ChatRoomItem = new ChatRoomRepository(_db);
             Key = new KeyRepository(_db);
             KeyHistory = new KeyHistoryRepository(_db);
             Lot = new LotRepository(_db);

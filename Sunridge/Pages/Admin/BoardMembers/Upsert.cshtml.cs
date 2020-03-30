@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Sunridge.Models;
 
-namespace Sunridge.Pages.Home.Upsert
+namespace Sunridge.Pages.Admin.BoardMembers
 {
     [Authorize(Roles = SD.AdminRole)]//have to be admin to access this page
     public class UpsertModel : PageModel
@@ -133,7 +133,7 @@ namespace Sunridge.Pages.Home.Upsert
             //commit changes to the db
             _unitOfWork.Save();
 
-            return RedirectToPage("./BoardMembers");
+            return RedirectToPage("./BoardMemberEdit");
         }
     }
 }
