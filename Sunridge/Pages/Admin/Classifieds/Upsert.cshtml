@@ -1,5 +1,6 @@
 ﻿@page
 @model Sunridge.Pages.Admin.Classifieds.UpsertModel
+
 @{
     ViewData["Title"] = "Upsert";
 }
@@ -14,79 +15,64 @@
             <th>Description</th>
             <th>Phone</th>
             <th>Email</th>
-            <th></th>
         </tr>
     </thead>
 </table>
-<@*form method="post" asp-action="Upsert" enctype="multipart/form-data">
-    <div class="form-group row">
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+
+    <div class="col-8 pt-3">
         <div class="row form-group">
             <div class="col-md-3">
                 <label asp-for="ClassifiedsObj.ClassifiedListing.Category"></label>
             </div>
             <div class="col-md-9">
-                @Html.DropDownListFor(m => m.ClassifiedsObj.Photo.Category, Model.ClassifiedsObj.Categories, "- Please select a Category", new { @class = "form-control" })
-                <span class="text-danger" asp-validation-for="ClassifiedsObj.Photo.Category"></span>
+                @Html.DropDownListFor(m => m.ClassifiedsObj.ClassifiedListing.Category, Model.ClassifiedsObj.Category, "- Please select a Category", new { @class = "form-control" })
+                <span class="text-danger" asp-validation-for="ClassifiedsObj.ClassifiedListing.Category"></span>
             </div>
         </div>
-    </div>
-    <div class="col-8 pt-3">
         <div class="form-group row">
             <div class="col-3">
-                <label asp-for="ClassifiedsObj.ClassifiedCategory.Description"></label>
+                <label asp-for="ClassifiedsObj.ClassifiedListing.ItemName"></label>
             </div>
             <div class="col-9">
-                <input class="form-control" asp-for="ClassifiedsObj.ClassifiedCategory.Description" />
-                <span class="text-danger" asp-validation-for="ClassifiedsObj.ClassifiedCategory.Description"></span>
+                <input class="form-control" asp-for="ClassifiedsObj.ClassifiedListing.ItemName" id="txtTitle" />
             </div>
         </div>
         <div class="form-group row">
             <div class="col-3">
-                <label asp-for="ClassifiedsObj.ItemName"></label>
+                <label asp-for="ClassifiedsObj.ClassifiedListing.Price"></label>
             </div>
             <div class="col-9">
-                <input class="form-control" asp-for="ClassifiedsObj.ItemName" />
-                <span class="text-danger" asp-validation-for="ClassifiedsObj.ItemName"></span>
+                <input class="form-control" asp-for="ClassifiedsObj.ClassifiedListing.Price" id="txtYear" />
             </div>
         </div>
         <div class="form-group row">
             <div class="col-3">
-                <label asp-for="ClassifiedsObj.Price"></label>
+                <label asp-for="ClassifiedsObj.ClassifiedListing.Description"></label>
             </div>
             <div class="col-9">
-                <input class="form-control" asp-for="ClassifiedsObj.Price" />
-                <span class="text-danger" asp-validation-for="ClassifiedsObj.Price"></span>
+                <input class="form-control" asp-for="ClassifiedsObj.ClassifiedListing.Description" id="txtYear" />
             </div>
         </div>
         <div class="form-group row">
             <div class="col-3">
-                <label asp-for="ClassifiedsObj.Description"></label>
+                <label asp-for="ClassifiedsObj.ClassifiedListing.Phone"></label>
             </div>
             <div class="col-9">
-                <textarea class="form-control" asp-for="ClassifiedsObj.Description" id="txtDescription" style="height:200px"></textarea>
+                <input class="form-control" asp-for="ClassifiedsObj.ClassifiedListing.Phone" id="txtYear" />
             </div>
         </div>
         <div class="form-group row">
             <div class="col-3">
-                <label asp-for="ClassifiedsObj.Phone"></label>
+                <label asp-for="ClassifiedsObj.ClassifiedListing.Email"></label>
             </div>
             <div class="col-9">
-                <input class="form-control" asp-for="ClassifiedsObj.Phone" />
-                <span class="text-danger" asp-validation-for="ClassifiedsObj.Phone"></span>
+                <input class="form-control" asp-for="ClassifiedsObj.ClassifiedListing.Email" id="txtYear" />
             </div>
         </div>
         <div class="form-group row">
             <div class="col-3">
-                <label asp-for="ClassifiedsObj.Email"></label>
-            </div>
-            <div class="col-9">
-                <input class="form-control" asp-for="ClassifiedsObj.Email" />
-                <span class="text-danger" asp-validation-for="ClassifiedsObj.Email"></span>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-3">
-                <label asp-for="ClassifiedsObj.Images"></label>
+                <label asp-for="ClassifiedsObj.ClassifiedListing.Images"></label>
             </div>
             <div class="col-9">
                 <input type="file" class="form-control" name="files" id="files" />
@@ -101,7 +87,8 @@
             </div>
         </div>
     </div>
-</form>*@
+</form>
 @section Scripts{
-    <script src="~/js/classifieds.js"></script>
+    <script src="~/js/adminClassifiedIndex.js"></script>
 }
+
