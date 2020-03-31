@@ -53,19 +53,19 @@ namespace Sunridge.Pages.Admin.Photos
 
         public IActionResult OnPost()
         {
-            //find root path wwwroot
-            string webRootPath = _hostingEnvironment.WebRootPath;
-            //Grab the file(s) from the form
-            var files = HttpContext.Request.Form.Files;
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
 
             string userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = _unitofWork.ApplicationUser.GetFirstOrDefault(s => s.Id == userId);
             PhotosObj.Photo.Name = user.FirstName + " " + user.LastName;
 
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            //find root path wwwroot
+            string webRootPath = _hostingEnvironment.WebRootPath;
+            //Grab the file(s) from the form
+            var files = HttpContext.Request.Form.Files;
 
             if (PhotosObj.Photo.Id == 0) //new photo object
             {
@@ -106,7 +106,7 @@ namespace Sunridge.Pages.Admin.Photos
                         System.IO.File.Delete(imagePath);
                     }
 
-                    using (var filestream = new FileStream(Path.Combine(uploads, fileName, extension), FileMode.Create))
+                    using (var filestream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
                     {
                         files[0].CopyTo(filestream);
                     }

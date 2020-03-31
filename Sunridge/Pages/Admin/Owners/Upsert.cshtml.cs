@@ -19,6 +19,8 @@ namespace Sunridge.Pages.Admin.Owners
         //binds the model to the page
         [BindProperty]
         public ApplicationUser OwnerObj { get; set; }
+        [BindProperty]
+        public Address AddressObj { get; set; }
 
         public UpsertModel(IUnitOfWork unitofWork, IWebHostEnvironment hostingEnvironment)
         {
@@ -26,18 +28,17 @@ namespace Sunridge.Pages.Admin.Owners
             _hostingEnvironment = hostingEnvironment;
         }
 
-        public IActionResult OnGet()
+        public IActionResult OnGet(string id)
         {
 
-            string userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //string userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             OwnerObj = new ApplicationUser();
-            OwnerObj = _unitofWork.ApplicationUser.GetFirstOrDefault(u => u.Id == userId);
-
-            if (OwnerObj == null)
-            {
-                return NotFound();
-            }
+            if (id != null)
+                OwnerObj = _unitofWork.ApplicationUser.GetFirstOrDefault(u => u.Id == id);
+            AddressObj = new Address();
+            if (id != null)
+                AddressObj = _unitofWork.Address.GetFirstOrDefault(u => u.Id == OwnerObj.AddressId);
 
             return Page();
         }
@@ -48,6 +49,9 @@ namespace Sunridge.Pages.Admin.Owners
             {
                 return Page();
             }
+
+            if (AddressObj.Id != 0)
+                OwnerObj.AddressId = AddressObj.Id;
 
             _unitofWork.ApplicationUser.Update(OwnerObj);
             _unitofWork.Save();

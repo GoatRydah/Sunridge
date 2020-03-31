@@ -24,6 +24,11 @@
             </div>
         </div>
 
+        @if (Model.PhotosObj.Photo.Id != 0)
+        {
+            <input type="hidden" asp-for="PhotosObj.Photo.Id" />
+        }
+
         <div class="row form-group">
             <div class="col-md-3">
                 <label asp-for="PhotosObj.Photo.Category"></label>
@@ -43,10 +48,17 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-6">
-                <button type="submit" class="btn btn-primary form-control" onclick="return ValidInput()">Create</button>
+            <div class="col-md-6 mb-2">
+                @if (Model.PhotosObj.Photo.Id != 0)
+                {
+                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Create</button>
+                }
             </div>
-            <div class="col-6">
+            <div class="col-md-6">
                 <a asp-page="./Index" type="submit" class="btn btn-success form-control">Back to List</a>
             </div>
         </div>
