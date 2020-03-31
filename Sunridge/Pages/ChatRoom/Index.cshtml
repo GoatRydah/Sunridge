@@ -1,11 +1,28 @@
 ﻿@page
 @model Sunridge.Pages.ChatRoom.IndexModel
 @using Sunridge.Utility
+@using System.Linq;
 @{
     ViewData["Title"] = "Index";
 }
 @if (User.IsInRole(SD.OwnerRole) || User.IsInRole(SD.AdminRole))
 {
+    <div class="container overflow-auto" style="height:500px" id="chatDiv">
+        @foreach(var item in Model.ChatRoomModelList)
+        {
+            <div border-radius:"5px">
+                <p>
+                    @foreach (var user in Model.ApplicationUserList) 
+                    { 
+                        if (item.ApplicationUserId == user.Id) 
+                        { 
+                            @user.FullName
+                        } 
+                    } : @item.Post
+                </p>
+            </div>
+        }
+    </div>
     <form method="post" asp-action="Index" enctype="multipart/form-data">
         <div class="col-8 pt-3">
             <div class="form-group row">
@@ -24,14 +41,31 @@
             </div>
         </div>
     </form>
+    <script>
+        var timer = setInterval(timerTick, 100);
 
-    @foreach (var item in Model.ChatRoomModelList)
-    {
-        <div class="col-lg-3 col-xl-3 col-md-6 pb-4">
-            <div class="card" border-radius:5px">
-                <h3>@item.Post</h3>
-            </div>
-        </div>
-    }
+        //var element = document.getElementById("chatDiv");
+        //element.scrollTop = element.scrollHeight;
+
+        function timerTick(){
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function() {
+				if(this.readyState == 4 && this.status == 200){
+					refreshPage();
+				}
+			}
+			xmlhttp.open("GET","/Index?action=refresh", true);
+			xmlhttp.send();
+        }
+
+        function refreshPage()
+        {
+
+            $('#chatDiv').load(document.URL + ' #chatDiv');
+            var messageBody = document.querySelector('#chatDiv');
+            messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+        }
+
+    </script>
 }
 
