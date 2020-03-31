@@ -79,6 +79,32 @@ namespace Sunridge.DataAccess.Data.Repository
             objFromDb.KeyHistories = applicationUser.KeyHistories;
             objFromDb.LostAndFoundItems = applicationUser.LostAndFoundItems;
 
+            Address addr;
+            
+            addr = _db.Address.Where(s => s.Id == objFromDb.AddressId).FirstOrDefault();
+
+            if (addr == null)
+            {
+                addr = new Address();
+                addr.IsArchive = false;
+                addr.State = applicationUser.StateValue;
+                addr.City = applicationUser.CityValue;
+                addr.Apartment = applicationUser.ApartmentValue;
+                addr.StreetAddress = applicationUser.AddressValue;
+                addr.Zip = applicationUser.ZipValue;
+                _db.Address.Add(addr);
+                objFromDb.Address = addr;
+
+                _db.SaveChanges();
+
+                objFromDb.AddressId = addr.Id;
+            }
+            else
+            {
+                _db.Address.Update(addr);
+                objFromDb.Address = addr;
+            }
+
             _db.SaveChanges();
         }
     }

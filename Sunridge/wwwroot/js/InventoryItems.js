@@ -7,32 +7,24 @@ $(document).ready(function () {
 function LoadList() {
     dataTable = $('#DT_Load').DataTable({
         "ajax": {
-            "url": "/api/adminPhotoIndex/",
+            "url": "/api/adminInventoryItems/",
             "type": "GET",
             "datatype": "json"
         },
         "columns": [
-            { "data": "category", "width": "15%" },
-            { "data": "title", "width": "15%" },
-            { "data": "name", "width": "15%" },
-            { "data": "year", "width": "15%" },
+            { "data": "description", "width": "50%" },
             {
-                "data": "image", "render": function (data) {
-                    return `<img  src="${data}" style="max-width:100px;" class="rounded-lg"/>`;
-                }, "width": "15%"
-            },
-            {
-                "data": "id",
+                "data": "inventoryId",
                 "render": function (data) {
                     return ` <div class="text-center">
-                                <a href="/admin/photos/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
+                                <a href="/admin/inventoryItems/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                                     <i class="far fa-edit"></i> Edit
                                 </a>
-                                <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onClick=Delete('/api/adminPhotoIndex/'${data})>
+                                <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onClick=Delete('/api/adminInventoryItems/'+${data})>
                                     <i class="far fa-trash-alt"></i> Delete
                                 </a>
                              </div>`;
-                }, "width": "25%"
+                }, "width": "50%"
             }
         ],
         "language": {
