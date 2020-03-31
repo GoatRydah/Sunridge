@@ -1,0 +1,150 @@
+﻿@page
+@model Sunridge.Pages.Admin.Owners.UpsertModel
+@{
+    ViewData["Title"] = "Upsert";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Upsert</h1>
+
+@*@if (Model.miscValue == "reset")
+{
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+    <div class="form-group row">
+        <div class="col-3">
+            <label for="txtPassword">Password</label>
+        </div>
+        <div class="col-9">
+            <input type="password" class="form-control" id="txtPassword" name="pass"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-3">
+            <label for="txtConfirmPassword">Confirm Password</label>
+        </div>
+        <div class="col-9">
+            <input type="password" class="form-control" id="txtConfirmPassword" name="confirmPass"/>
+        </div>
+    </div>
+</form>
+}
+else
+{*@
+    <form method="post" asp-action="Upsert" enctype="multipart/form-data">
+
+        <div class="col-8 pt-3 pl-3">
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="OwnerObj.FirstName"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" asp-for="OwnerObj.FirstName" id="txtFirstName" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="OwnerObj.LastName"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" asp-for="OwnerObj.LastName" id="textLastName" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="OwnerObj.Email"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" asp-for="OwnerObj.Email" id="txtEmail" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="OwnerObj.PhoneNumber"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" asp-for="OwnerObj.PhoneNumber" id="txtPhone" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="OwnerObj.Occupation"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" asp-for="OwnerObj.Occupation" id="txtOccupation" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="OwnerObj.Birthday"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" asp-for="OwnerObj.Birthday" id="txtBirthday" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="OwnerObj.EmergencyContactName"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" asp-for="OwnerObj.EmergencyContactName" id="txtEmergencyContactName" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="OwnerObj.EmergencyContactPhone"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" asp-for="OwnerObj.EmergencyContactPhone" id="txtEmergencyContactPhone" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="OwnerObj.Address"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" asp-for="OwnerObj.Address" id="txtAddress" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="OwnerObj.ApartmentValue"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" asp-for="OwnerObj.ApartmentValue" id="txtApartment" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="OwnerObj.CityValue"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" asp-for="OwnerObj.CityValue" id="txtCity" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="OwnerObj.StateValue"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" asp-for="OwnerObj.StateValue" id="txtState" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="OwnerObj.ZipValue"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" asp-for="OwnerObj.ZipValue" id="txtZip" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <button type="submit" class="btn btn-primary form-control" onclick="return ValidInput()">Create</button>
+                </div>
+                <div class="col-6">
+                    <a asp-page="./Index" type="submit" class="btn btn-success form-control">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </form>
+@*}*@

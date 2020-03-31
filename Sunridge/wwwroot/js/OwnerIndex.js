@@ -7,32 +7,35 @@ $(document).ready(function () {
 function LoadList() {
     dataTable = $('#DT_Load').DataTable({
         "ajax": {
-            "url": "/api/adminPhotoIndex/",
+            "url": "/api/ownerIndex/",
             "type": "GET",
             "datatype": "json"
         },
         "columns": [
-            { "data": "category", "width": "15%" },
-            { "data": "title", "width": "15%" },
-            { "data": "name", "width": "15%" },
-            { "data": "year", "width": "15%" },
-            {
-                "data": "image", "render": function (data) {
-                    return `<img  src="${data}" style="max-width:100px;" class="rounded-lg"/>`;
-                }, "width": "15%"
+            { "data": "firstName", "width": "11%" },
+            { "data": "lastName", "width": "11%" },
+            { "data": "userName", "width": "11%" },
+            { "data": "emergencyContactName", "width": "11%" },
+            { "data": "emergencyContactPhone", "width": "11%" },
+            { "data": "ownerLots", "render": function (data) {
+                return "stuff";
+                }, "width": "11%"
             },
             {
                 "data": "id",
                 "render": function (data) {
                     return ` <div class="text-center">
-                                <a href="/admin/photos/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
+                                <a href="/identity/account/resetPassword?code=${data}" class="btn btn-info text-white" style="cursor:pointer; width:100px;">
                                     <i class="far fa-edit"></i> Edit
                                 </a>
-                                <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onClick=Delete('/api/adminPhotoIndex/'${data})>
+                                <a href="/identity/account/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:160px;">
+                                    <i class="fas fa-lock-open"></i> Reset Password
+                                </a>
+                                <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onClick=Delete('/api/ownerIndex/${data}')>
                                     <i class="far fa-trash-alt"></i> Delete
                                 </a>
                              </div>`;
-                }, "width": "25%"
+                }, "width": "34%"
             }
         ],
         "language": {
@@ -43,9 +46,10 @@ function LoadList() {
 }
 
 function Delete(url) {
+    console.log("made it");
     swal({
         title: "Are you sure you want to delete?",
-        text: "You will not be able to restore the data!",
+        text: "User will be removed!",
         icon: "warning",
         buttons: true,
         dangerMode: true

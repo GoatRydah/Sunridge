@@ -31,6 +31,7 @@ namespace Sunridge.DataAccess.Data.Repository
         public ILotInventoryRepository LotInventory { get; private set; }
         public IMaintenanceRepository Maintenance { get; private set; }
         public INewsItemRepository NewsItem { get; private set; }
+        public IOwnerLotRepository OwnerLot { get; private set; }
         public IPhotoRepository Photo { get; private set; }
         public IPhotoCategoriesRepository PhotoCategories { get; private set; }
         public IScheduledEventsRepository ScheduledEvents { get; private set; }
@@ -67,6 +68,7 @@ namespace Sunridge.DataAccess.Data.Repository
             LotInventory = new LotInventoryRepository(_db);
             Maintenance = new MaintenanceRepository(_db);
             NewsItem = new NewsItemRepository(_db);
+            OwnerLot = new OwnerLotRepository(_db);
             Photo = new PhotoRepository(_db);
             PhotoCategories = new PhotoCategoriesRepository(_db);
             ScheduledEvents = new ScheduledEventsRepository(_db);
