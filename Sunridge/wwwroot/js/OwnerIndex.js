@@ -25,10 +25,10 @@ function LoadList() {
                 "data": "id",
                 "render": function (data) {
                     return ` <div class="text-center">
-                                <a href="/identity/account/resetPassword?code=${data}" class="btn btn-info text-white" style="cursor:pointer; width:100px;">
+                                <a href="/admin/owners/upsert?id=${data}" class="btn btn-info text-white" style="cursor:pointer; width:100px;">
                                     <i class="far fa-edit"></i> Edit
                                 </a>
-                                <a href="/identity/account/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:160px;">
+                                <a href="/identity/account/resetPassword?code=${data}" class="btn btn-success text-white" style="cursor:pointer; width:160px;">
                                     <i class="fas fa-lock-open"></i> Reset Password
                                 </a>
                                 <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onClick=Delete('/api/ownerIndex/${data}')>

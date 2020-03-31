@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Sunridge.Utility;
 using System.Security.Claims;
+using System.Collections.Generic;
+using Sunridge.Models;
 
 namespace Sunridge.Controllers
 {
@@ -24,7 +26,9 @@ namespace Sunridge.Controllers
         public IActionResult Get()
         {
             if (User.IsInRole(SD.AdminRole))
-                return Json(new { data = _unitOfWork.ApplicationUser.GetAll(null, null, null) });
+            {                
+                return Json(new { data = _unitOfWork.ApplicationUser.GetAll(s => s.IsArchive == false, null, null) });
+            }
             else //(the User.IsInRole(SD.OwnerRole))
             {
                 string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
