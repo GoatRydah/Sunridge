@@ -1,0 +1,68 @@
+﻿@page
+@model Sunridge.Pages.Admin.CommonAreaAssets.UpsertModel
+
+@{
+    ViewData["Title"] = "Upsert";
+}
+<br />
+<br />
+<table id="DT_load" class="table table-striped table-bordered" style="width:100%">
+    <thead>
+        <tr>
+            <th>Asset Name</th>
+            <th>Purchase Price</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+</table>
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+
+    <div class="col-8 pt-3">
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="CommonAreaObj.AssetName"></label>
+            </div>
+            <div class="col-9">
+                <input class="form-control" asp-for="CommonAreaObj.AssetName" id="txtName" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="CommonAreaObj.PurchasePrice"></label>
+            </div>
+            <div class="col-9">
+                <input class="form-control" asp-for="CommonAreaObj.PurchasePrice" id="txtPrice" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="CommonAreaObj.Status"></label>
+            </div>
+            <div class="col-9">
+                <input class="form-control" asp-for="CommonAreaObj.Status" id="txtStatus" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="CommonAreaObj.Date"></label>
+            </div>
+            <div class="col-9">
+                <input id="datepicker" class="form-control" asp-for="CommonAreaObj.Date" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <button type="submit" class="btn btn-primary form-control" onclick="return ValidInput()">Create</button>
+            </div>
+            <div class="col-6">
+                <a asp-page="./Index" type="submit" class="btn btn-success form-control">Back to List</a>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    <script src="~/js/adminCommonArea.js"></script>
+}
+
