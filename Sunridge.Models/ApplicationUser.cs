@@ -34,11 +34,6 @@ namespace Sunridge.Models
         [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText = "[None listed]")]
         public string Phone { get; set; }
 
-        [DataType(DataType.EmailAddress)]
-        [Display(Name = "Email Address")]
-        [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText = "[None listed]")]
-        public string Email { get; set; }
-
         [Display(Name = "Emergency Contact")]
         [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText = "[None listed]")]
         public string EmergencyContactName { get; set; }

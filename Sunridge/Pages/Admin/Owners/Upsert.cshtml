@@ -5,8 +5,6 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Upsert</h1>
-
 @*@if (Model.miscValue == "reset")
 {
 <form method="post" asp-action="Upsert" enctype="multipart/form-data">
@@ -33,7 +31,7 @@ else
     <form method="post" asp-action="Upsert" enctype="multipart/form-data">
 
         <div class="col-8 pt-3 pl-3">
-            @if (Model.OwnerObj.Id != null && Model.OwnerObj.Id != "")
+            @if (Model.OwnerObj.FirstName != null && Model.OwnerObj.FirstName != "")
             {
                 <input type="hidden" asp-for="OwnerObj.Id" />
             }
@@ -147,7 +145,7 @@ else
             </div>
             <div class="row">
                 <div class="col-md-6 mb-2">
-                    @if (Model.OwnerObj.Id != null && Model.OwnerObj.Id != "")
+                    @if (Model.OwnerObj.FirstName != null && Model.OwnerObj.FirstName != "")
                     {
                         <button type="submit" class="btn btn-primary form-control">Update</button>
                     }

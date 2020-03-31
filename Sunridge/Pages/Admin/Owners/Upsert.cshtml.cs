@@ -53,8 +53,22 @@ namespace Sunridge.Pages.Admin.Owners
             if (AddressObj.Id != 0)
                 OwnerObj.AddressId = AddressObj.Id;
 
-            _unitofWork.ApplicationUser.Update(OwnerObj);
-            _unitofWork.Save();
+            var user = _unitofWork.ApplicationUser.GetFirstOrDefault(s => s.Id == OwnerObj.Id);
+
+            if (user == null)
+            {
+                _unitofWork.Address.Add(AddressObj);
+                OwnerObj.AddressId = AddressObj.Id;
+                OwnerObj.Address = AddressObj;
+                OwnerObj.UserName = OwnerObj.FirstName + OwnerObj.LastName;
+                _unitofWork.ApplicationUser.Add(OwnerObj);
+                _unitofWork.Save();
+            }
+            else
+            {
+                _unitofWork.ApplicationUser.Update(OwnerObj);
+                _unitofWork.Save();
+            }
 
             return RedirectToPage("./Index");
         }
