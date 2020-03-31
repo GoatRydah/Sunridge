@@ -1,22 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+using Sunridge.DataAccess.Data.Repository.IRepository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Sunridge.DataAccess.Data.Repository.IRepository;
+
 
 namespace Sunridge.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClassifiedListingController : Controller
+    public class AdminClassifiedIndexController : Controller
     {
-
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _hostingEnvironment;
-        public ClassifiedListingController(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment)
+        public AdminClassifiedIndexController(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment)
         {
             _unitOfWork = unitOfWork;
             _hostingEnvironment = hostingEnvironment;
@@ -25,7 +22,7 @@ namespace Sunridge.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Json(new { data = _unitOfWork.NewsItem.GetAll(null, null, null) });
+            return Json(new { data = _unitOfWork.ClassifiedListing.GetAll(null, null, null) });
         }
 
         [HttpDelete("{id}")]

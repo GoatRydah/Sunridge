@@ -12,150 +12,87 @@
         </div>
     </div>
 </section>
-<!-- Testimonials -->
 <section class="testimonials text-center">
-
-    <div class="row">
-        <div class="container container-fluid bg-light p-5">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div id="box" class="container">
-                        <!--Carousel Wrapper-->
-                        <div id="carousel-thumb 0" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel" data-interval="0">
-                            <!--Slides-->
-                            <div class="carousel-inner" role="listbox">
-                                <div class="carousel-item active">
-                                    <img id="itemImage" class="d-block w-100" src="~/images/classifieds/cabin.jpg">
-                                </div>
-                            </div>
-                        </div>
-                        <!--/.Carousel Wrapper-->
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <h1>Cabin #1 - $100000</h1>
-                    <p>1.066 hundred square ft. 2.3 acres. 2 bedroom (upstairs very large) big closet. Sleeps many people. Bedroom downstairs (master). Full bath. Nice size kitchen, lots of cabinet space. 15 cu. ft. propane refrigerator/freezer, excellent condition. Upgraded windows. 4000-watt electric start generator. Very little upkeep on the outside. Aluminum siding, front deck is Trex. Back deck and balcony are wood. Shed on property. Wood heat. The cabin is secluded and is bordered on two sides by common land.</p>
-                    <h4>Email: <a href="mailto:Test at test@gmail.com">Test at test@gmail.com</a></h4>
-                </div>
-            </div>
-        </div>
-        <div class="container container-fluid bg-light p-5">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div id="box" class="container">
-                        <!--Carousel Wrapper-->
-                        <div id="carousel-thumb 0" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel" data-interval="0">
-                            <!--Slides-->
-                            <div class="carousel-inner" role="listbox">
-                                <div class="carousel-item active">
-                                    <img id="itemImage" class="d-block w-100" src="~/images/classifieds/cabin 2.jpg">
-                                </div>
-                            </div>
-                        </div>
-                        <!--/.Carousel Wrapper-->
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <h1>Cabin #2 - $200000</h1>
-                    <p>1.066 hundred square ft. 2.3 acres. 2 bedroom (upstairs very large) big closet. Sleeps many people. Bedroom downstairs (master). Full bath. Nice size kitchen, lots of cabinet space. 15 cu. ft. propane refrigerator/freezer, excellent condition. Upgraded windows. 4000-watt electric start generator. Very little upkeep on the outside. Aluminum siding, front deck is Trex. Back deck and balcony are wood. Shed on property. Wood heat. The cabin is secluded and is bordered on two sides by common land.</p>
-                    <h4>Email: <a href="mailto:Test at test@gmail.com">Test at test@gmail.com</a></h4>
-                </div>
-            </div>
-        </div>
-        @foreach (var item in Model.ClassifiedListingsList)
+    @foreach (var p in Model.ClassifiedListingsList)
+    {
+        @if (p.Category == "Cabin")
         {
-            <div class="col-lg-3 col-xl-3 col-md-6 pb-4">
-                <div class="card" border-radius:5px">
-                    <img src="@item.Images" class="card-img-top p-2 rounded" />
-                    <h3>@item.Description</h3>
+            <div class="container mb-5">
+                <hr>
+                <div class="container container-fluid bg-light p-5">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div id="box" class="container">
+                                <!--Carousel Wrapper-->
+                                <div id="carousel-thumb" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel" data-interval="0">
+                                    <!--Slides-->
+                                    @*<div class="carousel-inner" role="listbox">
+                                            @foreach (var image in p.Images)
+                                            {
+                                                if (image.IsMainImage)
+                                                {
+                                                    <div class="carousel-item active">
+                                                        <img id="itemImage" class="d-block w-100" src="@image.ImageURL">
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="carousel-item">
+                                                        <img id="itemImage" class="d-block w-100" src="@image.ImageURL">
+                                                    </div>
+                                                }
+
+                                            }
+                                        </div>*@
+                                    <!--/.Slides-->
+                                    <!--Controls-->
+                                    <a class="carousel-control-prev" href="#carousel-thumb" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carousel-thumb" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                    <!--/.Controls-->
+                                    <ol id="thumbnailBar" class="carousel-indicators list-inline visible-sm-block hidden-xs-block visible-md-block visible-lg-block">
+                                        @* @for (var imgIndex = 0; imgIndex < item.Images.Count; imgIndex++)
+                                            {
+                                                var image = item.Images[imgIndex];
+                                                if (image.IsMainImage)
+                                                {
+                                                    <li data-target="#carousel-thumb" data-slide-to="@imgIndex" class="active list-inline-item">
+                                                        <img id="thumbnail" class="img-fluid" src="@image.ImageURL">
+                                                    </li>
+                                                }
+                                                else
+                                                {
+                                                    <li data-target="#carousel-thumb" data-slide-to="@imgIndex" class="list-inline-item">
+                                                        <img id="thumbnail" class="img-fluid" src="@image.ImageURL">
+                                                    </li>
+                                                }
+
+                                            }*@
+                                    </ol>
+                                </div>
+                                <!--/.Carousel Wrapper-->
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <h1>@p.ItemName - $@p.Price</h1>
+                            <p>@p.Description</p>
+                            @if (!String.IsNullOrEmpty(p.Email))
+                            {
+                                <h4>Email: <a href="mailto:@p.Email">@p.Email</a></h4>
+                            }
+                            @if (!String.IsNullOrEmpty(p.Phone))
+                            {
+                                <h4>Phone: @p.Phone</h4>
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
         }
-    </div>
-</section>
-
-   @* @for (var index = 0; index < Model.ClassifiedListings.Count; index++)
-    {
-        var item = Model.ClassifiedListings[index];
-        <div class="container mb-5">
-            <hr>
-            <div class="container container-fluid bg-light p-5">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div id="box" class="container">
-                            <!--Carousel Wrapper-->
-                            <div id="carousel-thumb @index" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel" data-interval="0">
-                                <!--Slides-->
-                                <div class="carousel-inner" role="listbox">
-                                    @foreach (var image in item.Images)
-                                    {
-                                        if (image.IsMainImage)
-                                        {
-                                            <div class="carousel-item active">
-                                                <img id="itemImage" class="d-block w-100" src="@image.ImageURL">
-                                            </div>
-                                        }
-                                        else
-                                        {
-                                            <div class="carousel-item">
-                                                <img id="itemImage" class="d-block w-100" src="@image.ImageURL">
-                                            </div>
-                                        }
-
-                                    }
-                                </div>
-                                <!--/.Slides-->
-                                <!--Controls-->
-                                <a class="carousel-control-prev" href="#carousel-thumb @index" role="button" data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#carousel-thumb @index" role="button" data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                                <!--/.Controls-->
-                                <ol id="thumbnailBar" class="carousel-indicators list-inline visible-sm-block hidden-xs-block visible-md-block visible-lg-block">
-                                    @for (var imgIndex = 0; imgIndex < item.Images.Count; imgIndex++)
-                                    {
-                                        var image = item.Images[imgIndex];
-                                        if (image.IsMainImage)
-                                        {
-                                            <li data-target="#carousel-thumb @index" data-slide-to="@imgIndex" class="active list-inline-item">
-                                                <img id="thumbnail" class="img-fluid" src="@image.ImageURL">
-                                            </li>
-                                        }
-                                        else
-                                        {
-                                            <li data-target="#carousel-thumb @index" data-slide-to="@imgIndex" class="list-inline-item">
-                                                <img id="thumbnail" class="img-fluid" src="@image.ImageURL">
-                                            </li>
-                                        }
-
-                                    }
-                                </ol>
-                            </div>
-                            <!--/.Carousel Wrapper-->
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <h1>@item.ItemName - $@item.Price</h1>
-                        <p>@item.Description</p>
-                        @if (!String.IsNullOrEmpty(item.Email))
-                        {
-                            <h4>Email: <a href="mailto:@item.Email">@item.Email</a></h4>
-                        }
-                        @if (!String.IsNullOrEmpty(item.Phone))
-                        {
-                            <h4>Phone: @item.Phone</h4>
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
     }
 </section>
-
-    @section Scripts
-        {
-    }*@

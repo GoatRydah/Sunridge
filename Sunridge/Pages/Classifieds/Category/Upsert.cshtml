@@ -13,23 +13,7 @@
         </tr>
     </thead>
 </table>
-<form method="post" asp-action="Upsert" enctype="multipart/form-data">
-    <div class="col-3">
-        <label asp-for="ClassifiedCategoryObj.Description"></label>
-    </div>
-    <div class="col-9">
-        <input class="form-control" asp-for="ClassifiedCategoryObj.Description" />
-        <span class="text-danger" asp-validation-for="ClassifiedCategoryObj.Description"></span>
-    </div>
-    <div class="row">
-        <div class="col-6">
-            <button type="submit" class="btn btn-primary form-control" onclick="return ValidInput()">Create</button>
-        </div>
-        <div class="col-6">
-            <a asp-page="./Upsert" type="submit" class="btn btn-success form-control">Back to List</a>
-        </div>
-    </div>
-</form>
+
 @section Scripts{
     <script src="~/js/classifiedsCategory.js"></script>
 }
