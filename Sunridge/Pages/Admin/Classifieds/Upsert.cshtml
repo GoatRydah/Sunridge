@@ -22,13 +22,16 @@
 
     <div class="col-8 pt-3">
         <div class="row form-group">
-            @*<div class="col-md-3">
+            <div class="col-md-3">
                 <label asp-for="ClassifiedsObj.ClassifiedListing.Category"></label>
             </div>
             <div class="col-md-9">
-                @Html.DropDownListFor(m => m.ClassifiedsObj.ClassifiedListing.Category, Model.ClassifiedsObj.Category, "- Please select a Category", new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.ClassifiedsObj.ClassifiedListing.Category, 
+               Model.ClassifiedsObj.Category, 
+               "- Please select a Category", 
+               new { @class = "form-control" })
                 <span class="text-danger" asp-validation-for="ClassifiedsObj.ClassifiedListing.Category"></span>
-            </div>*@
+            </div>
         </div>
         <div class="form-group row">
             <div class="col-3">
@@ -79,9 +82,14 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-6">
-                <button type="submit" class="btn btn-primary form-control" onclick="return ValidInput()">Create</button>
-            </div>
+            @if (Model.ClassifiedsObj.ClassifiedListing.ClassifiedListingId != 0)
+            {
+                <button type="submit" class="btn btn-primary form-control">Update</button>
+            }
+            else
+            {
+                <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Create</button>
+            }
             <div class="col-6">
                 <a asp-page="./Index" type="submit" class="btn btn-success form-control">Back to List</a>
             </div>

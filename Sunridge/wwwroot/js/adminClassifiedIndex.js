@@ -13,7 +13,7 @@ function LoadList() {
         },
         "columns": [
             { "data": "category", "width": "15%" },
-            { "data": "title", "width": "15%" },
+            { "data": "itemName", "width": "15%" },
             { "data": "price", "width": "10%" },
             { "data": "description", "width": "10%" },
             { "data": "phone", "width": "15%" },

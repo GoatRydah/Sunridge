@@ -32,6 +32,7 @@ namespace Sunridge.Models
         //Nav properties
         [ForeignKey("OwnerId")]
         public virtual ApplicationUser Owner { get; set; }
+        [Required]
         public string Category { get; set; }
         public string Images { get; set; }
     }
