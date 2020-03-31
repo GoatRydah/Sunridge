@@ -7,7 +7,7 @@ $(document).ready(function () {
 function LoadList() {
     dataTable = $('#DT_Load').DataTable({
         "ajax": {
-            "url": "/api/adminCommonAreaAssets/",
+            "url": "/api/adminCommonArea/",
             "type": "GET",
             "datatype": "json"
         },
@@ -24,7 +24,7 @@ function LoadList() {
                                 <a href="/admin/commonareaassets/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                                     <i class="far fa-edit"></i> Edit
                                 </a>
-                                <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onClick=Delete('/api/adminCommonAreaAsset/'+${data})>
+                                <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onClick=Delete('/api/adminCommonArea/'+${data})>
                                     <i class="far fa-trash-alt"></i> Delete
                                 </a>
                              </div>`;
