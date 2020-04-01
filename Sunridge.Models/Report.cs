@@ -13,7 +13,10 @@ namespace Sunridge.Models
 
         [Display(Name = "Form Type")]
         [Required]
-        public Owner Owner { get; set; }
+        public string ApplicationUserId { get; set; }
+        [NotMapped]
+        [ForeignKey("ApplicationUserId")]
+        public virtual ApplicationUser ApplicationUser { get; set; }
         [Display(Name= "Listing Date")]
         public string ListingDate { get; set; }
         [Display(Name = "Resolved Date")]

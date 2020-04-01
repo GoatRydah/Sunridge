@@ -11,7 +11,7 @@ namespace Sunridge.Models
         public int Id { get; set; }
 
         [Display(Name = "Labor Activity")]
-        public List<String> LaborActivity { get; set; }
-        public List<String> Hours { get; set; }
+        public string LaborActivity { get; set; }
+        public string Hours { get; set; }
     }
 }
