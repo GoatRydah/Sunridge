@@ -2,7 +2,7 @@
 
 namespace Sunridge.DataAccess.Migrations
 {
-    public partial class AddReportInfo : Migration
+    public partial class ReportMigrationFix : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,8 @@ namespace Sunridge.DataAccess.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     EquipmentName = table.Column<string>(nullable: true),
-                    Hours = table.Column<string>(nullable: true)
+                    Hours = table.Column<string>(nullable: true),
+                    ReportId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -27,7 +28,8 @@ namespace Sunridge.DataAccess.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     LaborActivity = table.Column<string>(nullable: true),
-                    Hours = table.Column<string>(nullable: true)
+                    Hours = table.Column<string>(nullable: true),
+                    ReportId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

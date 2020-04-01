@@ -14,7 +14,7 @@ namespace Sunridge.Pages.Admin.Reports
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        //public IEnumerable<Report> ReportsList { get; set; }
+        public IEnumerable<Report> ReportsList { get; set; }
         public IndexModel(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -22,8 +22,7 @@ namespace Sunridge.Pages.Admin.Reports
 
         public void OnGet()
         {
-            //ReportsList = _unitOfWork.Report.GetAll(null, null, null);
-
+            ReportsList = _unitOfWork.ReportItem.GetAll(null, null, null);
         }
     }
 }

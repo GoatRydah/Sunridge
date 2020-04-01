@@ -30,9 +30,8 @@ namespace Sunridge.DataAccess.Data.Repository
             var objFromDb = _db.EquipmentHoursItem.FirstOrDefault(s => s.Id == equipmentHours.Id);
             objFromDb.EquipmentName = equipmentHours.EquipmentName;
             objFromDb.Hours = equipmentHours.Hours;
-
-
-
+            objFromDb.ReportId = equipmentHours.ReportId;
+            objFromDb.Report = equipmentHours.Report;
             _db.SaveChanges();
         }
     }

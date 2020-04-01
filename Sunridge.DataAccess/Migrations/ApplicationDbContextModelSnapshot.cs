@@ -473,6 +473,9 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<string>("Hours")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ReportId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("EquipmentHoursItem");
@@ -725,6 +728,9 @@ namespace Sunridge.DataAccess.Migrations
 
                     b.Property<string>("LaborActivity")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ReportId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

@@ -10,8 +10,8 @@ using Sunridge.Data;
 namespace Sunridge.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200401202745_AddReportInfo")]
-    partial class AddReportInfo
+    [Migration("20200401210300_ReportMigrationFix")]
+    partial class ReportMigrationFix
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -475,6 +475,9 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<string>("Hours")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ReportId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("EquipmentHoursItem");
@@ -727,6 +730,9 @@ namespace Sunridge.DataAccess.Migrations
 
                     b.Property<string>("LaborActivity")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ReportId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

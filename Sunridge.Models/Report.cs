@@ -30,13 +30,13 @@ namespace Sunridge.Models
         [NotMapped]
         [ForeignKey("LaborHoursId")]
 
-        public LaborHours LaborHours { get; set; }
+        public List<LaborHours> LaborHours { get; set; }
 
 
         public int EquipmentHoursId { get; set; }
         [NotMapped]
         [ForeignKey("EquipmentHoursId")]
 
-        public LaborHours EquipmentHours { get; set; }
+        public List<EquipmentHours> EquipmentHours { get; set; }
     }
 }
