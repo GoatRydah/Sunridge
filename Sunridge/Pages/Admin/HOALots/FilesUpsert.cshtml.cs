@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Sunridge.Pages.Admin.HOALots
+namespace Sunridge
 {
-    public class IndexModel : PageModel
+    public class FilesUpsertModel : PageModel
     {
         public void OnGet()
         {
