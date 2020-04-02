@@ -9,23 +9,22 @@ $(document).ready(function () {
 function loadList() {
     dataTable = $('#DT_load').DataTable({
         "ajax": {
-            "url": "/api/boardmember/",
+            "url": "/api/key/",
             "type": "GET",
             "datatype": "json"
         },
         "columns": [
-            { "data": "applicationUser.firstName", "width": "30%" },
-            { "data": "boardRole", "width": "30%" },
-            { "data": "displayOrder", "width": "10%" },
+            { "data": "serialNumber", "width": "35%" },
+            { "data": "year", "width": "35%" },
 
             {
                 "data": "id",
                 "render": function (data) {
                     return ` <div class="text-center">
-                                <a href="/Admin/BoardMembers/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
+                                <a href="/Admin/Keys/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                                     <i class="far fa-edit"></i> Edit
                                 </a>
-                                <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/boardmember/'+${data})>
+                                <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/key/'+${data})>
                                     <i class="far fa-trash-alt"></i> Delete
                                 </a>
                     </div>`;
