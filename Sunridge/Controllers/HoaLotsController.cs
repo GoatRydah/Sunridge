@@ -30,11 +30,14 @@ namespace Sunridge.Controllers
             HoaLots = new List<HOALotVM>();
 
             var theLots = _unitOfWork.Lot.GetAll(null, null, null);
-            HOALotVM tempModel = new HOALotVM();
+            HOALotVM tempModel;
 
             foreach(var lot in theLots)
             {
-                // set lotnumber and taxid
+                tempModel = new HOALotVM();
+
+                // set lotnumber and taxid and id
+                tempModel.id = lot.LotId;
                 tempModel.LotNumber = lot.LotNumber;
                 tempModel.TaxId = lot.TaxId;
 
@@ -62,13 +65,24 @@ namespace Sunridge.Controllers
                 //add owner(s) to model
                 tempModel.UserName = theOwners;
 
-                //TODO: get and set lot inventory data
+                //get and set lot inventory data
+                var lotInventories = _unitOfWork.LotInventory.GetAll(s => s.LotId == lot.LotId, null, null);
+                string theInventories = "";
+                foreach (var lotInventory in lotInventories)
+                {
+                    var inventoryItem = _unitOfWork.Inventory.GetFirstOrDefault(s => s.InventoryId == lotInventory.InventoryId);
+                    theInventories += inventoryItem.Description + ", ";
+                }
+
+                if (theInventories.Length > 1)
+                    theInventories = theInventories.Substring(0, theInventories.Length - 2);
+
+                tempModel.LotInventory = theInventories;
 
                 HoaLots.Add(tempModel);
             }
 
-
-            return Json(new { data = _unitOfWork.Lot.GetAll(null, null, null) });
+            return Json(new { data = HoaLots });
         }
     }
 }

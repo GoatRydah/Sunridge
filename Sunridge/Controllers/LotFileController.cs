@@ -23,7 +23,7 @@ namespace Sunridge.Controllers
         [HttpGet]
         public IActionResult Get(int id) //TODO: fix this: thinking 'id' might be passing lotid and not lothistory id right now (if it's passing at all)
         {
-            return Json(new { data = _unitOfWork.File.GetAll(s => s.LotHistoryId == id, null, null) });
+            return Json(new { data = _unitOfWork.File.GetAll(null, null, null) });
         }
 
         [HttpDelete("{id}")]

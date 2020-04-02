@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sunridge.Data;
 
 namespace Sunridge.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200402215017_updateFile")]
+    partial class updateFile
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -522,9 +524,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<int?>("LotHistoryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LotId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -533,8 +532,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.HasIndex("FormResponseId");
 
                     b.HasIndex("LotHistoryId");
-
-                    b.HasIndex("LotId");
 
                     b.ToTable("File");
                 });
@@ -1283,12 +1280,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.HasOne("Sunridge.Models.LotHistory", null)
                         .WithMany("Files")
                         .HasForeignKey("LotHistoryId");
-
-                    b.HasOne("Sunridge.Models.Lot", "Lot")
-                        .WithMany()
-                        .HasForeignKey("LotId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Sunridge.Models.FormResponse", b =>

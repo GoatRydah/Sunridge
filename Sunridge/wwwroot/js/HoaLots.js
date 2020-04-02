@@ -18,7 +18,7 @@ function LoadList() {
             { "data": "taxId", "width": "15%" },
             { "data": "lotInventory", "width": "15%" },
             {
-                "data": "lotId",
+                "data": "id",
                 "render": function (data) {
                     return ` <div class="text-center">
                                 <a href="/admin/hOALots/upsert?id=${data}" class="btn btn-info text-white" style="cursor:pointer; width:100px;">

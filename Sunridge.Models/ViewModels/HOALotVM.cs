@@ -6,6 +6,7 @@ namespace Sunridge.Models.ViewModels
 {
     public class HOALotVM
     {
+        public int id { get; set; }
         public string LotNumber { get; set; }
         public string StreetAddress { get; set; }
         public string UserName { get; set; }
