@@ -28,9 +28,12 @@ namespace Sunridge.Pages.Admin.Reports
         [BindProperty]
         public ReportVM ReportVMObj { get; set; }
 
+        [BindProperty]
+        public List<LaborHours> laborHoursList { get; set; }
 
-        public int laborCount = 0;
-        public int equipmentCount = 0;
+        [BindProperty]
+        public List<EquipmentHours> equipmentHoursList { get; set; }
+
         public IActionResult OnGet(int? id) ///IActionResult return type is page, obj
         {
             ReportVMObj = new ReportVM()
@@ -40,6 +43,16 @@ namespace Sunridge.Pages.Admin.Reports
                 LaborHours = new List<LaborHours>()
             };
 
+            laborHoursList = new List<LaborHours>();
+            equipmentHoursList = new List<EquipmentHours>();
+
+            for (int i = 0; i < 10; i++)
+            {
+                LaborHours temp = new LaborHours();
+                laborHoursList.Add(temp);
+                EquipmentHours etemp = new EquipmentHours();
+                equipmentHoursList.Add(etemp);
+            }
 
 
             if (id != null) //edit
@@ -49,9 +62,9 @@ namespace Sunridge.Pages.Admin.Reports
 
                 ReportVMObj.Report = _unitofWork.ReportItem.GetFirstOrDefault(u => u.Id == id);
                 ReportVMObj.EquipmentHours = equipmentTemp.ToList();
-                equipmentCount = ReportVMObj.EquipmentHours.Count();
+                //equipmentCount = ReportVMObj.EquipmentHours.Count();
                 ReportVMObj.LaborHours = laborTemp.ToList();
-                laborCount = ReportVMObj.LaborHours.Count();
+                //laborCount = ReportVMObj.LaborHours.Count();
 
                 if (ReportVMObj == null)
                 {
@@ -77,33 +90,37 @@ namespace Sunridge.Pages.Admin.Reports
                 return Page();
             }
 
-            IEnumerable<Report> tempReportIdList = _unitofWork.ReportItem.GetAll();
-            int reportNum = 0;
-            foreach (var item in tempReportIdList)
-            {
-                if(item.Id > reportNum)
-                {
-                    reportNum = item.Id;
-                }
-            }
-
-            reportNum = reportNum + 1;
-
-            for (int i = 0; i < ReportVMObj.LaborHours.Count(); i++)
-            {
-                ReportVMObj.LaborHours[i].ReportId = reportNum;
-                ReportVMObj.LaborHours[i].Report = ReportVMObj.Report;
-            }
-
-            for (int i = 0; i < ReportVMObj.EquipmentHours.Count(); i++)
-            {
-                ReportVMObj.EquipmentHours[i].ReportId = reportNum;
-                ReportVMObj.EquipmentHours[i].Report = ReportVMObj.Report;
-            }
+           
             
-            if (ReportVMObj.Report.Id == 0) //new menu item
+            if (ReportVMObj.Report.Id == 0) //new  item
             {
-                if(ReportVMObj.Report.Resolved == true)
+                ReportVMObj.LaborHours = laborHoursList;
+                ReportVMObj.EquipmentHours = equipmentHoursList;
+                IEnumerable<Report> tempReportIdList = _unitofWork.ReportItem.GetAll();
+                int reportNum = 0;
+                foreach (var item in tempReportIdList)
+                {
+                    if (item.Id > reportNum)
+                    {
+                        reportNum = item.Id;
+                    }
+                }
+
+                reportNum = reportNum + 1;
+
+                for (int i = 0; i < ReportVMObj.LaborHours.Count(); i++)
+                {
+                    ReportVMObj.LaborHours[i].ReportId = reportNum;
+                    ReportVMObj.LaborHours[i].Report = ReportVMObj.Report;
+                }
+
+                for (int i = 0; i < ReportVMObj.EquipmentHours.Count(); i++)
+                {
+                    ReportVMObj.EquipmentHours[i].ReportId = reportNum;
+                    ReportVMObj.EquipmentHours[i].Report = ReportVMObj.Report;
+                }
+
+                if (ReportVMObj.Report.Resolved == true)
                 {
                     ReportVMObj.Report.ResolvedDate = DateTime.Today.ToString();
                 }

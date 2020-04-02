@@ -1,12 +1,13 @@
 ﻿@page
 @model Sunridge.Pages.Admin.Reports.UpsertModel
 @using Sunridge.Utility
+@using Sunridge.Models
 
 @if (User.IsInRole(SD.AdminRole))
 {
     <form method="post" asp-action="Upsert" enctype="multipart/form-data">
         <div class="container">
-            <div class="row px-2 mx-2 backgroundWhite border">
+            <div class="row px-2 mx-2 border">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 @if (Model.ReportVMObj.Report.Id != 0)
                 {
@@ -16,127 +17,490 @@
                         <input type="hidden" asp-for="ReportVMObj.LaborHours[i].Id" />
                         <input type="hidden" asp-for="ReportVMObj.EquipmentHours[i].Id" />
                     }
-                 }
-                    <div class="col-12 px-3" style="border-bottom: 1px solid #325d88">
-                        <h2 class="text-primary">@(Model.ReportVMObj.Report.Id != 0 ? "Update" : "Create") Menu Item</h2>
+                }
+                <div class="col-12 px-3" style="border-bottom: 1px solid #325d88">
+                    <h2 class="text-primary">@(Model.ReportVMObj.Report.Id != 0 ? "Update" : "Create") Report</h2>
+                </div>
+                <div class="col-8 pt-3">
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label asp-for="ReportVMObj.Report.FormType"></label>
+                        </div>
+                        <div class="col-9">
+                            <select class="form-control" asp-for="ReportVMObj.Report.FormType" id="formTypeDropDown">
+                                <option value="Suggestion / Complaint">Suggestion / Complaint</option>
+                                <option value="Work in kind">Work in kind</option>
+                            </select>
+                            <span class="text-danger" asp-validation-for="ReportVMObj.Report.FormType"></span>
+                        </div>
                     </div>
-                    <div class="col-8 pt-3">
-                        <div class="form-group row">
-                            <div class="col-3">
-                                <label asp-for="ReportVMObj.Report.FormType"></label>
-                            </div>
-                            <div class="col-9">
-                                <select class="form-control" asp-for="ReportVMObj.Report.FormType" id="formTypeDropDown">
-                                    <option value="Suggestion / Complaint">Suggestion / Complaint</option>
-                                    <option value="Work in kind">Work in kind</option>
-                                </select>
-                                <span class="text-danger" asp-validation-for="ReportVMObj.Report.FormType"></span>
-                            </div>
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label asp-for="ReportVMObj.Report.Description"></label>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-3">
-                                <label asp-for="ReportVMObj.Report.Description"></label>
-                            </div>
-                            <div class="col-9">
-                                <textarea class="form-control" asp-for="ReportVMObj.Report.Description" id="txtDescription" style="height:200px"></textarea>
-                            </div>
+                        <div class="col-9">
+                            <textarea class="form-control" asp-for="ReportVMObj.Report.Description" id="txtDescription" style="height:200px"></textarea>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-3">
-                                <label asp-for="ReportVMObj.Report.Suggestion"></label>
-                            </div>
-                            <div class="col-9">
-                                <textarea class="form-control" asp-for="ReportVMObj.Report.Suggestion" id="txtDescription" style="height:200px"></textarea>
-                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label asp-for="ReportVMObj.Report.Suggestion"></label>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-3">
-                                <label asp-for="ReportVMObj.Report.Comments"></label>
-                            </div>
-                            <div class="col-9">
-                                <textarea class="form-control" asp-for="ReportVMObj.Report.Comments" id="txtDescription" style="height:200px"></textarea>
-                            </div>
+                        <div class="col-9">
+                            <textarea class="form-control" asp-for="ReportVMObj.Report.Suggestion" id="txtSuggestion" style="height:200px"></textarea>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-3">
-                                <label asp-for="ReportVMObj.Report.ListingDate"></label>
-                            </div>
-                            <div class="col-9">
-                                <input class="form-control" asp-for="ReportVMObj.Report.ListingDate" />
-                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label asp-for="ReportVMObj.Report.Comments"></label>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-3">
-                                <label asp-for="ReportVMObj.Report.Resolved"></label>
-                            </div>
-                            <div class="col-9">
-                                <input class="form-control" asp-for="ReportVMObj.Report.Resolved" />
-                            </div>
+                        <div class="col-9">
+                            <textarea class="form-control" asp-for="ReportVMObj.Report.Comments" id="txtComments" style="height:200px"></textarea>
                         </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label asp-for="ReportVMObj.Report.ListingDate"></label>
+                        </div>
+                        <div class="col-9">
+                            <input class="form-control" asp-for="ReportVMObj.Report.ListingDate" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label asp-for="ReportVMObj.Report.Resolved"></label>
+                        </div>
+                        <div class="col-9">
+                            <input class="form-control" asp-for="ReportVMObj.Report.Resolved" />
+                        </div>
+                    </div>
 
-                        @if (Model.ReportVMObj.LaborHours.Count() > 0)
-                        {
-                            @for (var i = 0; i < Model.ReportVMObj.LaborHours.Count(); i++)
-                            {
-                                <div class="form-group row">
-                                    <div class="col-3">
-                                        <label asp-for="ReportVMObj.LaborHours[i].LaborActivity"></label>
-                                    </div>
-                                    <div class="col-9">
-                                        <input class="form-control" asp-for="ReportVMObj.LaborHours[i].LaborActivity" />
-                                    </div>
-                                    <div class="col-3">
-                                        <label asp-for="ReportVMObj.LaborHours[i].Hours"></label>
-                                    </div>
-                                    <div class="col-9">
-                                        <input class="form-control" asp-for="ReportVMObj.LaborHours[i].Hours" />
-                                    </div>
-                                </div>
+                    <script>
+                        var currentSelected = document.getElementById("formTypeDropDown");
+                        var choice = document.getElementById("formTypeDropDown").value;
+                        currentSelected.addEventListener("change", function () {
+                            choice = document.getElementById("formTypeDropDown").value;
+                            if (choice == "Work in kind") {
+                                var x = document.getElementById("labordiv");
+                                if (x.style.display == "none") {
+                                    x.style.display = "block";
+                                }
 
-                            }
-                        }
+                                x = document.getElementById("equipmentdiv");
+                                if (x.style.display == "none") {
+                                    x.style.display = "block";
+                                }
 
-                        @if (Model.ReportVMObj.EquipmentHours.Count() > 0)
-                        {
-                            @for (var i = 0; i < Model.ReportVMObj.EquipmentHours.Count(); i++)
-                            {
-                                <div class="form-group row">
-                                    <div class="col-3">
-                                        <label asp-for="ReportVMObj.EquipmentHours[i].EquipmentName"></label>
-                                    </div>
-                                    <div class="col-9">
-                                        <input class="form-control" asp-for="ReportVMObj.EquipmentHours[i].EquipmentName" />
-                                    </div>
-                                    <div class="col-3">
-                                        <label asp-for="ReportVMObj.EquipmentHours[i].Hours"></label>
-                                    </div>
-                                    <div class="col-9">
-                                        <input class="form-control" asp-for="ReportVMObj.EquipmentHours[i].Hours" />
-                                    </div>
-                                </div>
-                            }
-                        }
-                        <div class="form-group row">
-                            <div class="col-9 offset-3">
-                                <div class="row">
-                                    <div class="col-6">
-                                        @if (Model.ReportVMObj.Report.Id != 0)
-                                        {
-                                            <button type="submit" class="btn btn-primary form-control">Update</button>
+                                var laborListener = document.getElementById("laborButton");
+                                var equipmentListener = document.getElementById("equipmentButton");
+
+                                laborListener.addEventListener("click", function () {
+                                    var numLabor = document.getElementById("labors").value;
+                                    for (var i = 0; i < numLabor; i++) {
+                                        var y = document.getElementById("laborHours" + i);
+                                        if (y.style.display == "block") {
+                                            y.style.display = "none";
                                         }
-                                        else
-                                        {
-                                            <button type="submit" class="btn btn-primary form-control" onclick="return ValidInput()">Create</button>
+                                        if (y.style.display == "none") {
+                                            y.style.display = "block";
                                         }
-                                    </div>
-                                    <div class="col-6">
-                                        <a asp-page="./Index" type="submit" class="btn btn-success form-control">Back to List</a>
-                                    </div>
+                                    }
+                                });
+
+                                equipmentListener.addEventListener("click", function () {
+                                    var numEquipment = document.getElementById("equipments").value;
+                                    for (var i = 0; i < numEquipment; i++) {
+                                        var y = document.getElementById("equipmentHours" + i);
+                                        if (y.style.display == "block") {
+                                            y.style.display = "none";
+                                        }
+                                        if (y.style.display == "none") {
+                                            y.style.display = "block";
+                                        }
+                                    }
+                                });
+                            } else {
+                                var x = document.getElementById("labordiv");
+                                if (x.style.display == "block") {
+                                    x.style.display = "none";
+                                }
+
+                                x = document.getElementById("equipmentdiv");
+                                if (x.style.display == "block") {
+                                    x.style.display = "none";
+                                }
+                            }
+                        });
+
+
+                    </script>
+
+                    <div class="form-group row" style="display: none;" id="labordiv">
+                        <div class="col-3">
+                            <label>How Many Labor Objects Would You Like?</label>
+                        </div>
+                        <div class="col-9">
+                            <input class="form-control" id="labors" /> <i id="laborButton" class="btn btn-success form-control">Add</i>
+                        </div>
+                    </div>
+
+                    <div class="form-group row" style="display: none;" id="equipmentdiv">
+                        <div class="col-3">
+                            <label>How Many Equipment Objects Would You Like?</label>
+                        </div>
+                        <div class="col-9">
+                            <input class="form-control" id="equipments" /> <i id="equipmentButton" class="btn btn-success form-control">Add</i>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group row" style="display:none" id="laborHours0">
+                        <div class="col-3">
+                            <label asp-for="laborHoursList[0].LaborActivity"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="laborHoursList[0].LaborActivity" />
+                        </div>
+                        <div class="col-3">
+                            <label asp-for="laborHoursList[0].Hours"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="laborHoursList[0].Hours" />
+                        </div>
+                    </div>
+                    <div class="form-group row" style="display:none" id="laborHours1">
+                        <div class="col-3">
+                            <label asp-for="laborHoursList[1].LaborActivity"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="laborHoursList[1].LaborActivity" />
+                        </div>
+                        <div class="col-3">
+                            <label asp-for="laborHoursList[1].Hours"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="laborHoursList[1].Hours" />
+                        </div>
+                    </div>
+                    <div class="form-group row" style="display:none" id="laborHours2">
+                        <div class="col-3">
+                            <label asp-for="laborHoursList[2].LaborActivity"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="laborHoursList[2].LaborActivity" />
+                        </div>
+                        <div class="col-3">
+                            <label asp-for="laborHoursList[2].Hours"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="laborHoursList[2].Hours" />
+                        </div>
+                    </div>
+                    <div class="form-group row" style="display:none" id="laborHours3">
+                        <div class="col-3">
+                            <label asp-for="laborHoursList[3].LaborActivity"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="laborHoursList[3].LaborActivity" />
+                        </div>
+                        <div class="col-3">
+                            <label asp-for="laborHoursList[3].Hours"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="laborHoursList[3].Hours" />
+                        </div>
+                    </div>
+                    <div class="form-group row" style="display:none" id="laborHours4">
+                        <div class="col-3">
+                            <label asp-for="laborHoursList[4].LaborActivity"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="laborHoursList[4].LaborActivity" />
+                        </div>
+                        <div class="col-3">
+                            <label asp-for="laborHoursList[4].Hours"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="laborHoursList[4].Hours" />
+                        </div>
+                    </div>
+                    <div class="form-group row" style="display:none" id="laborHours5">
+                        <div class="col-3">
+                            <label asp-for="laborHoursList[5].LaborActivity"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="laborHoursList[5].LaborActivity" />
+                        </div>
+                        <div class="col-3">
+                            <label asp-for="laborHoursList[5].Hours"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="laborHoursList[5].Hours" />
+                        </div>
+                    </div>
+                    <div class="form-group row" style="display:none" id="laborHours6">
+                        <div class="col-3">
+                            <label asp-for="laborHoursList[6].LaborActivity"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="laborHoursList[6].LaborActivity" />
+                        </div>
+                        <div class="col-3">
+                            <label asp-for="laborHoursList[6].Hours"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="laborHoursList[6].Hours" />
+                        </div>
+                    </div>
+                    <div class="form-group row" style="display:none" id="laborHours7">
+                        <div class="col-3">
+                            <label asp-for="laborHoursList[7].LaborActivity"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="laborHoursList[7].LaborActivity" />
+                        </div>
+                        <div class="col-3">
+                            <label asp-for="laborHoursList[7].Hours"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="laborHoursList[7].Hours" />
+                        </div>
+                    </div>
+                    <div class="form-group row" style="display:none" id="laborHours8">
+                        <div class="col-3">
+                            <label asp-for="laborHoursList[8].LaborActivity"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="laborHoursList[8].LaborActivity" />
+                        </div>
+                        <div class="col-3">
+                            <label asp-for="laborHoursList[8].Hours"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="laborHoursList[8].Hours" />
+                        </div>
+                    </div>
+                    <div class="form-group row" style="display:none" id="laborHours9">
+                        <div class="col-3">
+                            <label asp-for="laborHoursList[9].LaborActivity"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="laborHoursList[9].LaborActivity" />
+                        </div>
+                        <div class="col-3">
+                            <label asp-for="laborHoursList[9].Hours"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="laborHoursList[9].Hours" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row" style="display:none" id="equipmentHours0">
+                        <div class="col-3">
+                            <label asp-for="equipmentHoursList[0].EquipmentName"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="equipmentHoursList[0].EquipmentName" />
+                        </div>
+                        <div class="col-3">
+                            <label asp-for="equipmentHoursList[0].Hours"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="equipmentHoursList[0].Hours" />
+                        </div>
+                    </div>
+                    <div class="form-group row" style="display:none" id="equipmentHours1">
+                        <div class="col-3">
+                            <label asp-for="equipmentHoursList[1].EquipmentName"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="equipmentHoursList[1].EquipmentName" />
+                        </div>
+                        <div class="col-3">
+                            <label asp-for="equipmentHoursList[1].Hours"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="equipmentHoursList[1].Hours" />
+                        </div>
+                    </div>
+                    <div class="form-group row" style="display:none" id="equipmentHours2">
+                        <div class="col-3">
+                            <label asp-for="equipmentHoursList[2].EquipmentName"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="equipmentHoursList[2].EquipmentName" />
+                        </div>
+                        <div class="col-3">
+                            <label asp-for="equipmentHoursList[2].Hours"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="equipmentHoursList[2].Hours" />
+                        </div>
+                    </div>
+                    <div class="form-group row" style="display:none" id="equipmentHours3">
+                        <div class="col-3">
+                            <label asp-for="equipmentHoursList[3].EquipmentName"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="equipmentHoursList[3].EquipmentName" />
+                        </div>
+                        <div class="col-3">
+                            <label asp-for="equipmentHoursList[3].Hours"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="equipmentHoursList[3].Hours" />
+                        </div>
+                    </div>
+                    <div class="form-group row" style="display:none" id="equipmentHours4">
+                        <div class="col-3">
+                            <label asp-for="equipmentHoursList[4].EquipmentName"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="equipmentHoursList[4].EquipmentName" />
+                        </div>
+                        <div class="col-3">
+                            <label asp-for="equipmentHoursList[4].Hours"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="equipmentHoursList[4].Hours" />
+                        </div>
+                    </div>
+                    <div class="form-group row" style="display:none" id="equipmentHours5">
+                        <div class="col-3">
+                            <label asp-for="equipmentHoursList[5].EquipmentName"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="equipmentHoursList[5].EquipmentName" />
+                        </div>
+                        <div class="col-3">
+                            <label asp-for="equipmentHoursList[5].Hours"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="equipmentHoursList[5].Hours" />
+                        </div>
+                    </div>
+                    <div class="form-group row" style="display:none" id="equipmentHours6">
+                        <div class="col-3">
+                            <label asp-for="equipmentHoursList[6].EquipmentName"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="equipmentHoursList[6].EquipmentName" />
+                        </div>
+                        <div class="col-3">
+                            <label asp-for="equipmentHoursList[6].Hours"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="equipmentHoursList[6].Hours" />
+                        </div>
+                    </div>
+                    <div class="form-group row" style="display:none" id="equipmentHours7">
+                        <div class="col-3">
+                            <label asp-for="equipmentHoursList[7].EquipmentName"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="equipmentHoursList[7].EquipmentName" />
+                        </div>
+                        <div class="col-3">
+                            <label asp-for="equipmentHoursList[7].Hours"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="equipmentHoursList[7].Hours" />
+                        </div>
+                    </div>
+                    <div class="form-group row" style="display:none" id="equipmentHours8">
+                        <div class="col-3">
+                            <label asp-for="equipmentHoursList[8].EquipmentName"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="equipmentHoursList[8].EquipmentName" />
+                        </div>
+                        <div class="col-3">
+                            <label asp-for="equipmentHoursList[8].Hours"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="equipmentHoursList[8].Hours" />
+                        </div>
+                    </div>
+                    <div class="form-group row" style="display:none" id="equipmentHours9">
+                        <div class="col-3">
+                            <label asp-for="equipmentHoursList[9].EquipmentName"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="equipmentHoursList[9].EquipmentName" />
+                        </div>
+                        <div class="col-3">
+                            <label asp-for="equipmentHoursList[9].Hours"></label>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" asp-for="equipmentHoursList[9].Hours" />
+                        </div>
+                    </div>
+
+
+                    @if (Model.ReportVMObj.LaborHours.Count() > 0)
+                    {
+                        @for (var i = 0; i < Model.ReportVMObj.LaborHours.Count(); i++)
+                        {
+                            <div class="form-group row">
+                                <div class="col-3">
+                                    <label asp-for="ReportVMObj.LaborHours[i].LaborActivity"></label>
+                                </div>
+                                <div class="col-9">
+                                    <input class="form-control" asp-for="ReportVMObj.LaborHours[i].LaborActivity" />
+                                </div>
+                                <div class="col-3">
+                                    <label asp-for="ReportVMObj.LaborHours[i].Hours"></label>
+                                </div>
+                                <div class="col-9">
+                                    <input class="form-control" asp-for="ReportVMObj.LaborHours[i].Hours" />
+                                </div>
+                            </div>
+
+                        }
+                    }
+
+                    @if (Model.ReportVMObj.EquipmentHours.Count() > 0)
+                    {
+                        @for (var i = 0; i < Model.ReportVMObj.EquipmentHours.Count(); i++)
+                        {
+                            <div class="form-group row">
+                                <div class="col-3">
+                                    <label asp-for="ReportVMObj.EquipmentHours[i].EquipmentName"></label>
+                                </div>
+                                <div class="col-9">
+                                    <input class="form-control" asp-for="ReportVMObj.EquipmentHours[i].EquipmentName" />
+                                </div>
+                                <div class="col-3">
+                                    <label asp-for="ReportVMObj.EquipmentHours[i].Hours"></label>
+                                </div>
+                                <div class="col-9">
+                                    <input class="form-control" asp-for="ReportVMObj.EquipmentHours[i].Hours" />
+                                </div>
+                            </div>
+                        }
+                    }
+                    <div class="form-group row">
+                        <div class="col-9 offset-3">
+                            <div class="row">
+                                <div class="col-6">
+                                    @if (Model.ReportVMObj.Report.Id != 0)
+                                    {
+                                        <button type="submit" class="btn btn-primary form-control">Update</button>
+                                    }
+                                    else
+                                    {
+                                        <button type="submit" class="btn btn-primary form-control" onclick="return ValidInput()">Create</button>
+                                    }
+                                </div>
+                                <div class="col-6">
+                                    <a asp-page="./Index" type="submit" class="btn btn-success form-control">Back to List</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
         </div>
     </form>
 }
