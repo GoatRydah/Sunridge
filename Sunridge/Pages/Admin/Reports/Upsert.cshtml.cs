@@ -94,6 +94,20 @@ namespace Sunridge.Pages.Admin.Reports
             
             if (ReportVMObj.Report.Id == 0) //new  item
             {
+                for (int i = 9; i >= 0; i--)
+                {
+                    if(laborHoursList[i].LaborActivity ==null|| laborHoursList[i].Hours==null)
+                    {
+                        laborHoursList.Remove(laborHoursList[i]);
+                    }
+                }
+                for (int i = 9; i >= 0; i--)
+                {
+                    if (equipmentHoursList[i].EquipmentName == null || equipmentHoursList[i].Hours == null)
+                    {
+                        equipmentHoursList.Remove(equipmentHoursList[i]);
+                    }
+                }
                 ReportVMObj.LaborHours = laborHoursList;
                 ReportVMObj.EquipmentHours = equipmentHoursList;
                 IEnumerable<Report> tempReportIdList = _unitofWork.ReportItem.GetAll();

@@ -96,6 +96,8 @@
 
                                 laborListener.addEventListener("click", function () {
                                     var numLabor = document.getElementById("labors").value;
+                                    var z = document.getElementById("labors");
+                                    z.style.display = "none";
                                     for (var i = 0; i < numLabor; i++) {
                                         var y = document.getElementById("laborHours" + i);
                                         if (y.style.display == "block") {
@@ -111,6 +113,8 @@
                                     var numEquipment = document.getElementById("equipments").value;
                                     for (var i = 0; i < numEquipment; i++) {
                                         var y = document.getElementById("equipmentHours" + i);
+                                        var z = document.getElementById("equipments");
+                                        z.style.display = "none";
                                         if (y.style.display == "block") {
                                             y.style.display = "none";
                                         }
