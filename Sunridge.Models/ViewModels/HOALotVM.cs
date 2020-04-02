@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Sunridge.Models.ViewModels
+{
+    public class HOALotVM
+    {
+        public string LotNumber { get; set; }
+        public string StreetAddress { get; set; }
+        public string UserName { get; set; }
+        public string TaxId { get; set; }
+        public string LotInventory { get; set; }
+    }
+}

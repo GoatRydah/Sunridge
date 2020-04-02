@@ -1,74 +1,4 @@
-﻿//var editor;
-
-//$(document).ready(function () {
-//    LoadList();
-//});
-
-//function LoadList() {
-//    editor = new $.fn.dataTable.Editor({
-//        ajax: "/api/ownerIndex/",
-//        table: "#DT_Load",
-//        fileds: [{
-//            label: "First Name:",
-//            name: "ApplicationUser.FirstName"
-//        }, {
-//            label: "Last Name:",
-//            name: "ApplicationUser.LastName"
-//        }, {
-//            label: "Username:",
-//            name: "ApplicationUser.UserName"
-//        }, {
-//            label: "Emergency Contact Name:",
-//            name: "ApplicationUser.EmergencyContactName"
-//        }, {
-//            label: "Emergency Contact Phone:",
-//            name: "ApplicationUser.EmergencyContactPhone"
-//        }, {
-//            label: "Emergency Contact Phone:",
-//            name: "ApplicationUser.EmergencyContactPhone"
-//        }, {
-//            label: "Lot Number:",
-//            name: "Lot.LotNumber"
-//        }
-//        ]
-//    });
-
-
-//    $('#DT_Load').DataTable({
-
-//        ajax: "/api/ownerIndex/",
-//        dom: 'Bfrtip',
-//        columns: [
-//            { data: "ApplicationUser.FirstName", width: "11%" },
-//            { data: "ApplicationUser.LastName", width: "11%" },
-//            { data: "ApplicationUser.UserName", width: "11%" },
-//            { data: "ApplicationUser.EmergencyContactName", width: "11%" },
-//            { data: "ApplicationUser.EmergencyContactPhone", width: "11%" },
-//            { data: "Lot.LotNumber", width: "11%" },
-//            {
-//                data: "id",
-//                render: function (data) {
-//                    return ` <div class="text-center">
-//                                <a href="/admin/owners/upsert?id=${data}" class="btn btn-info text-white" style="cursor:pointer; width:100px;">
-//                                    <i class="far fa-edit"></i> Edit
-//                                </a>
-//                                <a href="/identity/account/resetPassword?code=${data}" class="btn btn-success text-white" style="cursor:pointer; width:160px;">
-//                                    <i class="fas fa-lock-open"></i> Reset Password
-//                                </a>
-//                                <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onClick=Delete('/api/ownerIndex/${data}')>
-//                                    <i class="far fa-trash-alt"></i> Delete
-//                                </a>
-//                             </div>`;
-//                }, "width": "34%"
-//            }
-//        ],
-//        language: {
-//            emptyTable: "no data found."
-//        },
-//        width: "100%"
-//    });
-
-var dataTable;
+﻿var dataTable;
 
 $(document).ready(function () {
     LoadList();
@@ -82,15 +12,11 @@ function LoadList() {
             "datatype": "json"
         },
         "columns": [
-            { "data": "firstName", "width": "11%" },
-            { "data": "lastName", "width": "11%" },
-            { "data": "userName", "width": "11%" },
-            { "data": "emergencyContactName", "width": "11%" },
-            { "data": "emergencyContactPhone", "width": "11%" },
-            { "data": "ownerLots", "render": function (data) {
-                return "stuff";
-                }, "width": "11%"
-            },
+            { "data": "name", "width": "13%" },
+            { "data": "username", "width": "13%" },
+            { "data": "emergencyContactName", "width": "13%" },
+            { "data": "emergencyContactPhone", "width": "13%" },
+            { "data": "lots", "width": "13%" },
             {
                 "data": "id",
                 "render": function (data) {
@@ -98,14 +24,14 @@ function LoadList() {
                                 <a href="/admin/owners/upsert?id=${data}" class="btn btn-info text-white" style="cursor:pointer; width:100px;">
                                     <i class="far fa-edit"></i> Edit
                                 </a>
-                                <a href="/identity/account/resetPassword?code=${data}" class="btn btn-success text-white" style="cursor:pointer; width:160px;">
+                                <a href="/admin/owners/passwordResetIndex?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:160px;">
                                     <i class="fas fa-lock-open"></i> Reset Password
                                 </a>
                                 <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onClick=Delete('/api/ownerIndex/${data}')>
                                     <i class="far fa-trash-alt"></i> Delete
                                 </a>
                              </div>`;
-                }, "width": "34%"
+                }, "width": "35%"
             }
         ],
         "language": {
