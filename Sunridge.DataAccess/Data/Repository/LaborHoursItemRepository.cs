@@ -30,8 +30,8 @@ namespace Sunridge.DataAccess.Data.Repository
             var objFromDb = _db.LaborHoursItem.FirstOrDefault(s => s.Id == laborHours.Id);
             objFromDb.LaborActivity = laborHours.LaborActivity;
             objFromDb.Hours = laborHours.Hours;
-            objFromDb.ReportId = laborHours.ReportId;
             objFromDb.Report = laborHours.Report;
+            objFromDb.ReportId = laborHours.ReportId;
 
 
             _db.SaveChanges();

@@ -13,6 +13,7 @@ namespace Sunridge.Models
 
         [Display(Name = "Form Type")]
         [Required]
+        public string FormType { get; set; }
         public string ApplicationUserId { get; set; }
         [NotMapped]
         [ForeignKey("ApplicationUserId")]
@@ -26,17 +27,12 @@ namespace Sunridge.Models
         public string Comments { get; set; }
         public bool Resolved { get; set; }
 
-        public int LaborHoursId { get; set; }
+        //Nav properties
         [NotMapped]
         [ForeignKey("LaborHoursId")]
-
-        public List<LaborHours> LaborHours { get; set; }
-
-
-        public int EquipmentHoursId { get; set; }
+        public LaborHours LaborHoursId { get; set; }
         [NotMapped]
         [ForeignKey("EquipmentHoursId")]
-
-        public List<EquipmentHours> EquipmentHours { get; set; }
+        public EquipmentHours EquipmentHoursId { get; set; }
     }
 }

@@ -18,6 +18,6 @@ namespace Sunridge.Models
         public int ReportId { get; set; }
         [NotMapped]
         [ForeignKey("ReportId")]
-        public Report Report { get; set; }
+        public virtual Report Report { get; set; }
     }
 }

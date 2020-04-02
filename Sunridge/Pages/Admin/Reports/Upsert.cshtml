@@ -1,55 +1,132 @@
 ﻿@page
 @model Sunridge.Pages.Admin.Reports.UpsertModel
-@{
-    ViewData["Title"] = "Upsert";
+@using Sunridge.Utility
+
+@if (User.IsInRole(SD.AdminRole))
+{
+    <form method="post" asp-action="Upsert" enctype="multipart/form-data">
+        <div class="container">
+            <div class="row px-2 mx-2 backgroundWhite border">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                @if (Model.ReportVMObj.Report.Id != 0)
+                {
+                    <input type="hidden" asp-for="ReportVMObj.Report.Id" />
+                }
+                <div class="col-12 px-3" style="border-bottom: 1px solid #325d88">
+                    <h2 class="text-primary">@(Model.ReportVMObj.Report.Id != 0 ? "Update" : "Create") Menu Item</h2>
+                </div>
+                <div class="col-8 pt-3">
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label asp-for="ReportVMObj.Report.FormType"></label>
+                        </div>
+                        <div class="col-9">
+                            <select class="form-control" asp-for="ReportVMObj.Report.FormType" id="formTypeDropDown">
+                                <option value="Suggestion / Complaint">Suggestion / Complaint</option>
+                                <option value="Work in kind">Work in kind</option>
+                            </select>
+                            <span class="text-danger" asp-validation-for="ReportVMObj.Report.FormType"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label asp-for="ReportVMObj.Report.Description"></label>
+                        </div>
+                        <div class="col-9">
+                            <textarea class="form-control" asp-for="ReportVMObj.Report.Description" id="txtDescription" style="height:200px"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label asp-for="ReportVMObj.Report.Suggestion"></label>
+                        </div>
+                        <div class="col-9">
+                            <textarea class="form-control" asp-for="ReportVMObj.Report.Suggestion" id="txtDescription" style="height:200px"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label asp-for="ReportVMObj.Report.Comments"></label>
+                        </div>
+                        <div class="col-9">
+                            <textarea class="form-control" asp-for="ReportVMObj.Report.Comments" id="txtDescription" style="height:200px"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label asp-for="ReportVMObj.Report.ListingDate"></label>
+                        </div>
+                        <div class="col-9">
+                            <input class="form-control" asp-for="ReportVMObj.Report.ListingDate" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label asp-for="ReportVMObj.Report.Resolved"></label>
+                        </div>
+                        <div class="col-9">
+                            <input class="form-control" asp-for="ReportVMObj.Report.Resolved" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label asp-for="LaborHoursObj.LaborActivity"></label>
+                        </div>
+                        <div class="col-9">
+                            <input class="form-control" asp-for="LaborHoursObj.LaborActivity" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label asp-for="LaborHoursObj.Hours"></label>
+                        </div>
+                        <div class="col-9">
+                            <input class="form-control" asp-for="LaborHoursObj.Hours" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label asp-for="EquipmentHoursObj.EquipmentName"></label>
+                        </div>
+                        <div class="col-9">
+                            <input class="form-control" asp-for="EquipmentHoursObj.EquipmentName" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label asp-for="EquipmentHoursObj.Hours"></label>
+                        </div>
+                        <div class="col-9">
+                            <input class="form-control" asp-for="EquipmentHoursObj.Hours" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-9 offset-3">
+                            <div class="row">
+                                <div class="col-6">
+                                    @if (Model.ReportVMObj.Report.Id != 0)
+                                    {
+                                        <button type="submit" class="btn btn-primary form-control">Update</button>
+                                    }
+                                    else
+                                    {
+                                        <button type="submit" class="btn btn-primary form-control" onclick="return ValidInput()">Create</button>
+                                    }
+                                </div>
+                                <div class="col-6">
+                                    <a asp-page="./Index" type="submit" class="btn btn-success form-control">Back to List</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 }
-<br />
-<br />
-<table id="DT_load" class="table table-striped table-bordered" style="width:100%">
-    <thead>
-        <tr>
-            <th>Description</th>
-            <th></th>
-        </tr>
-    </thead>
-</table>
-
-<br />
-<br />
-<table id="DT_load" class="table table-striped table-bordered" style="width:100%">
-    <thead>
-        <tr>
-            <th>Description</th>
-            <th></th>
-        </tr>
-    </thead>
-</table>
-<form method="post" asp-action="Upsert" enctype="multipart/form-data">
-
-    <div class="col-8 pt-3">
-        <div class="form-group row">
-            <div class="col-3">
-                <label asp-for="ReportObj.Description"></label>
-            </div>
-            <div class="col-9">
-                <textarea class="form-control" asp-for="ReportObj.Description" id="txtDescription" style="height:200px"></textarea>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-3">
-                <label asp-for="ReportObj.ApplicationUser.FullName"></label>
-            </div>
-            <div class="col-9">
-                <input type="file" class="form-control" name="files" id="files" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <button type="submit" class="btn btn-primary form-control" onclick="return ValidInput()">Create</button>
-            </div>
-            <div class="col-6">
-                <a asp-page="./Index" type="submit" class="btn btn-success form-control">Back to List</a>
-            </div>
-        </div>
+else
+{
+    <div>
+        <h1 class="danger">Access Denied</h1>
     </div>
-</form>
+}

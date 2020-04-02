@@ -29,6 +29,7 @@ namespace Sunridge.DataAccess.Data.Repository
         {
             var objFromDb = _db.ReportItem.FirstOrDefault(s => s.Id == report.Id);
             objFromDb.ApplicationUserId = report.ApplicationUserId;
+            objFromDb.FormType = report.FormType;
             objFromDb.ApplicationUser = report.ApplicationUser;
             objFromDb.ListingDate = report.ListingDate;
             objFromDb.ResolvedDate = report.ResolvedDate;
@@ -36,10 +37,6 @@ namespace Sunridge.DataAccess.Data.Repository
             objFromDb.Suggestion = report.Suggestion;
             objFromDb.Comments = report.Comments;
             objFromDb.Resolved = report.Resolved;
-            objFromDb.LaborHoursId = report.LaborHoursId;
-            objFromDb.LaborHours = report.LaborHours;
-            objFromDb.EquipmentHoursId = report.EquipmentHoursId;
-            objFromDb.EquipmentHours = report.EquipmentHours;
 
 
             _db.SaveChanges();

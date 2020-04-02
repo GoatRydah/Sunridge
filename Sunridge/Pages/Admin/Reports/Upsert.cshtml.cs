@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Sunridge.Data;
 using Sunridge.DataAccess.Data.Repository.IRepository;
 using Sunridge.Models;
+using Sunridge.Models.ViewModels;
 
 namespace Sunridge.Pages.Admin.Reports
 {
     public class UpsertModel : PageModel
     {
-
         private readonly IUnitOfWork _unitofWork;
         private readonly IWebHostEnvironment _hostingEnvironment;
 
@@ -25,22 +26,39 @@ namespace Sunridge.Pages.Admin.Reports
 
         //binds the model to the page
         [BindProperty]
-        public Report ReportObj { get; set; }
+        public ReportVM ReportVMObj { get; set; }
+
         [BindProperty]
-        public IEnumerable<LaborHours> LaborHoursObj { get; set; }
+        public LaborHours LaborHoursObj { get; set; }
+
         [BindProperty]
-        public IEnumerable<EquipmentHours> EquipmentHoursObj { get; set; }
+        public EquipmentHours EquipmentHoursObj { get; set; }
+
+        public int laborCount = 0;
+        public int equipmentCount = 0;
         public IActionResult OnGet(int? id) ///IActionResult return type is page, obj
         {
+            ReportVMObj = new ReportVM()
+            {
+                Report = new Report(),
+                EquipmentHours = new List<EquipmentHours>(),
+                LaborHours = new List<LaborHours>()
+            };
+            LaborHoursObj = new LaborHours();
+            EquipmentHoursObj = new EquipmentHours();
+
+            IEnumerable<LaborHours> laborTemp = _unitofWork.LaborHoursItem.GetAll().Where(u => u.ReportId == id);
+            IEnumerable<EquipmentHours> equipmentTemp = _unitofWork.EquipmentHoursItem.GetAll().Where(u => u.ReportId == id);
+
             if (id != null) //edit
             {
-                ReportObj = _unitofWork.ReportItem.GetFirstOrDefault(u => u.Id == id);
-                LaborHoursObj = _unitofWork.LaborHoursItem.GetAll();
-                LaborHoursObj = LaborHoursObj.Where(u => u.ReportId == id);
+                ReportVMObj.Report = _unitofWork.ReportItem.GetFirstOrDefault(u => u.Id == id);
+                ReportVMObj.EquipmentHours = equipmentTemp.ToList();
+                equipmentCount = ReportVMObj.EquipmentHours.Count();
+                ReportVMObj.LaborHours = laborTemp.ToList();
+                laborCount = ReportVMObj.LaborHours.Count();
 
-                EquipmentHoursObj = _unitofWork.EquipmentHoursItem.GetAll();
-                EquipmentHoursObj = EquipmentHoursObj.Where(u => u.ReportId == id);
-                if (ReportObj == null)
+                if (ReportVMObj == null)
                 {
                     return NotFound();
                 }
@@ -56,38 +74,78 @@ namespace Sunridge.Pages.Admin.Reports
 
             if (claim != null)
             {
-                ReportObj.ApplicationUserId = claim.Value;
+                ReportVMObj.Report.ApplicationUserId = claim.Value;
+                ReportVMObj.Report.ApplicationUser = _unitofWork.ApplicationUser.GetFirstOrDefault(u=> u.Id == claim.Value);
+            }
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
 
-                if (!ModelState.IsValid)
+            IEnumerable<Report> tempReportIdList = _unitofWork.ReportItem.GetAll();
+            int reportNum = 0;
+            foreach (var item in tempReportIdList)
+            {
+                if(item.Id > reportNum)
                 {
-                    return Page();
+                    reportNum = item.Id;
                 }
+            }
 
-                if (ReportObj.Id == 0)
+            reportNum = reportNum + 1;
+
+            LaborHoursObj.ReportId = reportNum;
+            EquipmentHoursObj.ReportId = reportNum;
+
+            LaborHoursObj.Report = ReportVMObj.Report;
+            EquipmentHoursObj.Report = ReportVMObj.Report;
+
+            ReportVMObj.LaborHours = new List<LaborHours>();
+            ReportVMObj.EquipmentHours = new List<EquipmentHours>();
+
+            ReportVMObj.LaborHours.Add(LaborHoursObj);
+            ReportVMObj.EquipmentHours.Add(EquipmentHoursObj);
+            if (ReportVMObj.Report.Id == 0) //new menu item
+            {
+                if(ReportVMObj.Report.Resolved == true)
                 {
-                    foreach(var item in LaborHoursObj)
-                    {
-                        _unitofWork.LaborHoursItem.Update(item);
-                    }
-                    foreach (var item in EquipmentHoursObj)
-                    {
-                        _unitofWork.EquipmentHoursItem.Update(item);
-                    }
-                    _unitofWork.ReportItem.Update(ReportObj);
+                    ReportVMObj.Report.ResolvedDate = DateTime.Today.ToString();
                 }
                 else
                 {
-                    foreach (var item in LaborHoursObj)
-                    {
-                        _unitofWork.LaborHoursItem.Add(item);
-                    }
-                    foreach (var item in EquipmentHoursObj)
-                    {
-                        _unitofWork.EquipmentHoursItem.Add(item);
-                    }
-                    _unitofWork.ReportItem.Add(ReportObj);
+                    ReportVMObj.Report.ResolvedDate = "Unresolved";
+                }
+                _unitofWork.ReportItem.Add(ReportVMObj.Report);
+                foreach(var item in ReportVMObj.LaborHours)
+                {
+                    _unitofWork.LaborHoursItem.Add(item);
+                }
+                foreach (var item in ReportVMObj.EquipmentHours)
+                {
+                    _unitofWork.EquipmentHoursItem.Add(item);
                 }
             }
+            else //else we edit
+            {
+                if (ReportVMObj.Report.Resolved == true)
+                {
+                    ReportVMObj.Report.ResolvedDate = DateTime.Today.ToString();
+                }
+                else
+                {
+                    ReportVMObj.Report.ResolvedDate = "Unresolved";
+                }
+                _unitofWork.ReportItem.Update(ReportVMObj.Report);
+                foreach (var item in ReportVMObj.LaborHours)
+                {
+                    _unitofWork.LaborHoursItem.Update(item);
+                }
+                foreach (var item in ReportVMObj.EquipmentHours)
+                {
+                    _unitofWork.EquipmentHoursItem.Update(item);
+                }
+            }
+
             _unitofWork.Save();
             return RedirectToPage("./Index");
         }

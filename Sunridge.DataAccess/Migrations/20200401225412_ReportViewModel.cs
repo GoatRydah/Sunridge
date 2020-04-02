@@ -2,7 +2,7 @@
 
 namespace Sunridge.DataAccess.Migrations
 {
-    public partial class ReportMigrationFix : Migration
+    public partial class ReportViewModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,15 +42,14 @@ namespace Sunridge.DataAccess.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ApplicationUserId = table.Column<string>(nullable: false),
+                    FormType = table.Column<string>(nullable: false),
+                    ApplicationUserId = table.Column<string>(nullable: true),
                     ListingDate = table.Column<string>(nullable: true),
                     ResolvedDate = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Suggestion = table.Column<string>(nullable: true),
                     Comments = table.Column<string>(nullable: true),
-                    Resolved = table.Column<bool>(nullable: false),
-                    LaborHoursId = table.Column<int>(nullable: false),
-                    EquipmentHoursId = table.Column<int>(nullable: false)
+                    Resolved = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

@@ -10,8 +10,8 @@ using Sunridge.Data;
 namespace Sunridge.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200401210300_ReportMigrationFix")]
-    partial class ReportMigrationFix
+    [Migration("20200401225412_ReportViewModel")]
+    partial class ReportViewModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -1021,7 +1021,6 @@ namespace Sunridge.DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ApplicationUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Comments")
@@ -1030,11 +1029,9 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EquipmentHoursId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LaborHoursId")
-                        .HasColumnType("int");
+                    b.Property<string>("FormType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ListingDate")
                         .HasColumnType("nvarchar(max)");
