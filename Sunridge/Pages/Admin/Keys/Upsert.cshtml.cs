@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Sunridge.Pages.Admin.KeyHistory
+namespace Sunridge.Pages.Admin.Keys
 {
-    public class IndexModel : PageModel
+    public class UpsertModel : PageModel
     {
         public void OnGet()
         {

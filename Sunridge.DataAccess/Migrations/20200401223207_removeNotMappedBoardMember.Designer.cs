@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sunridge.Data;
 
 namespace Sunridge.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200401223207_removeNotMappedBoardMember")]
+    partial class removeNotMappedBoardMember
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1121,17 +1123,8 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<int>("AddressId")
                         .HasColumnType("int");
 
-                    b.Property<string>("AddressValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ApartmentValue")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("Birthday")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("CityValue")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ClassifiedListingViewModelId")
                         .HasColumnType("int");
@@ -1167,12 +1160,6 @@ namespace Sunridge.DataAccess.Migrations
 
                     b.Property<bool?>("ReceiveEmails")
                         .HasColumnType("bit");
-
-                    b.Property<string>("StateValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ZipValue")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasIndex("AddressId");
 

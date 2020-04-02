@@ -5,7 +5,7 @@
     <div class="border backgroundWhite container mt-5 pt-3">
         <div class="row">
             <div class="col-6 mt-3">
-                <h2 class="text-primary">Key List</h2>
+                <h2 class="text-primary">Key History List</h2>
             </div>
             <div class="col-6 text-right mt-3">
                 <a asp-page="Upsert" class="btn btn-primary"><i class="fas fa-plus"></i>&nbsp;Create New</a>
@@ -16,7 +16,12 @@
         <table id="DT_load" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
-                    <th>Serial Number</th>
+                    <th>Key</th>
+                    <th>Lot</th>
+                    <th>Status</th>
+                    <th>Issued</th>
+                    <th>Returned</th>
+                    <th>Paid Amount</th>
                     <th></th>
                 </tr>
             </thead>
@@ -37,5 +42,5 @@ else
 
 
 @section Scripts{
-    <script src="~/js/Key.js"></script>
+    <script src="~/js/KeyHistory.js"></script>
 }
