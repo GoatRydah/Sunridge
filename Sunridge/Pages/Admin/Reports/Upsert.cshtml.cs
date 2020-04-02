@@ -28,11 +28,6 @@ namespace Sunridge.Pages.Admin.Reports
         [BindProperty]
         public ReportVM ReportVMObj { get; set; }
 
-        [BindProperty]
-        public LaborHours LaborHoursObj { get; set; }
-
-        [BindProperty]
-        public EquipmentHours EquipmentHoursObj { get; set; }
 
         public int laborCount = 0;
         public int equipmentCount = 0;
@@ -44,14 +39,14 @@ namespace Sunridge.Pages.Admin.Reports
                 EquipmentHours = new List<EquipmentHours>(),
                 LaborHours = new List<LaborHours>()
             };
-            LaborHoursObj = new LaborHours();
-            EquipmentHoursObj = new EquipmentHours();
 
-            IEnumerable<LaborHours> laborTemp = _unitofWork.LaborHoursItem.GetAll().Where(u => u.ReportId == id);
-            IEnumerable<EquipmentHours> equipmentTemp = _unitofWork.EquipmentHoursItem.GetAll().Where(u => u.ReportId == id);
+
 
             if (id != null) //edit
             {
+                IEnumerable<LaborHours> laborTemp = _unitofWork.LaborHoursItem.GetAll().Where(u => u.ReportId == id);
+                IEnumerable<EquipmentHours> equipmentTemp = _unitofWork.EquipmentHoursItem.GetAll().Where(u => u.ReportId == id);
+
                 ReportVMObj.Report = _unitofWork.ReportItem.GetFirstOrDefault(u => u.Id == id);
                 ReportVMObj.EquipmentHours = equipmentTemp.ToList();
                 equipmentCount = ReportVMObj.EquipmentHours.Count();
@@ -94,17 +89,18 @@ namespace Sunridge.Pages.Admin.Reports
 
             reportNum = reportNum + 1;
 
-            LaborHoursObj.ReportId = reportNum;
-            EquipmentHoursObj.ReportId = reportNum;
+            for (int i = 0; i < ReportVMObj.LaborHours.Count(); i++)
+            {
+                ReportVMObj.LaborHours[i].ReportId = reportNum;
+                ReportVMObj.LaborHours[i].Report = ReportVMObj.Report;
+            }
 
-            LaborHoursObj.Report = ReportVMObj.Report;
-            EquipmentHoursObj.Report = ReportVMObj.Report;
-
-            ReportVMObj.LaborHours = new List<LaborHours>();
-            ReportVMObj.EquipmentHours = new List<EquipmentHours>();
-
-            ReportVMObj.LaborHours.Add(LaborHoursObj);
-            ReportVMObj.EquipmentHours.Add(EquipmentHoursObj);
+            for (int i = 0; i < ReportVMObj.EquipmentHours.Count(); i++)
+            {
+                ReportVMObj.EquipmentHours[i].ReportId = reportNum;
+                ReportVMObj.EquipmentHours[i].Report = ReportVMObj.Report;
+            }
+            
             if (ReportVMObj.Report.Id == 0) //new menu item
             {
                 if(ReportVMObj.Report.Resolved == true)
