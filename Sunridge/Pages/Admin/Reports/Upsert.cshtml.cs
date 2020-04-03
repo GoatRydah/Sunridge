@@ -110,17 +110,26 @@ namespace Sunridge.Pages.Admin.Reports
                 }
                 ReportVMObj.LaborHours = laborHoursList;
                 ReportVMObj.EquipmentHours = equipmentHoursList;
-                IEnumerable<Report> tempReportIdList = _unitofWork.ReportItem.GetAll();
+
+                if (ReportVMObj.Report.Resolved == true)
+                {
+                    ReportVMObj.Report.ResolvedDate = DateTime.Today.ToString();
+                }
+                else
+                {
+                    ReportVMObj.Report.ResolvedDate = "Unresolved";
+                }
+                _unitofWork.ReportItem.Add(ReportVMObj.Report); //inserts report
+
+                IEnumerable<Report> tempReportIdList = _unitofWork.ReportItem.GetAll(); //goes to db and grabs all reports
                 int reportNum = 0;
-                foreach (var item in tempReportIdList)
+                foreach (var item in tempReportIdList) //loops through the narrow down the last inserted report
                 {
                     if (item.Id > reportNum)
                     {
                         reportNum = item.Id;
                     }
                 }
-
-                reportNum = reportNum + 1;
 
                 for (int i = 0; i < ReportVMObj.LaborHours.Count(); i++)
                 {
@@ -133,17 +142,7 @@ namespace Sunridge.Pages.Admin.Reports
                     ReportVMObj.EquipmentHours[i].ReportId = reportNum;
                     ReportVMObj.EquipmentHours[i].Report = ReportVMObj.Report;
                 }
-
-                if (ReportVMObj.Report.Resolved == true)
-                {
-                    ReportVMObj.Report.ResolvedDate = DateTime.Today.ToString();
-                }
-                else
-                {
-                    ReportVMObj.Report.ResolvedDate = "Unresolved";
-                }
-                _unitofWork.ReportItem.Add(ReportVMObj.Report);
-                foreach(var item in ReportVMObj.LaborHours)
+                foreach (var item in ReportVMObj.LaborHours)
                 {
                     _unitofWork.LaborHoursItem.Add(item);
                 }
@@ -176,15 +175,6 @@ namespace Sunridge.Pages.Admin.Reports
                     ReportVMObj.EquipmentHours[i].Report = ReportVMObj.Report;
                     _unitofWork.EquipmentHoursItem.Update(ReportVMObj.EquipmentHours[i]);
                 }
-
-                //foreach (var item in ReportVMObj.LaborHours)
-                //{
-                //    _unitofWork.LaborHoursItem.Update(item);
-                //}
-                //foreach (var item in ReportVMObj.EquipmentHours)
-                //{
-                //    _unitofWork.EquipmentHoursItem.Update(item);
-                //}
             }
 
             _unitofWork.Save();
