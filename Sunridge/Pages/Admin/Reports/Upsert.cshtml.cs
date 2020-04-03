@@ -163,14 +163,28 @@ namespace Sunridge.Pages.Admin.Reports
                     ReportVMObj.Report.ResolvedDate = "Unresolved";
                 }
                 _unitofWork.ReportItem.Update(ReportVMObj.Report);
-                foreach (var item in ReportVMObj.LaborHours)
+
+                for(int i = 0; i < ReportVMObj.LaborHours.Count; i++)
                 {
-                    _unitofWork.LaborHoursItem.Update(item);
+                    ReportVMObj.LaborHours[i].ReportId = ReportVMObj.Report.Id;
+                    ReportVMObj.LaborHours[i].Report = ReportVMObj.Report;
+                    _unitofWork.LaborHoursItem.Update(ReportVMObj.LaborHours[i]);
                 }
-                foreach (var item in ReportVMObj.EquipmentHours)
+                for (int i = 0; i < ReportVMObj.EquipmentHours.Count; i++)
                 {
-                    _unitofWork.EquipmentHoursItem.Update(item);
+                    ReportVMObj.EquipmentHours[i].ReportId = ReportVMObj.Report.Id;
+                    ReportVMObj.EquipmentHours[i].Report = ReportVMObj.Report;
+                    _unitofWork.EquipmentHoursItem.Update(ReportVMObj.EquipmentHours[i]);
                 }
+
+                //foreach (var item in ReportVMObj.LaborHours)
+                //{
+                //    _unitofWork.LaborHoursItem.Update(item);
+                //}
+                //foreach (var item in ReportVMObj.EquipmentHours)
+                //{
+                //    _unitofWork.EquipmentHoursItem.Update(item);
+                //}
             }
 
             _unitofWork.Save();
