@@ -15,7 +15,7 @@ namespace Sunridge.Models
 
         //keep track of who the user is
         public string ApplicationUserId { get; set; }
-        [NotMapped]
+        
         [ForeignKey("ApplicationUserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
 

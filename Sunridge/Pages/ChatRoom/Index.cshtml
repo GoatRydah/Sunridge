@@ -44,26 +44,23 @@
     <script>
         var timer = setInterval(timerTick, 100);
 
-        //var element = document.getElementById("chatDiv");
-        //element.scrollTop = element.scrollHeight;
+        var element = document.getElementById("chatDiv");
+        element.scrollTop = element.scrollHeight;
 
         function timerTick(){
 			var xmlhttp = new XMLHttpRequest();
 			xmlhttp.onreadystatechange = function() {
 				if(this.readyState == 4 && this.status == 200){
-					refreshPage();
+                    refreshPage();
 				}
 			}
-			xmlhttp.open("GET","/Index?action=refresh", true);
+			xmlhttp.open("GET","/Index?", true);
 			xmlhttp.send();
         }
 
         function refreshPage()
         {
-
             $('#chatDiv').load(document.URL + ' #chatDiv');
-            var messageBody = document.querySelector('#chatDiv');
-            messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
         }
 
     </script>

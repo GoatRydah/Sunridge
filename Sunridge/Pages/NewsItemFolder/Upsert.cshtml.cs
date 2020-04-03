@@ -25,8 +25,6 @@ namespace Sunridge.Pages.NewsItemFolder
         public Models.NewsItem NewsItemObj { get; set; }
         public IActionResult OnGet(int? id) ///IActionResult return type is page, obj
         {
-            //NewsItem = new NewsItem();
-
             if (id != null) //edit
             {
                 NewsItemObj = _unitofWork.NewsItem.GetFirstOrDefault(u => u.NewsItemId == id);
@@ -34,6 +32,10 @@ namespace Sunridge.Pages.NewsItemFolder
                 {
                     return NotFound();
                 }
+            }
+            else
+            {
+                NewsItemObj = new Models.NewsItem();
             }
 
             return Page();

@@ -14,38 +14,51 @@
             <a asp-page="Upsert" class="btn btn-primary"><i class="fas fa-plus"></i>&nbsp;Create New</a>
         </div>
     </div>
+    <table id="DT_load" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
 }
-    <div class="container mb-5">
-        <h1 class="mb-4">News History</h1>
-        <div id="accordion">
-            @foreach (var year in Model.numYears)
-            {
-                <div class="card">
-                    <div class="card-header" id="@year">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapse + @year" aria-expanded="true" aria-controls="collapse + @year">
-                                @year
-                            </button>
-                        </h5>
-                    </div>
-                    @foreach (var item in Model.NewsItemList.Where(i => i.Year == year))
-                    {
-                        <div id="collapse + @year" class="collapse show" aria-labelledby="@year" data-parent="#accordion" style="">
-                            <div class="card-body">
-                                <hr class="mt-5 mb-5">
-                                <h2>@item.Header</h2>
-                                <p>@item.Content</p>
-
-                                @if (item.FilePath != null)
-                                {
-                                    <div style="box-shadow: 10px 10px 8px 10px #888888;" class="col-sm-12 text-center mb-5">
-                                        <a class="lightbox" href="@item.FilePath" target="_blank">@item.FilePath</a>
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                    }
+<div class="container mb-5">
+    <h1 class="mb-4">News History</h1>
+    <div id="accordion">
+        @foreach (var year in Model.numYears)
+        {
+            <div class="card">
+                <div class="card-header" id="@year">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse + @year" aria-expanded="true" aria-controls="collapse + @year">
+                            @year
+                        </button>
+                    </h5>
                 </div>
-            }
-        </div>
+                @foreach (var item in Model.NewsItemList.Where(i => i.Year == year))
+                {
+                    <div id="collapse + @year" class="collapse show" aria-labelledby="@year" data-parent="#accordion" style="">
+                        <div class="card-body">
+                            <hr class="mt-5 mb-5">
+                            <h2>@item.Header</h2>
+                            <p>@item.Content</p>
+
+                            @if (item.FilePath != null)
+                            {
+                                <div style="box-shadow: 10px 10px 8px 10px #888888;" class="col-sm-12 text-center mb-5">
+                                    <a class="lightbox" href="@item.FilePath" target="_blank">@item.FilePath</a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        }
     </div>
+</div>
+@section Scripts{
+    <script src="~/js/newsItem.js"></script>
+}

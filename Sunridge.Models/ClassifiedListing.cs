@@ -10,8 +10,6 @@ namespace Sunridge.Models
     public class ClassifiedListing
     {
         public int ClassifiedListingId { get; set; }
-        public string OwnerId { get; set; }
-        public int ClassifiedCategoryId { get; set; }
 
         [Required]
         [Display(Name = "Title")]
@@ -30,15 +28,12 @@ namespace Sunridge.Models
         public DateTime ListingDate { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public bool IsArchive { get; set; }
-        public string LastModifiedBy { get; set; }
-        public DateTime LastModifiedDate { get; set; }
 
         //Nav properties
         [ForeignKey("OwnerId")]
         public virtual ApplicationUser Owner { get; set; }
-        [ForeignKey("ClassifiedCategoryId")]
-        public virtual ClassifiedCategory ClassifiedCategory { get; set; }
+        [Required]
+        public string Category { get; set; }
         public string Images { get; set; }
     }
 }

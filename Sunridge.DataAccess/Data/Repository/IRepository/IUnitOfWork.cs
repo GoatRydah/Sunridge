@@ -23,6 +23,9 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         IClassifiedListingViewModelRepository ClassifiedListingViewModel { get; }
         IDashboardViewModelRepository DashboardViewModel { get; }
         ILostAndFoundItemRepository LostAndFoundItem { get; }
+        IReportRepository ReportItem { get; }
+        IEquipmentHoursRepository EquipmentHoursItem { get; }
+        ILaborHoursRepository LaborHoursItem { get; }
         IChatRoomRepository ChatRoomItem { get; }
         IKeyRepository Key { get; }
         IKeyHistoryRepository KeyHistory { get; }

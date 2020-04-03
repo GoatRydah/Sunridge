@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace SunridgePages.Admin.LostAndFoundItems
+namespace Sunridge.Pages.Admin.LostAndFound
 {
     public class IndexModel : PageModel
     {
-        public void OnGet()
+        public IActionResult OnGet()
         {
-
+            return RedirectToPage("../../LostAndFound/Index");
         }
     }
 }

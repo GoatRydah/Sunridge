@@ -28,16 +28,14 @@ namespace Sunridge.DataAccess.Data.Repository
         public void Update(ClassifiedListing classifiedListing)
         {
             var objFromDb = _db.ClassifiedListing.FirstOrDefault(s => s.ClassifiedListingId == classifiedListing.ClassifiedListingId);
-            objFromDb.OwnerId = classifiedListing.OwnerId;
             objFromDb.Owner = classifiedListing.Owner;
-            objFromDb.ClassifiedCategoryId = classifiedListing.ClassifiedCategoryId;
             objFromDb.ItemName = classifiedListing.ItemName;
             objFromDb.Price = classifiedListing.Price;
             objFromDb.Description = classifiedListing.Description;
             objFromDb.ListingDate = classifiedListing.ListingDate;
             objFromDb.Phone = classifiedListing.Phone;
             objFromDb.Email = classifiedListing.Email;
-            objFromDb.ClassifiedCategory = classifiedListing.ClassifiedCategory;
+            objFromDb.Category = classifiedListing.Category;
             objFromDb.Images = classifiedListing.Images;
 
 

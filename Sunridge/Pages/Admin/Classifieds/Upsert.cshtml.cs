@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,7 @@ using Sunridge.DataAccess.Data.Repository.IRepository;
 using Sunridge.Models;
 using Sunridge.Models.ViewModels;
 
-namespace Sunridge.Pages.Classifieds
+namespace Sunridge.Pages.Admin.Classifieds
 {
     public class UpsertModel : PageModel
     {
@@ -25,25 +26,25 @@ namespace Sunridge.Pages.Classifieds
 
         //binds the model to the page
         [BindProperty]
-        public ClassifiedListing ClassifiedsObj { get; set; }
+        public ClassifiedListingVM ClassifiedsObj { get; set; }
         public IActionResult OnGet(int? id) ///IActionResult return type is page, obj
         {
-            //ClassifiedsObj = new ClassifiedListingVM()
-            //{
-            //    ClassifiedCategoryList =
-            //   _unitofWork.ClassifiedCategory.GetClassifiedCategoryListOrDropdown(),
-            //    OwnerList =
-            //    _unitofWork.ApplicationUser.GetApplicationUserListOrDropdown(),
-            //    ClassifiedListing = new Models.ClassifiedListing()
-            //};
-
             if (id != null) //edit
             {
-                ClassifiedsObj = _unitofWork.ClassifiedListing.GetFirstOrDefault(u => u.ClassifiedListingId == id);
+                ClassifiedsObj = new ClassifiedListingVM();
+                ClassifiedsObj.ClassifiedListing = _unitofWork.ClassifiedListing.GetFirstOrDefault(u => u.ClassifiedListingId == id);
+                ClassifiedsObj.Category = _unitofWork.ClassifiedCategory.GetClassifiedCategoryListOrDropdown();
+
                 if (ClassifiedsObj == null)
                 {
                     return NotFound();
                 }
+            }
+            else
+            {
+                ClassifiedsObj = new ClassifiedListingVM();
+                ClassifiedsObj.ClassifiedListing = new ClassifiedListing();
+                ClassifiedsObj.Category = _unitofWork.ClassifiedCategory.GetClassifiedCategoryListOrDropdown();
             }
 
             return Page();
@@ -56,17 +57,21 @@ namespace Sunridge.Pages.Classifieds
             //Grab the file(s) from the form
             var files = HttpContext.Request.Form.Files;
 
+            //string userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //var user = _unitofWork.ApplicationUser.GetFirstOrDefault(s => s.Id == userId);
+            //ClassifiedsObj.ClassifiedListing.Owner = user.FirstName + " " + user.LastName;
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            if (ClassifiedsObj.ClassifiedListingId == 0)
+            if (ClassifiedsObj.ClassifiedListing.ClassifiedListingId == 0) //new classified object
             {
                 //rename file user submits for image
                 string fileName = Guid.NewGuid().ToString();
                 //upload file to the path
-                var uploads = Path.Combine(webRootPath, @"images\classifieds");
+                var uploads = Path.Combine(webRootPath, @"img\photo-gal");
                 //preserve our extension
                 var extension = Path.GetExtension(files[0].FileName);
 
@@ -75,21 +80,21 @@ namespace Sunridge.Pages.Classifieds
                     files[0].CopyTo(filestream); //files variable comes from the razor page files id
                 }
 
-                ClassifiedsObj.Images = @"\images\classifieds\" + fileName + extension;
+                ClassifiedsObj.ClassifiedListing.Images = @"\img\photo-gal\" + fileName + extension;
 
-                _unitofWork.ClassifiedListing.Add(ClassifiedsObj);
+                _unitofWork.ClassifiedListing.Add(ClassifiedsObj.ClassifiedListing);
             }
             else //else we edit
             {
                 var objFromDb =
-                    _unitofWork.ClassifiedListing.Get(ClassifiedsObj.ClassifiedListingId);
+                    _unitofWork.ClassifiedListing.Get(ClassifiedsObj.ClassifiedListing.ClassifiedListingId);
                 //checks if there are files submitted
                 if (files.Count > 0)
                 {
                     //rename file user submits for image
                     string fileName = Guid.NewGuid().ToString();
                     //upload file to the path
-                    var uploads = Path.Combine(webRootPath, @"images\classifieds");
+                    var uploads = Path.Combine(webRootPath, @"img\photo-gal");
                     //preserve our extension
                     var extension = Path.GetExtension(files[0].FileName);
 
@@ -105,13 +110,13 @@ namespace Sunridge.Pages.Classifieds
                         files[0].CopyTo(filestream);
                     }
 
-                    ClassifiedsObj.Images = @"\images\classifieds\" + fileName + extension;
+                    ClassifiedsObj.ClassifiedListing.Images = @"\img\photo-gal\" + fileName + extension;
                 }
                 else
                 {
-                    ClassifiedsObj.Images = objFromDb.Images;
+                    ClassifiedsObj.ClassifiedListing.Images = objFromDb.Images;
                 }
-                _unitofWork.ClassifiedListing.Update(ClassifiedsObj);
+                _unitofWork.ClassifiedListing.Update(ClassifiedsObj.ClassifiedListing);
             }
             _unitofWork.Save();
             return RedirectToPage("./Index");
