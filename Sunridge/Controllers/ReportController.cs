@@ -4,6 +4,8 @@ using Sunridge.DataAccess.Data.Repository.IRepository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using Sunridge.Models;
+using System.Collections.Generic;
 
 namespace Sunridge.Controllers
 {
@@ -34,12 +36,31 @@ namespace Sunridge.Controllers
             try
             {
                 var objFromDb = _unitOfWork.ReportItem.GetFirstOrDefault(u => u.Id == id);
+                IEnumerable<LaborHours> laborFromDb = _unitOfWork.LaborHoursItem.GetAll(u => u.ReportId == id);
+                IEnumerable<EquipmentHours> equipmentFromDb = _unitOfWork.EquipmentHoursItem.GetAll(u => u.ReportId == id);
                 if (objFromDb == null)
                 {
                     return Json(new { success = false, message = "Error while deleting" });
                 }
 
+                if (laborFromDb == null)
+                {
+                    return Json(new { success = false, message = "Error while deleting" });
+                }
+
+                if (equipmentFromDb == null)
+                {
+                    return Json(new { success = false, message = "Error while deleting" });
+                }
                 _unitOfWork.ReportItem.Remove(objFromDb);
+                foreach(var item in laborFromDb)
+                {
+                    _unitOfWork.LaborHoursItem.Remove(item);
+                }
+                foreach (var item in equipmentFromDb)
+                {
+                    _unitOfWork.EquipmentHoursItem.Remove(item);
+                }
                 _unitOfWork.Save();
             }
             catch (Exception)

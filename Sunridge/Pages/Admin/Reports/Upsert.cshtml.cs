@@ -120,7 +120,7 @@ namespace Sunridge.Pages.Admin.Reports
                     ReportVMObj.Report.ResolvedDate = "Unresolved";
                 }
                 _unitofWork.ReportItem.Add(ReportVMObj.Report); //inserts report
-
+                _unitofWork.Save();
                 IEnumerable<Report> tempReportIdList = _unitofWork.ReportItem.GetAll(); //goes to db and grabs all reports
                 int reportNum = 0;
                 foreach (var item in tempReportIdList) //loops through the narrow down the last inserted report
