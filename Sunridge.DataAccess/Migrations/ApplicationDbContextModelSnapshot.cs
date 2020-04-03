@@ -511,9 +511,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<string>("FileURL")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("FormResponseId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsArchive")
                         .HasColumnType("bit");
 
@@ -523,9 +520,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<DateTime>("LastModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("LotHistoryId")
-                        .HasColumnType("int");
-
                     b.Property<int>("LotId")
                         .HasColumnType("int");
 
@@ -533,10 +527,6 @@ namespace Sunridge.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("FileId");
-
-                    b.HasIndex("FormResponseId");
-
-                    b.HasIndex("LotHistoryId");
 
                     b.HasIndex("LotId");
 
@@ -1354,14 +1344,6 @@ namespace Sunridge.DataAccess.Migrations
 
             modelBuilder.Entity("Sunridge.Models.File", b =>
                 {
-                    b.HasOne("Sunridge.Models.FormResponse", null)
-                        .WithMany("Files")
-                        .HasForeignKey("FormResponseId");
-
-                    b.HasOne("Sunridge.Models.LotHistory", null)
-                        .WithMany("Files")
-                        .HasForeignKey("LotHistoryId");
-
                     b.HasOne("Sunridge.Models.Lot", "Lot")
                         .WithMany()
                         .HasForeignKey("LotId")

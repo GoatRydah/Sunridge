@@ -50,6 +50,7 @@ namespace Sunridge.Pages.Admin.Owners
             //temp = _unitOfWork.ApplicationUser.GetFirstOrDefault(s => s.Id == Owner.Id);
 
             temp.UserName = Owner.UserName;
+            temp.Email = Owner.UserName;
             //var result = await _userManager.ChangePasswordAsync(temp, currrentPassword, newPassword);
             string token = await _userManager.GeneratePasswordResetTokenAsync(temp);
             var result = await _userManager.ResetPasswordAsync(temp, token, password);
