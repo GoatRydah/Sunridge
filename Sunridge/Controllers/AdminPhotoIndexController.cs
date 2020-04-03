@@ -3,7 +3,8 @@ using System.IO;
 using Sunridge.DataAccess.Data.Repository.IRepository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-
+using Sunridge.Utility;
+using System.Security.Claims;
 
 namespace Sunridge.Controllers
 {
@@ -22,7 +23,14 @@ namespace Sunridge.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Json(new { data = _unitOfWork.Photo.GetAll(null, null, null) });
+            if (User.IsInRole(SD.AdminRole))
+                return Json(new { data = _unitOfWork.Photo.GetAll(null, null, null) });
+            else //(the User.IsInRole(SD.OwnerRole))
+            {
+                string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                string name = _unitOfWork.ApplicationUser.GetFirstOrDefault(s => s.Id == userId).FullName;
+                return Json(new { data = _unitOfWork.Photo.GetAll(s => s.Name == name, null, null) });
+            }
         }
 
         [HttpDelete("{id}")]

@@ -25,6 +25,10 @@ namespace Sunridge.DataAccess.Data.Repository
         public IClassifiedListingViewModelRepository ClassifiedListingViewModel { get; private set; }
         public IDashboardViewModelRepository DashboardViewModel { get; private set; }
         public ILostAndFoundItemRepository LostAndFoundItem { get; private set; }
+        public IReportRepository ReportItem { get; private set; }
+        public IEquipmentHoursRepository EquipmentHoursItem { get; private set; }
+        public ILaborHoursRepository LaborHoursItem { get; private set; }
+
         public IChatRoomRepository ChatRoomItem { get; private set; }
         public IKeyRepository Key { get; private set; }
         public IKeyHistoryRepository KeyHistory { get; private set; }
@@ -33,6 +37,7 @@ namespace Sunridge.DataAccess.Data.Repository
         public ILotInventoryRepository LotInventory { get; private set; }
         public IMaintenanceRepository Maintenance { get; private set; }
         public INewsItemRepository NewsItem { get; private set; }
+        public IOwnerLotRepository OwnerLot { get; private set; }
         public IPhotoRepository Photo { get; private set; }
         public IPhotoCategoriesRepository PhotoCategories { get; private set; }
         public IScheduledEventsRepository ScheduledEvents { get; private set; }
@@ -63,6 +68,9 @@ namespace Sunridge.DataAccess.Data.Repository
             ClassifiedListingViewModel = new ClassifiedListingViewModelRepository(_db);
             DashboardViewModel = new DashboardViewModelRepository(_db);
             LostAndFoundItem = new LostAndFoundItemRepository(_db);
+            ReportItem = new ReportRepository(_db);
+            EquipmentHoursItem = new EquipmentHoursItemRepository(_db);
+            LaborHoursItem = new LaborHoursItemRepository(_db);
             ChatRoomItem = new ChatRoomRepository(_db);
             Key = new KeyRepository(_db);
             KeyHistory = new KeyHistoryRepository(_db);
@@ -71,6 +79,7 @@ namespace Sunridge.DataAccess.Data.Repository
             LotInventory = new LotInventoryRepository(_db);
             Maintenance = new MaintenanceRepository(_db);
             NewsItem = new NewsItemRepository(_db);
+            OwnerLot = new OwnerLotRepository(_db);
             Photo = new PhotoRepository(_db);
             PhotoCategories = new PhotoCategoriesRepository(_db);
             ScheduledEvents = new ScheduledEventsRepository(_db);

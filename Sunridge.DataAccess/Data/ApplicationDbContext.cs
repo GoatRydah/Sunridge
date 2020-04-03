@@ -36,6 +36,9 @@ namespace Sunridge.Data
         public DbSet<ClassifiedListingViewModel> ClassifiedListingViewModel { get; set; }
         public DbSet<DashboardViewModel> DashboardViewModel { get; set; }
         public DbSet<LostAndFoundItem> LostAndFoundItem { get; set; }
+        public DbSet<Report> ReportItem { get; set; }
+        public DbSet<EquipmentHours> EquipmentHoursItem { get; set; }
+        public DbSet<LaborHours> LaborHoursItem { get; set; }
         public DbSet<ChatRoomModel> ChatRoomItem { get; set; }
         public DbSet<KeyHistory> KeyHistory { get; set; }
         public DbSet<Lot> Lot { get; set; }

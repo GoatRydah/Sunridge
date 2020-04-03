@@ -22,7 +22,6 @@ namespace Sunridge.Pages.Admin.BannerItems
         public void OnGet()
         {
             BannerList = _unitOfWork.Banner.GetAll();
-
         }
     }
 }

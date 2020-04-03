@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace SunridgePages.Admin.NewsItems
+namespace Sunridge.Pages.Admin.NewsItems
 {
     public class IndexModel : PageModel
     {
-        public void OnGet()
+        public IActionResult OnGet()
         {
-
+            return RedirectToPage("../../NewsItemFolder/Index");
         }
     }
 }

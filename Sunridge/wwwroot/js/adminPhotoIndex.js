@@ -16,7 +16,11 @@ function LoadList() {
             { "data": "title", "width": "15%" },
             { "data": "name", "width": "15%" },
             { "data": "year", "width": "15%" },
-            { "data": "image", "width": "15%" },
+            {
+                "data": "image", "render": function (data) {
+                    return `<img  src="${data}" style="max-width:100px;" class="rounded-lg"/>`;
+                }, "width": "15%"
+            },
             {
                 "data": "id",
                 "render": function (data) {
@@ -24,7 +28,7 @@ function LoadList() {
                                 <a href="/admin/photos/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                                     <i class="far fa-edit"></i> Edit
                                 </a>
-                                <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onClick=Delete('/api/adminPhotoIndex/'+${data})>
+                                <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onClick=Delete('/api/adminPhotoIndex/'${data})>
                                     <i class="far fa-trash-alt"></i> Delete
                                 </a>
                              </div>`;

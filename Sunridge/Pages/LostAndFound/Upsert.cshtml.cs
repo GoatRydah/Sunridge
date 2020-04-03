@@ -28,7 +28,6 @@ namespace Sunridge.Pages.LostAndFound
         public LostAndFoundItem LostAndFoundItemObj { get; set; }
         public IActionResult OnGet(int? id) ///IActionResult return type is page, obj
         {
-            //LostAndFoundItem = new LostAndFoundItem();
 
             if (id != null) //edit
             {
@@ -37,6 +36,10 @@ namespace Sunridge.Pages.LostAndFound
                 {
                     return NotFound();
                 }
+            }
+            else
+            {
+                LostAndFoundItemObj = new LostAndFoundItem();
             }
 
             return Page();

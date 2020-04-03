@@ -25,6 +25,9 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         IClassifiedListingViewModelRepository ClassifiedListingViewModel { get; }
         IDashboardViewModelRepository DashboardViewModel { get; }
         ILostAndFoundItemRepository LostAndFoundItem { get; }
+        IReportRepository ReportItem { get; }
+        IEquipmentHoursRepository EquipmentHoursItem { get; }
+        ILaborHoursRepository LaborHoursItem { get; }
         IChatRoomRepository ChatRoomItem { get; }
         IKeyRepository Key { get; }
         IKeyHistoryRepository KeyHistory { get; }
@@ -33,6 +36,7 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         ILotInventoryRepository LotInventory { get; }
         IMaintenanceRepository Maintenance { get; }
         INewsItemRepository NewsItem { get; }
+        IOwnerLotRepository OwnerLot { get; }
         IPhotoRepository Photo { get; }
         IPhotoCategoriesRepository PhotoCategories { get; }
         IScheduledEventsRepository ScheduledEvents { get; }
