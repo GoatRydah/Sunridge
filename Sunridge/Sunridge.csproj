@@ -13,15 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Pages\Admin\Views\KeyHistory\Create.cshtml" />
-    <None Include="Pages\Admin\Views\KeyHistory\Delete.cshtml" />
-    <None Include="Pages\Admin\Views\KeyHistory\Details.cshtml" />
-    <None Include="Pages\Admin\Views\KeyHistory\Edit.cshtml" />
-    <None Include="Pages\Admin\Views\KeyHistory\Index.cshtml" />
-    <None Include="Pages\Admin\Views\Keys\Create.cshtml" />
-    <None Include="Pages\Admin\Views\Keys\Delete.cshtml" />
-    <None Include="Pages\Admin\Views\Keys\Edit.cshtml" />
-    <None Include="Pages\Admin\Views\Keys\Index.cshtml" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map" />
