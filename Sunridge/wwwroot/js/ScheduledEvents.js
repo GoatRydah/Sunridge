@@ -63,6 +63,6 @@ $(document).ready(function () {
         });
     }
 })
-function editEvent() {
-    window.location.href = '/Pages/Admin/Events/Edit/' + selectedEvent;
-}
+//function editEvent() {
+//    window.location.href = '/Pages/Admin/Events/Edit/' + selectedEvent;
+//}
