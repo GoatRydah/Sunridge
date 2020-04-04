@@ -77,6 +77,7 @@
     <Folder Include="wwwroot\docs\NewsItemFiles\" />
     <Folder Include="wwwroot\images\boardMembers\" />
     <Folder Include="wwwroot\images\banner\" />
+    <Folder Include="wwwroot\images\ScheduledEvents\" />
     <Folder Include="wwwroot\images\newsItems\" />
   </ItemGroup>
 

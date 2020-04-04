@@ -16,7 +16,7 @@ function LoadList() {
             { "data": "description", "width": "15%" },
             { "data": "start", "width": "15%" },
             { "data": "end", "width": "15%" },
-            { "data": "isFullDay", "width": "15%" },
+            { "data": "isfullday", "width": "15%" },
             {
                 "data": "id",
                 "render": function (data) {
