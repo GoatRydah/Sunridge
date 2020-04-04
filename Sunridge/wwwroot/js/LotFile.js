@@ -7,45 +7,39 @@ $(document).ready(function () {
 function LoadList() {
     dataTable = $('#DT_Load').DataTable({
         "ajax": {
-            "url": "/api/ownerIndex/",
+            "url": "/api/LotFile/",
             "type": "GET",
             "datatype": "json"
         },
         "columns": [
-            { "data": "name", "width": "13%" },
-            { "data": "username", "width": "13%" },
-            { "data": "emergencyContactName", "width": "13%" },
-            { "data": "emergencyContactPhone", "width": "13%" },
-            { "data": "lots", "width": "13%" },
+            { "data": "title", "width": "25%" },
+            { "data": "description", "width": "25%" },
+            { "data": "file", "width": "25%" },
             {
-                "data": "id",
+                "data": "fileId",
                 "render": function (data) {
                     return ` <div class="text-center">
-                                <a href="/admin/owners/upsert?id=${data}" class="btn btn-info text-white" style="cursor:pointer; width:100px;">
+                                <a href="/admin/hOALots/filesUpsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                                     <i class="far fa-edit"></i> Edit
                                 </a>
-                                <a href="/admin/owners/passwordResetIndex?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:160px;">
-                                    <i class="fas fa-lock-open"></i> Reset Password
-                                </a>
-                                <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onClick=Delete('/api/ownerIndex/${data}')>
+                                <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onClick=Delete('/api/LotFile/'${data})>
                                     <i class="far fa-trash-alt"></i> Delete
                                 </a>
                              </div>`;
-                }, "width": "35%"
+                }, "width": "25%"
             }
         ],
         "language": {
-            "emptyTable": "no data found."
+            "emptyTable": "no files found for this lot."
         },
         "width": "100%"
     });
 }
 
 function Delete(url) {
-    console.log("made it");
     swal({
         title: "Are you sure you want to delete?",
-        text: "User will be removed!",
+        text: "You will not be able to restore the data!",
         icon: "warning",
         buttons: true,
         dangerMode: true
