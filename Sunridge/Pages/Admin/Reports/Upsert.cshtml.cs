@@ -29,7 +29,7 @@ namespace Sunridge.Pages.Admin.Reports
         public ReportVM ReportVMObj { get; set; }
 
         [BindProperty]
-        public List<LaborHours> laborHoursList { get; set; }
+        public List<LaborHours> laborHoursList { get; set; }//
 
         [BindProperty]
         public List<EquipmentHours> equipmentHoursList { get; set; }
