@@ -21,7 +21,7 @@ function LoadList() {
                 "data": "id",
                 "render": function (data) {
                     return ` <div class="text-center">
-                                <a href="/admin/events/create?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
+                                <a href="/admin/events/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                                     <i class="far fa-edit"></i> Edit
                                 </a>
                                 <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onClick=Delete('/api/adminScheduledEventsIndex/'+${data})>
