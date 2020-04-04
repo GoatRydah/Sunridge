@@ -19,7 +19,7 @@
 </section>
 @if (User.IsInRole(SD.AdminRole))
 {
-    <a class="nav-link" asp-area="Admin" asp-controller="ScheduledEvents" asp-action="Index"><i class="far fa-edit"></i> Edit Events</a>
+    <a asp-page="/Admin/Events/Index" class="nav-link">Edit Events</a>
 }
 <!-- Calendar -->
 <section class="calendar text-center">

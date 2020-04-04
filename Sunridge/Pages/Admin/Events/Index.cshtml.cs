@@ -13,7 +13,7 @@ namespace Sunridge.Pages.Admin.Events
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public IEnumerable<Models.ScheduledEvent> scheduledEvents { get; set; }
+        public IEnumerable<ScheduledEvent> scheduledEvents { get; set; }
 
         public IndexModel(IUnitOfWork unitOfWork)
         {

@@ -1,59 +1,73 @@
 ﻿@page
-@model Sunridge.Models.ScheduledEvent
+@model Sunridge.Pages.Admin.Events.CreateModel
 @{
     ViewData["Title"] = "Create News Item";
 }
 
 <h2>Create New Calendar Event</h2>
 
-<hr />
-<div class="row">
-    <div class="col-md-6">
-        <form asp-action="Create" method="post" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Subject" class="control-label"></label>
-                <input asp-for="Subject" class="form-control" />
-                <span asp-validation-for="Subject" class="text-danger"></span>
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+
+    <div class="col-8 pt-3">
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="ScheduledEventObj.Subject"></label>
             </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <textarea asp-for="Description" class="form-control" rows="4"></textarea>
-                <span asp-validation-for="Description" class="text-danger"></span>
+            <div class="col-9">
+                <input class="form-control" asp-for="ScheduledEventObj.Subject" id="txtName" />
             </div>
-            <div class="form-group">
-                <label asp-for="Location" class="control-label"></label>
-                <input asp-for="Location" class="form-control" />
-                <span asp-validation-for="Location" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="ScheduledEventObj.Description"></label>
             </div>
-            <div class="form-group">
-                <label asp-for="Start" class="control-label"></label>
-                <input asp-for="Start" class="form-control" />
-                <span asp-validation-for="Start" class="text-danger"></span>
+            <div class="col-9">
+                <input class="form-control" asp-for="ScheduledEventObj.Description" id="txtDescription" />
             </div>
-            <div class="form-group">
-                <label asp-for="End" class="control-label"></label>
-                <input asp-for="End" class="form-control" />
-                <span asp-validation-for="End" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="ScheduledEventObj.Location"></label>
             </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="IsFullDay" /> @Html.DisplayNameFor(model => model.IsFullDay)
-                    </label>
-                </div>
+            <div class="col-9">
+                <input class="form-control" asp-for="ScheduledEventObj.Location" id="txtLocation" />
             </div>
-            <div class="form-group">
-                <label asp-for="Image"></label>
-                <input type="file" name="files" asp-for="Image" class="form-control" />
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="ScheduledEventObj.Start"></label>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="col-9">
+                <input id="datepicker" class="form-control" asp-for="ScheduledEventObj.Start" />
             </div>
-        </form>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="ScheduledEventObj.End"></label>
+            </div>
+            <div class="col-9">
+                <input id="datepicker" class="form-control" asp-for="ScheduledEventObj.End" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="ScheduledEventObj.IsFullDay"></label>
+            </div>
+            <div class="col-9">
+                <input id="radio" class="form-control" asp-for="ScheduledEventObj.IsFullDay" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <button type="submit" class="btn btn-primary form-control" onclick="return ValidInput()">Create</button>
+            </div>
+            <div class="col-6">
+                <a asp-page="./Index" type="submit" class="btn btn-success form-control">Back to List</a>
+            </div>
+        </div>
     </div>
-</div>
+</form>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-page="./Index">Back to List</a>
 </div>
