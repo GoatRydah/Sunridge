@@ -105,6 +105,16 @@
                                     x.style.display = "none";
                                 }
                             }
+                            var laborListener = document.getElementById("laborButton");
+                            var equipmentListener = document.getElementById("equipmentButton");
+
+                            laborListener.addEventListener("click", function () {
+                                $('#refreshMeLabor').load(document.URL + ' #refreshMeLabor');
+                            });
+
+                            equipmentListener.addEventListener("click", function () {
+                                $('#refreshMeEquipment').load(document.URL + ' #refreshMeEquipment');
+                            });
                         });
 
 
@@ -112,74 +122,91 @@
 
                     <div class="form-group row" style="display: none;" id="labordiv">
                         <div class="col-9">
-                            <button asp-page-handler="laborplus" class="form-control" id="labors"> <i id="laborButton" class="btn btn-success form-control">Add</i></button>
+                            <button asp-page-handler="laborplus" class="form-control"> <i id="laborButton" class="btn btn-success form-control">Add Labor</i></button>
                         </div>
                     </div>
 
                     <div class="form-group row" style="display: none;" id="equipmentdiv">
                         <div class="col-9">
-                            <button asp-page-handler="equipmentplus" class="form-control" id="equipments"> <i id="equipmentButton" class="btn btn-success form-control">Add</i></button>
+                            <button asp-page-handler="equipmentplus" class="form-control"> <i id="equipmentButton" class="btn btn-success form-control">Add Equipment</i></button>
                         </div>
                     </div>
 
-
-
-                    
-
-
-                    @if (Model.ReportVMObj.LaborHours.Count() > 0)
-                    {
-                        @for (var i = 0; i < Model.ReportVMObj.LaborHours.Count(); i++)
+                    <div id="refreshMeLabor">
+                        @if (Model.ReportVMObj.LaborHours.Count() > 0)
                         {
-                            <div class="form-group row">
-                                <div class="col-3">
-                                    <label asp-for="ReportVMObj.LaborHours[i].LaborActivity"></label>
+                            @for (var i = 0; i < Model.ReportVMObj.LaborHours.Count(); i++)
+                            {
+                                <div class="form-group row">
+                                    <div class="col-3">
+                                        <label asp-for="ReportVMObj.LaborHours[i].LaborActivity"></label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input class="form-control" asp-for="ReportVMObj.LaborHours[i].LaborActivity" />
+                                    </div>
+                                    <div class="col-3">
+                                        <label asp-for="ReportVMObj.LaborHours[i].Hours"></label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input class="form-control" asp-for="ReportVMObj.LaborHours[i].Hours" />
+                                    </div>
                                 </div>
+                            }
+                            <div class="form-group row" id="labordiv">
                                 <div class="col-9">
-                                    <input class="form-control" asp-for="ReportVMObj.LaborHours[i].LaborActivity" />
-                                </div>
-                                <div class="col-3">
-                                    <label asp-for="ReportVMObj.LaborHours[i].Hours"></label>
-                                </div>
-                                <div class="col-9">
-                                    <input class="form-control" asp-for="ReportVMObj.LaborHours[i].Hours" />
+                                    <button asp-page-handler="laborplus" class="form-control"> <i id="laborButton" class="btn btn-success form-control">Add Labor</i></button>
                                 </div>
                             </div>
-
-                        }
-                    }
-
-                    @if (Model.ReportVMObj.EquipmentHours.Count() > 0)
-                    {
-                        @for (var i = 0; i < Model.ReportVMObj.EquipmentHours.Count(); i++)
-                        {
-                            <div class="form-group row">
-                                <div class="col-3">
-                                    <label asp-for="ReportVMObj.EquipmentHours[i].EquipmentName"></label>
-                                </div>
+                            <div class="form-group row" id="equipmentdiv">
                                 <div class="col-9">
-                                    <input class="form-control" asp-for="ReportVMObj.EquipmentHours[i].EquipmentName" />
-                                </div>
-                                <div class="col-3">
-                                    <label asp-for="ReportVMObj.EquipmentHours[i].Hours"></label>
-                                </div>
-                                <div class="col-9">
-                                    <input class="form-control" asp-for="ReportVMObj.EquipmentHours[i].Hours" />
+                                    <button asp-page-handler="equipmentplus" class="form-control"> <i id="equipmentButton" class="btn btn-success form-control">Add Equipment</i></button>
                                 </div>
                             </div>
                         }
-                    }
+                    </div>
+                    <div id="refreshMeEquipment">
+                        @if (Model.ReportVMObj.EquipmentHours.Count() > 0)
+                        {
+                            @for (var i = 0; i < Model.ReportVMObj.EquipmentHours.Count(); i++)
+                            {
+                                <div class="form-group row">
+                                    <div class="col-3">
+                                        <label asp-for="ReportVMObj.EquipmentHours[i].EquipmentName"></label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input class="form-control" asp-for="ReportVMObj.EquipmentHours[i].EquipmentName" />
+                                    </div>
+                                    <div class="col-3">
+                                        <label asp-for="ReportVMObj.EquipmentHours[i].Hours"></label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input class="form-control" asp-for="ReportVMObj.EquipmentHours[i].Hours" />
+                                    </div>
+                                </div>
+                            }
+                            <div class="form-group row" id="labordiv">
+                                <div class="col-9">
+                                    <button asp-page-handler="laborplus" class="form-control"> <i id="laborButton" class="btn btn-success form-control">Add Labor</i></button>
+                                </div>
+                            </div>
+                            <div class="form-group row" id="equipmentdiv">
+                                <div class="col-9">
+                                    <button asp-page-handler="equipmentplus" class="form-control"> <i id="equipmentButton" class="btn btn-success form-control">Add Equipment</i></button>
+                                </div>
+                            </div>
+                        }
+                    </div>
                     <div class="form-group row">
                         <div class="col-9 offset-3">
                             <div class="row">
                                 <div class="col-6">
                                     @if (Model.ReportVMObj.Report.Id != 0)
                                     {
-                                        <button type="submit" class="btn btn-primary form-control">Update</button>
+                                        <button asp-page-handler="create" type="submit" class="btn btn-primary form-control">Update</button>
                                     }
                                     else
                                     {
-                                        <button type="submit" class="btn btn-primary form-control" onclick="return ValidInput()">Create</button>
+                                        <button asp-page-handler="create" type="submit" class="btn btn-primary form-control" onclick="return ValidInput()">Create</button>
                                     }
                                 </div>
                                 <div class="col-6">

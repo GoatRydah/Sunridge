@@ -66,6 +66,10 @@ namespace Sunridge.Pages.Admin.Reports
             {
                 ReportVMObj.LaborHours = new List<LaborHours>();
             }
+            if (ReportVMObj.EquipmentHours == null)
+            {
+                ReportVMObj.EquipmentHours = new List<EquipmentHours>();
+            }
             ReportVMObj.LaborHours.Add(temp);
         }
 
@@ -73,6 +77,10 @@ namespace Sunridge.Pages.Admin.Reports
         {
             EquipmentHours temp = new EquipmentHours();
             temp.ReportId = 0;
+            if (ReportVMObj.LaborHours == null)
+            {
+                ReportVMObj.LaborHours = new List<LaborHours>();
+            }
             if (ReportVMObj.EquipmentHours == null)
             {
                 ReportVMObj.EquipmentHours = new List<EquipmentHours>();
@@ -80,7 +88,7 @@ namespace Sunridge.Pages.Admin.Reports
             ReportVMObj.EquipmentHours.Add(temp);
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPostCreate()
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
