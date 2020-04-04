@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace SunridgePages.Pages.Admin.Events
+namespace Sunridge
 {
-    public class IndexModel : PageModel
+    public class CreateModel : PageModel
     {
         public void OnGet()
         {
