@@ -163,17 +163,25 @@ namespace Sunridge.Pages.Admin.Reports
                 }
                 _unitofWork.ReportItem.Update(ReportVMObj.Report);
 
-                for(int i = 0; i < ReportVMObj.LaborHours.Count; i++)
+                try
                 {
-                    ReportVMObj.LaborHours[i].ReportId = ReportVMObj.Report.Id;
-                    ReportVMObj.LaborHours[i].Report = ReportVMObj.Report;
-                    _unitofWork.LaborHoursItem.Update(ReportVMObj.LaborHours[i]);
-                }
-                for (int i = 0; i < ReportVMObj.EquipmentHours.Count; i++)
+
+                    for (int i = 0; i < ReportVMObj.LaborHours.Count; i++)
+                    {
+                        ReportVMObj.LaborHours[i].ReportId = ReportVMObj.Report.Id;
+                        ReportVMObj.LaborHours[i].Report = ReportVMObj.Report;
+                        _unitofWork.LaborHoursItem.Update(ReportVMObj.LaborHours[i]);
+                    }
+                    for (int i = 0; i < ReportVMObj.EquipmentHours.Count; i++)
+                    {
+                        ReportVMObj.EquipmentHours[i].ReportId = ReportVMObj.Report.Id;
+                        ReportVMObj.EquipmentHours[i].Report = ReportVMObj.Report;
+                        _unitofWork.EquipmentHoursItem.Update(ReportVMObj.EquipmentHours[i]);
+                    }
+                }catch(Exception e)
                 {
-                    ReportVMObj.EquipmentHours[i].ReportId = ReportVMObj.Report.Id;
-                    ReportVMObj.EquipmentHours[i].Report = ReportVMObj.Report;
-                    _unitofWork.EquipmentHoursItem.Update(ReportVMObj.EquipmentHours[i]);
+                    _unitofWork.Save();
+                    return RedirectToPage("./Index");
                 }
             }
 

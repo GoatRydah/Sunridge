@@ -13,9 +13,9 @@ function loadList() {
         },
         "columns": [
             { "data": "formType", "width": "25%" },
+            { "data": "description", "width": "25%" },
             { "data": "listingDate", "width": "25%" },
             { "data": "resolvedDate", "width": "25%" },
-            { "data": "description", "width": "25%" },
             {
                 "data": "id",
                 "render": function (data) {
