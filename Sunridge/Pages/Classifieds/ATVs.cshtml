@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "ATVs";
 }
-   
+
 <link rel="Stylesheet" href="~/css/General/classifiedsSlider.css" type="text/css" />
 <!-- inro section Grid -->
 <section class="p-4">
@@ -29,8 +29,8 @@
                                 <!--Carousel Wrapper-->
                                 <div id="carousel-thumb" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel" data-interval="0">
                                     <!--Slides-->
-                                    @*<div class="carousel-inner" role="listbox">
-                                        @foreach (var image in p.Images)
+                                    <div class="carousel-inner" role="listbox">
+                                        @*@foreach (var image in p.Image)
                                         {
                                             if (image.IsMainImage)
                                             {
@@ -45,8 +45,8 @@
                                                 </div>
                                             }
 
-                                        }
-                                    </div>*@
+                                        }*@
+                                    </div>
                                     <!--/.Slides-->
                                     <!--Controls-->
                                     <a class="carousel-control-prev" href="#carousel-thumb" role="button" data-slide="prev">
@@ -59,23 +59,23 @@
                                     </a>
                                     <!--/.Controls-->
                                     <ol id="thumbnailBar" class="carousel-indicators list-inline visible-sm-block hidden-xs-block visible-md-block visible-lg-block">
-                                        @* @for (var imgIndex = 0; imgIndex < item.Images.Count; imgIndex++)
-        {
-            var image = item.Images[imgIndex];
-            if (image.IsMainImage)
-            {
-                <li data-target="#carousel-thumb" data-slide-to="@imgIndex" class="active list-inline-item">
-                    <img id="thumbnail" class="img-fluid" src="@image.ImageURL">
-                </li>
-            }
-            else
-            {
-                <li data-target="#carousel-thumb" data-slide-to="@imgIndex" class="list-inline-item">
-                    <img id="thumbnail" class="img-fluid" src="@image.ImageURL">
-                </li>
-            }
+                                        @*@for (var imgIndex = 0; imgIndex < p.Image.Count; imgIndex++)
+                                        {
+                                            var image = p.Image[imgIndex];
+                                            if (image.IsMainImage)
+                                            {
+                                                <li data-target="#carousel-thumb" data-slide-to="@imgIndex" class="active list-inline-item">
+                                                    <img id="thumbnail" class="img-fluid" src="@image.ImageURL">
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li data-target="#carousel-thumb" data-slide-to="@imgIndex" class="list-inline-item">
+                                                    <img id="thumbnail" class="img-fluid" src="@image.ImageURL">
+                                                </li>
+                                            }
 
-        }*@
+                                        }*@
                                     </ol>
                                 </div>
                                 <!--/.Carousel Wrapper-->
