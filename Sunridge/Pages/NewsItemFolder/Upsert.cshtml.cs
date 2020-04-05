@@ -60,14 +60,18 @@ namespace Sunridge.Pages.NewsItemFolder
                 //upload file to the path
                 var uploads = Path.Combine(webRootPath, @"images\newsItems");
                 //preserve our extension
-                var extension = Path.GetExtension(files[0].FileName);
 
-                using (var filestream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
-                {
-                    files[0].CopyTo(filestream); //files variable comes from the razor page files id
+                if (files.Count > 0)
+                { 
+                    var extension = Path.GetExtension(files[0].FileName);
+
+                    using (var filestream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+                    {
+                        files[0].CopyTo(filestream); //files variable comes from the razor page files id
+                    }
+
+                    NewsItemObj.FilePath = @"\images\newsItems\" + fileName + extension;
                 }
-
-                NewsItemObj.FilePath = @"\images\newsItems\" + fileName + extension;
 
                 _unitofWork.NewsItem.Add(NewsItemObj);
             }
