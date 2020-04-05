@@ -14,9 +14,7 @@ function loadList() {
             "datatype": "json"
         },
         "columns": [
-            { "data": "serialNumber", "width": "35%" },
-            { "data": "year", "width": "35%" },
-
+            { "data": "fullSerial", "width": "70%" },
             {
                 "data": "keyId",
                 "render": function (data) {
