@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Sunridge.DataAccess.Migrations
 {
-    public partial class initialSetup : Migration
+    public partial class Everything : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -57,6 +57,20 @@ namespace Sunridge.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ChatRoomItem",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Post = table.Column<string>(nullable: false),
+                    ApplicationUserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChatRoomItem", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CommonAreaAsset",
                 columns: table => new
                 {
@@ -74,6 +88,21 @@ namespace Sunridge.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CommonAreaAsset", x => x.CommonAreaAssetId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EquipmentHoursItem",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EquipmentName = table.Column<string>(nullable: true),
+                    Hours = table.Column<string>(nullable: true),
+                    ReportId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EquipmentHoursItem", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -123,6 +152,21 @@ namespace Sunridge.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "LaborHoursItem",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LaborActivity = table.Column<string>(nullable: true),
+                    Hours = table.Column<string>(nullable: true),
+                    ReportId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LaborHoursItem", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "NewsItem",
                 columns: table => new
                 {
@@ -137,6 +181,56 @@ namespace Sunridge.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_NewsItem", x => x.NewsItemId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Photo",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    Category = table.Column<string>(nullable: false),
+                    Title = table.Column<string>(nullable: false),
+                    Year = table.Column<int>(nullable: false),
+                    Image = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Photo", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PhotoCategories",
+                columns: table => new
+                {
+                    PhotoCategoriesId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CategoryName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PhotoCategories", x => x.PhotoCategoriesId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ReportItem",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FormType = table.Column<string>(nullable: false),
+                    ApplicationUserId = table.Column<string>(nullable: true),
+                    ListingDate = table.Column<string>(nullable: true),
+                    ResolvedDate = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Suggestion = table.Column<string>(nullable: true),
+                    Comments = table.Column<string>(nullable: true),
+                    Resolved = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ReportItem", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -252,7 +346,11 @@ namespace Sunridge.DataAccess.Migrations
                     IsArchive = table.Column<bool>(nullable: true),
                     LastModifiedBy = table.Column<string>(nullable: true),
                     LastModifiedDate = table.Column<DateTime>(nullable: true),
-                    AdminPhotoViewModelsId = table.Column<int>(nullable: true),
+                    ApartmentValue = table.Column<string>(nullable: true),
+                    CityValue = table.Column<string>(nullable: true),
+                    StateValue = table.Column<string>(nullable: true),
+                    ZipValue = table.Column<string>(nullable: true),
+                    AddressValue = table.Column<string>(nullable: true),
                     ClassifiedListingViewModelId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -352,6 +450,55 @@ namespace Sunridge.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BoardMember",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BoardRole = table.Column<string>(nullable: true),
+                    Image = table.Column<string>(nullable: true),
+                    ApplicationUserId = table.Column<string>(nullable: true),
+                    DisplayOrder = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BoardMember", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BoardMember_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ClassifiedListing",
+                columns: table => new
+                {
+                    ClassifiedListingId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ItemName = table.Column<string>(maxLength: 75, nullable: false),
+                    Price = table.Column<float>(nullable: false),
+                    Description = table.Column<string>(maxLength: 1000, nullable: false),
+                    ListingDate = table.Column<DateTime>(nullable: false),
+                    Phone = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    OwnerId = table.Column<string>(nullable: true),
+                    Category = table.Column<string>(nullable: false),
+                    Images = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClassifiedListing", x => x.ClassifiedListingId);
+                    table.ForeignKey(
+                        name: "FK_ClassifiedListing_AspNetUsers_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DashboardViewModel",
                 columns: table => new
                 {
@@ -392,25 +539,21 @@ namespace Sunridge.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Photo",
+                name: "ClassifiedListingViewModel",
                 columns: table => new
                 {
-                    PhotoId = table.Column<int>(nullable: false)
+                    ClassifiedListingViewModelId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OwnerId = table.Column<string>(nullable: true),
-                    Category = table.Column<string>(nullable: false),
-                    Title = table.Column<string>(nullable: false),
-                    Year = table.Column<int>(nullable: false),
-                    Image = table.Column<string>(nullable: true)
+                    ClassifiedListingId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Photo", x => x.PhotoId);
+                    table.PrimaryKey("PK_ClassifiedListingViewModel", x => x.ClassifiedListingViewModelId);
                     table.ForeignKey(
-                        name: "FK_Photo_AspNetUsers_OwnerId",
-                        column: x => x.OwnerId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        name: "FK_ClassifiedListingViewModel_ClassifiedListing_ClassifiedListingId",
+                        column: x => x.ClassifiedListingId,
+                        principalTable: "ClassifiedListing",
+                        principalColumn: "ClassifiedListingId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -446,22 +589,48 @@ namespace Sunridge.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AdminPhotoViewModels",
+                name: "ClassifiedCategory",
                 columns: table => new
                 {
-                    AdminPhotoViewModelsId = table.Column<int>(nullable: false)
+                    ClassifiedCategoryId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PhotoId = table.Column<int>(nullable: true)
+                    CategoryName = table.Column<string>(nullable: true),
+                    ClassifiedListingViewModelId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AdminPhotoViewModels", x => x.AdminPhotoViewModelsId);
+                    table.PrimaryKey("PK_ClassifiedCategory", x => x.ClassifiedCategoryId);
                     table.ForeignKey(
-                        name: "FK_AdminPhotoViewModels_Photo_PhotoId",
-                        column: x => x.PhotoId,
-                        principalTable: "Photo",
-                        principalColumn: "PhotoId",
+                        name: "FK_ClassifiedCategory_ClassifiedListingViewModel_ClassifiedListingViewModelId",
+                        column: x => x.ClassifiedListingViewModelId,
+                        principalTable: "ClassifiedListingViewModel",
+                        principalColumn: "ClassifiedListingViewModelId",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "File",
+                columns: table => new
+                {
+                    FileId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LotId = table.Column<int>(nullable: false),
+                    FileURL = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    IsArchive = table.Column<bool>(nullable: false),
+                    LastModifiedBy = table.Column<string>(nullable: true),
+                    LastModifiedDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_File", x => x.FileId);
+                    table.ForeignKey(
+                        name: "FK_File_Lot_LotId",
+                        column: x => x.LotId,
+                        principalTable: "Lot",
+                        principalColumn: "LotId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -729,143 +898,6 @@ namespace Sunridge.DataAccess.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "File",
-                columns: table => new
-                {
-                    FileId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    LotHistoryId = table.Column<int>(nullable: false),
-                    FileURL = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    IsArchive = table.Column<bool>(nullable: false),
-                    LastModifiedBy = table.Column<string>(nullable: true),
-                    LastModifiedDate = table.Column<DateTime>(nullable: false),
-                    FormResponseId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_File", x => x.FileId);
-                    table.ForeignKey(
-                        name: "FK_File_FormResponse_FormResponseId",
-                        column: x => x.FormResponseId,
-                        principalTable: "FormResponse",
-                        principalColumn: "FormResponseId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_File_LotHistory_LotHistoryId",
-                        column: x => x.LotHistoryId,
-                        principalTable: "LotHistory",
-                        principalColumn: "LotHistoryId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ClassifiedListing",
-                columns: table => new
-                {
-                    ClassifiedListingId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    OwnerId = table.Column<string>(nullable: true),
-                    ClassifiedCategoryId = table.Column<int>(nullable: false),
-                    ItemName = table.Column<string>(maxLength: 75, nullable: false),
-                    Price = table.Column<float>(nullable: false),
-                    Description = table.Column<string>(maxLength: 1000, nullable: false),
-                    ListingDate = table.Column<DateTime>(nullable: false),
-                    Phone = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    IsArchive = table.Column<bool>(nullable: false),
-                    LastModifiedBy = table.Column<string>(nullable: true),
-                    LastModifiedDate = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ClassifiedListing", x => x.ClassifiedListingId);
-                    table.ForeignKey(
-                        name: "FK_ClassifiedListing_AspNetUsers_OwnerId",
-                        column: x => x.OwnerId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ClassifiedListingViewModel",
-                columns: table => new
-                {
-                    ClassifiedListingViewModelId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ClassifiedListingId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ClassifiedListingViewModel", x => x.ClassifiedListingViewModelId);
-                    table.ForeignKey(
-                        name: "FK_ClassifiedListingViewModel_ClassifiedListing_ClassifiedListingId",
-                        column: x => x.ClassifiedListingId,
-                        principalTable: "ClassifiedListing",
-                        principalColumn: "ClassifiedListingId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ClassifiedCategory",
-                columns: table => new
-                {
-                    ClassifiedCategoryId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(nullable: true),
-                    IsArchive = table.Column<bool>(nullable: false),
-                    LastModifiedBy = table.Column<string>(nullable: true),
-                    LastModifiedDate = table.Column<DateTime>(nullable: false),
-                    ClassifiedListingViewModelId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ClassifiedCategory", x => x.ClassifiedCategoryId);
-                    table.ForeignKey(
-                        name: "FK_ClassifiedCategory_ClassifiedListingViewModel_ClassifiedListingViewModelId",
-                        column: x => x.ClassifiedListingViewModelId,
-                        principalTable: "ClassifiedListingViewModel",
-                        principalColumn: "ClassifiedListingViewModelId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ClassifiedImage",
-                columns: table => new
-                {
-                    ClassifiedImageId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ClassifiedListingId = table.Column<int>(nullable: false),
-                    IsMainImage = table.Column<bool>(nullable: false),
-                    ImageURL = table.Column<string>(nullable: true),
-                    ImageExtension = table.Column<string>(nullable: true),
-                    ClassifiedListingViewModelId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ClassifiedImage", x => x.ClassifiedImageId);
-                    table.ForeignKey(
-                        name: "FK_ClassifiedImage_ClassifiedListing_ClassifiedListingId",
-                        column: x => x.ClassifiedListingId,
-                        principalTable: "ClassifiedListing",
-                        principalColumn: "ClassifiedListingId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ClassifiedImage_ClassifiedListingViewModel_ClassifiedListingViewModelId",
-                        column: x => x.ClassifiedListingViewModelId,
-                        principalTable: "ClassifiedListingViewModel",
-                        principalColumn: "ClassifiedListingViewModelId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AdminPhotoViewModels_PhotoId",
-                table: "AdminPhotoViewModels",
-                column: "PhotoId");
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -911,34 +943,19 @@ namespace Sunridge.DataAccess.Migrations
                 column: "AddressId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_AdminPhotoViewModelsId",
-                table: "AspNetUsers",
-                column: "AdminPhotoViewModelsId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_ClassifiedListingViewModelId",
                 table: "AspNetUsers",
                 column: "ClassifiedListingViewModelId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_BoardMember_ApplicationUserId",
+                table: "BoardMember",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ClassifiedCategory_ClassifiedListingViewModelId",
                 table: "ClassifiedCategory",
                 column: "ClassifiedListingViewModelId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ClassifiedImage_ClassifiedListingId",
-                table: "ClassifiedImage",
-                column: "ClassifiedListingId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ClassifiedImage_ClassifiedListingViewModelId",
-                table: "ClassifiedImage",
-                column: "ClassifiedListingViewModelId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ClassifiedListing_ClassifiedCategoryId",
-                table: "ClassifiedListing",
-                column: "ClassifiedCategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ClassifiedListing_OwnerId",
@@ -971,14 +988,9 @@ namespace Sunridge.DataAccess.Migrations
                 column: "OwnerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_File_FormResponseId",
+                name: "IX_File_LotId",
                 table: "File",
-                column: "FormResponseId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_File_LotHistoryId",
-                table: "File",
-                column: "LotHistoryId");
+                column: "LotId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FormResponse_LotId",
@@ -1061,11 +1073,6 @@ namespace Sunridge.DataAccess.Migrations
                 column: "OwnerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Photo_OwnerId",
-                table: "Photo",
-                column: "OwnerId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Transaction_LotId",
                 table: "Transaction",
                 column: "LotId");
@@ -1081,43 +1088,19 @@ namespace Sunridge.DataAccess.Migrations
                 column: "TransactionTypeId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_AspNetUsers_AdminPhotoViewModels_AdminPhotoViewModelsId",
-                table: "AspNetUsers",
-                column: "AdminPhotoViewModelsId",
-                principalTable: "AdminPhotoViewModels",
-                principalColumn: "AdminPhotoViewModelsId",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUsers_ClassifiedListingViewModel_ClassifiedListingViewModelId",
                 table: "AspNetUsers",
                 column: "ClassifiedListingViewModelId",
                 principalTable: "ClassifiedListingViewModel",
                 principalColumn: "ClassifiedListingViewModelId",
                 onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_ClassifiedListing_ClassifiedCategory_ClassifiedCategoryId",
-                table: "ClassifiedListing",
-                column: "ClassifiedCategoryId",
-                principalTable: "ClassifiedCategory",
-                principalColumn: "ClassifiedCategoryId",
-                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_AdminPhotoViewModels_Photo_PhotoId",
-                table: "AdminPhotoViewModels");
-
-            migrationBuilder.DropForeignKey(
                 name: "FK_ClassifiedListing_AspNetUsers_OwnerId",
                 table: "ClassifiedListing");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_ClassifiedCategory_ClassifiedListingViewModel_ClassifiedListingViewModelId",
-                table: "ClassifiedCategory");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -1138,10 +1121,19 @@ namespace Sunridge.DataAccess.Migrations
                 name: "Banner");
 
             migrationBuilder.DropTable(
-                name: "ClassifiedImage");
+                name: "BoardMember");
+
+            migrationBuilder.DropTable(
+                name: "ChatRoomItem");
+
+            migrationBuilder.DropTable(
+                name: "ClassifiedCategory");
 
             migrationBuilder.DropTable(
                 name: "Comment");
+
+            migrationBuilder.DropTable(
+                name: "EquipmentHoursItem");
 
             migrationBuilder.DropTable(
                 name: "ErrorViewModel");
@@ -1154,6 +1146,9 @@ namespace Sunridge.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "KeyHistory");
+
+            migrationBuilder.DropTable(
+                name: "LaborHoursItem");
 
             migrationBuilder.DropTable(
                 name: "LostAndFoundItem");
@@ -1169,6 +1164,15 @@ namespace Sunridge.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "OwnerLot");
+
+            migrationBuilder.DropTable(
+                name: "Photo");
+
+            migrationBuilder.DropTable(
+                name: "PhotoCategories");
+
+            migrationBuilder.DropTable(
+                name: "ReportItem");
 
             migrationBuilder.DropTable(
                 name: "ScheduledEvent");
@@ -1204,25 +1208,16 @@ namespace Sunridge.DataAccess.Migrations
                 name: "DashboardViewModel");
 
             migrationBuilder.DropTable(
-                name: "Photo");
-
-            migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Address");
 
             migrationBuilder.DropTable(
-                name: "AdminPhotoViewModels");
-
-            migrationBuilder.DropTable(
                 name: "ClassifiedListingViewModel");
 
             migrationBuilder.DropTable(
                 name: "ClassifiedListing");
-
-            migrationBuilder.DropTable(
-                name: "ClassifiedCategory");
         }
     }
 }

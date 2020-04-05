@@ -39,7 +39,7 @@ namespace Sunridge.DataAccess.Data.Repository
             objFromDb.ResolveUser = formResponse.ResolveUser;
             objFromDb.Owner = formResponse.Owner;
             objFromDb.Comments = formResponse.Comments;
-            objFromDb.Files = formResponse.Files;
+            //objFromDb.Files = formResponse.Files;
             objFromDb.Lot = formResponse.Lot;
             objFromDb.InKindWorkHours = formResponse.InKindWorkHours;
 

@@ -52,7 +52,6 @@ namespace Sunridge.Models
         [ForeignKey("OwnerId")]
         public ApplicationUser Owner { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
-        public virtual ICollection<File> Files { get; set; }
         [ForeignKey("LotId")]
         public virtual Lot Lot { get; set; }
         public virtual List<InKindWorkHours> InKindWorkHours { get; set; }

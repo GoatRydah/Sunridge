@@ -9,16 +9,15 @@ namespace Sunridge.Models
     public class File
     {
         public int FileId { get; set; }
-        public int LotHistoryId { get; set; }
+        public int LotId { get; set; }
 
         public string FileURL { get; set; }
 
         public string Name { get; set; }
         public string Description { get; set; }
 
-        //Nav properties
-        [ForeignKey("LotHistoryId")]
-        public LotHistory LotHistory { get; set; }
+        [ForeignKey("LotId")]
+        public Lot Lot { get; set; }
         public bool IsArchive { get; set; }
         public string LastModifiedBy { get; set; }
         public DateTime LastModifiedDate { get; set; }
