@@ -21,7 +21,7 @@ function loadList() {
                 "data": "keyId",
                 "render": function (data) {
                     return ` <div class="text-center">
-                                <a href="/Admin/Keys/upsert?keyId=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
+                                <a href="/Admin/Keys/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                                     <i class="far fa-edit"></i> Edit
                                 </a>
                                 <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/keys/'+${data})>

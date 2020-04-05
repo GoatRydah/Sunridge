@@ -29,7 +29,7 @@ namespace Sunridge.DataAccess.Data.Repository
 
         public void Update(Key key)
         {
-            var objFromDb = _db.Key.FirstOrDefault(s => s.SerialNumber == key.SerialNumber);
+            var objFromDb = _db.Key.FirstOrDefault(s => s.KeyId == key.KeyId);
 
             objFromDb.SerialNumber = key.SerialNumber;
             objFromDb.Year = key.Year;
