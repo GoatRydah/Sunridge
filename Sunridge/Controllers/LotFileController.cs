@@ -21,9 +21,26 @@ namespace Sunridge.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get(int id) //TODO: fix this: thinking 'id' might be passing lotid and not lothistory id right now (if it's passing at all)
+        public IActionResult Get() //TODO: fix this: thinking 'id' might be passing lotid and not lothistory id right now (if it's passing at all)
         {
-            return Json(new { data = _unitOfWork.File.GetAll(null, null, null) });
+            int theId = 0;
+            try
+            {
+                string[] id = (string[])TempData["lotId"];
+                theId = Int32.Parse(id[0]);
+                TempData["lotId"] = id;
+                if (theId == 0)
+                    return Json(new { data = 0 });
+            }
+            catch
+            {
+                string id = TempData["lotId"].ToString();
+                theId = Int32.Parse(id);
+                if (theId == 0)
+                    return Json(new { data = 0 });
+            }
+
+            return Json(new { data = _unitOfWork.File.GetAll(s => s.LotId == theId, null, null) });
         }
 
         [HttpDelete("{id}")]
@@ -32,12 +49,14 @@ namespace Sunridge.Controllers
             try
             {
                 var objFromDb = _unitOfWork.File.GetFirstOrDefault(u => u.FileId == id);
+                TempData["lotId"] = objFromDb.LotId;
+
                 if (objFromDb == null)
                 {
                     return Json(new { success = false, message = "Error while deleting" });
                 }
                 //Physically Delete the file in wwwroot
-                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, objFromDb.FileURL.TrimStart('\\'));
+                var filePath = Path.Combine(_hostingEnvironment.WebRootPath + "\\docs\\lotFiles\\" + objFromDb.FileURL.TrimStart('\\'));
                 if (System.IO.File.Exists(filePath))
                 {
                     System.IO.File.Delete(filePath);

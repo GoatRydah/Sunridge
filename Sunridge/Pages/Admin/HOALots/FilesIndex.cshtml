@@ -1,17 +1,24 @@
 ﻿@page
-@model Sunridge.FilesIndexModel
+@model Sunridge.Pages.Admin.HOALots.FilesIndexModel
 @{
     ViewData["Title"] = "FilesIndex";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
+@if (Request.Query["id"].Count > 0)
+{
+    TempData["lotId"] = Request.Query["id"];
+}
 <div class="row pl-2">
     <div calss="col-md-3">
         <h2 class="pl-2 pt-2">Files for Lot @Model.LotObj.LotNumber</h2>
     </div>
     <div class="col-md-7"></div>
     <div class="col-md-2 pb-3 pt-2">
-        <a asp-page="/Admin/HOALots/FilesUpsert" class="btn btn-primary">Upload Document</a>
+        <a href="/Admin/HOALots/FilesUpsert?lotId=@(Model.LotObj.LotId)" class="btn btn-primary">Upload Document</a>
+    </div>
+    <div class="col-md-2">
+        <a href="/Admin/HOALots/Index" class="btn btn-primary">Back to Lots</a>
     </div>
 </div>
 
@@ -31,4 +38,3 @@
 @section Scripts {
     <script src="~/js/LotFile.js"></script>
 }
-
