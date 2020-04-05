@@ -22,7 +22,7 @@ namespace Sunridge.DataAccess.Data.Repository
         {
             return _db.Key.Select(i => new SelectListItem()
             {
-                Text = i.SerialNumber,
+                Text = i.FullSerial,
                 Value = i.Year.ToString()
             });
         }
