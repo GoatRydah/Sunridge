@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Sunridge.Models;
-using Sunridge.DataAccess.Data.Repository;
 
 namespace Sunridge.Pages.Admin.Keys
 {
@@ -28,11 +27,11 @@ namespace Sunridge.Pages.Admin.Keys
 
         public IActionResult OnGet(int? id)  //id is optional
         {
-            KeyObj = _unitOfWork.Key.GetFirstOrDefault(k => k.KeyId == id);
+            KeyObj = new Key();
 
             if (id != null) //edit
             {
-                //KeyObj = _unitOfWork.Key.GetFirstOrDefault(u => u.KeyId == id);
+                KeyObj = _unitOfWork.Key.GetFirstOrDefault(u => u.KeyId == id);
                 if (KeyObj == null)
                 {
                     return NotFound();
@@ -48,11 +47,11 @@ namespace Sunridge.Pages.Admin.Keys
             {
                 return Page();
             }
-            if (KeyObj.KeyId == 0) //new Food Type
+            if (KeyObj.KeyId == 0) //new category
             {
                 _unitOfWork.Key.Add(KeyObj);
             }
-            else //update the Food Type (edit)
+            else //update the category (edit)
             {
                 _unitOfWork.Key.Update(KeyObj);
             }
