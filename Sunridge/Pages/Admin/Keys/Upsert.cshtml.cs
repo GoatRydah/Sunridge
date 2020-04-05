@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Sunridge.Models;
+using Sunridge.DataAccess.Data.Repository;
 
 namespace Sunridge.Pages.Admin.Keys
 {
@@ -27,11 +28,11 @@ namespace Sunridge.Pages.Admin.Keys
 
         public IActionResult OnGet(int? id)  //id is optional
         {
-            KeyObj = new Key();
+            KeyObj = _unitOfWork.Key.GetFirstOrDefault(k => k.KeyId == id);
 
             if (id != null) //edit
             {
-                KeyObj = _unitOfWork.Key.GetFirstOrDefault(u => u.KeyId == id);
+                //KeyObj = _unitOfWork.Key.GetFirstOrDefault(u => u.KeyId == id);
                 if (KeyObj == null)
                 {
                     return NotFound();
