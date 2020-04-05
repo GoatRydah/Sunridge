@@ -11,6 +11,7 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         IBannerRepository Banner { get; }
         IBoardMemberRepository BoardMember { get; }
         IClassifiedCategoryRepository ClassifiedCategory { get; }
+        IClassifiedImageRepository ClassifiedImage { get; }
         IClassifiedListingRepository ClassifiedListing { get; }
         IClassifiedServiceRepository ClassifiedService { get; }
         ICommentRepository Comment { get; }

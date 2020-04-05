@@ -11,6 +11,7 @@ namespace Sunridge.DataAccess.Data.Repository
         public IBannerRepository Banner { get; private set; }
         public IBoardMemberRepository BoardMember { get; private set; }
         public IClassifiedCategoryRepository ClassifiedCategory { get; private set; }
+        public IClassifiedImageRepository ClassifiedImage { get; private set; }
         public IClassifiedListingRepository ClassifiedListing { get; private set; }
         public IClassifiedServiceRepository ClassifiedService { get; private set; }
         public ICommentRepository Comment { get; private set; }
