@@ -74,7 +74,7 @@ namespace Sunridge.Pages.Admin.Classifieds
                 //rename file user submits for image
                 string fileName = Guid.NewGuid().ToString();
                 //upload file to the path
-                var uploads = Path.Combine(webRootPath, @"img\photo-gal");
+                var uploads = Path.Combine(webRootPath, @"images\classifieds");
                 //preserve our extension
                 var extension = Path.GetExtension(files[0].FileName);
 
@@ -83,7 +83,7 @@ namespace Sunridge.Pages.Admin.Classifieds
                     files[0].CopyTo(filestream); //files variable comes from the razor page files id
                 }
 
-                ClassifiedsObj.ClassifiedListing.Images = @"\img\photo-gal\" + fileName + extension;
+                ClassifiedsObj.ClassifiedListing.Images = @"\images\classifieds\" + fileName + extension;
 
                 _unitofWork.ClassifiedListing.Add(ClassifiedsObj.ClassifiedListing);
             }
@@ -97,7 +97,7 @@ namespace Sunridge.Pages.Admin.Classifieds
                     //rename file user submits for image
                     string fileName = Guid.NewGuid().ToString();
                     //upload file to the path
-                    var uploads = Path.Combine(webRootPath, @"img\photo-gal");
+                    var uploads = Path.Combine(webRootPath, @"images\classifieds");
                     //preserve our extension
                     var extension = Path.GetExtension(files[0].FileName);
 
@@ -113,7 +113,7 @@ namespace Sunridge.Pages.Admin.Classifieds
                         files[0].CopyTo(filestream);
                     }
 
-                    ClassifiedsObj.ClassifiedListing.Images = @"\img\photo-gal\" + fileName + extension;
+                    ClassifiedsObj.ClassifiedListing.Images = @"\images\classifieds\" + fileName + extension;
                 }
                 else
                 {
