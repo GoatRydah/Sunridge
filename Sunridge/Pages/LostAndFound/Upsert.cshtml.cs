@@ -118,6 +118,9 @@ namespace Sunridge.Pages.LostAndFound
 
                     _unitofWork.LostAndFoundItem.Update(LostAndFoundItemObj);
                 }
+                LostAndFoundItemObj.ApplicationUser = _unitofWork.ApplicationUser.GetFirstOrDefault(u => u.Id == LostAndFoundItemObj.ApplicationUserId);
+                LostAndFoundItemObj.username = LostAndFoundItemObj.ApplicationUser.FullName;
+
             }
             _unitofWork.Save();
             return RedirectToPage("./Index");

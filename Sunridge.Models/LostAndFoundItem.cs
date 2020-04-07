@@ -19,5 +19,7 @@ namespace Sunridge.Models
         [NotMapped]
         [ForeignKey("ApplicationUserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
+
+        public string username { get; set; }
     }
 }
