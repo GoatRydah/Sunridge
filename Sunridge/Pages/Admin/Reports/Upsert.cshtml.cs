@@ -28,12 +28,6 @@ namespace Sunridge.Pages.Admin.Reports
         [BindProperty]
         public ReportVM ReportVMObj { get; set; }
 
-        [BindProperty]
-        public List<LaborHours> laborHoursList { get; set; }
-
-        [BindProperty]
-        public List<EquipmentHours> equipmentHoursList { get; set; }
-
         public IActionResult OnGet(int? id) ///IActionResult return type is page, obj
         {
             ReportVMObj = new ReportVM()
@@ -42,17 +36,6 @@ namespace Sunridge.Pages.Admin.Reports
                 EquipmentHours = new List<EquipmentHours>(),
                 LaborHours = new List<LaborHours>()
             };
-
-            laborHoursList = new List<LaborHours>();
-            equipmentHoursList = new List<EquipmentHours>();
-
-            for (int i = 0; i < 10; i++)
-            {
-                LaborHours temp = new LaborHours();
-                laborHoursList.Add(temp);
-                EquipmentHours etemp = new EquipmentHours();
-                equipmentHoursList.Add(etemp);
-            }
 
 
             if (id != null) //edit
@@ -75,7 +58,37 @@ namespace Sunridge.Pages.Admin.Reports
             return Page();
         }
 
-        public IActionResult OnPost()
+        public void OnPostLaborPlus()
+        {
+            LaborHours temp = new LaborHours();
+            temp.ReportId = 0;
+            if(ReportVMObj.LaborHours == null)
+            {
+                ReportVMObj.LaborHours = new List<LaborHours>();
+            }
+            if (ReportVMObj.EquipmentHours == null)
+            {
+                ReportVMObj.EquipmentHours = new List<EquipmentHours>();
+            }
+            ReportVMObj.LaborHours.Add(temp);
+        }
+
+        public void OnPostEquipmentPlus()
+        {
+            EquipmentHours temp = new EquipmentHours();
+            temp.ReportId = 0;
+            if (ReportVMObj.LaborHours == null)
+            {
+                ReportVMObj.LaborHours = new List<LaborHours>();
+            }
+            if (ReportVMObj.EquipmentHours == null)
+            {
+                ReportVMObj.EquipmentHours = new List<EquipmentHours>();
+            }
+            ReportVMObj.EquipmentHours.Add(temp);
+        }
+
+        public IActionResult OnPostCreate()
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
@@ -94,22 +107,7 @@ namespace Sunridge.Pages.Admin.Reports
             
             if (ReportVMObj.Report.Id == 0) //new  item
             {
-                for (int i = 9; i >= 0; i--)
-                {
-                    if(laborHoursList[i].LaborActivity ==null|| laborHoursList[i].Hours==null)
-                    {
-                        laborHoursList.Remove(laborHoursList[i]);
-                    }
-                }
-                for (int i = 9; i >= 0; i--)
-                {
-                    if (equipmentHoursList[i].EquipmentName == null || equipmentHoursList[i].Hours == null)
-                    {
-                        equipmentHoursList.Remove(equipmentHoursList[i]);
-                    }
-                }
-                ReportVMObj.LaborHours = laborHoursList;
-                ReportVMObj.EquipmentHours = equipmentHoursList;
+                //equipment and labor
 
                 if (ReportVMObj.Report.Resolved == true)
                 {
@@ -163,17 +161,25 @@ namespace Sunridge.Pages.Admin.Reports
                 }
                 _unitofWork.ReportItem.Update(ReportVMObj.Report);
 
-                for(int i = 0; i < ReportVMObj.LaborHours.Count; i++)
+                try
                 {
-                    ReportVMObj.LaborHours[i].ReportId = ReportVMObj.Report.Id;
-                    ReportVMObj.LaborHours[i].Report = ReportVMObj.Report;
-                    _unitofWork.LaborHoursItem.Update(ReportVMObj.LaborHours[i]);
-                }
-                for (int i = 0; i < ReportVMObj.EquipmentHours.Count; i++)
+
+                    for (int i = 0; i < ReportVMObj.LaborHours.Count; i++)
+                    {
+                        ReportVMObj.LaborHours[i].ReportId = ReportVMObj.Report.Id;
+                        ReportVMObj.LaborHours[i].Report = ReportVMObj.Report;
+                        _unitofWork.LaborHoursItem.Update(ReportVMObj.LaborHours[i]);
+                    }
+                    for (int i = 0; i < ReportVMObj.EquipmentHours.Count; i++)
+                    {
+                        ReportVMObj.EquipmentHours[i].ReportId = ReportVMObj.Report.Id;
+                        ReportVMObj.EquipmentHours[i].Report = ReportVMObj.Report;
+                        _unitofWork.EquipmentHoursItem.Update(ReportVMObj.EquipmentHours[i]);
+                    }
+                }catch(Exception e)
                 {
-                    ReportVMObj.EquipmentHours[i].ReportId = ReportVMObj.Report.Id;
-                    ReportVMObj.EquipmentHours[i].Report = ReportVMObj.Report;
-                    _unitofWork.EquipmentHoursItem.Update(ReportVMObj.EquipmentHours[i]);
+                    _unitofWork.Save();
+                    return RedirectToPage("./Index");
                 }
             }
 

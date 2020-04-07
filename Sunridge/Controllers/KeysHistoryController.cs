@@ -22,13 +22,13 @@ namespace Sunridge.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Json(new { data = _unitOfWork.KeyHistory.GetAll(null, null, null) });
+            return Json(new { data = _unitOfWork.KeyHistory.GetAll() });
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var objFromDb = _unitOfWork.KeyHistory.GetFirstOrDefault(u => u.KeyId == id);
+            var objFromDb = _unitOfWork.KeyHistory.GetFirstOrDefault(u => u.KeyHistoryId == id);
             if (objFromDb == null)
             {
                 return Json(new { success = false, message = "Error while deleting" });

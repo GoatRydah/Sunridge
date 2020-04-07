@@ -5,7 +5,7 @@
     ViewData["Title"] = "Index";
 }
 
-@if (User.IsInRole(SD.AdminRole))
+@if (User.IsInRole(SD.AdminRole) || User.IsInRole(SD.OwnerRole))
 {
     <div class="border  container">
         <div class="row">
@@ -30,6 +30,11 @@
             </thead>
         </table>
 
+
+        <h2>Forms</h2>
+        <a href="\images\Forms\SUNRIDGE_BUILDING_APPROVAL_REQUEST_FORM_rev2.pdf">Sunridge Building Approval Request Form</a>
+        <br>
+        <a href="\images\Forms\Sunridge-claim-form-fillable.pdf">Sunridge Claim Form</a>
     </div>
 }
 else

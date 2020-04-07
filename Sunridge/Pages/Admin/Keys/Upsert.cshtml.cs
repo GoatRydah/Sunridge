@@ -47,11 +47,11 @@ namespace Sunridge.Pages.Admin.Keys
             {
                 return Page();
             }
-            if (KeyObj.KeyId == 0) //new Food Type
+            if (KeyObj.KeyId == 0) //new category
             {
                 _unitOfWork.Key.Add(KeyObj);
             }
-            else //update the Food Type (edit)
+            else //update the category (edit)
             {
                 _unitOfWork.Key.Update(KeyObj);
             }

@@ -20,10 +20,10 @@ namespace Sunridge.DataAccess.Data.Repository
 
         public IEnumerable<SelectListItem> GetLotListOrDropdown()
         {
-            return _db.KeyHistory.Select(i => new SelectListItem()
+            return _db.Lot.Select(i => new SelectListItem()
             {
-                Text = i.KeyHistoryId.ToString(),
-                Value = i.KeyId.ToString()
+                Text = i.LotNumber.ToString(),
+                Value = i.LotId.ToString()
             });
         }
 

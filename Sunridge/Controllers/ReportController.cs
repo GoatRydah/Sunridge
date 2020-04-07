@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Sunridge.Models;
 using System.Collections.Generic;
+using Sunridge.Utility;
 
 namespace Sunridge.Controllers
 {
@@ -27,7 +28,14 @@ namespace Sunridge.Controllers
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
-            return Json(new { data = _unitOfWork.ReportItem.GetAll(u=>u.ApplicationUserId == claim.Value, null, null) });
+            if (User.IsInRole(SD.AdminRole))
+            {
+                return Json(new { data = _unitOfWork.ReportItem.GetAll(null, null, null) });
+            }
+            else
+            {
+                return Json(new { data = _unitOfWork.ReportItem.GetAll(u => u.ApplicationUserId == claim.Value, null, null) });
+            }
         }
 
         [HttpDelete("{id}")]

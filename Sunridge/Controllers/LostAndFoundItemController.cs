@@ -4,6 +4,8 @@ using Sunridge.DataAccess.Data.Repository.IRepository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using Sunridge.Models;
+using Sunridge.Utility;
 
 namespace Sunridge.Controllers
 {
@@ -24,8 +26,14 @@ namespace Sunridge.Controllers
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-
-            return Json(new { data = _unitOfWork.LostAndFoundItem.GetAll(u=>u.ApplicationUserId == claim.Value, null, null) });
+            if (User.IsInRole(SD.AdminRole))
+            {
+                return Json(new { data = _unitOfWork.LostAndFoundItem.GetAll(null, null, null) });
+            }
+            else
+            {
+                return Json(new { data = _unitOfWork.LostAndFoundItem.GetAll(u => u.ApplicationUserId == claim.Value, null, null) });
+            }
         }
 
         [HttpDelete("{id}")]
