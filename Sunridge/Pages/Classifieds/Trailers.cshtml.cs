@@ -18,12 +18,12 @@ namespace Sunridge.Pages.Classifieds
             _unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<ClassifiedListing> ClassifiedListingsList { get; set; }
+        //public IEnumerable<ClassifiedListing> ClassifiedListingsList { get; set; }
 
-        public void OnGet()
-        {
-            ClassifiedListingsList = _unitOfWork.ClassifiedListing.GetAll();
+        //public void OnGet()
+        //{
+        //    ClassifiedListingsList = _unitOfWork.ClassifiedListing.GetAll();
 
-        }
+        //}
     }
 }
