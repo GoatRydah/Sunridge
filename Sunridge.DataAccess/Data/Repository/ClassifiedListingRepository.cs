@@ -28,8 +28,7 @@ namespace Sunridge.DataAccess.Data.Repository
         public void Update(ClassifiedListing classifiedListing)
         {
             var objFromDb = _db.ClassifiedListing.FirstOrDefault(s => s.ClassifiedListingId == classifiedListing.ClassifiedListingId);
-            objFromDb.ApplicationUser = classifiedListing.ApplicationUser;
-            objFromDb.ApplicationUserId = classifiedListing.ApplicationUserId;
+            objFromDb.Owner = classifiedListing.Owner;
             objFromDb.ItemName = classifiedListing.ItemName;
             objFromDb.Price = classifiedListing.Price;
             objFromDb.Description = classifiedListing.Description;
@@ -37,8 +36,6 @@ namespace Sunridge.DataAccess.Data.Repository
             objFromDb.Phone = classifiedListing.Phone;
             objFromDb.Email = classifiedListing.Email;
             objFromDb.Category = classifiedListing.Category;
-            objFromDb.ClassifiedCategoryId = classifiedListing.ClassifiedCategoryId;
-            objFromDb.Categories = classifiedListing.Categories;
             objFromDb.Images = classifiedListing.Images;
 
 
