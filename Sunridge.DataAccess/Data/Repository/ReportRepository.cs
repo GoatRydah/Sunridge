@@ -37,6 +37,7 @@ namespace Sunridge.DataAccess.Data.Repository
             objFromDb.Suggestion = report.Suggestion;
             objFromDb.Comments = report.Comments;
             objFromDb.Resolved = report.Resolved;
+            objFromDb.username = report.ApplicationUser.FullName;
 
 
             _db.SaveChanges();

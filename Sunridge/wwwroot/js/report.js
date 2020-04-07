@@ -12,7 +12,8 @@ function loadList() {
             "datatype": "json"
         },
         "columns": [
-            { "data": "formType", "width": "25%" },
+            { "data": "username", "width": "10%" },
+            { "data": "formType", "width": "15%" },
             { "data": "description", "width": "25%" },
             { "data": "listingDate", "width": "25%" },
             { "data": "resolvedDate", "width": "25%" },

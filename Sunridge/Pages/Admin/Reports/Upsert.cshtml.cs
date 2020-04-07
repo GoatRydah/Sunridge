@@ -128,25 +128,29 @@ namespace Sunridge.Pages.Admin.Reports
                         reportNum = item.Id;
                     }
                 }
-
-                for (int i = 0; i < ReportVMObj.LaborHours.Count(); i++)
+                if (ReportVMObj.LaborHours != null)
                 {
-                    ReportVMObj.LaborHours[i].ReportId = reportNum;
-                    ReportVMObj.LaborHours[i].Report = ReportVMObj.Report;
+                    for (int i = 0; i < ReportVMObj.LaborHours.Count(); i++)
+                    {
+                        ReportVMObj.LaborHours[i].ReportId = reportNum;
+                        ReportVMObj.LaborHours[i].Report = ReportVMObj.Report;
+                    }
+                    foreach (var item in ReportVMObj.LaborHours)
+                    {
+                        _unitofWork.LaborHoursItem.Add(item);
+                    }
                 }
-
-                for (int i = 0; i < ReportVMObj.EquipmentHours.Count(); i++)
+                if (ReportVMObj.EquipmentHours != null)
                 {
-                    ReportVMObj.EquipmentHours[i].ReportId = reportNum;
-                    ReportVMObj.EquipmentHours[i].Report = ReportVMObj.Report;
-                }
-                foreach (var item in ReportVMObj.LaborHours)
-                {
-                    _unitofWork.LaborHoursItem.Add(item);
-                }
-                foreach (var item in ReportVMObj.EquipmentHours)
-                {
-                    _unitofWork.EquipmentHoursItem.Add(item);
+                    for (int i = 0; i < ReportVMObj.EquipmentHours.Count(); i++)
+                    {
+                        ReportVMObj.EquipmentHours[i].ReportId = reportNum;
+                        ReportVMObj.EquipmentHours[i].Report = ReportVMObj.Report;
+                    }
+                    foreach (var item in ReportVMObj.EquipmentHours)
+                    {
+                        _unitofWork.EquipmentHoursItem.Add(item);
+                    }
                 }
             }
             else //else we edit
@@ -178,11 +182,14 @@ namespace Sunridge.Pages.Admin.Reports
                     }
                 }catch(Exception e)
                 {
+                    ReportVMObj.Report.ApplicationUser = _unitofWork.ApplicationUser.GetFirstOrDefault(u => u.Id == ReportVMObj.Report.ApplicationUserId);
+                    ReportVMObj.Report.username = ReportVMObj.Report.ApplicationUser.FullName;
                     _unitofWork.Save();
                     return RedirectToPage("./Index");
                 }
             }
-
+            ReportVMObj.Report.ApplicationUser = _unitofWork.ApplicationUser.GetFirstOrDefault(u => u.Id == ReportVMObj.Report.ApplicationUserId);
+            ReportVMObj.Report.username = ReportVMObj.Report.ApplicationUser.FullName;
             _unitofWork.Save();
             return RedirectToPage("./Index");
         }
