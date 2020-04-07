@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Sunridge.DataAccess.Data.Repository.IRepository;
 using Sunridge.Models;
 
-namespace Sunridge
+namespace Sunridge.Pages.Admin.HOALots
 {
     public class FilesIndexModel : PageModel
     {
@@ -27,7 +27,19 @@ namespace Sunridge
 
         public void OnGet(int id)
         {
-            LotObj = _unitofWork.Lot.GetFirstOrDefault(s => s.LotId == id);
+            var temp = TempData["AnId"];
+            int theId = 0;
+
+            if (id == 0)
+            {
+                theId = Int32.Parse(temp.ToString());
+                LotObj = _unitofWork.Lot.GetFirstOrDefault(s => s.LotId == theId);
+                TempData["lotId"] = LotObj.LotId;
+            }
+            else
+            {
+                LotObj = _unitofWork.Lot.GetFirstOrDefault(s => s.LotId == id);
+            }
         }
     }
 }

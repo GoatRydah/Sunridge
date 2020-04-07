@@ -25,7 +25,7 @@ namespace Sunridge.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get(int id)
         {
             HoaLots = new List<HOALotVM>();
 
