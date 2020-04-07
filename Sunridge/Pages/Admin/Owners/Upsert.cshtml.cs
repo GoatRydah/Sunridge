@@ -21,6 +21,8 @@ namespace Sunridge.Pages.Admin.Owners
         public ApplicationUser OwnerObj { get; set; }
         [BindProperty]
         public Address AddressObj { get; set; }
+        [BindProperty]
+        public bool createAnother { get; set; }
 
         public UpsertModel(IUnitOfWork unitofWork, IWebHostEnvironment hostingEnvironment)
         {
@@ -68,6 +70,11 @@ namespace Sunridge.Pages.Admin.Owners
             {
                 _unitofWork.ApplicationUser.Update(OwnerObj);
                 _unitofWork.Save();
+            }
+
+            if (createAnother)
+            {
+                return RedirectToPage("./Upsert");
             }
 
             return RedirectToPage("./Index");

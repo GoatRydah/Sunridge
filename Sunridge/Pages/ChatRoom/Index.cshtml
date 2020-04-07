@@ -8,16 +8,16 @@
 @if (User.IsInRole(SD.OwnerRole) || User.IsInRole(SD.AdminRole))
 {
     <div class="container overflow-auto" style="height:500px" id="chatDiv">
-        @foreach(var item in Model.ChatRoomModelList)
+        @foreach (var item in Model.ChatRoomModelList)
         {
             <div border-radius:"5px">
                 <p>
-                    @foreach (var user in Model.ApplicationUserList) 
-                    { 
-                        if (item.ApplicationUserId == user.Id) 
-                        { 
+                    @foreach (var user in Model.ApplicationUserList)
+                    {
+                        if (item.ApplicationUserId == user.Id)
+                        {
                             @user.FullName
-                        } 
+                        }
                     } : @item.Post
                 </p>
             </div>
@@ -41,25 +41,34 @@
             </div>
         </div>
     </form>
+
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script>
-        var timer = setInterval(timerTick, 100);
+
+        $(document).ready(function () {
+            
+            var div = $("#chatDiv");
+            div.scrollTop(div.prop("scrollHeight"));
+        });
+
+        var timer = setInterval(timerTick, 2000);
 
         var element = document.getElementById("chatDiv");
         element.scrollTop = element.scrollHeight;
 
-        function timerTick(){
-			var xmlhttp = new XMLHttpRequest();
-			xmlhttp.onreadystatechange = function() {
-				if(this.readyState == 4 && this.status == 200){
+        function timerTick() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
                     refreshPage();
-				}
-			}
-			xmlhttp.open("GET","/Index?", true);
-			xmlhttp.send();
+                    window.scrollTo(0,document.body.scrollHeight);
+                }
+            }
+            xmlhttp.open("GET", "/Index?", true);
+            xmlhttp.send();
         }
 
-        function refreshPage()
-        {
+        function refreshPage() {
             $('#chatDiv').load(document.URL + ' #chatDiv');
         }
 
