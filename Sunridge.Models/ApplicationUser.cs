@@ -57,7 +57,7 @@ namespace Sunridge.Models
         public virtual IEnumerable<OwnerLot> OwnerLots { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
         public virtual ICollection<FormResponse> FormResponses { get; set; }
-        //public virtual ICollection<ClassifiedListing> ClassifiedListings { get; set; }
+        public virtual ICollection<ClassifiedListing> ClassifiedListings { get; set; }
         public virtual ICollection<KeyHistory> KeyHistories { get; set; }
         public virtual IEnumerable<LostAndFoundItem> LostAndFoundItems { get; set; }
         public virtual IEnumerable<BoardMember> BoardMembers { get; set; }
