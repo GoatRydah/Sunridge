@@ -48,15 +48,16 @@ namespace Sunridge.Pages.NewsItemFolder
             //Grab the file(s) from the form
             var files = HttpContext.Request.Form.Files;
 
-            //if (!ModelState.IsValid)
-            //{
-            //    return Page();
-            //}
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
 
-            if (NewsItemObj.NewsItemId == 0) //new lostandfounditem
+            if (NewsItemObj.NewsItemId == 0) //new item
             {
                 //rename file user submits for image
                 string fileName = Guid.NewGuid().ToString();
+                NewsItemObj.FileName = files[0].FileName;
                 //upload file to the path
                 var uploads = Path.Combine(webRootPath, @"images\newsItems");
                 //preserve our extension

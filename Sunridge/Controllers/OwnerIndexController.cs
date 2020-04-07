@@ -29,11 +29,12 @@ namespace Sunridge.Controllers
         [HttpGet]
         public IActionResult Get()
         {
+            owners = new List<OwnerLotVM>();
+
             if (User.IsInRole(SD.AdminRole))
             {
                 var activeOwners = _unitOfWork.ApplicationUser.GetAll(s => s.IsArchive == false, null, null);
-                var allLots = _unitOfWork.Lot.GetAll(s => s.IsArchive == false, null, null);
-                owners = new List<OwnerLotVM>();
+                var allLots = _unitOfWork.Lot.GetAll(s => s.IsArchive == false, null, null);              
 
                 foreach (var owner in activeOwners)
                 {     
@@ -65,7 +66,34 @@ namespace Sunridge.Controllers
             else //(the User.IsInRole(SD.OwnerRole))
             {
                 string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                return Json(new { data = _unitOfWork.ApplicationUser.GetAll(s => s.Id == userId, null, null) });
+                var owner = _unitOfWork.ApplicationUser.GetAll(s => s.Id == userId, null, null);
+
+                foreach (var own in owner)
+                {
+                    OwnerLotVM temp = new OwnerLotVM();
+                    temp.id = own.Id;
+                    temp.name = own.FullName;
+                    temp.username = own.UserName;
+                    temp.emergencyContactName = own.EmergencyContactName == null ? "" : own.EmergencyContactName;
+                    temp.emergencyContactPhone = own.EmergencyContactPhone == null ? "" : own.EmergencyContactPhone;
+
+                    string theLots = "";
+                    var ownerLots = _unitOfWork.OwnerLot.GetAll(s => s.OwnerId == own.Id, null, null);
+                    foreach (var ol in ownerLots)
+                    {
+                        var lot = _unitOfWork.Lot.GetFirstOrDefault(s => s.LotId == ol.LotId);
+                        theLots += lot.LotNumber + ", ";
+                    }
+
+                    if (theLots.Length > 1)
+                        theLots = theLots.Substring(0, theLots.Length - 2);
+
+                    temp.lots = theLots == null ? "" : theLots;
+
+                    owners.Add(temp);
+                }
+
+                return Json(new { data = owners });
             }
         }
 

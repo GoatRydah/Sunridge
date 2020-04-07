@@ -12,9 +12,14 @@ function LoadList() {
             "datatype": "json"
         },
         "columns": [
-            { "data": "title", "width": "25%" },
+            { "data": "name", "width": "25%" },
             { "data": "description", "width": "25%" },
-            { "data": "file", "width": "25%" },
+            { "data": "fileURL",
+                "render": function (data) {
+                    return `<a href="/docs/lotFiles/${data}" download>${data}</a>`;
+                }
+                ,"width": "25%"
+            },
             {
                 "data": "fileId",
                 "render": function (data) {
@@ -22,7 +27,7 @@ function LoadList() {
                                 <a href="/admin/hOALots/filesUpsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                                     <i class="far fa-edit"></i> Edit
                                 </a>
-                                <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onClick=Delete('/api/LotFile/'${data})>
+                                <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onClick=Delete('/api/LotFile/'+${data})>
                                     <i class="far fa-trash-alt"></i> Delete
                                 </a>
                              </div>`;

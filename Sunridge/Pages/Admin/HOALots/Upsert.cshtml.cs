@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Sunridge.DataAccess.Data.Repository.IRepository;
 using Sunridge.Models;
 
-namespace Sunridge
+namespace Sunridge.Pages.Admin.HOALots
 {
     public class UpsertModel : PageModel
     {
