@@ -28,11 +28,11 @@ namespace Sunridge.DataAccess.Data.Repository
         public void Update(File file)
         {
             var objFromDb = _db.File.FirstOrDefault(s => s.FileId == file.FileId);
-            objFromDb.LotHistoryId = file.LotHistoryId;
+            //objFromDb.LotHistoryId = file.LotHistoryId;
             objFromDb.FileURL = file.FileURL;
             objFromDb.Name = file.Name;
             objFromDb.Description = file.Description;
-            objFromDb.LotHistory = file.LotHistory;
+            //objFromDb.LotHistory = file.LotHistory;
 
 
             _db.SaveChanges();

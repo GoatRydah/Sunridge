@@ -7,31 +7,28 @@ $(document).ready(function () {
 function LoadList() {
     dataTable = $('#DT_Load').DataTable({
         "ajax": {
-            "url": "/api/ownerIndex/",
+            "url": "/api/HoaLots/",
             "type": "GET",
             "datatype": "json"
         },
         "columns": [
-            { "data": "name", "width": "13%" },
-            { "data": "username", "width": "13%" },
-            { "data": "emergencyContactName", "width": "13%" },
-            { "data": "emergencyContactPhone", "width": "13%" },
-            { "data": "lots", "width": "13%" },
+            { "data": "lotNumber", "width": "15%" },
+            { "data": "streetAddress", "width": "15%" },
+            { "data": "userName", "width": "15%" },
+            { "data": "taxId", "width": "15%" },
+            { "data": "lotInventory", "width": "15%" },
             {
                 "data": "id",
                 "render": function (data) {
                     return ` <div class="text-center">
-                                <a href="/admin/owners/upsert?id=${data}" class="btn btn-info text-white" style="cursor:pointer; width:100px;">
+                                <a href="/admin/hOALots/upsert?id=${data}" class="btn btn-info text-white" style="cursor:pointer; width:100px;">
                                     <i class="far fa-edit"></i> Edit
                                 </a>
-                                <a href="/admin/owners/passwordResetIndex?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:160px;">
-                                    <i class="fas fa-lock-open"></i> Reset Password
-                                </a>
-                                <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onClick=Delete('/api/ownerIndex/${data}')>
-                                    <i class="far fa-trash-alt"></i> Delete
+                                <a href="/admin/hOALots/filesIndex?id=${data}" class="btn btn-dark text-white" style="cursor:pointer; width:100px;">
+                                    <i class="far fa-file-alt"></i> Files
                                 </a>
                              </div>`;
-                }, "width": "35%"
+                }, "width": "25%"
             }
         ],
         "language": {
@@ -42,10 +39,9 @@ function LoadList() {
 }
 
 function Delete(url) {
-    console.log("made it");
     swal({
         title: "Are you sure you want to delete?",
-        text: "User will be removed!",
+        text: "You will not be able to restore the data!",
         icon: "warning",
         buttons: true,
         dangerMode: true

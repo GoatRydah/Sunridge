@@ -1,51 +1,61 @@
 ﻿@page
-@model Sunridge.Pages.Admin.Photos.UpsertModel
+@model Sunridge.Pages.Admin.HOALots.FilesUpsertModel
 @using Sunridge.Utility;
 
 @{
-    ViewData["Title"] = "Upsert";
+    ViewData["Title"] = "FilesUpsert";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
 @if (User.IsInRole(SD.AdminRole) || User.IsInRole(SD.OwnerRole))
 {
+    @if (Model.file.FileId == 0)
+    {
+        <h1>New Document</h1>
+    }
+    else
+    {
+        <h1>Edit Document</h1>
+    }
+
+
     <form method="post" asp-action="Upsert" enctype="multipart/form-data">
+
+        @if (Model.file.FileId != 0)
+        {
+            <input type="hidden" asp-for="file.FileId" />
+        }
+
+        <input type="text" asp-for="file.LotId" value="@Request.Query["lotId"]" hidden />
 
         <div class="col-8 pt-3">
             <div class="form-group row">
                 <div class="col-3">
-                    <label asp-for="PhotosObj.Photo.Title"></label>
+                    <label asp-for="file.Name"></label>
                 </div>
                 <div class="col-9">
-                    <input class="form-control" asp-for="PhotosObj.Photo.Title" id="txtTitle"></input>
+                    <input class="form-control" asp-for="file.Name" id="txtTitle" />
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-3">
-                    <label asp-for="PhotosObj.Photo.Year"></label>
+                    <label asp-for="file.Description"></label>
                 </div>
                 <div class="col-9">
-                    <input class="form-control" asp-for="PhotosObj.Photo.Year" id="txtYear"></input>
+                    <input class="form-control" asp-for="file.Description" id="txtYear" />
                 </div>
             </div>
-
-            @if (Model.PhotosObj.Photo.Id != 0)
-            {
-                <input type="hidden" asp-for="PhotosObj.Photo.Id" />
-            }
-
-            <div class="row form-group">
-                <div class="col-md-3">
-                    <label asp-for="PhotosObj.Photo.Category"></label>
-                </div>
-                <div class="col-md-9">
-                    @Html.DropDownListFor(m => m.PhotosObj.Photo.Category, Model.PhotosObj.Categories, "- Please select a Category", new { @class = "form-control" })
-                    <span class="text-danger" asp-validation-for="PhotosObj.Photo.Category"></span>
-                </div>
-            </div>
-
+            @*<div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="file.FileURL"></label>
+                    </div>
+                    <div class="col-9">
+                        <input class="form-control" asp-for="file.FileURL" id="txtYear" />
+                    </div>
+                </div>*@
             <div class="form-group row">
                 <div class="col-3">
-                    <label asp-for="PhotosObj.Photo.Image"></label>
+                    <label asp-for="file.FileURL"></label>
                 </div>
                 <div class="col-9">
                     <input type="file" class="form-control" name="files" id="files" />
@@ -53,7 +63,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6 mb-2">
-                    @if (Model.PhotosObj.Photo.Id != 0)
+                    @if (Model.file.FileId != 0)
                     {
                         <button type="submit" class="btn btn-primary form-control">Update</button>
                     }
@@ -71,5 +81,5 @@
 }
 else
 {
-    <h1>You must be logged in to view this page.</h1>
+    <h1>You must be logged into view this page.</h1>
 }

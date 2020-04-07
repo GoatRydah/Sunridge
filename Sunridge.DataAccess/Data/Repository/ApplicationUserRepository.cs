@@ -19,11 +19,36 @@ namespace Sunridge.DataAccess.Data.Repository
 
         public IEnumerable<SelectListItem> GetApplicationUserListOrDropdown()
         {
-            return _db.ApplicationUser.Select(i => new SelectListItem()
+            return _db.ApplicationUser.Where(s => s.IsArchive == false).Select(i => new SelectListItem()
             {
                 Value = i.Id.ToString(),
-                Text = i.FullName
+                Text = i.FullName,
             });
+        }
+
+        public IEnumerable<SelectListItem> GetApplicationUserListOrDropdown(string id)
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+            var users = _db.ApplicationUser.Where(s => s.IsArchive == false);
+
+            foreach (var user in users)
+            {
+                items.Add(new SelectListItem()
+                {
+                    Text = user.FullName,
+                    Value = user.Id,
+                    Selected = user.Id == id ? true : false
+                });
+            }
+
+            return items;
+
+            //return _db.ApplicationUser.Where(s => s.IsArchive == false).Select(i => new SelectListItem()
+            //{
+            //    Value = i.Id.ToString(),
+            //    Text = i.FullName,
+            //    Selected = i.Id == id ? true : false
+            //});
         }
 
         public int AddAddressAndGetId(ApplicationUser applicationUser)

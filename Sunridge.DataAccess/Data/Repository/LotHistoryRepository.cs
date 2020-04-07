@@ -33,7 +33,7 @@ namespace Sunridge.DataAccess.Data.Repository
 
             objFromDb.IsArchive = LotHistory.IsArchive;
             objFromDb.Comments = LotHistory.Comments;
-            objFromDb.Files = LotHistory.Files;
+            //objFromDb.Files = LotHistory.Files;
             objFromDb.LastModifiedBy = LotHistory.LastModifiedBy;
             objFromDb.LastModifiedDate = LotHistory.LastModifiedDate;
             objFromDb.Lot = LotHistory.Lot;

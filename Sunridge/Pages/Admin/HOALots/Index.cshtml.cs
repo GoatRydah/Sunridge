@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace SunridgePages.Admin.HOALots
+namespace Sunridge.Pages.Admin.HOALots
 {
     public class IndexModel : PageModel
     {

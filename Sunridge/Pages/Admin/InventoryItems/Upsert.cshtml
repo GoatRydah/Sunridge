@@ -1,39 +1,48 @@
 ﻿@page
 @model Sunridge.Pages.Admin.InventoryItems.UpsertModel
+@using Sunridge.Utility;
+
 @{
     ViewData["Title"] = "Upsert";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+@if (User.IsInRole(SD.AdminRole) || User.IsInRole(SD.OwnerRole))
+{
+    <form method="post" asp-action="Upsert" enctype="multipart/form-data">
 
-    <div class="col-8 pt-3 pl-3">
-        @if (Model.inventoryObj.InventoryId != 0)
-        {
-            <input type="hidden" asp-for="inventoryObj.InventoryId" />
-        }
-        <div class="form-group row">
-            <div class="col-3">
-                <label asp-for="inventoryObj.Description"></label>
+        <div class="col-8 pt-3 pl-3">
+            @if (Model.inventoryObj.InventoryId != 0)
+            {
+                <input type="hidden" asp-for="inventoryObj.InventoryId" />
+            }
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="inventoryObj.Description"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" asp-for="inventoryObj.Description" id="txtFirstName" />
+                </div>
             </div>
-            <div class="col-9">
-                <input class="form-control" asp-for="inventoryObj.Description" id="txtFirstName" />
+            <div class="row">
+                <div class="col-md-6 mb-2">
+                    @if (Model.inventoryObj.InventoryId != 0)
+                    {
+                        <button type="submit" class="btn btn-primary form-control">Update</button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Create</button>
+                    }
+                </div>
+                <div class="col-md-6">
+                    <a asp-page="./Index" type="submit" class="btn btn-success form-control">Back to List</a>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6 mb-2">
-                @if (Model.inventoryObj.InventoryId != 0)
-                {
-                    <button type="submit" class="btn btn-primary form-control">Update</button>
-                }
-                else
-                {
-                    <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Create</button>
-                }
-            </div>
-            <div class="col-md-6">
-                <a asp-page="./Index" type="submit" class="btn btn-success form-control">Back to List</a>
-            </div>
-        </div>
-    </div>
-</form>
+    </form>
+}
+else
+{
+    <h1>You must be logged in to view this page.</h1>
+}
