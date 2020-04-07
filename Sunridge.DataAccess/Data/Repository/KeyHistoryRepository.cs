@@ -23,7 +23,7 @@ namespace Sunridge.DataAccess.Data.Repository
             return _db.KeyHistory.Select(i => new SelectListItem()
             {
                 Text = i.KeyHistoryId.ToString(),
-                Value = i.KeyId.ToString()
+                Value = i.KeyHistoryId.ToString()
             });
         }
 
