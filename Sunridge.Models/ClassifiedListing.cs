@@ -29,11 +29,17 @@ namespace Sunridge.Models
         public string Phone { get; set; }
         public string Email { get; set; }
 
-        //Nav properties
-        [ForeignKey("OwnerId")]
-        public virtual ApplicationUser Owner { get; set; }
-        [Required]
+        public string ApplicationUserId { get; set; }
+        [NotMapped]
+        [ForeignKey("ApplicationUserId")]
+        public virtual ApplicationUser ApplicationUser { get; set; }
+
+        public int ClassifiedCategoryId { get; set; }
         public string Category { get; set; }
+        [Required]
+        [ForeignKey("ClassifiedCategoryId")]
+        public ClassifiedCategory Categories { get; set; }
+
         public string Images { get; set; }
         public List<ClassifiedImage> Image { get; set; }
     }

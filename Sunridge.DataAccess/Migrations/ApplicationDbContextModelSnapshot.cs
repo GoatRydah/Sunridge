@@ -377,9 +377,14 @@ namespace Sunridge.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Category")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ClassifiedCategoryId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -400,9 +405,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<DateTime>("ListingDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("OwnerId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
@@ -411,7 +413,9 @@ namespace Sunridge.DataAccess.Migrations
 
                     b.HasKey("ClassifiedListingId");
 
-                    b.HasIndex("OwnerId");
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("ClassifiedCategoryId");
 
                     b.ToTable("ClassifiedListing");
                 });
@@ -1379,9 +1383,15 @@ namespace Sunridge.DataAccess.Migrations
 
             modelBuilder.Entity("Sunridge.Models.ClassifiedListing", b =>
                 {
-                    b.HasOne("Sunridge.Models.ApplicationUser", "Owner")
+                    b.HasOne("Sunridge.Models.ApplicationUser", null)
                         .WithMany("ClassifiedListings")
-                        .HasForeignKey("OwnerId");
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("Sunridge.Models.ClassifiedCategory", "Categories")
+                        .WithMany()
+                        .HasForeignKey("ClassifiedCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Sunridge.Models.Comment", b =>
