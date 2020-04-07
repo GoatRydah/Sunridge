@@ -11,5 +11,6 @@ namespace Sunridge.Models.ViewModels
     {
         public ClassifiedListing ClassifiedListing { get; set; }
         public IEnumerable<SelectListItem> Category { get; set; }
+        public IEnumerable<SelectListItem> Images { get; set; }
     }
 }

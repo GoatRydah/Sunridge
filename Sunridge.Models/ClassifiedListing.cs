@@ -35,5 +35,6 @@ namespace Sunridge.Models
         [Required]
         public string Category { get; set; }
         public string Images { get; set; }
+        public List<ClassifiedImage> Image { get; set; }
     }
 }

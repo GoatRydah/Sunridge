@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sunridge.Data;
 
 namespace Sunridge.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200331212443_initialClassifiedService")]
+    partial class initialClassifiedService
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -287,7 +289,7 @@ namespace Sunridge.DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BoardRole")
                         .HasColumnType("nvarchar(max)");
@@ -299,8 +301,6 @@ namespace Sunridge.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("BoardMember");
                 });
@@ -342,32 +342,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.HasIndex("ClassifiedListingViewModelId");
 
                     b.ToTable("ClassifiedCategory");
-                });
-
-            modelBuilder.Entity("Sunridge.Models.ClassifiedImage", b =>
-                {
-                    b.Property<int>("ClassifiedImageId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ClassifiedListingId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ImageExtension")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageURL")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsMainImage")
-                        .HasColumnType("bit");
-
-                    b.HasKey("ClassifiedImageId");
-
-                    b.HasIndex("ClassifiedListingId");
-
-                    b.ToTable("ClassifiedImage");
                 });
 
             modelBuilder.Entity("Sunridge.Models.ClassifiedListing", b =>
@@ -414,28 +388,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.HasIndex("OwnerId");
 
                     b.ToTable("ClassifiedListing");
-                });
-
-            modelBuilder.Entity("Sunridge.Models.ClassifiedService", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ClassifiedService");
                 });
 
             modelBuilder.Entity("Sunridge.Models.Comment", b =>
@@ -510,27 +462,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("CommonAreaAsset");
                 });
 
-            modelBuilder.Entity("Sunridge.Models.EquipmentHours", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("EquipmentName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Hours")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ReportId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EquipmentHoursItem");
-                });
-
             modelBuilder.Entity("Sunridge.Models.ErrorViewModel", b =>
                 {
                     b.Property<int>("ErrorViewModelId")
@@ -559,6 +490,9 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<string>("FileURL")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("FormResponseId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsArchive")
                         .HasColumnType("bit");
 
@@ -568,7 +502,7 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<DateTime>("LastModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("LotId")
+                    b.Property<int>("LotHistoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -576,7 +510,9 @@ namespace Sunridge.DataAccess.Migrations
 
                     b.HasKey("FileId");
 
-                    b.HasIndex("LotId");
+                    b.HasIndex("FormResponseId");
+
+                    b.HasIndex("LotHistoryId");
 
                     b.ToTable("File");
                 });
@@ -761,27 +697,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("KeyHistory");
                 });
 
-            modelBuilder.Entity("Sunridge.Models.LaborHours", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Hours")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LaborActivity")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ReportId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("LaborHoursItem");
-                });
-
             modelBuilder.Entity("Sunridge.Models.LostAndFoundItem", b =>
                 {
                     b.Property<int>("Id")
@@ -797,9 +712,6 @@ namespace Sunridge.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("username")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -1059,46 +971,6 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("PhotoCategories");
                 });
 
-            modelBuilder.Entity("Sunridge.Models.Report", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Comments")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FormType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ListingDate")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Resolved")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ResolvedDate")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Suggestion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("username")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ReportItem");
-                });
-
             modelBuilder.Entity("Sunridge.Models.ScheduledEvent", b =>
                 {
                     b.Property<int>("ID")
@@ -1249,17 +1121,8 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<int>("AddressId")
                         .HasColumnType("int");
 
-                    b.Property<string>("AddressValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ApartmentValue")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("Birthday")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("CityValue")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ClassifiedListingViewModelId")
                         .HasColumnType("int");
@@ -1295,12 +1158,6 @@ namespace Sunridge.DataAccess.Migrations
 
                     b.Property<bool?>("ReceiveEmails")
                         .HasColumnType("bit");
-
-                    b.Property<string>("StateValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ZipValue")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasIndex("AddressId");
 
@@ -1360,27 +1217,11 @@ namespace Sunridge.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Sunridge.Models.BoardMember", b =>
-                {
-                    b.HasOne("Sunridge.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("BoardMembers")
-                        .HasForeignKey("ApplicationUserId");
-                });
-
             modelBuilder.Entity("Sunridge.Models.ClassifiedCategory", b =>
                 {
                     b.HasOne("Sunridge.Models.ViewModels.ClassifiedListingViewModel", null)
                         .WithMany("ClassifiedCategory")
                         .HasForeignKey("ClassifiedListingViewModelId");
-                });
-
-            modelBuilder.Entity("Sunridge.Models.ClassifiedImage", b =>
-                {
-                    b.HasOne("Sunridge.Models.ClassifiedListing", null)
-                        .WithMany("Image")
-                        .HasForeignKey("ClassifiedListingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Sunridge.Models.ClassifiedListing", b =>
@@ -1407,9 +1248,13 @@ namespace Sunridge.DataAccess.Migrations
 
             modelBuilder.Entity("Sunridge.Models.File", b =>
                 {
-                    b.HasOne("Sunridge.Models.Lot", "Lot")
-                        .WithMany()
-                        .HasForeignKey("LotId")
+                    b.HasOne("Sunridge.Models.FormResponse", null)
+                        .WithMany("Files")
+                        .HasForeignKey("FormResponseId");
+
+                    b.HasOne("Sunridge.Models.LotHistory", "LotHistory")
+                        .WithMany("Files")
+                        .HasForeignKey("LotHistoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

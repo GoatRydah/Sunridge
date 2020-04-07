@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sunridge.Data;
 
 namespace Sunridge.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200405142909_addClassifiedImages")]
+    partial class addClassifiedImages
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -559,6 +561,9 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<string>("FileURL")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("FormResponseId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsArchive")
                         .HasColumnType("bit");
 
@@ -568,7 +573,7 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<DateTime>("LastModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("LotId")
+                    b.Property<int>("LotHistoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -576,7 +581,9 @@ namespace Sunridge.DataAccess.Migrations
 
                     b.HasKey("FileId");
 
-                    b.HasIndex("LotId");
+                    b.HasIndex("FormResponseId");
+
+                    b.HasIndex("LotHistoryId");
 
                     b.ToTable("File");
                 });
@@ -797,9 +804,6 @@ namespace Sunridge.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("username")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -1089,9 +1093,6 @@ namespace Sunridge.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Suggestion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("username")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -1407,9 +1408,13 @@ namespace Sunridge.DataAccess.Migrations
 
             modelBuilder.Entity("Sunridge.Models.File", b =>
                 {
-                    b.HasOne("Sunridge.Models.Lot", "Lot")
-                        .WithMany()
-                        .HasForeignKey("LotId")
+                    b.HasOne("Sunridge.Models.FormResponse", null)
+                        .WithMany("Files")
+                        .HasForeignKey("FormResponseId");
+
+                    b.HasOne("Sunridge.Models.LotHistory", "LotHistory")
+                        .WithMany("Files")
+                        .HasForeignKey("LotHistoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
