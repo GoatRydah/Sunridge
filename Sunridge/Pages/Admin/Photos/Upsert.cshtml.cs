@@ -16,7 +16,7 @@ namespace Sunridge.Pages.Admin.Photos
     public class UpsertModel : PageModel
     {
         private readonly IUnitOfWork _unitofWork;
-        private readonly IWebHostEnvironment _hostingEnvironment;
+        public readonly IWebHostEnvironment _hostingEnvironment;
 
         public UpsertModel(IUnitOfWork unitofWork, IWebHostEnvironment hostingEnvironment)
         {
