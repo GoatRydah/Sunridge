@@ -27,7 +27,7 @@
                         </div>
                         <div class="col-9">
                             @Html.DropDownListFor(m => m.KeyHistoryObj.KeyHistory.KeyId, Model.KeyHistoryObj.Key, "-Please select a Key", new { @class = "form-control" })
-                            <span class="text-danger" asp-validation-for="KeyHistoryObj.KeyHistory.Key"></span>
+                            <span class="text-danger" asp-validation-for="KeyHistoryObj.KeyHistory.KeyId"></span>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -53,7 +53,7 @@
                             <label>Date Issued</label>
                         </div>
                         <div class="col-9">
-                            <input id="datepicker" type="date" value="" asp-for="KeyHistoryObj.KeyHistory.DateIssued" type="text" class="form-control" />
+                            <input class="datepicker" type="date" value="" asp-for="KeyHistoryObj.KeyHistory.DateIssued" type="text" class="form-control" />
                             <span class="text-danger" asp-validation-for="KeyHistoryObj.KeyHistory.DateIssued"></span>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                             <label>Date Returned</label>
                         </div>
                         <div class="col-9">
-                            <input id="datepicker" type="date" value="" asp-for="KeyHistoryObj.KeyHistory.DateReturned" type="text" class="form-control" />
+                            <input class="datepicker" type="date" value="" asp-for="KeyHistoryObj.KeyHistory.DateReturned" type="text" class="form-control" />
                             <span class="text-danger" asp-validation-for="KeyHistoryObj.KeyHistory.DateReturned"></span>
                         </div>
                     </div>
@@ -114,4 +114,25 @@ else
     </div>
 -->
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
+@section Scripts{
+    <script>
+        $(function () {
+            $(".datepicker").datepicker({  });
+        });
+
+
+        function validateInput() {
+            var dt = document.getElementById("datepicker").value;
+
+            if (dt.toString() == '') {
+                swal("Error", "Please select Date", "error");
+                return false;
+            }
+
+            return true;
+        }
+
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+}

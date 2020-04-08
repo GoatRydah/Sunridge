@@ -10,8 +10,8 @@ using Sunridge.Data;
 namespace Sunridge.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200403050838_Everything")]
-    partial class Everything
+    [Migration("20200408003641_fixKeyHistoryMigration1")]
+    partial class fixKeyHistoryMigration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
