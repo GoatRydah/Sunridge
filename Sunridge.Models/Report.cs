@@ -34,5 +34,7 @@ namespace Sunridge.Models
         [NotMapped]
         [ForeignKey("EquipmentHoursId")]
         public EquipmentHours EquipmentHoursId { get; set; }
+
+        public string username { get; set; }
     }
 }

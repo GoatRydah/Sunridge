@@ -32,6 +32,15 @@ namespace Sunridge.Pages.ChatRoom
             
         }
 
+        public void OnPostClear()
+        {
+            IEnumerable <ChatRoomModel> chatRoom = _unitOfWork.ChatRoomItem.GetAll(null, null, null);
+            foreach (var item in chatRoom)
+            {
+                _unitOfWork.ChatRoomItem.Remove(item);
+            }
+            _unitOfWork.Save();
+        }
         public void OnPost()
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;

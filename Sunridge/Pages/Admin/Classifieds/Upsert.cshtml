@@ -1,101 +1,104 @@
 ﻿@page
 @model Sunridge.Pages.Admin.Classifieds.UpsertModel
-
+@using Sunridge.Utility
 @{
     ViewData["Title"] = "Upsert";
 }
 <br />
 <br />
-<table id="DT_load" class="table table-striped table-bordered" style="width:100%">
-    <thead>
-        <tr>
-            <th>Category</th>
-            <th>Title</th>
-            <th>Price</th>
-            <th>Description</th>
-            <th>Phone</th>
-            <th>Email</th>
-        </tr>
-    </thead>
-</table>
-<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+@if (User.IsInRole(SD.AdminRole))
+{
+    <table id="DT_load" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Phone</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+    </table>
+    <form method="post" asp-action="Upsert" enctype="multipart/form-data">
 
-    <div class="col-8 pt-3">
-        <div class="row form-group">
-            <div class="col-md-3">
-                <label asp-for="ClassifiedsObj.ClassifiedListing.Category"></label>
+        <div class="col-8 pt-3">
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <label asp-for="ClassifiedsObj.ClassifiedListing.Category"></label>
+                </div>
+                <div class="col-md-9">
+                    @Html.DropDownListFor(m => m.ClassifiedsObj.ClassifiedListing.Category,
+        Model.ClassifiedsObj.Category,
+        "- Please select a Category",
+        new { @class = "form-control" })
+                    <span class="text-danger" asp-validation-for="ClassifiedsObj.ClassifiedListing.Category"></span>
+                </div>
             </div>
-            <div class="col-md-9">
-                @Html.DropDownListFor(m => m.ClassifiedsObj.ClassifiedListing.Category, 
-               Model.ClassifiedsObj.Category, 
-               "- Please select a Category", 
-               new { @class = "form-control" })
-                <span class="text-danger" asp-validation-for="ClassifiedsObj.ClassifiedListing.Category"></span>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="ClassifiedsObj.ClassifiedListing.ItemName"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" asp-for="ClassifiedsObj.ClassifiedListing.ItemName" id="txtTitle" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="ClassifiedsObj.ClassifiedListing.Price"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" asp-for="ClassifiedsObj.ClassifiedListing.Price" id="txtYear" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="ClassifiedsObj.ClassifiedListing.Description"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" asp-for="ClassifiedsObj.ClassifiedListing.Description" id="txtYear" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="ClassifiedsObj.ClassifiedListing.Phone"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" asp-for="ClassifiedsObj.ClassifiedListing.Phone" id="txtYear" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="ClassifiedsObj.ClassifiedListing.Email"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" asp-for="ClassifiedsObj.ClassifiedListing.Email" id="txtYear" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="ClassifiedsObj.ClassifiedListing.Images"></label>
+                </div>
+                <div class="col-9">
+                    <input type="file" class="form-control" name="files" id="files" multiple/>
+                </div>
+            </div>
+            <div class="row">
+                @if (Model.ClassifiedsObj.ClassifiedListing.ClassifiedListingId != 0)
+                {
+                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Create</button>
+                }
+                <div class="col-6">
+                    <a asp-page="./Index" type="submit" class="btn btn-success form-control">Back to List</a>
+                </div>
             </div>
         </div>
-        <div class="form-group row">
-            <div class="col-3">
-                <label asp-for="ClassifiedsObj.ClassifiedListing.ItemName"></label>
-            </div>
-            <div class="col-9">
-                <input class="form-control" asp-for="ClassifiedsObj.ClassifiedListing.ItemName" id="txtTitle" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-3">
-                <label asp-for="ClassifiedsObj.ClassifiedListing.Price"></label>
-            </div>
-            <div class="col-9">
-                <input class="form-control" asp-for="ClassifiedsObj.ClassifiedListing.Price" id="txtYear" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-3">
-                <label asp-for="ClassifiedsObj.ClassifiedListing.Description"></label>
-            </div>
-            <div class="col-9">
-                <input class="form-control" asp-for="ClassifiedsObj.ClassifiedListing.Description" id="txtYear" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-3">
-                <label asp-for="ClassifiedsObj.ClassifiedListing.Phone"></label>
-            </div>
-            <div class="col-9">
-                <input class="form-control" asp-for="ClassifiedsObj.ClassifiedListing.Phone" id="txtYear" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-3">
-                <label asp-for="ClassifiedsObj.ClassifiedListing.Email"></label>
-            </div>
-            <div class="col-9">
-                <input class="form-control" asp-for="ClassifiedsObj.ClassifiedListing.Email" id="txtYear" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-3">
-                <label asp-for="ClassifiedsObj.ClassifiedListing.Images"></label>
-            </div>
-            <div class="col-9">
-                <input type="file" class="form-control" name="files" id="files" />
-            </div>
-        </div>
-        <div class="row">
-            @if (Model.ClassifiedsObj.ClassifiedListing.ClassifiedListingId != 0)
-            {
-                <button type="submit" class="btn btn-primary form-control">Update</button>
-            }
-            else
-            {
-                <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Create</button>
-            }
-            <div class="col-6">
-                <a asp-page="./Index" type="submit" class="btn btn-success form-control">Back to List</a>
-            </div>
-        </div>
-    </div>
-</form>
+    </form>
+}
 @section Scripts{
     <script src="~/js/adminClassifiedIndex.js"></script>
 }

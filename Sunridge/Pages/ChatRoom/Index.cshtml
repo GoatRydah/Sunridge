@@ -8,20 +8,23 @@
 @if (User.IsInRole(SD.OwnerRole) || User.IsInRole(SD.AdminRole))
 {
     <div class="container overflow-auto" style="height:500px" id="chatDiv">
-        @foreach (var item in Model.ChatRoomModelList)
+        @if (Model.ChatRoomModelList != null)
         {
-            <div border-radius:"5px">
-                <p>
-                    @foreach (var user in Model.ApplicationUserList)
-                    {
-                        if (item.ApplicationUserId == user.Id)
+            @foreach (var item in Model.ChatRoomModelList)
+            {
+                <div border-radius:"5px">
+                    <p>
+                        @foreach (var user in Model.ApplicationUserList)
                         {
-                            @user.FullName
-                        }
-                    } : @item.Post
-                </p>
-            </div>
-        }
+                            if (item.ApplicationUserId == user.Id)
+                            {
+                                @user.FullName
+                            }
+                        } : @item.Post
+                    </p>
+                </div>
+            }
+        }|
     </div>
     <form method="post" asp-action="Index" enctype="multipart/form-data">
         <div class="col-8 pt-3">
@@ -36,9 +39,17 @@
             </div>
             <div class="row">
                 <div class="col-6">
-                    <button type="submit" class="btn btn-primary form-control" onclick="return ValidInput()">Send</button>
+                    <button type="submit" class="btn btn-primary form-control">Send</button>
                 </div>
             </div>
+            @if (User.IsInRole(SD.AdminRole))
+            {
+            <div class="row">
+                <div class="col-6">
+                    <button asp-page-handler="clear" type="submit" class="btn btn-danger form-control">Remove</button>
+                </div>
+            </div>
+            }
         </div>
     </form>
 

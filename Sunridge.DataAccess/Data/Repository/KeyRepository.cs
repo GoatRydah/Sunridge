@@ -22,14 +22,14 @@ namespace Sunridge.DataAccess.Data.Repository
         {
             return _db.Key.Select(i => new SelectListItem()
             {
-                Text = i.SerialNumber,
+                Text = i.FullSerial,
                 Value = i.Year.ToString()
             });
         }
 
         public void Update(Key key)
         {
-            var objFromDb = _db.Key.FirstOrDefault(s => s.SerialNumber == key.SerialNumber);
+            var objFromDb = _db.Key.FirstOrDefault(s => s.KeyId == key.KeyId);
 
             objFromDb.SerialNumber = key.SerialNumber;
             objFromDb.Year = key.Year;

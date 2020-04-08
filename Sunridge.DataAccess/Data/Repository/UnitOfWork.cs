@@ -11,7 +11,9 @@ namespace Sunridge.DataAccess.Data.Repository
         public IBannerRepository Banner { get; private set; }
         public IBoardMemberRepository BoardMember { get; private set; }
         public IClassifiedCategoryRepository ClassifiedCategory { get; private set; }
+        public IClassifiedImageRepository ClassifiedImage { get; private set; }
         public IClassifiedListingRepository ClassifiedListing { get; private set; }
+        public IClassifiedServiceRepository ClassifiedService { get; private set; }
         public ICommentRepository Comment { get; private set; }
         public ICommonAreaAssetRepository CommonAreaAsset { get; private set; }
         public IErrorViewModelRepository ErrorViewModel { get; private set; }
@@ -53,6 +55,7 @@ namespace Sunridge.DataAccess.Data.Repository
             BoardMember = new BoardMemberRepository(_db);
             ClassifiedCategory = new ClassifiedCategoryRepository(_db);
             ClassifiedListing = new ClassifiedListingRepository(_db);
+            ClassifiedService = new ClassifiedServiceRepository(_db);
             Comment = new CommentRepository(_db);
             CommonAreaAsset = new CommonAreaAssetRepository(_db);
             ErrorViewModel = new ErrorViewModelRepository(_db);

@@ -1,6 +1,12 @@
 ﻿@page
 @model Sunridge.Pages.Admin.KeysHistory.UpsertModel
 @using Sunridge.Utility
+
+<link rel="Stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" type="text/css" />
+
+
+
+
 @if (User.IsInRole(SD.AdminRole))
 {
     <form method="post" asp-action="Upsert" enctype="multipart/form-data">
@@ -47,7 +53,7 @@
                             <label>Date Issued</label>
                         </div>
                         <div class="col-9">
-                            <input id="datepicker" value="" asp-for="KeyHistoryObj.KeyHistory.DateIssued" type="text" class="form-control" />
+                            <input id="datepicker" type="date" value="" asp-for="KeyHistoryObj.KeyHistory.DateIssued" type="text" class="form-control" />
                             <span class="text-danger" asp-validation-for="KeyHistoryObj.KeyHistory.DateIssued"></span>
                         </div>
                     </div>
@@ -56,7 +62,7 @@
                             <label>Date Returned</label>
                         </div>
                         <div class="col-9">
-                            <input id="datepicker" value="" asp-for="KeyHistoryObj.KeyHistory.DateReturned" type="text" class="form-control" />
+                            <input id="datepicker" type="date" value="" asp-for="KeyHistoryObj.KeyHistory.DateReturned" type="text" class="form-control" />
                             <span class="text-danger" asp-validation-for="KeyHistoryObj.KeyHistory.DateReturned"></span>
                         </div>
                     </div>
@@ -107,3 +113,5 @@ else
         <h1 class="danger">Access Denied</h1>
     </div>
 -->
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>

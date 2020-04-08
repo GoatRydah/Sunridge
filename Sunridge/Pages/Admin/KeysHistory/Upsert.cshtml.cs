@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Sunridge.Models;
 using Sunridge.Models.ViewModels;
+using System.Security.Claims;
 
 namespace Sunridge.Pages.Admin.KeysHistory
 {
@@ -33,7 +34,7 @@ namespace Sunridge.Pages.Admin.KeysHistory
             {
                 Key = _unitOfWork.Key.GetCategoryListOrDropdown(),
                 Lot = _unitOfWork.Lot.GetLotListOrDropdown(),
-                KeyHistory = new Models.KeyHistory()
+                KeyHistory = new KeyHistory()
             };
 
 
@@ -52,16 +53,28 @@ namespace Sunridge.Pages.Admin.KeysHistory
 
         public IActionResult OnPost()
         {
+            //get current user
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
             if (KeyHistoryObj.KeyHistory.KeyHistoryId == 0) //new Food Type
             {
+
+
+                KeyHistoryObj.KeyHistory.Status = "Active";
+                KeyHistoryObj.KeyHistory.IsArchive = false;
+                KeyHistoryObj.KeyHistory.LastModifiedBy = claim.Value;
+                KeyHistoryObj.KeyHistory.LastModifiedDate = DateTime.Now;
                 _unitOfWork.KeyHistory.Add(KeyHistoryObj.KeyHistory);
             }
-            else //update the Food Type (edit)
+            else // (edit)
             {
+                KeyHistoryObj.KeyHistory.LastModifiedBy = claim.Value;
+                KeyHistoryObj.KeyHistory.LastModifiedDate = DateTime.Now;
                 _unitOfWork.KeyHistory.Update(KeyHistoryObj.KeyHistory);
             }
 

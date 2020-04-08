@@ -5,6 +5,7 @@
     ViewData["Title"] = "Event Calender";
 }
 
+
 <!-- Intro Section Grid -->
 <section class="text-center p-5">
     <div class="container">
@@ -16,10 +17,10 @@
         </div>
     </div>
 </section>
-@*@if (User.IsInRole(SD.AdminEndUser))
+@if (User.IsInRole(SD.AdminRole))
 {
-    <a class="nav-link" asp-area="Admin" asp-controller="ScheduledEvents" asp-action="Index"><i class="far fa-edit"></i> Edit Events</a>
-}*@
+    <a asp-page="/Admin/Events/Index" class="nav-link">Edit Events</a>
+}
 <!-- Calendar -->
 <section class="calendar text-center">
     <div class="container">
@@ -42,10 +43,10 @@
                 <p id="eventDetails"></p>
             </div>
             <div class="modal-footer">
-                @*@if (User.IsInRole(SD.AdminEndUser))
+                @if (User.IsInRole(SD.AdminRole))
                 {
                     <button type="button" class="btn btn-primary" onclick="editEvent()">Edit Event</button>
-                }*@
+                }
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -125,7 +126,7 @@
             }
         })
         function editEvent() {
-            window.location.href = '/Admin/ScheduledEvents/Edit/' + selectedEvent;
+            window.location.href = '/Admin/Events/Index';
         }
     </script>
 }

@@ -9,17 +9,17 @@ $(document).ready(function () {
 function loadList() {
     dataTable = $('#DT_load').DataTable({
         "ajax": {
-            "url": "/api/key/",
+            "url": "/api/keyshistory/",
             "type": "GET",
             "datatype": "json"
         },
         "columns": [
-            { "data": "key.serialNumber", "width": "35%" },
-            { "data": "lot.lotNumber", "width": "35%" },
-            { "data": "status", "width": "35%" },
-            { "data": "dateIssued", "width": "35%" },
-            { "data": "dateReturned", "width": "35%" },
-            { "data": "paidAmount", "width": "35%" },
+            { "data": "key.serialNumber", "width": "15%" },
+            { "data": "lot.lotNumber", "width": "15%" },
+            { "data": "status", "width": "10%" },
+            { "data": "dateIssued", "width": "15%" },
+            { "data": "dateReturned", "width": "15%" },
+            { "data": "paidAmount", "width": "10%" },
 
             {
                 "data": "id",
@@ -32,7 +32,7 @@ function loadList() {
                                     <i class="far fa-trash-alt"></i> Delete
                                 </a>
                     </div>`;
-                }, "width": "30%"
+                }, "width": "20%"
             }
         ],
         "language": {
