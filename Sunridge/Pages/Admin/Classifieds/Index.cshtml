@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Classifieds Index";
 }
-@*@if (User.IsInRole(SD.AdminRole))
+@if (User.IsInRole(SD.AdminRole))
 {
     <h2>Admin Classified List</h2>
 
@@ -36,4 +36,4 @@
 }
     @section Scripts {
         <script src="~/js/adminClassifiedIndex.js"></script>
-    }*@
+    }

@@ -16,16 +16,16 @@ namespace Sunridge.Pages.Admin.Classifieds
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        //public IEnumerable<ClassifiedListing> classifieds { get; set; }
+        public IEnumerable<ClassifiedListing> classifieds { get; set; }
 
-        //public IndexModel(IUnitOfWork unitOfWork)
-        //{
-        //    _unitOfWork = unitOfWork;
-        //}
+        public IndexModel(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
 
-        //public void OnGet()
-        //{
-        //    classifieds = _unitOfWork.ClassifiedListing.GetAll(null, null, null);
-        //}
+        public void OnGet()
+        {
+            classifieds = _unitOfWork.ClassifiedListing.GetAll(null, null, null);
+        }
     }
 }
