@@ -13,10 +13,10 @@
     </div>
 </section>
 <!-- Testimonials -->
-@*<section class="testimonials text-center">
-        @foreach (var p in Model.ClassifiedListingsList)
+<section class="testimonials text-center">
+        @foreach (var p in Model.ClassifiedListingList)
         {
-            @if (p.Category == "Trailer")
+            @if (p.Category.Description == "Trailer")
             {
                 <div class="container mb-5">
                     <hr>
@@ -28,7 +28,7 @@
                                     <div id="carousel-thumb" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel" data-interval="0">
                                         <!--Slides-->
                                         <div class="carousel-inner" role="listbox">
-                                                @foreach (var image in p.Images)
+                                                @*@foreach (var image in p.Images)
                                                 {
                                                     if (image.IsMainImage)
                                                     {
@@ -43,7 +43,7 @@
                                                         </div>
                                                     }
 
-                                                }
+                                                }*@
                                             </div>
                                         <!--/.Slides-->
                                         <!--Controls-->
@@ -57,7 +57,7 @@
                                         </a>
                                         <!--/.Controls-->
                                         <ol id="thumbnailBar" class="carousel-indicators list-inline visible-sm-block hidden-xs-block visible-md-block visible-lg-block">
-                                             @for (var imgIndex = 0; imgIndex < item.Images.Count; imgIndex++)
+                                             @*@for (var imgIndex = 0; imgIndex < item.Images.Count; imgIndex++)
                                                 {
                                                     var image = item.Images[imgIndex];
                                                     if (image.IsMainImage)
@@ -73,7 +73,7 @@
                                                         </li>
                                                     }
 
-                                                }
+                                                }*@
                                         </ol>
                                     </div>
                                     <!--/.Carousel Wrapper-->
@@ -96,4 +96,4 @@
                 </div>
             }
         }
-    </section>*@
+    </section>
