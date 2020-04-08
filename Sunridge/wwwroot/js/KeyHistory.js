@@ -22,7 +22,7 @@ function loadList() {
             { "data": "paidAmount", "width": "10%" },
 
             {
-                "data": "id",
+                "data": "keyHistoryId",
                 "render": function (data) {
                     return ` <div class="text-center">
                                 <a href="/Admin/KeysHistory/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
