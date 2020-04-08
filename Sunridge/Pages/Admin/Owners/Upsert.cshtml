@@ -7,7 +7,7 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-@if (User.IsInRole(SD.AdminRole) || User.IsInRole(SD.OwnerRole))
+@if (User.IsInRole(SD.AdminRole))
 {
     <form method="post" asp-action="Upsert" enctype="multipart/form-data">
 
@@ -152,7 +152,7 @@
 }
 else
 {
-    <h1>You must be logged in to view this page.</h1>
+    <h1>You must be logged in as an admin to view this page.</h1>
 }
 
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
