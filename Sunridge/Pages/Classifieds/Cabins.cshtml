@@ -15,7 +15,7 @@
 <section class="testimonials text-center">
         @foreach (var p in Model.ClassifiedListingsList)
         {
-            @if (p.Category.Description == "Cabin")
+            @if (p.ClassifiedCategoryId == 4)
             {
                 <div class="container mb-5">
                     <hr>

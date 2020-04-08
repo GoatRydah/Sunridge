@@ -13,7 +13,7 @@ function loadList() {
         },
         "columns": [
             { "data": "category.description", "width": "15%" },
-            { "data": "title", "width": "15%" },
+            { "data": "itemname", "width": "15%" },
             { "data": "price", "width": "10%" },
             { "data": "description", "width": "15%" },
             { "data": "phone", "width": "15%" },
@@ -22,7 +22,7 @@ function loadList() {
                 "data": "id",
                 "render": function (data) {
                     return ` <div class="text-center">
-                                <a href="/classifieds/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
+                                <a href="/pages/admin/classifieds/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                                     <i class="far fa-edit"></i> Edit
                                 </a>
                                 <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/classifieds/'+${data})>
