@@ -143,6 +143,10 @@
                     <a asp-page="./Index" type="submit" class="btn btn-success form-control">Back to List</a>
                 </div>
             </div>
+            @if (Model.OwnerObj.FirstName == null || Model.OwnerObj.FirstName == "")
+            {
+                <p class="text-danger mt-3">Default Password will be assigned to this user: <span class="text-dark font-weight-bold">Temppass123$</span></p>
+            }
         </div>
     </form>
 }
