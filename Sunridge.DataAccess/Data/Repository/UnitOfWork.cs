@@ -55,7 +55,7 @@ namespace Sunridge.DataAccess.Data.Repository
             ClassifiedCategory = new ClassifiedCategoryRepository(_db);
             ClassifiedListing = new ClassifiedListingRepository(_db);
             ClassifiedService = new ClassifiedServiceRepository(_db);
-            ClassifiedImage = new IClassifiedImageRepository(_db);
+            ClassifiedImage = new ClassifiedImageRepository(_db);
             Comment = new CommentRepository(_db);
             CommonAreaAsset = new CommonAreaAssetRepository(_db);
             ErrorViewModel = new ErrorViewModelRepository(_db);
