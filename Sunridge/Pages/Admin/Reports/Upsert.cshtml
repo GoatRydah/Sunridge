@@ -29,10 +29,7 @@
                         <div class="col-9">
                             <select class="form-control" asp-for="ReportVMObj.Report.FormType" id="formTypeDropDown">
                                 <option value="Suggestion / Complaint">Suggestion / Complaint</option>
-                                @if (User.IsInRole(SD.AdminRole))
-                                {
                                 <option value="Work in kind">Work in kind</option>
-                                }
                             </select>
                             <span class="text-danger" asp-validation-for="ReportVMObj.Report.FormType"></span>
                         </div>
