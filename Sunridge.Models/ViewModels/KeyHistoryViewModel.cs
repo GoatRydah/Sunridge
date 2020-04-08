@@ -10,7 +10,7 @@ namespace Sunridge.Models.ViewModels
     {
         public int KeyHistoryViewModelId { get; set; }
         public KeyHistory KeyHistory { get; set; }
-        public IEnumerable<SelectListItem> Key { get; set; }
-        public IEnumerable<SelectListItem> Lot { get; set; }
+        public IEnumerable<SelectListItem> KeyList { get; set; }
+        public IEnumerable<SelectListItem> LotList { get; set; }
     }
 }

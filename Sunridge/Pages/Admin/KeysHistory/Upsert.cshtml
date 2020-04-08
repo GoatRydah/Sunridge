@@ -23,20 +23,20 @@
                 <div class="col-8 pt-3">
                     <div class="form-group row">
                         <div class="col-3">
-                            <label asp-for="KeyHistoryObj.KeyHistory.Key"></label>
+                            <label asp-for="KeyHistoryObj.KeyHistory.KeyId"></label>
                         </div>
                         <div class="col-9">
-                            @Html.DropDownListFor(m => m.KeyHistoryObj.KeyHistory.KeyId, Model.KeyHistoryObj.Key, "-Please select a Key", new { @class = "form-control" })
+                            @Html.DropDownListFor(m => m.KeyHistoryObj.KeyHistory.KeyId, Model.KeyHistoryObj.KeyList, "-Please select a Key", new { @class = "form-control" })
                             <span class="text-danger" asp-validation-for="KeyHistoryObj.KeyHistory.KeyId"></span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-3">
-                            <label asp-for="KeyHistoryObj.KeyHistory.Lot"></label>
+                            <label asp-for="KeyHistoryObj.KeyHistory.LotId"></label>
                         </div>
                         <div class="col-9">
-                            @Html.DropDownListFor(m => m.KeyHistoryObj.KeyHistory.LotId, Model.KeyHistoryObj.Lot, "-Please select a Lot", new { @class = "form-control" })
-                            <span class="text-danger" asp-validation-for="KeyHistoryObj.KeyHistory.Lot"></span>
+                            @Html.DropDownListFor(m => m.KeyHistoryObj.KeyHistory.LotId, Model.KeyHistoryObj.LotList, "-Please select a Lot", new { @class = "form-control" })
+                            <span class="text-danger" asp-validation-for="KeyHistoryObj.KeyHistory.LotId"></span>
                         </div>
                     </div>
                     <div class="form-group row">
