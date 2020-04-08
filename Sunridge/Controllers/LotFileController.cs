@@ -21,7 +21,7 @@ namespace Sunridge.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get() //TODO: fix this: thinking 'id' might be passing lotid and not lothistory id right now (if it's passing at all)
+        public IActionResult Get()
         {
             int theId = 0;
             try
