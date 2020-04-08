@@ -19,38 +19,38 @@ namespace Sunridge.Pages.Classifieds.Category
         {
             _unitofWork = unitOfWork;
         }
-        //[BindProperty]
-        //public Models.ClassifiedCategory ClassifiedCategoryObj { get; set; }
-        //public IActionResult OnGet(int? id)
-        //{
-        //    ClassifiedCategoryObj = new Models.ClassifiedCategory();
-        //    if (id != null) //edit
-        //    {
-        //        ClassifiedCategoryObj = _unitofWork.ClassifiedCategory.GetFirstOrDefault(u => u.ClassifiedCategoryId == id);
-        //        if (ClassifiedCategoryObj == null)
-        //        {
-        //            return NotFound();
-        //        }
-        //    }
-        //    return Page();
-        //}
+        [BindProperty]
+        public Models.ClassifiedCategory ClassifiedCategoryObj { get; set; }
+        public IActionResult OnGet(int? id)
+        {
+            ClassifiedCategoryObj = new Models.ClassifiedCategory();
+            if (id != null) //edit
+            {
+                ClassifiedCategoryObj = _unitofWork.ClassifiedCategory.GetFirstOrDefault(u => u.ClassifiedCategoryId == id);
+                if (ClassifiedCategoryObj == null)
+                {
+                    return NotFound();
+                }
+            }
+            return Page();
+        }
 
-        //public IActionResult OnPost()
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return Page();
-        //    }
-        //    if (ClassifiedCategoryObj.ClassifiedCategoryId == 0) //new category
-        //    {
-        //        _unitofWork.ClassifiedCategory.Add(ClassifiedCategoryObj);
-        //    }
-        //    else
-        //    {
-        //        _unitofWork.ClassifiedCategory.Update(ClassifiedCategoryObj);
-        //    }
-        //    _unitofWork.Save();
-        //    return RedirectToPage("./Upsert");
-        //}
+        public IActionResult OnPost()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+            if (ClassifiedCategoryObj.ClassifiedCategoryId == 0) //new category
+            {
+                _unitofWork.ClassifiedCategory.Add(ClassifiedCategoryObj);
+            }
+            else
+            {
+                _unitofWork.ClassifiedCategory.Update(ClassifiedCategoryObj);
+            }
+            _unitofWork.Save();
+            return RedirectToPage("./Upsert");
+        }
     }
 }
