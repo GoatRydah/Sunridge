@@ -61,6 +61,11 @@ namespace Sunridge.Pages.Admin.HOALots
                 if (primaryOwner != null)
                 {
                     primaryOwners = _unitofWork.ApplicationUser.GetApplicationUserListOrDropdown(primaryOwner.Id);
+                    foreach (var item in primaryOwners)
+                    {
+                        if (item.Selected == true)
+                            PrimaryOwner = item.Value;
+                    }
                 }
                 else
                 {
@@ -80,6 +85,11 @@ namespace Sunridge.Pages.Admin.HOALots
                 if (secondaryOwner != null)
                 {
                     secondaryOwners = _unitofWork.ApplicationUser.GetApplicationUserListOrDropdown(secondaryOwner.Id);
+                    foreach (var item in secondaryOwners)
+                    {
+                        if (item.Selected == true)
+                            SecondaryOwner = item.Value;
+                    }
                 }
                 else
                 {

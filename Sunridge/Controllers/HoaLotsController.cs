@@ -7,6 +7,7 @@ using Sunridge.Utility;
 using System.Security.Claims;
 using Sunridge.Models.ViewModels;
 using System.Collections.Generic;
+using System.Web;
 
 namespace Sunridge.Controllers
 {
@@ -54,13 +55,23 @@ namespace Sunridge.Controllers
                 {
                     var owner = _unitOfWork.ApplicationUser.GetFirstOrDefault(s => s.Id == oLot.OwnerId);
 
-                    //TODO: if owner is primary, bold them and put them first, else don't
-                    theOwners += owner.FullName + ", ";
+                    if (oLot.IsPrimary)
+                        theOwners += $"<strong>{owner.FullName}</strong>, ";
+                }
+
+                foreach (var oLot in ownerLots)
+                {
+                    var owner = _unitOfWork.ApplicationUser.GetFirstOrDefault(s => s.Id == oLot.OwnerId);
+
+                    if (!oLot.IsPrimary)
+                        theOwners += owner.FullName + ", ";
                 }
 
                 //trim last comma
                 if (theOwners.Length > 1)
                     theOwners = theOwners.Substring(0, theOwners.Length - 2);
+
+                HttpUtility.HtmlEncode(theOwners);
 
                 //add owner(s) to model
                 tempModel.UserName = theOwners;
