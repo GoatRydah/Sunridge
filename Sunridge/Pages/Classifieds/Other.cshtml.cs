@@ -18,7 +18,7 @@ namespace Sunridge.Pages.Classifieds
             _unitOfWork = unitOfWork;
         }
 
-        //public List<string> serviceUrls { get; set; }
+        public List<string> serviceUrls { get; set; }
 
         public void OnGet()
         {
