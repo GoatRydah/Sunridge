@@ -32,6 +32,7 @@ namespace Sunridge.DataAccess.Data.Repository
             objFromDb.Image = lostAndFoundItem.Image;
             objFromDb.ApplicationUserId = lostAndFoundItem.ApplicationUserId;
             objFromDb.ApplicationUser = lostAndFoundItem.ApplicationUser;
+            objFromDb.username = lostAndFoundItem.ApplicationUser.FullName;
 
             _db.SaveChanges();
         }

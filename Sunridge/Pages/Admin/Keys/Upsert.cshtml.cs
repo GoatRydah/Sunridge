@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Sunridge.Models;
+using System.Security.Claims;
 
 namespace Sunridge.Pages.Admin.Keys
 {
@@ -43,16 +44,25 @@ namespace Sunridge.Pages.Admin.Keys
 
         public IActionResult OnPost()
         {
+            //get current user
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
             if (KeyObj.KeyId == 0) //new category
             {
+                KeyObj.IsArchive = false;
+                KeyObj.LastModifiedBy = claim.Value;
+                KeyObj.LastModifiedDate = DateTime.Now;
                 _unitOfWork.Key.Add(KeyObj);
             }
             else //update the category (edit)
             {
+                KeyObj.LastModifiedBy = claim.Value;
+                KeyObj.LastModifiedDate = DateTime.Now;
                 _unitOfWork.Key.Update(KeyObj);
             }
 
