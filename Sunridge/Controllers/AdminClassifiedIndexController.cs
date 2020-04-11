@@ -25,32 +25,32 @@ namespace Sunridge.Controllers
             return Json(new { data = _unitOfWork.ClassifiedListing.GetAll(null, null, null) });
         }
 
-        //[HttpDelete("{id}")]
-        //public IActionResult Delete(int id)
-        //{
-        //    try
-        //    {
-        //        var objFromDb = _unitOfWork.ClassifiedListing.GetFirstOrDefault(u => u.ClassifiedListingId == id);
-        //        if (objFromDb == null)
-        //        {
-        //            return Json(new { success = false, message = "Error while deleting" });
-        //        }
-        //        Physically Delete the image in wwwroot
-        //        var imagePath = Path.Combine(_hostingEnvironment.WebRootPath, objFromDb.Images.TrimStart('\\'));
-        //        if (System.IO.File.Exists(imagePath))
-        //        {
-        //            System.IO.File.Delete(imagePath);
-        //        }
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                var objFromDb = _unitOfWork.ClassifiedListing.GetFirstOrDefault(u => u.ClassifiedListingId == id);
+                if (objFromDb == null)
+                {
+                    return Json(new { success = false, message = "Error while deleting" });
+                }
+                //Physically Delete the image in wwwroot
+                var imagePath = Path.Combine(_hostingEnvironment.WebRootPath, objFromDb.Image.TrimStart('\\'));
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
 
-        //        _unitOfWork.ClassifiedListing.Remove(objFromDb);
-        //        _unitOfWork.Save();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return Json(new { success = false, message = "Error while deleting" });
-        //    }
-        //    return Json(new { success = true, message = "Delete Successful" });
+                _unitOfWork.ClassifiedListing.Remove(objFromDb);
+                _unitOfWork.Save();
+            }
+            catch (Exception)
+            {
+                return Json(new { success = false, message = "Error while deleting" });
+            }
+            return Json(new { success = true, message = "Delete Successful" });
 
-        //}
+        }
     }
 }
