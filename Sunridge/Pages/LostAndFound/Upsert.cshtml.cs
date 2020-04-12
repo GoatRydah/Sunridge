@@ -47,14 +47,6 @@ namespace Sunridge.Pages.LostAndFound
 
         public IActionResult OnPost()
         {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-
-            if (claim != null)
-            {
-                LostAndFoundItemObj.ApplicationUserId = claim.Value;
-
-
                 //find root path wwwroot
                 string webRootPath = _hostingEnvironment.WebRootPath;
                 //Grab the file(s) from the form
@@ -67,6 +59,10 @@ namespace Sunridge.Pages.LostAndFound
 
                 if (LostAndFoundItemObj.Id == 0) //new lostandfounditem
                 {
+                    var claimsIdentity = (ClaimsIdentity)User.Identity;
+                    var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+                    LostAndFoundItemObj.ApplicationUserId = claim.Value;
+                    LostAndFoundItemObj.ApplicationUser = _unitofWork.ApplicationUser.GetFirstOrDefault(u=> u.Id == claim.Value);
                     //rename file user submits for image
                     string fileName = Guid.NewGuid().ToString();
                     //upload file to the path
@@ -87,6 +83,8 @@ namespace Sunridge.Pages.LostAndFound
                 {
                     var objFromDb =
                         _unitofWork.LostAndFoundItem.Get(LostAndFoundItemObj.Id);
+                LostAndFoundItemObj.ApplicationUserId = objFromDb.ApplicationUserId;
+                LostAndFoundItemObj.ApplicationUser = _unitofWork.ApplicationUser.GetFirstOrDefault(u=>u.Id == LostAndFoundItemObj.ApplicationUserId);
                     //checks if there are files submitted
                     if (files.Count > 0)
                     {
@@ -104,12 +102,13 @@ namespace Sunridge.Pages.LostAndFound
                             System.IO.File.Delete(imagePath);
                         }
 
-                        using (var filestream = new FileStream(Path.Combine(uploads, fileName, extension), FileMode.Create))
+                        using (var filestream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
                         {
-                            files[0].CopyTo(filestream);
+                            files[0].CopyTo(filestream); //files variable comes from the razor page files id
                         }
 
                         LostAndFoundItemObj.Image = @"\images\lostAndFoundItem\" + fileName + extension;
+
                     }
                     else
                     {
@@ -120,8 +119,6 @@ namespace Sunridge.Pages.LostAndFound
                 }
                 LostAndFoundItemObj.ApplicationUser = _unitofWork.ApplicationUser.GetFirstOrDefault(u => u.Id == LostAndFoundItemObj.ApplicationUserId);
                 LostAndFoundItemObj.username = LostAndFoundItemObj.ApplicationUser.FullName;
-
-            }
             _unitofWork.Save();
             return RedirectToPage("./Index");
         }

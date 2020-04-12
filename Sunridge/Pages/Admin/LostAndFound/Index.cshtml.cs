@@ -11,7 +11,7 @@ namespace Sunridge.Pages.Admin.LostAndFound
     {
         public IActionResult OnGet()
         {
-            return RedirectToPage("../../LostAndFound/Index");
+            return RedirectToPage("../../LostAndFound/LostAndFoundData");
         }
     }
 }
