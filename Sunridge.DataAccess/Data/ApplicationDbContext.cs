@@ -25,6 +25,7 @@ namespace Sunridge.Data
         public DbSet<ClassifiedListing> ClassifiedListing { get; set; }
         public DbSet<ClassifiedService> ClassifiedService { get; set; }
         public DbSet<ClassifiedImage> ClassifiedImage { get; set; }
+        public DbSet<ClassifiedListingVM> ClassifiedListingVM { get; set; }
         public DbSet<Comment> Comment { get; set; }
         public DbSet<CommonAreaAsset> CommonAreaAsset { get; set; }
         public DbSet<ErrorViewModel> ErrorViewModel { get; set; }
