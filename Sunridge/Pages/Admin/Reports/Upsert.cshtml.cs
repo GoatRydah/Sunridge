@@ -90,14 +90,6 @@ namespace Sunridge.Pages.Admin.Reports
 
         public IActionResult OnPostCreate()
         {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-
-            if (claim != null)
-            {
-                ReportVMObj.Report.ApplicationUserId = claim.Value;
-                ReportVMObj.Report.ApplicationUser = _unitofWork.ApplicationUser.GetFirstOrDefault(u=> u.Id == claim.Value);
-            }
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -107,6 +99,14 @@ namespace Sunridge.Pages.Admin.Reports
             
             if (ReportVMObj.Report.Id == 0) //new  item
             {
+                var claimsIdentity = (ClaimsIdentity)User.Identity;
+                var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+                if (claim != null)
+                {
+                    ReportVMObj.Report.ApplicationUserId = claim.Value;
+                    ReportVMObj.Report.ApplicationUser = _unitofWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value);
+                }
                 //equipment and labor
 
                 if (ReportVMObj.Report.Resolved == true)
@@ -155,6 +155,8 @@ namespace Sunridge.Pages.Admin.Reports
             }
             else //else we edit
             {
+                ReportVMObj.Report.ApplicationUser = _unitofWork.ReportItem.GetFirstOrDefault(u => u.Id == ReportVMObj.Report.Id).ApplicationUser;
+                ReportVMObj.Report.ApplicationUserId = _unitofWork.ReportItem.GetFirstOrDefault(u => u.Id == ReportVMObj.Report.Id).ApplicationUserId;
                 if (ReportVMObj.Report.Resolved == true)
                 {
                     ReportVMObj.Report.ResolvedDate = DateTime.Today.ToString();
