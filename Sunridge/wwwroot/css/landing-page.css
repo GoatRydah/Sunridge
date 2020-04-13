@@ -238,3 +238,8 @@ img.masthead9 {
 .carousel-inner > .item > img {
     margin: 0 auto;
 }
+
+#bannerBody {
+    white-space: pre;
+    overflow-wrap: break-word;
+}
