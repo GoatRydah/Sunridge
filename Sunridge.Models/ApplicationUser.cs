@@ -54,13 +54,12 @@ namespace Sunridge.Models
         //Navigation properties
         [ForeignKey("AddressId")]
         public virtual Address Address { get; set; }
-        public virtual IEnumerable<OwnerLot> OwnerLots { get; set; }
+        public virtual ICollection<OwnerLot> OwnerLots { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
         public virtual ICollection<FormResponse> FormResponses { get; set; }
         public virtual ICollection<ClassifiedListing> ClassifiedListings { get; set; }
         public virtual ICollection<KeyHistory> KeyHistories { get; set; }
-        public virtual IEnumerable<LostAndFoundItem> LostAndFoundItems { get; set; }
-        public virtual IEnumerable<BoardMember> BoardMembers { get; set; }
+        public virtual ICollection<LostAndFoundItem> LostAndFoundItems { get; set; }
 
 
 
