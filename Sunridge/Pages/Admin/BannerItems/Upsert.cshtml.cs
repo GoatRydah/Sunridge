@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Sunridge.Models;
+using System.Web;
 
 namespace Sunridge.Pages.Admin.BannerItems
 {
@@ -80,6 +81,10 @@ namespace Sunridge.Pages.Admin.BannerItems
                 }
 
                 BannerObj.Image = @"\images\banner\" + fileName + extension;
+
+                //convert to html
+                HttpUtility.HtmlEncode(BannerObj.Body);
+ 
 
                 //add it to the db
                 _unitOfWork.Banner.Add(BannerObj);
