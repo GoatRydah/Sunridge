@@ -7,6 +7,7 @@ namespace Sunridge.DataAccess.Data.Repository
     {
         private readonly ApplicationDbContext _db;
         public IApplicationUserRepository ApplicationUser { get; private set; }
+        public IAdminCommentsRepository AdminComments { get; private set; }
         public IAddressRepository Address { get; private set; }
         public IBannerRepository Banner { get; private set; }
         public IBoardMemberRepository BoardMember { get; private set; }
