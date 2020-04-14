@@ -1,10 +1,13 @@
 ﻿@page
 @model Sunridge.Pages.LostAndFound.UpsertModel
+@using Sunridge.Utility
 @{
     ViewData["Title"] = "Upsert";
 }
 <br />
 <br />
+@if (User.IsInRole(SD.AdminRole) || User.IsInRole(SD.OwnerRole))
+{
 <form method="post" asp-action="Upsert" enctype="multipart/form-data">
     @if (Model.LostAndFoundItemObj.Id != 0)
     {
@@ -37,6 +40,10 @@
         </div>
     </div>
 </form>
+}else
+{
+    <h1>Access Denied</h1>
+}
 @section Scripts {
     <script>
         tinymce.init(
