@@ -15,7 +15,12 @@ function LoadList() {
             { "data": "lotNumber", "width": "15%" },
             { "data": "streetAddress", "width": "15%" },
             { "data": "userName", "width": "15%" },
-            { "data": "taxId", "width": "15%" },
+            {
+                "data": "taxId", "render": function (data) {
+                    return `<a href="http://www3.co.weber.ut.us/psearch/tax_summary.php?id=${data}">${data}</a>`;  
+                },
+                "width": "15%"
+            },
             { "data": "lotInventory", "width": "15%" },
             {
                 "data": "id",

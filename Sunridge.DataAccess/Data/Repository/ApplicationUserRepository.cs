@@ -89,7 +89,7 @@ namespace Sunridge.DataAccess.Data.Repository
             objFromDb.Address = applicationUser.Address;
             objFromDb.Occupation = applicationUser.Occupation;
             objFromDb.Birthday = applicationUser.Birthday;
-            objFromDb.Phone = applicationUser.Phone;
+            objFromDb.PhoneNumber = applicationUser.PhoneNumber;
             objFromDb.Email = applicationUser.Email;
             objFromDb.EmergencyContactName = applicationUser.EmergencyContactName;
             objFromDb.EmergencyContactPhone = applicationUser.EmergencyContactPhone;
