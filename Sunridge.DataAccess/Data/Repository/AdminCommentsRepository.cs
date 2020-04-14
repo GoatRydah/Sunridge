@@ -31,6 +31,8 @@ namespace Sunridge.DataAccess.Data.Repository
             objFromDb.AdminComment = adminComments.AdminComment;
             objFromDb.ReportId = adminComments.ReportId;
             objFromDb.Report = adminComments.Report;
+            objFromDb.ApplicationUserId = adminComments.ApplicationUserId;
+            objFromDb.ApplicationUser = adminComments.ApplicationUser;
 
 
             _db.SaveChanges();

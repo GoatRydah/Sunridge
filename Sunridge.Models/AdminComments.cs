@@ -18,5 +18,10 @@ namespace Sunridge.Models
         [NotMapped]
         [ForeignKey("ReportId")]
         public virtual Report Report { get; set; }
+
+        public string ApplicationUserId { get; set; }
+
+        [ForeignKey("ApplicationUserId")]
+        public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }
