@@ -66,6 +66,8 @@
                             <input class="form-control" asp-for="ReportVMObj.Report.ListingDate" />
                         </div>
                     </div>
+                    @if (User.IsInRole(SD.AdminRole))
+                    {
                     <div class="form-group row">
                         <div class="col-3">
                             <label asp-for="ReportVMObj.Report.Resolved"></label>
@@ -74,6 +76,7 @@
                             <input class="form-control" asp-for="ReportVMObj.Report.Resolved" />
                         </div>
                     </div>
+                    }
 
                     <script>
                         var currentSelected = document.getElementById("formTypeDropDown");
