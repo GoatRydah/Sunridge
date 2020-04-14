@@ -51,6 +51,7 @@ namespace Sunridge.DataAccess.Data.Repository
         {
             _db = db;
             ApplicationUser = new ApplicationUserRepository(_db);
+            AdminComments = new AdminCommentsRepository(_db);
             Address = new AddressRepository(_db);
             Banner = new BannerRepository(_db);
             BoardMember = new BoardMemberRepository(_db);

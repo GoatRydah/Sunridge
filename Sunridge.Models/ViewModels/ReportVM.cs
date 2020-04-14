@@ -11,5 +11,6 @@ namespace Sunridge.Models.ViewModels
         public Report Report { get; set; }
         public List<EquipmentHours> EquipmentHours { get; set; }
         public List<LaborHours> LaborHours { get; set; }
+        public AdminComments AdminComments { get; set; }
     }
 }
