@@ -5,28 +5,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>News Items</h2>
+<h1 class="mb-4">News</h1>
 
-@if (User.IsInRole(SD.AdminRole))
-{
-    <div class="row">
-        <div class="col-6 text-right">
-            <a asp-page="Upsert" class="btn btn-primary"><i class="fas fa-plus"></i>&nbsp;Create New</a>
-        </div>
-    </div>
-    <table id="DT_load" class="table table-striped table-bordered" style="width:100%">
-        <thead>
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-    </table>
-}
 <div class="container mb-5">
-    <h1 class="mb-4">News History</h1>
+
     <div id="accordion">
         @foreach (var year in Model.numYears)
         {
@@ -40,11 +22,11 @@
                 </div>
                 @foreach (var item in Model.NewsItemList.Where(i => i.Year == year))
                 {
-                    <div id="collapse + @year" class="collapse show" aria-labelledby="@year" data-parent="#accordion" style="">
+                    <div id="collapse + @year" class="collapse hide" aria-labelledby="@year" data-parent="#accordion" style="">
                         <div class="card-body">
                             <hr class="mt-5 mb-5">
-                            <h2>@item.Header</h2>
-                            <p>@item.Content</p>
+                            <h2>@Html.Raw(item.Header)</h2>
+                            <p>@Html.Raw(item.Content)</p>
 
                             @if (item.FilePath != null)
                             {
@@ -59,6 +41,3 @@
         }
     </div>
 </div>
-@section Scripts{
-    <script src="~/js/newsItem.js"></script>
-}

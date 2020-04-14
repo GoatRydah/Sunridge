@@ -46,7 +46,7 @@
         </div>
         <div class="row">
             <div class="col-6">
-                <button type="submit" class="btn btn-primary form-control" onclick="return ValidInput()">Create</button>
+                <button type="submit" class="btn btn-primary form-control" onclick="return ValidInput()">Submit</button>
             </div>
             <div class="col-6">
                 <a asp-page="./Index" type="submit" class="btn btn-success form-control">Back to List</a>
@@ -54,3 +54,14 @@
         </div>
     </div>
 </form>
+@section Scripts {
+    <script>
+        tinymce.init(
+            {
+                selector: 'textarea',
+                plugins: 'lists',
+                menubar: 'file edit format'
+            }
+        )
+    </script>
+}
