@@ -28,11 +28,11 @@
                 <input asp-for="ScheduledEvent.Location" class="form-control" />
                 <span asp-validation-for="ScheduledEvent.Location" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="ScheduledEvent.Image" class="control-label"></label>
                 <input asp-for="ScheduledEvent.Image" class="form-control" />
                 <span asp-validation-for="ScheduledEvent.Image" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <label asp-for="ScheduledEvent.Start" class="control-label"></label>
                 <input asp-for="ScheduledEvent.Start" class="form-control" />
@@ -47,6 +47,10 @@
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="ScheduledEvent.IsFullDay" /> @Html.DisplayNameFor(model => model.ScheduledEvent.IsFullDay)
                 </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="ScheduledEvent.Image"></label>
+                <input type="file" name="files" asp-for="ScheduledEvent.Image" class="form-control" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
