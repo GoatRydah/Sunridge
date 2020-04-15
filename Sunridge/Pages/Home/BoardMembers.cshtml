@@ -24,7 +24,13 @@
                     <div class="testimonial-item mx-auto mb-5 mb-lg-0">
                         <img class="img-fluid rounded-circle mb-3" src="@member.Image">
                         <h5>@member.BoardRole: @member.ApplicationUser.FullName</h5>
-                        <p class="font-weight-light mb-0">@member.ApplicationUser.OwnerLots</p>
+                        @foreach (var lot in Model.LotList)
+                        {
+                            if (member.ApplicationUser == lot.ApplicationUser)
+                            {
+                                <p class="font-weight-light mb-0">@lot.Lot.LotNumber</p>
+                            }
+                        }
                         <p class="font-weight-light mb-0">@member.ApplicationUser.PhoneNumber</p>
                         @{string temp = "mailto:" + @member.ApplicationUser.Email;}
                         <p class="font-weight-light mb-0">Email: <a href=@temp.ToString()>@member.ApplicationUser.FullName</a></p>

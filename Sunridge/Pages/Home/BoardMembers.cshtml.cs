@@ -14,6 +14,7 @@ namespace Sunridge.Pages.Home
         private readonly IUnitOfWork _unitOfWork;
 
         public IEnumerable<BoardMember> BoardMemberList { get; set; }
+        public IEnumerable<OwnerLot> LotList { get; set; }
         public BoardMembersModel(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -22,6 +23,8 @@ namespace Sunridge.Pages.Home
         public void OnGet()
         {
             BoardMemberList = _unitOfWork.BoardMember.GetAll(null, q => q.OrderBy(c => c.DisplayOrder), null);
+            LotList = _unitOfWork.OwnerLot.GetAll(null,null,"Lot");
+
             int count = 0;
             if(BoardMemberList.Any())
             {
