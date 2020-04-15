@@ -50,87 +50,87 @@ namespace Sunridge.Pages.Admin.ScheduledEvents
 
             return RedirectToPage("./Index");
         }
-        public IActionResult OnPost()
-        {
-            //find root path to wwwroot
-            string webRootPath = _hostingEnvironment.WebRootPath;
-            //grab the file(s) from the form
-            var files = HttpContext.Request.Form.Files;
+        //    public IActionResult OnPost()
+        //{
+        //    //find root path to wwwroot
+        //    string webRootPath = _hostingEnvironment.WebRootPath;
+        //    //grab the file(s) from the form
+        //    var files = HttpContext.Request.Form.Files;
 
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return Page();
+        //    }
 
 
-            //new menu item
-            if (ScheduledEvent.ID == 0)
-            {
-                //rename the file the user submits
-                //guid is a unique string that will not be duplicated
-                string fileName = Guid.NewGuid().ToString();
+        //    //new menu item
+        //    if (ScheduledEvent.ID == 0)
+        //    {
+        //        //rename the file the user submits
+        //        //guid is a unique string that will not be duplicated
+        //        string fileName = Guid.NewGuid().ToString();
 
-                //upload to path
-                var uploads = Path.Combine(webRootPath, @"images\ScheduledEvents");
+        //        //upload to path
+        //        var uploads = Path.Combine(webRootPath, @"images\ScheduledEvents");
 
-                //preserve our extension
-                var extension = Path.GetExtension(files[0].FileName);
+        //        //preserve our extension
+        //        var extension = Path.GetExtension(files[0].FileName);
 
-                //append new name to the extension
-                using (var filestream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
-                {
-                    files[0].CopyTo(filestream);
-                }
+        //        //append new name to the extension
+        //        using (var filestream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+        //        {
+        //            files[0].CopyTo(filestream);
+        //        }
 
-                ScheduledEvent.Image = @"\images\ScheduledEvents\" + fileName + extension;
+        //        ScheduledEvent.Image = @"\images\ScheduledEvents\" + fileName + extension;
 
-                //add it to the db
-                _unitOfWork.ScheduledEvents.Add(ScheduledEvent);
-            }
-            //edit the menu item 
-            else
-            {
-                var objFromDb = _unitOfWork.ScheduledEvents.Get(ScheduledEvent.ID);
-                //were there any files
-                if (files.Count > 0)
-                {
-                    //rename the file the user submits
-                    //guid is a unique string that will not be duplicated
-                    string fileName = Guid.NewGuid().ToString();
+        //        //add it to the db
+        //        _unitOfWork.ScheduledEvents.Add(ScheduledEvent);
+        //    }
+        //    //edit the menu item 
+        //    else
+        //    {
+        //        var objFromDb = _unitOfWork.ScheduledEvents.Get(ScheduledEvent.ID);
+        //        //were there any files
+        //        if (files.Count > 0)
+        //        {
+        //            //rename the file the user submits
+        //            //guid is a unique string that will not be duplicated
+        //            string fileName = Guid.NewGuid().ToString();
 
-                    //upload to path
-                    var uploads = Path.Combine(webRootPath, @"images\ScheduledEvents");
+        //            //upload to path
+        //            var uploads = Path.Combine(webRootPath, @"images\ScheduledEvents");
 
-                    //preserve our extension
-                    var extension = Path.GetExtension(files[0].FileName);
-                    var imagePath = Path.Combine(webRootPath, objFromDb.Image.TrimStart('\\'));
+        //            //preserve our extension
+        //            var extension = Path.GetExtension(files[0].FileName);
+        //            var imagePath = Path.Combine(webRootPath, objFromDb.Image.TrimStart('\\'));
 
-                    //if image already exists
-                    if (System.IO.File.Exists(imagePath))
-                    {
-                        System.IO.File.Delete(imagePath);
-                    }
+        //            //if image already exists
+        //            if (System.IO.File.Exists(imagePath))
+        //            {
+        //                System.IO.File.Delete(imagePath);
+        //            }
 
-                    //append new name to the extension
-                    using (var filestream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
-                    {
-                        files[0].CopyTo(filestream);
-                    }
+        //            //append new name to the extension
+        //            using (var filestream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+        //            {
+        //                files[0].CopyTo(filestream);
+        //            }
 
-                    ScheduledEvent.Image = @"\images\ScheduledEvents\" + fileName + extension;
-                }
-                else
-                {
-                    ScheduledEvent.Image = objFromDb.Image;
-                }
+        //            ScheduledEvent.Image = @"\images\ScheduledEvents\" + fileName + extension;
+        //        }
+        //        else
+        //        {
+        //            ScheduledEvent.Image = objFromDb.Image;
+        //        }
 
-                _unitOfWork.ScheduledEvents.Update(ScheduledEvent);
-            }
+        //        _unitOfWork.ScheduledEvents.Update(ScheduledEvent);
+        //    }
 
-            //commit changes to the db
-            _unitOfWork.Save();
+        //    //commit changes to the db
+        //    _unitOfWork.Save();
 
-            return RedirectToPage("./Index");
-        }
+        //    return RedirectToPage("./Index");
+        //}
     }
 }
