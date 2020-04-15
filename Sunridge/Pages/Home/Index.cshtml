@@ -20,8 +20,8 @@
                     <header class="text-white text-center" id="bannerHeader">
                         <div id="carouselTextBox" class="container w-4 p-4">
                             <h1>@Html.DisplayFor(modelItem => item.Header)</h1>
-                            <p style="font-size: 18pt;">
-                                @Html.DisplayFor(modelItem => item.Body)
+                            <p style="font-size: 18pt;" id="bannerBody">
+                                @Html.Raw(item.Body)
                             </p>
                         </div>
                     </header>

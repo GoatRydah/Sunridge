@@ -11,7 +11,7 @@ namespace Sunridge.Pages.Admin.NewsItems
     {
         public IActionResult OnGet()
         {
-            return RedirectToPage("../../NewsItemFolder/Index");
+            return RedirectToPage("../../NewsItemFolder/NewsItemData");
         }
     }
 }

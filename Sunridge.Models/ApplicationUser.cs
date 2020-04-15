@@ -29,11 +29,6 @@ namespace Sunridge.Models
             ConvertEmptyStringToNull = true, NullDisplayText = "[None listed]")]
         public DateTime? Birthday { get; set; }
 
-        [DataType(DataType.PhoneNumber)]
-        [Display(Name = "Phone Number")]
-        [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText = "[None listed]")]
-        public string Phone { get; set; }
-
         [Display(Name = "Emergency Contact")]
         [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText = "[None listed]")]
         public string EmergencyContactName { get; set; }
@@ -54,20 +49,24 @@ namespace Sunridge.Models
         //Navigation properties
         [ForeignKey("AddressId")]
         public virtual Address Address { get; set; }
-        public virtual IEnumerable<OwnerLot> OwnerLots { get; set; }
+        public virtual ICollection<OwnerLot> OwnerLots { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
         public virtual ICollection<FormResponse> FormResponses { get; set; }
         public virtual ICollection<ClassifiedListing> ClassifiedListings { get; set; }
         public virtual ICollection<KeyHistory> KeyHistories { get; set; }
-        public virtual IEnumerable<LostAndFoundItem> LostAndFoundItems { get; set; }
-        public virtual IEnumerable<BoardMember> BoardMembers { get; set; }
+        public virtual ICollection<LostAndFoundItem> LostAndFoundItems { get; set; }
 
 
 
+        [NotMapped]
         public string ApartmentValue { get; set; }
+        [NotMapped]
         public string CityValue { get; set; }
+        [NotMapped]
         public string StateValue { get; set; }
+        [NotMapped]
         public string ZipValue { get; set; }
+        [NotMapped]
         public string AddressValue { get; set; }
         // Calculated properties
         [Display(Name = "Name")]

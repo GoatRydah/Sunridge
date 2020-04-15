@@ -158,11 +158,12 @@ else
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script>
     $(".submission").click(function () {
-        var conf = confirm("Click okay to create another Owner after this one (clicking cancel still creates this owner)");
+        var conf = confirm("OWNER IS BEING CREATED. Would you like to create another?");
         if (conf == true) {
             $("#another").val(true);
         } else {
-             $("#another").val(false);
+            $("#another").val(false);
+            alert("Redirecting you to HOALots to assign Owner(s) a Lot.");
         }
     });
 </script>

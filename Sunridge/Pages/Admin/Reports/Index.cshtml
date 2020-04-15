@@ -7,7 +7,7 @@
 
 @if (User.IsInRole(SD.AdminRole) || User.IsInRole(SD.OwnerRole))
 {
-    <div class="border  container">
+    <div class="border  container mt-5 pt-3">
         <div class="row">
             <div class="col-6">
                 <h2 class="text-primary">Report List</h2>
@@ -36,6 +36,12 @@
         <a href="\images\Forms\SUNRIDGE_BUILDING_APPROVAL_REQUEST_FORM_rev2.pdf">Sunridge Building Approval Request Form</a>
         <br>
         <a href="\images\Forms\Sunridge-claim-form-fillable.pdf">Sunridge Claim Form</a>
+
+        <div class="row">
+            <div class="col-12 text-right mt-4 mb-4">
+                <a asp-page="/Admin/Dashboard" class="btn btn-success text-center float-right">Back to Dashboard</a>
+            </div>
+        </div>
     </div>
 }
 else

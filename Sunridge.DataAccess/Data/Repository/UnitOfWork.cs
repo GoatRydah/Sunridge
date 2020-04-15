@@ -7,6 +7,7 @@ namespace Sunridge.DataAccess.Data.Repository
     {
         private readonly ApplicationDbContext _db;
         public IApplicationUserRepository ApplicationUser { get; private set; }
+        public IAdminCommentsRepository AdminComments { get; private set; }
         public IAddressRepository Address { get; private set; }
         public IBannerRepository Banner { get; private set; }
         public IBoardMemberRepository BoardMember { get; private set; }
@@ -50,6 +51,7 @@ namespace Sunridge.DataAccess.Data.Repository
         {
             _db = db;
             ApplicationUser = new ApplicationUserRepository(_db);
+            AdminComments = new AdminCommentsRepository(_db);
             Address = new AddressRepository(_db);
             Banner = new BannerRepository(_db);
             BoardMember = new BoardMemberRepository(_db);

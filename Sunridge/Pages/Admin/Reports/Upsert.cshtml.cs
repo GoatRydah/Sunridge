@@ -10,6 +10,7 @@ using Sunridge.Data;
 using Sunridge.DataAccess.Data.Repository.IRepository;
 using Sunridge.Models;
 using Sunridge.Models.ViewModels;
+using Sunridge.Utility;
 
 namespace Sunridge.Pages.Admin.Reports
 {
@@ -34,7 +35,8 @@ namespace Sunridge.Pages.Admin.Reports
             {
                 Report = new Report(),
                 EquipmentHours = new List<EquipmentHours>(),
-                LaborHours = new List<LaborHours>()
+                LaborHours = new List<LaborHours>(),
+                AdminComments = new AdminComments()
             };
 
 
@@ -45,9 +47,15 @@ namespace Sunridge.Pages.Admin.Reports
 
                 ReportVMObj.Report = _unitofWork.ReportItem.GetFirstOrDefault(u => u.Id == id);
                 ReportVMObj.EquipmentHours = equipmentTemp.ToList();
-                //equipmentCount = ReportVMObj.EquipmentHours.Count();
                 ReportVMObj.LaborHours = laborTemp.ToList();
-                //laborCount = ReportVMObj.LaborHours.Count();
+                try 
+                {
+                    ReportVMObj.AdminComments = _unitofWork.AdminComments.GetFirstOrDefault(u => u.ReportId == id);
+                }catch(Exception e)
+                {
+                    ReportVMObj.AdminComments = new AdminComments();
+                }
+
 
                 if (ReportVMObj == null)
                 {
@@ -90,14 +98,6 @@ namespace Sunridge.Pages.Admin.Reports
 
         public IActionResult OnPostCreate()
         {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-
-            if (claim != null)
-            {
-                ReportVMObj.Report.ApplicationUserId = claim.Value;
-                ReportVMObj.Report.ApplicationUser = _unitofWork.ApplicationUser.GetFirstOrDefault(u=> u.Id == claim.Value);
-            }
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -107,6 +107,14 @@ namespace Sunridge.Pages.Admin.Reports
             
             if (ReportVMObj.Report.Id == 0) //new  item
             {
+                var claimsIdentity = (ClaimsIdentity)User.Identity;
+                var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+                if (claim != null)
+                {
+                    ReportVMObj.Report.ApplicationUserId = claim.Value;
+                    ReportVMObj.Report.ApplicationUser = _unitofWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value);
+                }
                 //equipment and labor
 
                 if (ReportVMObj.Report.Resolved == true)
@@ -128,6 +136,8 @@ namespace Sunridge.Pages.Admin.Reports
                         reportNum = item.Id;
                     }
                 }
+                //ReportVMObj.AdminComments.ReportId = reportNum;
+                //ReportVMObj.AdminComments.Report = _unitofWork.ReportItem.GetFirstOrDefault(u => u.Id == reportNum);
                 if (ReportVMObj.LaborHours != null)
                 {
                     for (int i = 0; i < ReportVMObj.LaborHours.Count(); i++)
@@ -155,6 +165,8 @@ namespace Sunridge.Pages.Admin.Reports
             }
             else //else we edit
             {
+                ReportVMObj.Report.ApplicationUserId = _unitofWork.ReportItem.GetFirstOrDefault(u => u.Id == ReportVMObj.Report.Id).ApplicationUserId;
+                ReportVMObj.Report.ApplicationUser = _unitofWork.ApplicationUser.GetFirstOrDefault(u => u.Id == ReportVMObj.Report.ApplicationUserId);
                 if (ReportVMObj.Report.Resolved == true)
                 {
                     ReportVMObj.Report.ResolvedDate = DateTime.Today.ToString();
@@ -164,7 +176,6 @@ namespace Sunridge.Pages.Admin.Reports
                     ReportVMObj.Report.ResolvedDate = "Unresolved";
                 }
                 _unitofWork.ReportItem.Update(ReportVMObj.Report);
-
                 try
                 {
 
@@ -184,12 +195,46 @@ namespace Sunridge.Pages.Admin.Reports
                 {
                     ReportVMObj.Report.ApplicationUser = _unitofWork.ApplicationUser.GetFirstOrDefault(u => u.Id == ReportVMObj.Report.ApplicationUserId);
                     ReportVMObj.Report.username = ReportVMObj.Report.ApplicationUser.FullName;
+                    if (User.IsInRole(SD.AdminRole))
+                    {
+                        var claimsIdentity = (ClaimsIdentity)User.Identity;
+                        var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+                        ReportVMObj.AdminComments.ApplicationUser = _unitofWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim.Value);
+                        ReportVMObj.AdminComments.ApplicationUserId = claim.Value;
+                        ReportVMObj.AdminComments.Report = ReportVMObj.Report;
+                        ReportVMObj.AdminComments.ReportId = ReportVMObj.Report.Id;
+                        if (ReportVMObj.AdminComments.Id == 0)
+                        {
+                            _unitofWork.AdminComments.Add(ReportVMObj.AdminComments);
+                        }
+                        else
+                        {
+                            _unitofWork.AdminComments.Update(ReportVMObj.AdminComments);
+                        }
+                    }
                     _unitofWork.Save();
                     return RedirectToPage("./Index");
                 }
             }
             ReportVMObj.Report.ApplicationUser = _unitofWork.ApplicationUser.GetFirstOrDefault(u => u.Id == ReportVMObj.Report.ApplicationUserId);
             ReportVMObj.Report.username = ReportVMObj.Report.ApplicationUser.FullName;
+            if (User.IsInRole(SD.AdminRole))
+            {
+                var claimsIdentity1 = (ClaimsIdentity)User.Identity;
+                var claim1 = claimsIdentity1.FindFirst(ClaimTypes.NameIdentifier);
+                ReportVMObj.AdminComments.ApplicationUser = _unitofWork.ApplicationUser.GetFirstOrDefault(u => u.Id == claim1.Value);
+                ReportVMObj.AdminComments.ApplicationUserId = claim1.Value;
+                ReportVMObj.AdminComments.Report = ReportVMObj.Report;
+                ReportVMObj.AdminComments.ReportId = ReportVMObj.Report.Id;
+                if (ReportVMObj.AdminComments.Id == 0)
+                {
+                    _unitofWork.AdminComments.Add(ReportVMObj.AdminComments);
+                }
+                else
+                {
+                    _unitofWork.AdminComments.Update(ReportVMObj.AdminComments);
+                }
+            }
             _unitofWork.Save();
             return RedirectToPage("./Index");
         }

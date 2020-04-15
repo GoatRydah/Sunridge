@@ -81,7 +81,7 @@
                     <label asp-for="PrimaryOwner">Primary Owner</label>
                 </div>
                 <div class="col-md-9">
-                    @Html.DropDownListFor(m => m.PrimaryOwner, Model.primaryOwners, "- Please select an owner", new { @class = "form-control" })
+                    @Html.DropDownListFor(m => m.PrimaryOwner, Model.primaryOwners, "- Please select an owner", new { @class = "form-control selectpicker" })
                     <span class="text-danger" asp-validation-for="PrimaryOwner"></span>
                 </div>
             </div>
@@ -90,7 +90,7 @@
                     <label asp-for="SecondaryOwner">Secondary Owner</label>
                 </div>
                 <div class="col-md-9">
-                    @Html.DropDownListFor(m => m.SecondaryOwner, Model.secondaryOwners, "- Please select an owner", new { @class = "form-control" })
+                    @Html.DropDownListFor(m => m.SecondaryOwner, Model.secondaryOwners, "- Please select an owner", new { @class = "form-control selectpicker" })
                     <span class="text-danger" asp-validation-for="SecondaryOwner"></span>
                 </div>
             </div>
@@ -132,4 +132,14 @@
 else
 {
     <h1>You must be logged in to view this page.</h1>
+}
+
+@section Scripts
+{
+<script>
+    $.fn.selectpicker.Constructor.BootstrapVersion = '4';
+
+    $('.selectpicker').attr('data-show-subtext', true);
+    $('.selectpicker').attr('data-live-search', true);
+</script>
 }
