@@ -11,6 +11,7 @@ namespace Sunridge.Models
         public int ClassifiedListingId { get; set; }
         public string OwnerId { get; set; }
         public int ClassifiedCategoryId { get; set; }
+        public string Categories { get; set; }
 
         [Required]
         [Display(Name = "Title")]
@@ -36,6 +37,7 @@ namespace Sunridge.Models
         public virtual ApplicationUser Owner { get; set; }
         [ForeignKey("ClassifiedCategoryId")]
         public virtual ClassifiedCategory Category { get; set; }
+
 
         public List<ClassifiedImage> Images { get; set; }
 

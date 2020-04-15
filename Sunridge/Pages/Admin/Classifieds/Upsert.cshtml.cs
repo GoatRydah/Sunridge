@@ -29,20 +29,28 @@ namespace Sunridge.Pages.Admin.Classifieds
 
         //binds the model to the page
         [BindProperty]
-        public ClassifiedListing ClassifiedObj { get; set; }
+        public ClassifiedListingVM ClassifiedObj { get; set; }
 
-        public IActionResult OnGet(int? id)  //id is optional
+        public IActionResult OnGet(int? id) ///IActionResult return type is page, obj
         {
-            //populate the lists for dropdowns
-            ClassifiedObj = new ClassifiedListing();
+            //LostAndFoundItem = new LostAndFoundItem();
 
             if (id != null) //edit
             {
-                ClassifiedObj = _unitofWork.ClassifiedListing.GetFirstOrDefault(u => u.ClassifiedListingId == id);
+                ClassifiedObj = new ClassifiedListingVM();
+                ClassifiedObj.ClassifiedListing = _unitofWork.ClassifiedListing.GetFirstOrDefault(u => u.ClassifiedListingId == id);
+                ClassifiedObj.CategoryList = _unitofWork.ClassifiedCategory.GetClassifiedCategoryListOrDropdown();
+
                 if (ClassifiedObj == null)
                 {
                     return NotFound();
                 }
+            }
+            else
+            {
+                ClassifiedObj = new ClassifiedListingVM();
+                ClassifiedObj.ClassifiedListing = new ClassifiedListing();
+                ClassifiedObj.CategoryList = _unitofWork.ClassifiedCategory.GetClassifiedCategoryListOrDropdown();
             }
 
             return Page();
@@ -50,81 +58,74 @@ namespace Sunridge.Pages.Admin.Classifieds
 
         public IActionResult OnPost()
         {
-            //find root path to wwwroot
-            string webRootPath = _hostingEnvironment.WebRootPath;
-            //grab the file(s) from the form
-            var files = HttpContext.Request.Form.Files;
-
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
+            string userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = _unitofWork.ApplicationUser.GetFirstOrDefault(s => s.Id == userId);
+           // ClassifiedObj.ClassifiedListing. = user.FirstName + " " + user.LastName;
 
-            //new menu item
-            if (ClassifiedObj.ClassifiedListingId == 0)
+            //find root path wwwroot
+            string webRootPath = _hostingEnvironment.WebRootPath;
+            //Grab the file(s) from the form
+            var files = HttpContext.Request.Form.Files;
+
+            if (ClassifiedObj.ClassifiedListing.ClassifiedListingId == 0) //new photo object
             {
-                //rename the file the user submits
-                //guid is a unique string that will not be duplicated
+                //rename file user submits for image
                 string fileName = Guid.NewGuid().ToString();
-
-                //upload to path
-                var uploads = Path.Combine(webRootPath, @"images\classifieds");
-
+                //upload file to the path
+                var uploads = Path.Combine(webRootPath, @"images\classifieds\");
                 //preserve our extension
                 var extension = Path.GetExtension(files[0].FileName);
 
-                //append new name to the extension
                 using (var filestream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
                 {
-                    files[0].CopyTo(filestream);
+                    files[0].CopyTo(filestream); //files variable comes from the razor page files id
                 }
 
-                ClassifiedObj.Image = @"\images\classifieds\" + fileName + extension;
+                ClassifiedObj.ClassifiedListing.Image = @"\images\classifieds\" + fileName + extension;
 
-                //add it to the db
-                _unitofWork.ClassifiedListing.Add(ClassifiedObj);
+                _unitofWork.ClassifiedListing.Add(ClassifiedObj.ClassifiedListing);
             }
-            //edit the menu item 
-            else
+            else //else we edit
             {
-                var objFromDb = _unitofWork.ClassifiedListing.Get(ClassifiedObj.ClassifiedListingId);
-                //were there any files
+                var objFromDb =
+                    _unitofWork.ClassifiedListing.Get(ClassifiedObj.ClassifiedListing.ClassifiedListingId);
+                //checks if there are files submitted
                 if (files.Count > 0)
                 {
-                    //rename the file the user submits
-                    //guid is a unique string that will not be duplicated
+                    //rename file user submits for image
                     string fileName = Guid.NewGuid().ToString();
-
-                    //upload to path
-                    var uploads = Path.Combine(webRootPath, @"images\banner");
-
+                    //upload file to the path
+                    var uploads = Path.Combine(webRootPath, @"images\classifieds");
                     //preserve our extension
                     var extension = Path.GetExtension(files[0].FileName);
+
                     var imagePath = Path.Combine(webRootPath, objFromDb.Image.TrimStart('\\'));
 
-                    //if image already exists
                     if (System.IO.File.Exists(imagePath))
                     {
                         System.IO.File.Delete(imagePath);
                     }
 
-                    //append new name to the extension
                     using (var filestream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
                     {
                         files[0].CopyTo(filestream);
                     }
 
-                    ClassifiedObj.Image = @"\images\clssifieds\" + fileName + extension;
+                    ClassifiedObj.ClassifiedListing.Image = @"\images\classifieds\" + fileName + extension;
                 }
                 else
                 {
-                    ClassifiedObj.Image = objFromDb.Image;
+                    ClassifiedObj.ClassifiedListing.Image = objFromDb.Image;
                 }
-                _unitofWork.ClassifiedListing.Update(ClassifiedObj);
+                _unitofWork.ClassifiedListing.Update(ClassifiedObj.ClassifiedListing);
             }
             _unitofWork.Save();
             return RedirectToPage("./Index");
-            }
         }
+    }
 }

@@ -25,66 +25,63 @@
         <div class="col-8 pt-3">
             <div class="row form-group">
                 <div class="col-md-3">
-                    <label asp-for="ClassifiedObj.Category"></label>
+                    <label asp-for="ClassifiedObj.ClassifiedListing.Categories"></label>
                 </div>
                 <div class="col-md-9">
-                    @*@Html.DropDownListFor(m => m.ClassifiedObj.ClassifiedCategoryId,
-        Model.ClassifiedObj.Category,
-        "- Please select a Category",
-        new { @class = "form-control" })*@
-                    <span class="text-danger" asp-validation-for="ClassifiedObj.Category"></span>
+                    @Html.DropDownListFor(m => m.ClassifiedObj.CategoryList, Model.ClassifiedObj.CategoryList, "- Please select a Category", new { @class = "form-control" })
+                   <span class="text-danger" asp-validation-for="ClassifiedObj.ClassifiedListing.Categories"></span>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-3">
-                    <label asp-for="ClassifiedObj.ItemName"></label>
+                    <label asp-for="ClassifiedObj.ClassifiedListing.ItemName"></label>
                 </div>
                 <div class="col-9">
-                    <input class="form-control" asp-for="ClassifiedObj.ItemName" id="txtTitle" />
+                    <input class="form-control" asp-for="ClassifiedObj.ClassifiedListing.ItemName" id="txtTitle" />
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-3">
-                    <label asp-for="ClassifiedObj.Price"></label>
+                    <label asp-for="ClassifiedObj.ClassifiedListing.Price"></label>
                 </div>
                 <div class="col-9">
-                    <input class="form-control" asp-for="ClassifiedObj.Price" id="txtYear" />
+                    <input class="form-control" asp-for="ClassifiedObj.ClassifiedListing.Price" id="txtYear" />
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-3">
-                    <label asp-for="ClassifiedObj.Description"></label>
+                    <label asp-for="ClassifiedObj.ClassifiedListing.Description"></label>
                 </div>
                 <div class="col-9">
-                    <input class="form-control" asp-for="ClassifiedObj.Description" id="txtYear" />
+                    <input class="form-control" asp-for="ClassifiedObj.ClassifiedListing.Description" id="txtYear" />
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-3">
-                    <label asp-for="ClassifiedObj.Phone"></label>
+                    <label asp-for="ClassifiedObj.ClassifiedListing.Phone"></label>
                 </div>
                 <div class="col-9">
-                    <input class="form-control" asp-for="ClassifiedObj.Phone" id="txtYear" />
+                    <input class="form-control" asp-for="ClassifiedObj.ClassifiedListing.Phone" id="txtYear" />
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-3">
-                    <label asp-for="ClassifiedObj.Email"></label>
+                    <label asp-for="ClassifiedObj.ClassifiedListing.Email"></label>
                 </div>
                 <div class="col-9">
-                    <input class="form-control" asp-for="ClassifiedObj.Email" id="txtYear" />
+                    <input class="form-control" asp-for="ClassifiedObj.ClassifiedListing.Email" id="txtYear" />
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-3">
-                    <label asp-for="ClassifiedObj.Images"></label>
+                    <label asp-for="ClassifiedObj.ClassifiedListing.Images"></label>
                 </div>
                 <div class="col-9">
                     <input type="file" class="form-control" name="files" id="files" multiple/>
                 </div>
             </div>
             <div class="row">
-                @if (Model.ClassifiedObj.ClassifiedListingId != 0)
+                @if (Model.ClassifiedObj.ClassifiedListing.ClassifiedListingId != 0)
                 {
                     <button type="submit" class="btn btn-primary form-control">Update</button>
                 }
