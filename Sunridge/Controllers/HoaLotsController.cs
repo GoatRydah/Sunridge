@@ -17,6 +17,8 @@ namespace Sunridge.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _hostingEnvironment;
+
+        [BindProperty]
         public List<HOALotVM> HoaLots { get; set; }
 
         public HoaLotsController(IUnitOfWork unitOfWork, IWebHostEnvironment hostingEnvironment)
@@ -55,16 +57,22 @@ namespace Sunridge.Controllers
                 {
                     var owner = _unitOfWork.ApplicationUser.GetFirstOrDefault(s => s.Id == oLot.OwnerId);
 
-                    if (oLot.IsPrimary)
+                    if (oLot.IsPrimary && owner != null)
+                    {
                         theOwners += $"<strong>{owner.FullName}</strong>, ";
+                        tempModel.primaryOwnerId = oLot.OwnerId;
+                    }
                 }
 
                 foreach (var oLot in ownerLots)
                 {
                     var owner = _unitOfWork.ApplicationUser.GetFirstOrDefault(s => s.Id == oLot.OwnerId);
 
-                    if (!oLot.IsPrimary)
+                    if (!oLot.IsPrimary && owner != null)
+                    {
                         theOwners += owner.FullName + ", ";
+                        tempModel.secondaryOwnerId = oLot.OwnerId;
+                    }
                 }
 
                 //trim last comma
@@ -94,6 +102,40 @@ namespace Sunridge.Controllers
             }
 
             return Json(new { data = HoaLots });
+        }
+
+        [HttpDelete("{lotNum}")]
+        public IActionResult Delete(string lotNum)
+        {
+            try
+            {
+                var lot = _unitOfWork.Lot.GetFirstOrDefault(s => s.LotNumber == lotNum);
+                //remove owner from lot and then archive owner
+                var ownerLots = _unitOfWork.OwnerLot.GetAll(s => s.LotId == lot.LotId);
+
+                foreach (var ownerLot in ownerLots)
+                {
+                    if (ownerLot.IsPrimary)
+                    {
+                        var owner = _unitOfWork.ApplicationUser.GetFirstOrDefault(s => s.Id == ownerLot.OwnerId);
+
+                        ownerLot.OwnerId = null;
+
+                        _unitOfWork.OwnerLot.Update(ownerLot);
+                        _unitOfWork.Save();
+
+                        owner.IsArchive = true;
+                        _unitOfWork.ApplicationUser.Update(owner);
+                        _unitOfWork.Save();
+                    }
+                } 
+            }
+            catch (Exception e)
+            {
+                return Json(new { success = false, message = "Error while deleting." });
+            }
+
+            return Json(new { success = true, message = "Delete successful." });
         }
     }
 }
