@@ -111,8 +111,10 @@ namespace Sunridge.Pages.Admin.Owners
             {
                 return RedirectToPage("Upsert", "OnGet", new { id = OwnerObj.Id, New = true });
             }
-
-            return RedirectToPage("./Index");
+            else
+            {
+                return RedirectToPage("../HOALots/Index", "OnGet");
+            }
         }
 
         public async Task<bool> AddPassword(ApplicationUser user, string pass)

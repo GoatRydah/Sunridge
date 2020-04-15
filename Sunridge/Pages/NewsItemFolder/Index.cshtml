@@ -25,8 +25,8 @@
                     <div id="collapse + @year" class="collapse hide" aria-labelledby="@year" data-parent="#accordion" style="">
                         <div class="card-body">
                             <hr class="mt-5 mb-5">
-                            <h2>@item.Header</h2>
-                            <p>@item.Content</p>
+                            <h2>@Html.Raw(item.Header)</h2>
+                            <p>@Html.Raw(item.Content)</p>
 
                             @if (item.FilePath != null)
                             {

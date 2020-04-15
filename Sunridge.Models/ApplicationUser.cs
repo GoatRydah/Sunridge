@@ -29,11 +29,6 @@ namespace Sunridge.Models
             ConvertEmptyStringToNull = true, NullDisplayText = "[None listed]")]
         public DateTime? Birthday { get; set; }
 
-        [DataType(DataType.PhoneNumber)]
-        [Display(Name = "Phone Number")]
-        [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText = "[None listed]")]
-        public string Phone { get; set; }
-
         [Display(Name = "Emergency Contact")]
         [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText = "[None listed]")]
         public string EmergencyContactName { get; set; }
@@ -63,10 +58,15 @@ namespace Sunridge.Models
 
 
 
+        [NotMapped]
         public string ApartmentValue { get; set; }
+        [NotMapped]
         public string CityValue { get; set; }
+        [NotMapped]
         public string StateValue { get; set; }
+        [NotMapped]
         public string ZipValue { get; set; }
+        [NotMapped]
         public string AddressValue { get; set; }
         // Calculated properties
         [Display(Name = "Name")]
