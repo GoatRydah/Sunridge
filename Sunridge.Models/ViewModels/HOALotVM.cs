@@ -12,5 +12,7 @@ namespace Sunridge.Models.ViewModels
         public string UserName { get; set; }
         public string TaxId { get; set; }
         public string LotInventory { get; set; }
+        public string primaryOwnerId { get; set; }
+        public string secondaryOwnerId { get; set; }
     }
 }
