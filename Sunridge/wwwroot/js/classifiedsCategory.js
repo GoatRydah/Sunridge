@@ -7,12 +7,12 @@ $(document).ready(function () {
 function loadList() {
     dataTable = $('#DT_load').DataTable({
         "ajax": {
-            "url": "/api/ClassifiedCategory/",
+            "url": "/api/classifiedsCategory/",
             "type": "GET",
             "datatype": "json"
         },
         "columns": [
-            { "data": "categoryName", "width": "50%" },
+            { "data": "description", "width": "50%" },
             {
                 "data": "ClassifiedCategoryId",
                 "render": function (data) {
@@ -20,7 +20,7 @@ function loadList() {
                         <a href="/classifieds/category/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                             <i class="far fa-edit"></i> Edit
                         </a>
-                        <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/classifiedcategory/'+${data})>
+                        <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/classifiedsCategory/'+${data})>
                             <i class="far fa-trash-alt"></i> Delete
                         </a>
                     <div>`;

@@ -23,7 +23,7 @@ namespace Sunridge.Pages.Home
         {
             BoardMemberList = _unitOfWork.BoardMember.GetAll(null, q => q.OrderBy(c => c.DisplayOrder), null);
             int count = 0;
-            if(BoardMemberList.Any())
+            if (BoardMemberList.Any())
             {
                 foreach (var boardMember in BoardMemberList)
                 {

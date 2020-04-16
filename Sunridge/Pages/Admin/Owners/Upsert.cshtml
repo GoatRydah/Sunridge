@@ -22,6 +22,7 @@
             }
 
             <input type="hidden" asp-for="createAnother" id="another" />
+            <input type="hidden" asp-for="redirect" id="redirect" />
 
             <div class="form-group row">
                 <div class="col-3">
@@ -127,6 +128,18 @@
                     <input class="form-control" asp-for="AddressObj.Zip" id="txtZip" />
                 </div>
             </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="OwnerType"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" asp-for="OwnerType" id="ownerType" hidden />
+                    <label for="OwnerRB">Owner</label>
+                    <input id="OwnerRB" type="radio" name="RB" value="Owner" checked />
+                    <label class="ml-5" for="AdminRB">Admin</label>
+                    <input id="AdminRB" type="radio" name="RB" value="Admin" />
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-md-6 mb-2">
@@ -158,12 +171,35 @@ else
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script>
     $(".submission").click(function () {
-        var conf = confirm("OWNER IS BEING CREATED. Would you like to create another?");
-        if (conf == true) {
-            $("#another").val(true);
+
+        if ($('#OwnerRB').is(':checked')) {
+
+            $('#ownerType').val('Owner');
         } else {
+
+            $('#ownerType').val('Admin');
+        }
+
+        var conf = confirm("OWNER IS BEING CREATED. Would you like to create another?");
+
+        if (conf == true) {
+
+            $("#another").val(true);
+
+        } else {
+
             $("#another").val(false);
-            alert("Redirecting you to HOALots to assign Owner(s) a Lot.");
+
+            var conf2 = confirm("Would you like to be redirected to Hoa Lots to add/remove Owners to a lot?");
+
+            if (conf2 == true) {
+
+                $('#redirect').val(true);
+
+            } else {
+
+                $('#redirect').val(false);
+            }
         }
     });
 </script>

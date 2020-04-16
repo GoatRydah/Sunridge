@@ -15,6 +15,7 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         IClassifiedImageRepository ClassifiedImage { get; }
         IClassifiedListingRepository ClassifiedListing { get; }
         IClassifiedServiceRepository ClassifiedService { get; }
+        IClassifiedListingVMRepository ClassifiedListingVM { get; }
         ICommentRepository Comment { get; }
         ICommonAreaAssetRepository CommonAreaAsset { get; }
         IErrorViewModelRepository ErrorViewModel { get; }
@@ -23,7 +24,6 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         IInKindWorkHoursRepository InKindWorkHours { get; }
         IInventoryRepository Inventory { get; }
         IAdminPhotoViewModelsRepository AdminPhotoViewModels { get; }
-        IClassifiedListingViewModelRepository ClassifiedListingViewModel { get; }
         IDashboardViewModelRepository DashboardViewModel { get; }
         ILostAndFoundItemRepository LostAndFoundItem { get; }
         IReportRepository ReportItem { get; }

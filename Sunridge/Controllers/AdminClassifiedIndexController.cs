@@ -36,7 +36,7 @@ namespace Sunridge.Controllers
                     return Json(new { success = false, message = "Error while deleting" });
                 }
                 //Physically Delete the image in wwwroot
-                var imagePath = Path.Combine(_hostingEnvironment.WebRootPath, objFromDb.Images.TrimStart('\\'));
+                var imagePath = Path.Combine(_hostingEnvironment.WebRootPath, objFromDb.Image.TrimStart('\\'));
                 if (System.IO.File.Exists(imagePath))
                 {
                     System.IO.File.Delete(imagePath);

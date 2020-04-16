@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
 namespace Sunridge.Models
 {
     public class ClassifiedListing
     {
         public int ClassifiedListingId { get; set; }
+        public string OwnerId { get; set; }
+        public int ClassifiedCategoryId { get; set; }
+        public string Categories { get; set; }
 
         [Required]
         [Display(Name = "Title")]
@@ -28,13 +30,16 @@ namespace Sunridge.Models
         public DateTime ListingDate { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+        public string Image { get; set; }
 
         //Nav properties
         [ForeignKey("OwnerId")]
         public virtual ApplicationUser Owner { get; set; }
+        [ForeignKey("ClassifiedCategoryId")]
+        public virtual ClassifiedCategory Category { get; set; }
         [Required]
-        public string Category { get; set; }
-        public string Images { get; set; }
-        public List<ClassifiedImage> Image { get; set; }
+        public List<ClassifiedImage> Images { get; set; }
+
+        public string classifiedcategory { get; set; }
     }
 }

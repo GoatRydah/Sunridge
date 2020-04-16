@@ -12,14 +12,14 @@ function LoadList() {
             "datatype": "json"
         },
         "columns": [
-            { "data": "category", "width": "15%" },
+            { "data": "classifiedcategory", "width": "15%" },
             { "data": "itemName", "width": "15%" },
             { "data": "price", "width": "10%" },
             { "data": "description", "width": "10%" },
             { "data": "phone", "width": "15%" },
             { "data": "email", "width": "15%" },
             {
-                "data": "id",
+                "data": "classifiedListingId",
                 "render": function (data) {
                     return ` <div class="text-center">
                                 <a href="/admin/classifieds/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">

@@ -100,9 +100,9 @@ namespace Sunridge.DataAccess.Data.Repository
             objFromDb.Address = applicationUser.Address;
             objFromDb.Transactions = applicationUser.Transactions;
             objFromDb.FormResponses = applicationUser.FormResponses;
-            objFromDb.ClassifiedListings = applicationUser.ClassifiedListings;
             objFromDb.KeyHistories = applicationUser.KeyHistories;
             objFromDb.LostAndFoundItems = applicationUser.LostAndFoundItems;
+            objFromDb.ClassifiedListings = applicationUser.ClassifiedListings;
 
             Address addr;
             

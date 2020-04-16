@@ -26,6 +26,7 @@ namespace Sunridge.Data
         public DbSet<ClassifiedListing> ClassifiedListing { get; set; }
         public DbSet<ClassifiedService> ClassifiedService { get; set; }
         public DbSet<ClassifiedImage> ClassifiedImage { get; set; }
+        public DbSet<ClassifiedListingVM> ClassifiedListingVM { get; set; }
         public DbSet<Comment> Comment { get; set; }
         public DbSet<CommonAreaAsset> CommonAreaAsset { get; set; }
         public DbSet<ErrorViewModel> ErrorViewModel { get; set; }
@@ -34,7 +35,6 @@ namespace Sunridge.Data
         public DbSet<InKindWorkHours> InKindWorkHours { get; set; }
         public DbSet<Inventory> Inventory { get; set; }
         public DbSet<AdminPhotoViewModels> AdminPhotoViewModels { get; set; }
-        public DbSet<ClassifiedListingViewModel> ClassifiedListingViewModel { get; set; }
         public DbSet<DashboardViewModel> DashboardViewModel { get; set; }
         public DbSet<LostAndFoundItem> LostAndFoundItem { get; set; }
         public DbSet<Report> ReportItem { get; set; }
