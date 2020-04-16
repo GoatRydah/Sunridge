@@ -5,7 +5,7 @@ $(document).ready(function () {
 })
 
 function loadList() {
-    dataTable = $('#DT_load').DataTable({
+    dataTable = $('#DT_Load').DataTable({
         "ajax": {
             "url": "/api/classifiedService/",
             "type": "GET",
@@ -17,7 +17,7 @@ function loadList() {
                 "data": "id",
                 "render": function (data) {
                     return ` <div class="text-center">
-                                <a href="classifieds/services/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
+                                <a href="services/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                                     <i class="far fa-edit"></i> Edit
                                 </a>
                                 <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/classifiedService/'+${data})>
