@@ -7,21 +7,20 @@ $(document).ready(function () {
 function loadList() {
     dataTable = $('#DT_load').DataTable({
         "ajax": {
-            "url": "/api/lostandfounditem/",
+            "url": "/api/classifiedService/",
             "type": "GET",
             "datatype": "json"
         },
         "columns": [
-            { "data": "username", "width": "50%" },
-            { "data": "description", "width": "50%" },
+            { "data": "description", "width": "70%" },
             {
                 "data": "id",
                 "render": function (data) {
                     return ` <div class="text-center">
-                                <a href="/lostandfound/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
+                                <a href="classifieds/services/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                                     <i class="far fa-edit"></i> Edit
                                 </a>
-                                <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/lostandfounditem/'+${data})>
+                                <a class="btn btn-danger text-white" style="cursor:pointer; width:100px;" onclick=Delete('/api/classifiedService/'+${data})>
                                     <i class="far fa-trash-alt"></i> Delete
                                 </a>
                 </div>`;

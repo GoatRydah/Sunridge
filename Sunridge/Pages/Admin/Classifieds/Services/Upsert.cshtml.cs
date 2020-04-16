@@ -119,7 +119,7 @@ namespace Sunridge.Pages.Admin.Classifieds.Services
                 }
             }
             _unitofWork.Save();
-            return RedirectToPage("./Index");
+            return RedirectToPage("../Index");
         }
     }
 }
