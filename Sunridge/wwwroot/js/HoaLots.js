@@ -23,7 +23,7 @@ function LoadList() {
             { "data": "userName", "width": "10%" },
             {
                 "data": "taxId", "render": function (data) {
-                    return `<a href="http://www3.co.weber.ut.us/psearch/tax_summary.php?id=${data}">${data}</a>`;  
+                    return `<a href="http://www3.co.weber.ut.us/psearch/tax_summary.php?id=${data}" target="_blank">${data}</a>`;  
                 },
                 "width": "9%"
             },
