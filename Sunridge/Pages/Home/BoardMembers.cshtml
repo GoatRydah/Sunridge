@@ -26,7 +26,7 @@
                         <h5>@member.BoardRole: @member.ApplicationUser.FullName</h5>
                         @foreach (var lot in Model.LotList)
                         {
-                            if (member.ApplicationUser == lot.ApplicationUser)
+                            if (member.ApplicationUser.Id == lot.ApplicationUser.Id)
                             {
                                 <p class="font-weight-light mb-0">@lot.Lot.LotNumber</p>
                             }
