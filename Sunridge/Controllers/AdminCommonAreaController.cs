@@ -37,7 +37,8 @@ namespace Sunridge.Controllers
                 {
                     return Json(new { success = false, message = "Error while deleting" });
                 }
-                
+
+                _unitOfWork.CommonAreaAsset.Remove(objFromDb);
                 _unitOfWork.Save();
             }
             catch (Exception)
