@@ -25,66 +25,63 @@
         <div class="col-8 pt-3">
             <div class="row form-group">
                 <div class="col-md-3">
-                    <label asp-for="ClassifiedsObj.ClassifiedListing.Category"></label>
+                    <label asp-for="ClassifiedObj.ClassifiedListing.Categories"></label>
                 </div>
                 <div class="col-md-9">
-                    @Html.DropDownListFor(m => m.ClassifiedsObj.ClassifiedListing.Category,
-        Model.ClassifiedsObj.Category,
-        "- Please select a Category",
-        new { @class = "form-control" })
-                    <span class="text-danger" asp-validation-for="ClassifiedsObj.ClassifiedListing.Category"></span>
+                    @Html.DropDownListFor(m => m.ClassifiedObj.ClassifiedListing.Categories, Model.ClassifiedObj.CategoryList, "- Please select a Category", new { @class = "form-control" })
+                    <span class="text-danger" asp-validation-for="ClassifiedObj.ClassifiedListing.Categories"></span>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-3">
-                    <label asp-for="ClassifiedsObj.ClassifiedListing.ItemName"></label>
+                    <label asp-for="ClassifiedObj.ClassifiedListing.ItemName"></label>
                 </div>
                 <div class="col-9">
-                    <input class="form-control" asp-for="ClassifiedsObj.ClassifiedListing.ItemName" id="txtTitle" />
+                    <input class="form-control" asp-for="ClassifiedObj.ClassifiedListing.ItemName" id="txtTitle" />
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-3">
-                    <label asp-for="ClassifiedsObj.ClassifiedListing.Price"></label>
+                    <label asp-for="ClassifiedObj.ClassifiedListing.Price"></label>
                 </div>
                 <div class="col-9">
-                    <input class="form-control" asp-for="ClassifiedsObj.ClassifiedListing.Price" id="txtYear" />
+                    <input class="form-control" asp-for="ClassifiedObj.ClassifiedListing.Price" id="txtYear" />
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-3">
-                    <label asp-for="ClassifiedsObj.ClassifiedListing.Description"></label>
+                    <label asp-for="ClassifiedObj.ClassifiedListing.Description"></label>
                 </div>
                 <div class="col-9">
-                    <input class="form-control" asp-for="ClassifiedsObj.ClassifiedListing.Description" id="txtYear" />
+                    <input class="form-control" asp-for="ClassifiedObj.ClassifiedListing.Description" id="txtYear" />
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-3">
-                    <label asp-for="ClassifiedsObj.ClassifiedListing.Phone"></label>
+                    <label asp-for="ClassifiedObj.ClassifiedListing.Phone"></label>
                 </div>
                 <div class="col-9">
-                    <input class="form-control" asp-for="ClassifiedsObj.ClassifiedListing.Phone" id="txtYear" />
+                    <input class="form-control" asp-for="ClassifiedObj.ClassifiedListing.Phone" id="txtYear" />
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-3">
-                    <label asp-for="ClassifiedsObj.ClassifiedListing.Email"></label>
+                    <label asp-for="ClassifiedObj.ClassifiedListing.Email"></label>
                 </div>
                 <div class="col-9">
-                    <input class="form-control" asp-for="ClassifiedsObj.ClassifiedListing.Email" id="txtYear" />
+                    <input class="form-control" asp-for="ClassifiedObj.ClassifiedListing.Email" id="txtYear" />
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-3">
-                    <label asp-for="ClassifiedsObj.ClassifiedListing.Images"></label>
+                    <label asp-for="ClassifiedObj.ClassifiedListing.Images"></label>
                 </div>
                 <div class="col-9">
-                    <input type="file" class="form-control" name="files" id="files" multiple/>
+                    <input type="file" class="form-control" name="files" id="files" multiple />
                 </div>
             </div>
             <div class="row">
-                @if (Model.ClassifiedsObj.ClassifiedListing.ClassifiedListingId != 0)
+                @if (Model.ClassifiedObj.ClassifiedListing.ClassifiedListingId != 0)
                 {
                     <button type="submit" class="btn btn-primary form-control">Update</button>
                 }
@@ -102,4 +99,3 @@
 @section Scripts{
     <script src="~/js/adminClassifiedIndex.js"></script>
 }
-

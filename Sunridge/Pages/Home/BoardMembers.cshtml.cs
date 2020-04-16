@@ -26,7 +26,7 @@ namespace Sunridge.Pages.Home
             LotList = _unitOfWork.OwnerLot.GetAll(null,null,"Lot");
 
             int count = 0;
-            if(BoardMemberList.Any())
+            if (BoardMemberList.Any())
             {
                 foreach (var boardMember in BoardMemberList)
                 {

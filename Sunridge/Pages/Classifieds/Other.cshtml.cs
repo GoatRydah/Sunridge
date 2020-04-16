@@ -17,11 +17,13 @@ namespace Sunridge.Pages.Classifieds
         {
             _unitOfWork = unitOfWork;
         }
-        public IEnumerable<ClassifiedService >classifiedService { get; set; }
+
+        public IEnumerable<ClassifiedService> classifiedService { get; set; }
 
         public void OnGet()
         {
             classifiedService = _unitOfWork.ClassifiedService.GetAll();
+
         }
     }
 }

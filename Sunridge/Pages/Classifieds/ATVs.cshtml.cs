@@ -20,12 +20,22 @@ namespace Sunridge.Pages.Classifieds
             _unitOfWork = unitOfWork;
         }
 
-        public  IEnumerable<ClassifiedListing> ClassifiedListingsList { get; set; }
+        public IEnumerable<ClassifiedListing> ClassifiedListingsList { get; set; }
+        [BindProperty]
+        public List<ClassifiedListing> ClassifiedListings { get; set; }
 
         public void OnGet()
         {
             ClassifiedListingsList = _unitOfWork.ClassifiedListing.GetAll();
+            ClassifiedImage temp = new ClassifiedImage();
+            ClassifiedListings = new List<ClassifiedListing>();
+            foreach (var listing in ClassifiedListingsList)
+            {
+                IEnumerable<ClassifiedImage> tempList = _unitOfWork.ClassifiedImage.GetAll(u => u.ClassifiedListingId == listing.ClassifiedListingId);
 
+                listing.Images = tempList.ToList();
+                ClassifiedListings.Add(listing);
+            }
         }
     }
 }

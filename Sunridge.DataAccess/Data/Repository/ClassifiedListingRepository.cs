@@ -2,8 +2,10 @@
 using Sunridge.Data;
 using Sunridge.DataAccess.Data.Repository.IRepository;
 using Sunridge.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Sunridge.DataAccess.Data.Repository
 {
@@ -37,7 +39,8 @@ namespace Sunridge.DataAccess.Data.Repository
             objFromDb.Email = classifiedListing.Email;
             objFromDb.Category = classifiedListing.Category;
             objFromDb.Images = classifiedListing.Images;
-
+            objFromDb.Categories = classifiedListing.Categories;
+            objFromDb.classifiedcategory = classifiedListing.classifiedcategory;
 
             _db.SaveChanges();
         }

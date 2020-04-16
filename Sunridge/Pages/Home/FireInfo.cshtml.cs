@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Sunridge.Pages.Home
+
 {
     public class FireInfoModel : PageModel
     {

@@ -5,8 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200401200054_initial.cs" />
-    <Compile Remove="Migrations\20200401200054_initial.Designer.cs" />
+    <Compile Remove="Migrations\20200416134307_addClassifieds.cs" />
+    <Compile Remove="Migrations\20200416134307_addClassifieds.Designer.cs" />
+    <Compile Remove="Migrations\20200416135451_updateClassifiedVM.cs" />
+    <Compile Remove="Migrations\20200416135451_updateClassifiedVM.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

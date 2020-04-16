@@ -25,7 +25,7 @@ namespace Sunridge.Controllers
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
-            return Json(new { data = _unitOfWork.ClassifiedService.GetAll(u=>u.ApplicationUserId == claim.Value, null, null) });
+            return Json(new { data = _unitOfWork.ClassifiedService.GetAll(u => u.ApplicationUserId == claim.Value, null, null) });
         }
 
         [HttpDelete("{id}")]
