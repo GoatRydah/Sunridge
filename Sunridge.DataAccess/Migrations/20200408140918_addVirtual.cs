@@ -2,7 +2,7 @@
 
 namespace Sunridge.DataAccess.Migrations
 {
-    public partial class initialClassifiedService : Migration
+    public partial class addVirtual : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -2,7 +2,7 @@
 
 namespace Sunridge.DataAccess.Migrations
 {
-    public partial class addRepositoryClassifiedVM : Migration
+    public partial class ClassifiedVM : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
