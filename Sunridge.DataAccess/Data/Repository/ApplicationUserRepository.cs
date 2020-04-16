@@ -102,6 +102,7 @@ namespace Sunridge.DataAccess.Data.Repository
             objFromDb.FormResponses = applicationUser.FormResponses;
             objFromDb.KeyHistories = applicationUser.KeyHistories;
             objFromDb.LostAndFoundItems = applicationUser.LostAndFoundItems;
+            objFromDb.ClassifiedListings = applicationUser.ClassifiedListings;
 
             Address addr;
             

@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200416134307_addClassifieds.cs" />
+    <Compile Remove="Migrations\20200416134307_addClassifieds.Designer.cs" />
+    <Compile Remove="Migrations\20200416135451_updateClassifiedVM.cs" />
+    <Compile Remove="Migrations\20200416135451_updateClassifiedVM.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.2" />

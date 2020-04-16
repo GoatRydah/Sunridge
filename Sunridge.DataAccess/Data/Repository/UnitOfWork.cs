@@ -24,7 +24,6 @@ namespace Sunridge.DataAccess.Data.Repository
         public IInKindWorkHoursRepository InKindWorkHours { get; private set; }
         public IInventoryRepository Inventory { get; private set; }
         public IAdminPhotoViewModelsRepository AdminPhotoViewModels { get; private set; }
-        public IClassifiedListingViewModelRepository ClassifiedListingViewModel { get; private set; }
         public IDashboardViewModelRepository DashboardViewModel { get; private set; }
         public ILostAndFoundItemRepository LostAndFoundItem { get; private set; }
         public IReportRepository ReportItem { get; private set; }

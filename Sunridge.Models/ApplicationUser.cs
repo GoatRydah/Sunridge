@@ -52,6 +52,7 @@ namespace Sunridge.Models
         public virtual ICollection<OwnerLot> OwnerLots { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
         public virtual ICollection<FormResponse> FormResponses { get; set; }
+        public virtual ICollection<ClassifiedListing> ClassifiedListings { get; set; }
         public virtual ICollection<KeyHistory> KeyHistories { get; set; }
         public virtual ICollection<LostAndFoundItem> LostAndFoundItems { get; set; }
 

@@ -3,10 +3,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Sunridge.DataAccess.Migrations
 {
-    public partial class addedClassifiedModels : Migration
+    public partial class addClassifieds : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            
+            
+
             migrationBuilder.CreateTable(
                 name: "ClassifiedCategory",
                 columns: table => new
@@ -21,6 +24,23 @@ namespace Sunridge.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ClassifiedService",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(nullable: false),
+                    Image = table.Column<string>(nullable: true),
+                    ApplicationUserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClassifiedService", x => x.Id);
+                });
+
+
+
+            migrationBuilder.CreateTable(
                 name: "ClassifiedListing",
                 columns: table => new
                 {
@@ -28,12 +48,15 @@ namespace Sunridge.DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OwnerId = table.Column<string>(nullable: true),
                     ClassifiedCategoryId = table.Column<int>(nullable: false),
+                    Categories = table.Column<string>(nullable: true),
                     ItemName = table.Column<string>(maxLength: 75, nullable: false),
                     Price = table.Column<float>(nullable: false),
                     Description = table.Column<string>(maxLength: 1000, nullable: false),
                     ListingDate = table.Column<DateTime>(nullable: false),
                     Phone = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true)
+                    Email = table.Column<string>(nullable: true),
+                    Image = table.Column<string>(nullable: true),
+                    classifiedcategory = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -51,6 +74,8 @@ namespace Sunridge.DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+          
 
             migrationBuilder.CreateTable(
                 name: "ClassifiedImage",
@@ -74,6 +99,8 @@ namespace Sunridge.DataAccess.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+           
+
             migrationBuilder.CreateIndex(
                 name: "IX_ClassifiedImage_ClassifiedListingId",
                 table: "ClassifiedImage",
@@ -88,18 +115,27 @@ namespace Sunridge.DataAccess.Migrations
                 name: "IX_ClassifiedListing_OwnerId",
                 table: "ClassifiedListing",
                 column: "OwnerId");
+
+           
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+
             migrationBuilder.DropTable(
                 name: "ClassifiedImage");
 
             migrationBuilder.DropTable(
-                name: "ClassifiedListing");
+                name: "ClassifiedService");
+
 
             migrationBuilder.DropTable(
+                name: "ClassifiedListing");
+
+           
+            migrationBuilder.DropTable(
                 name: "ClassifiedCategory");
+
         }
     }
 }
