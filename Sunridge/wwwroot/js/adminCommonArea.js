@@ -18,7 +18,7 @@ function LoadList() {
             { "data": "status", "width": "15%" },
             { "data": "date", "width": "15%" },
             {
-                "data": "id",
+                "data": "commonAreaAssetId",
                 "render": function (data) {
                     return ` <div class="text-center">
                                 <a href="/admin/commonareaassets/upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
