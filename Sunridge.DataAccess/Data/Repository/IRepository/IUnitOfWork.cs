@@ -7,6 +7,7 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
     public interface IUnitOfWork : IDisposable
     {
         IApplicationUserRepository ApplicationUser { get; }
+        IAdminCommentsRepository AdminComments { get; }
         IAddressRepository Address { get; }
         IBannerRepository Banner { get; }
         IBoardMemberRepository BoardMember { get; }

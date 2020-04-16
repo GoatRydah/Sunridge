@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sunridge.Data;
 
 namespace Sunridge.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200414171921_adminComments")]
+    partial class adminComments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -268,15 +270,10 @@ namespace Sunridge.DataAccess.Migrations
                     b.Property<string>("AdminComment")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("ReportId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("AdminComments");
                 });
@@ -1365,17 +1362,10 @@ namespace Sunridge.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Sunridge.Models.AdminComments", b =>
-                {
-                    b.HasOne("Sunridge.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId");
-                });
-
             modelBuilder.Entity("Sunridge.Models.BoardMember", b =>
                 {
                     b.HasOne("Sunridge.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
+                        .WithMany("BoardMembers")
                         .HasForeignKey("ApplicationUserId");
                 });
 
