@@ -11,10 +11,6 @@ namespace Sunridge.DataAccess.Data.Repository
         public IAddressRepository Address { get; private set; }
         public IBannerRepository Banner { get; private set; }
         public IBoardMemberRepository BoardMember { get; private set; }
-        public IClassifiedCategoryRepository ClassifiedCategory { get; private set; }
-        public IClassifiedImageRepository ClassifiedImage { get; private set; }
-        public IClassifiedListingRepository ClassifiedListing { get; private set; }
-        public IClassifiedServiceRepository ClassifiedService { get; private set; }
         public ICommentRepository Comment { get; private set; }
         public ICommonAreaAssetRepository CommonAreaAsset { get; private set; }
         public IErrorViewModelRepository ErrorViewModel { get; private set; }
@@ -23,7 +19,6 @@ namespace Sunridge.DataAccess.Data.Repository
         public IInKindWorkHoursRepository InKindWorkHours { get; private set; }
         public IInventoryRepository Inventory { get; private set; }
         public IAdminPhotoViewModelsRepository AdminPhotoViewModels { get; private set; }
-        public IClassifiedListingViewModelRepository ClassifiedListingViewModel { get; private set; }
         public IDashboardViewModelRepository DashboardViewModel { get; private set; }
         public ILostAndFoundItemRepository LostAndFoundItem { get; private set; }
         public IReportRepository ReportItem { get; private set; }
@@ -55,9 +50,6 @@ namespace Sunridge.DataAccess.Data.Repository
             Address = new AddressRepository(_db);
             Banner = new BannerRepository(_db);
             BoardMember = new BoardMemberRepository(_db);
-            ClassifiedCategory = new ClassifiedCategoryRepository(_db);
-            ClassifiedListing = new ClassifiedListingRepository(_db);
-            ClassifiedService = new ClassifiedServiceRepository(_db);
             Comment = new CommentRepository(_db);
             CommonAreaAsset = new CommonAreaAssetRepository(_db);
             ErrorViewModel = new ErrorViewModelRepository(_db);
@@ -66,7 +58,6 @@ namespace Sunridge.DataAccess.Data.Repository
             InKindWorkHours = new InKindWorkHoursRepository(_db);
             Inventory = new InventoryRepository(_db);
             AdminPhotoViewModels = new AdminPhotoViewModelsRepository(_db);
-            ClassifiedListingViewModel = new ClassifiedListingViewModelRepository(_db);
             DashboardViewModel = new DashboardViewModelRepository(_db);
             LostAndFoundItem = new LostAndFoundItemRepository(_db);
             ReportItem = new ReportRepository(_db);
