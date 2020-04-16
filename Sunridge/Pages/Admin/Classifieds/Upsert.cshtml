@@ -28,7 +28,7 @@
                     <label asp-for="ClassifiedObj.ClassifiedListing.Categories"></label>
                 </div>
                 <div class="col-md-9">
-                    @Html.DropDownListFor(m => m.ClassifiedObj.CategoryList, Model.ClassifiedObj.CategoryList, "- Please select a Category", new { @class = "form-control" })
+                    @Html.DropDownListFor(m => m.ClassifiedObj.ClassifiedListing.Categories, Model.ClassifiedObj.CategoryList, "- Please select a Category", new { @class = "form-control" })
                    <span class="text-danger" asp-validation-for="ClassifiedObj.ClassifiedListing.Categories"></span>
                 </div>
             </div>

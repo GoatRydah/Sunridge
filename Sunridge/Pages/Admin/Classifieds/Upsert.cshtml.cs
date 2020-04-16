@@ -58,10 +58,12 @@ namespace Sunridge.Pages.Admin.Classifieds
 
         public IActionResult OnPost()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            int catNum = Int32.Parse(ClassifiedObj.ClassifiedListing.Categories);
+            ClassifiedObj.ClassifiedListing.Category = _unitofWork.ClassifiedCategory.GetFirstOrDefault(u => u.ClassifiedCategoryId == catNum);
+            //if (!ModelState.IsValid)
+            //{
+            //    return Page();
+            //}
 
             string userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = _unitofWork.ApplicationUser.GetFirstOrDefault(s => s.Id == userId);
