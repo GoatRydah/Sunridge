@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -26,6 +27,11 @@ namespace Sunridge.Pages.Admin.Owners
         public Address AddressObj { get; set; }
         [BindProperty]
         public bool createAnother { get; set; }
+        [BindProperty]
+        public bool redirect { get; set; }
+        [BindProperty]
+        [DisplayName("User Type")]
+        public string OwnerType { get; set; }
 
         public UpsertModel(IUnitOfWork unitofWork, IWebHostEnvironment hostingEnvironment, UserManager<IdentityUser> userManager)
         {
@@ -111,9 +117,13 @@ namespace Sunridge.Pages.Admin.Owners
             {
                 return RedirectToPage("Upsert", "OnGet", new { id = OwnerObj.Id, New = true });
             }
-            else
+            else if (redirect)
             {
                 return RedirectToPage("../HOALots/Index", "OnGet");
+            }
+            else
+            {
+                return RedirectToPage("Index");
             }
         }
 
@@ -124,11 +134,20 @@ namespace Sunridge.Pages.Admin.Owners
             if (!result1.Succeeded)
                 return false;
 
-            var result2 = await _userManager.AddToRoleAsync(user, SD.OwnerRole);
+            if (OwnerType == "Admin")
+            {
+                var result2 = await _userManager.AddToRoleAsync(user, SD.AdminRole);
 
+                if (!result2.Succeeded)
+                    return false;
+            }
+            else
+            {
+                var result2 = await _userManager.AddToRoleAsync(user, SD.OwnerRole);
 
-            if (!result2.Succeeded)
-                return false;
+                if (!result2.Succeeded)
+                    return false;
+            }
 
             _unitofWork.ApplicationUser.Update(user);
 

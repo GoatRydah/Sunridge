@@ -36,7 +36,7 @@ namespace Sunridge.Areas.Identity.Pages.Account
             }
             else
             {
-                return RedirectToPage();
+                return RedirectToPage("../Home/Index", "OnGet");
             }
         }
     }
