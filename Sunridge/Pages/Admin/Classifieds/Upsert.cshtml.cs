@@ -60,6 +60,7 @@ namespace Sunridge.Pages.Admin.Classifieds
         {
             int catNum = Int32.Parse(ClassifiedObj.ClassifiedListing.Categories);
             ClassifiedObj.ClassifiedListing.Category = _unitofWork.ClassifiedCategory.GetFirstOrDefault(u => u.ClassifiedCategoryId == catNum);
+            ClassifiedObj.ClassifiedListing.classifiedcategory = ClassifiedObj.ClassifiedListing.Category.Description;
             //if (!ModelState.IsValid)
             //{
             //    return Page();

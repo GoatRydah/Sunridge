@@ -40,7 +40,7 @@ namespace Sunridge.DataAccess.Data.Repository
             objFromDb.Category = classifiedListing.Category;
             objFromDb.Images = classifiedListing.Images;
             objFromDb.Categories = classifiedListing.Categories;
-
+            objFromDb.classifiedcategory = classifiedListing.classifiedcategory;
 
             _db.SaveChanges();
         }
