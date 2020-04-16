@@ -68,30 +68,53 @@ namespace Sunridge.Pages.Admin.Classifieds
 
             string userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = _unitofWork.ApplicationUser.GetFirstOrDefault(s => s.Id == userId);
-           // ClassifiedObj.ClassifiedListing. = user.FirstName + " " + user.LastName;
+            // ClassifiedObj.ClassifiedListing. = user.FirstName + " " + user.LastName;
 
             //find root path wwwroot
             string webRootPath = _hostingEnvironment.WebRootPath;
             //Grab the file(s) from the form
             var files = HttpContext.Request.Form.Files;
 
-            if (ClassifiedObj.ClassifiedListing.ClassifiedListingId == 0) //new photo object
+            if (ClassifiedObj.ClassifiedListing.ClassifiedListingId == 0)
             {
-                //rename file user submits for image
-                string fileName = Guid.NewGuid().ToString();
-                //upload file to the path
-                var uploads = Path.Combine(webRootPath, @"images\classifieds\");
-                //preserve our extension
-                var extension = Path.GetExtension(files[0].FileName);
-
-                using (var filestream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
-                {
-                    files[0].CopyTo(filestream); //files variable comes from the razor page files id
-                }
-
-                ClassifiedObj.ClassifiedListing.Image = @"\images\classifieds\" + fileName + extension;
-
                 _unitofWork.ClassifiedListing.Add(ClassifiedObj.ClassifiedListing);
+                _unitofWork.Save();
+
+                int classifiedListingId = 0;
+
+                IEnumerable<ClassifiedListing> DBClassified = _unitofWork.ClassifiedListing.GetAll();
+
+                foreach(var listing in DBClassified) { 
+
+                    if(classifiedListingId < listing.ClassifiedListingId)
+                    {
+                        classifiedListingId = listing.ClassifiedListingId;
+                    }
+                }
+                for (int i = 0; i < files.Count(); i++)
+                {
+                    ClassifiedImage tempImage = new ClassifiedImage();
+                    //rename file user submits for image
+                    string fileName = Guid.NewGuid().ToString();
+                    //upload file to the path
+                    var uploads = Path.Combine(webRootPath, @"images\classifieds\");
+                    //preserve our extension
+                    var extension = Path.GetExtension(files[i].FileName);
+
+                    using (var filestream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+                    {
+                        files[i].CopyTo(filestream); //files variable comes from the razor page files id
+                    }
+
+                    ClassifiedObj.ClassifiedListing.Image = @"\images\classifieds\" + fileName + extension;
+                    tempImage.ImageURL = ClassifiedObj.ClassifiedListing.Image;
+                    tempImage.ClassifiedListingId = classifiedListingId;
+                    if(i == 0)
+                    {
+                        tempImage.IsMainImage = true;
+                    }
+                    _unitofWork.ClassifiedImage.Add(tempImage);
+                }
             }
             else //else we edit
             {
