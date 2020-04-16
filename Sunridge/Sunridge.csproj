@@ -75,7 +75,6 @@
 
 
   <ItemGroup>
-    <Folder Include="Pages\Admin\Classifieds\Services\" />
     <Folder Include="Pages\Classifieds\" />
     <Folder Include="wwwroot\docs\NewsItemFiles\" />
     <Folder Include="wwwroot\images\boardMembers\" />
