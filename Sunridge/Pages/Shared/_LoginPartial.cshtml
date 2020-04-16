@@ -21,9 +21,11 @@
     }
     else
     {
+        @* This is commented out so that people can't just willy nilly sign up. But it's left here in case something goes really wrong and nobody can ever log in. 
+        This can then be uncommnented to allow people to create users temporarily and can then be commented back out.
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-        </li>
+        </li>*@
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
         </li>
