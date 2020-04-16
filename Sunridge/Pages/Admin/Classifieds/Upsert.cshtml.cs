@@ -124,26 +124,34 @@ namespace Sunridge.Pages.Admin.Classifieds
                 //checks if there are files submitted
                 if (files.Count > 0)
                 {
-                    //rename file user submits for image
-                    string fileName = Guid.NewGuid().ToString();
-                    //upload file to the path
-                    var uploads = Path.Combine(webRootPath, @"images\classifieds");
-                    //preserve our extension
-                    var extension = Path.GetExtension(files[0].FileName);
-
-                    var imagePath = Path.Combine(webRootPath, objFromDb.Image.TrimStart('\\'));
-
-                    if (System.IO.File.Exists(imagePath))
+                    for (int i = 0; i < files.Count(); i++)
                     {
-                        System.IO.File.Delete(imagePath);
-                    }
+                        ClassifiedImage tempImage = new ClassifiedImage();
+                        //rename file user submits for image
+                        string fileName = Guid.NewGuid().ToString();
+                        //upload file to the path
+                        var uploads = Path.Combine(webRootPath, @"images\classifieds\");
+                        //preserve our extension
+                        var extension = Path.GetExtension(files[i].FileName);
 
-                    using (var filestream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
-                    {
-                        files[0].CopyTo(filestream);
-                    }
+                        var imagePath = Path.Combine(webRootPath, objFromDb.Image.TrimStart('\\'));
 
-                    ClassifiedObj.ClassifiedListing.Image = @"\images\classifieds\" + fileName + extension;
+                        if (System.IO.File.Exists(imagePath))
+                        {
+                            System.IO.File.Delete(imagePath);
+                        }
+
+                        using (var filestream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+                        {
+                            files[0].CopyTo(filestream);
+                        }
+
+                        if (i == 0)
+                        {
+                            tempImage.IsMainImage = true;
+                        }
+                        _unitofWork.ClassifiedImage.Add(tempImage);
+                    }
                 }
                 else
                 {
