@@ -55,23 +55,30 @@ namespace Sunridge.Pages.NewsItemFolder
 
             if (NewsItemObj.NewsItemId == 0) //new item
             {
-                //rename file user submits for image
-                string fileName = Guid.NewGuid().ToString();
-                NewsItemObj.FileName = files[0].FileName;
-                //upload file to the path
-                var uploads = Path.Combine(webRootPath, @"images\newsItems");
-                //preserve our extension
+                try
+                {
+                    //rename file user submits for image
+                    string fileName = Guid.NewGuid().ToString();
+                    NewsItemObj.FileName = files[0].FileName;
+                    //upload file to the path
+                    var uploads = Path.Combine(webRootPath, @"images\newsItems");
+                    //preserve our extension
 
-                if (files.Count > 0)
-                { 
-                    var extension = Path.GetExtension(files[0].FileName);
-
-                    using (var filestream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+                    if (files.Count > 0)
                     {
-                        files[0].CopyTo(filestream); //files variable comes from the razor page files id
-                    }
+                        var extension = Path.GetExtension(files[0].FileName);
 
-                    NewsItemObj.FilePath = @"\images\newsItems\" + fileName + extension;
+                        using (var filestream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+                        {
+                            files[0].CopyTo(filestream); //files variable comes from the razor page files id
+                        }
+
+                        NewsItemObj.FilePath = @"\images\newsItems\" + fileName + extension;
+                    }
+                }
+                catch(Exception e)
+                {
+
                 }
 
                 _unitofWork.NewsItem.Add(NewsItemObj);
