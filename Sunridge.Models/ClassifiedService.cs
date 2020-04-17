@@ -11,7 +11,6 @@ namespace Sunridge.Models
         public int Id { get; set; }
 
         [Display(Name = "Description")]
-        [Required]
         public string Description { get; set; } //Must be lowercase when using .js for data
         public string Image { get; set; }
         public string ApplicationUserId { get; set; }

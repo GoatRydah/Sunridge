@@ -4,6 +4,8 @@
 @{
     ViewData["Title"] = "Upsert";
 }
+<link rel="Stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" type="text/css" />
+
 <br />
 <br />
 @if (User.IsInRole(SD.AdminRole))
@@ -56,7 +58,8 @@
                         <label asp-for="CommonAreaObj.Date"></label>
                     </div>
                     <div class="col-9">
-                        <input id="datepicker" class="form-control" asp-for="CommonAreaObj.Date" />
+                        <input class="datepicker" type="date" value="" asp-for="CommonAreaObj.Date" type="text" class="form-control" />
+                        <span class="text-danger" asp-validation-for="CommonAreaObj.Date"></span>
                     </div>
                 </div>
                 <div class="row">
@@ -73,10 +76,31 @@
 }
 else
 {
-<div>
-    <h1 class="m-3">You must be logged in as an admin to view this page.</h1>
-</div>
+    <div>
+        <h1 class="m-3">You must be logged in as an admin to view this page.</h1>
+    </div>
 }
 @section Scripts{
     <script src="~/js/adminCommonArea.js"></script>
+    <script>
+        $(function () {
+            $(".datepicker").datepicker({});
+        });
+
+
+        function validateInput() {
+            var dt = document.getElementById("datepicker").value;
+
+            if (dt.toString() == '') {
+                swal("Error", "Please select Date", "error");
+                return false;
+            }
+
+            return true;
+        }
+
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 }
+
+
