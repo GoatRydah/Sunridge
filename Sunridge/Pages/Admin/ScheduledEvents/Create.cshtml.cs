@@ -73,7 +73,7 @@ namespace Sunridge.Pages.Admin.ScheduledEvents
                     return Page();
                 }
 
-                if (ScheduledEventObj.ID == 0) //new lostandfounditem
+                if (ScheduledEventObj.ID == 0) //new 
                 {
                     //rename file user submits for image
                     string fileName = Guid.NewGuid().ToString();
