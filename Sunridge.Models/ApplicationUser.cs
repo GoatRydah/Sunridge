@@ -10,7 +10,6 @@ namespace Sunridge.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        //The below came from Owner.cs in models which has since been deleted
         public int AddressId { get; set; }
 
         [Required]
@@ -44,7 +43,7 @@ namespace Sunridge.Models
         public bool IsArchive { get; set; } = false;
 
         public string LastModifiedBy { get; set; }
-        public DateTime LastModifiedDate { get; set; }
+        public DateTime? LastModifiedDate { get; set; }
 
         //Navigation properties
         [ForeignKey("AddressId")]

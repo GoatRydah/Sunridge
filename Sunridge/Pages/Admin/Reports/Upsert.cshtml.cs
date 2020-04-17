@@ -68,32 +68,46 @@ namespace Sunridge.Pages.Admin.Reports
 
         public void OnPostLaborPlus()
         {
-            LaborHours temp = new LaborHours();
-            temp.ReportId = 0;
-            if(ReportVMObj.LaborHours == null)
+            try
             {
-                ReportVMObj.LaborHours = new List<LaborHours>();
+                LaborHours temp = new LaborHours();
+                temp.ReportId = 0;
+                if (ReportVMObj.LaborHours == null)
+                {
+                    ReportVMObj.LaborHours = new List<LaborHours>();
+                }
+                if (ReportVMObj.EquipmentHours == null)
+                {
+                    ReportVMObj.EquipmentHours = new List<EquipmentHours>();
+                }
+                ReportVMObj.LaborHours.Add(temp);
             }
-            if (ReportVMObj.EquipmentHours == null)
+            catch(Exception e)
             {
-                ReportVMObj.EquipmentHours = new List<EquipmentHours>();
+
             }
-            ReportVMObj.LaborHours.Add(temp);
         }
 
         public void OnPostEquipmentPlus()
         {
-            EquipmentHours temp = new EquipmentHours();
-            temp.ReportId = 0;
-            if (ReportVMObj.LaborHours == null)
+            try
             {
-                ReportVMObj.LaborHours = new List<LaborHours>();
+                EquipmentHours temp = new EquipmentHours();
+                temp.ReportId = 0;
+                if (ReportVMObj.LaborHours == null)
+                {
+                    ReportVMObj.LaborHours = new List<LaborHours>();
+                }
+                if (ReportVMObj.EquipmentHours == null)
+                {
+                    ReportVMObj.EquipmentHours = new List<EquipmentHours>();
+                }
+                ReportVMObj.EquipmentHours.Add(temp);
             }
-            if (ReportVMObj.EquipmentHours == null)
+            catch(Exception e)
             {
-                ReportVMObj.EquipmentHours = new List<EquipmentHours>();
+
             }
-            ReportVMObj.EquipmentHours.Add(temp);
         }
 
         public IActionResult OnPostCreate()
