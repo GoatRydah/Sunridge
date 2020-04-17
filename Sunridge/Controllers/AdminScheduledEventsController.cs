@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
@@ -34,7 +35,14 @@ namespace Sunridge.Controllers
                 {
                     return Json(new { success = false, message = "Error while deleting" });
                 }
+                //Physically Delete the image in wwwroot
+                var imagePath = Path.Combine(_hostingEnvironment.WebRootPath, objFromDb.Image.TrimStart('\\'));
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
 
+                _unitOfWork.ScheduledEvents.Remove(objFromDb);
                 _unitOfWork.Save();
             }
             catch (Exception)
@@ -42,7 +50,6 @@ namespace Sunridge.Controllers
                 return Json(new { success = false, message = "Error while deleting" });
             }
             return Json(new { success = true, message = "Delete Successful" });
-
         }
     }
 }
