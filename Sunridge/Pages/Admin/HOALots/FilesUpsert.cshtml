@@ -7,6 +7,11 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
+@if (Request.Query["lotId"].Count > 0)
+{
+    TempData["lotId"] = Request.Query["lotId"];
+}
+
 @if (User.IsInRole(SD.AdminRole) || User.IsInRole(SD.OwnerRole))
 {
     <div class="border backgroundWhite container mt-5 pt-3">
@@ -74,14 +79,14 @@
                         }
                     </div>
                     <div class="col-md-6">
-                        <a asp-page="./Index" type="submit" class="btn btn-success form-control m-2">Back to List</a>
+                        <a asp-page="./FilesIndex" type="submit" asp-route-id="@TempData["LotId"]" class="btn btn-success form-control m-2">Back to List</a>
                     </div>
                 </div>
             </div>
         </form>
     </div>
-    }
-    else
-    {
+}
+else
+{
     <h1 class="m-3">You must be logged into view this page.</h1>
-    }
+}
