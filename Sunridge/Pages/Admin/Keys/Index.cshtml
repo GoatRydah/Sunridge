@@ -1,7 +1,7 @@
 ﻿@page
 @model Sunridge.Pages.Admin.Keys.IndexModel
 @using Sunridge.Utility
-@if (User.IsInRole(SD.AdminRole) || User.IsInRole(SD.OwnerRole))
+@if (User.IsInRole(SD.AdminRole))
 {
     <div class="border backgroundWhite container mt-5 pt-3">
         <div class="row">
@@ -19,18 +19,21 @@
             <thead>
                 <tr>
                     <th>Serial Number</th>
-
                     <th></th>
                 </tr>
             </thead>
         </table>
     </div>
 }
+else if (User.IsInRole(SD.OwnerRole))
+{
+
+}
 else
 {
-<div>
-    <h1 class="m-3">You must be logged in to view this page.</h1>
-</div> 
+    <div>
+        <h1 class="m-3">You must be logged in to view this page.</h1>
+    </div>
 }
 
 @section Scripts{

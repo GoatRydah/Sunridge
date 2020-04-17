@@ -61,7 +61,7 @@ namespace Sunridge.Pages.Admin.KeysHistory
             {
                 return Page();
             }
-            if (KeyHistoryObj.KeyHistory.KeyHistoryId == 0) //new Food Type
+            if (KeyHistoryObj.KeyHistory.KeyHistoryId == 0) //new entry
             {
 
 
