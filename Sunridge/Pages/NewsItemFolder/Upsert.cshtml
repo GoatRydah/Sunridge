@@ -52,7 +52,7 @@
                 <button type="submit" class="btn btn-primary form-control" onclick="return ValidInput()">Submit</button>
             </div>
             <div class="col-6">
-                <a asp-page="./Index" type="submit" class="btn btn-success form-control">Back to List</a>
+                
             </div>
         </div>
     </div>
@@ -60,7 +60,7 @@
 }
 else
 {
-    <h1>Access Denied</h1>
+    <h1 class="m-3">You must be logged in as an Admin to view this page.</h1>
 }
 @section Scripts {
     <script>
