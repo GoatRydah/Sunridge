@@ -21,7 +21,7 @@
                         </div>
                         <div class="col-9">
                             @Html.DropDownListFor(m => m.BoardMemberObj.BoardMember.ApplicationUserId, Model.BoardMemberObj.ApplicationUserList, "-Please select an Owner",
-          new { @class = "form-control" })
+new { @class = "form-control" })
                             <span class="text-danger" asp-validation-for="BoardMemberObj.BoardMember.ApplicationUser"></span>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                                     }
                                 </div>
                                 <div class="col-6">
-                                    <a asp-page="/Home/BoardMembers" class="btn btn-success form-control">Back to Board Members</a>
+                                    <a asp-page="/Admin/BoardMembers/BoardMemberEdit" class="btn btn-success form-control">Back to Board Members</a>
                                 </div>
                             </div>
                         </div>
@@ -85,12 +85,6 @@
 else
 {
     <div>
-        <h1 class="danger">Access Denied</h1>
+        <h1 class="m-3">You must be logged in as an admin to view this page.</h1>
     </div>
 }
-
-<!--
-    <div>
-        <h1 class="danger">Access Denied</h1>
-    </div>
--->

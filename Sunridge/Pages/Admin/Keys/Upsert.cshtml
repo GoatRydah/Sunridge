@@ -1,7 +1,7 @@
 ﻿@page
 @model Sunridge.Pages.Admin.Keys.UpsertModel
 @using Sunridge.Utility
-@if (User.IsInRole(SD.AdminRole))
+@if (User.IsInRole(SD.AdminRole) || User.IsInRole(SD.OwnerRole))
 {
     <form method="post" asp-action="Upsert" enctype="multipart/form-data">
         <div class="container mt-5">
@@ -61,12 +61,6 @@
 else
 {
     <div>
-        <h1 class="danger">Access Denied</h1>
+        <h1 class="m-3">You must be logged in to view this page.</h1>
     </div>
 }
-
-<!--
-    <div>
-        <h1 class="danger">Access Denied</h1>
-    </div>
--->
