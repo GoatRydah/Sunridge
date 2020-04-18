@@ -15,7 +15,7 @@ namespace Sunridge.Pages.Admin.Keys
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public IEnumerable<Models.Key> KeyList { get; set; }
+        public IEnumerable<KeyHistory> KeyList { get; set; }
         public IndexModel(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -26,7 +26,13 @@ namespace Sunridge.Pages.Admin.Keys
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
-            KeyList = _unitOfWork.Key.GetAll(k => k.);
+            //keep track of all of the owners lots
+            IEnumerable<OwnerLot> userLots =
+                _unitOfWork.OwnerLot.GetAll(l => l.ApplicationUser.Id == claim.Value);
+
+            //get all keys - we will filter by owner in cshtml page
+            KeyList = _unitOfWork.KeyHistory.GetAll();
+
         }
     }
 }
