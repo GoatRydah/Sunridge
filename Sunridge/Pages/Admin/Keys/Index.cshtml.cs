@@ -31,7 +31,7 @@ namespace Sunridge.Pages.Admin.Keys
             userLots = _unitOfWork.OwnerLot.GetAll(l => l.ApplicationUser.Id == claim.Value);
 
             //get all keys - we will filter by owner in cshtml page
-            KeyList = _unitOfWork.KeyHistory.GetAll();
+            KeyList = _unitOfWork.KeyHistory.GetAll(null,null,null);
 
         }
     }

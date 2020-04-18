@@ -27,16 +27,18 @@
 }
 else if (User.IsInRole(SD.OwnerRole))
 {
-    foreach (var lot in Model.userLots)
-    {
-        foreach(var key in Model.KeyList)
-        {
-            if(key.LotId == lot.LotId)
-            {
 
+    @foreach (var lot in Model.userLots)
+    {
+        @foreach (var key in Model.KeyList)
+        {
+            @if (key.LotId == lot.LotId)
+            {
+                <p>@key.Key.FullSerial</p>
             }
         }
     }
+
 }
 else
 {
