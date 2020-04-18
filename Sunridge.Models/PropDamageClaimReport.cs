@@ -20,6 +20,7 @@ namespace Sunridge.Models
         public string comments { get; set; }
 
         public bool resolved { get; set; }
+        public string resolveddate { get; set; }
 
         public string FileName { get; set; }
         public string FilePath { get; set; }

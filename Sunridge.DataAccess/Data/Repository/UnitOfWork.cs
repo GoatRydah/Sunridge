@@ -29,6 +29,7 @@ namespace Sunridge.DataAccess.Data.Repository
         public IReportRepository ReportItem { get; private set; }
         public IEquipmentHoursRepository EquipmentHoursItem { get; private set; }
         public ILaborHoursRepository LaborHoursItem { get; private set; }
+        public IPropDamageClaimReportRepository PropDamageClaimReport { get; private set; }
 
         public IChatRoomRepository ChatRoomItem { get; private set; }
         public IKeyRepository Key { get; private set; }
@@ -87,6 +88,7 @@ namespace Sunridge.DataAccess.Data.Repository
             ScheduledEvents = new ScheduledEventsRepository(_db);
             Transaction = new TransactionRepository(_db);
             TransactionType = new TransactionTypeRepository(_db);
+            PropDamageClaimReport = new PropDamageClaimReportRepository(_db);
         }
 
         public void Dispose()
