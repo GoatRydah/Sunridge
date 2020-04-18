@@ -5,7 +5,8 @@
 @{
     ViewData["Title"] = "Index";
 }
-@if (User.IsInRole(SD.OwnerRole) || User.IsInRole(SD.AdminRole))
+
+@*@if (User.IsInRole(SD.OwnerRole) || User.IsInRole(SD.AdminRole))
 {
     <div class="container overflow-auto" style="height:500px" id="chatDiv">
         @if (Model.ChatRoomModelList != null)
@@ -84,5 +85,5 @@
         }
 
     </script>
-}
+}*@
 
