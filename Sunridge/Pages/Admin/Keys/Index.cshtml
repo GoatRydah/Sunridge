@@ -28,25 +28,50 @@
 else if (User.IsInRole(SD.OwnerRole))
 {
 
-    @foreach (var lot in Model.userLots)
-    {
-        @foreach (var key in Model.KeyList)
-        {
-            @if (key.LotId == lot.LotId)
-            {
-                <p>@key.Key.FullSerial</p>
-            }
-        }
-    }
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <h3>My Keys:</h3>
+    </div>
+    <div class="col-3"></div>
+</div>
 
-}
-else
-{
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <table class="table-striped table-bordered col-12">
+
+            @foreach (var lot in Model.userLots)
+            {
+                @foreach (var key in Model.KeyList)
+                {
+                    @if (key.LotId == lot.LotId)
+                    {
+
+                        <tr>
+                            <td class="col-12">@key.Key.FullSerial</td>
+                        </tr>
+
+                    }
+                }
+            }
+        </table>
+    </div>
+    <div class="col-3"></div>
+    <div class="row">
+        <div class="col-12">
+
+        </div>
+    </div>
+</div>
+    }
+    else
+    {
     <div>
         <h1 class="m-3">You must be logged in to view this page.</h1>
     </div>
-}
+    }
 
-@section Scripts{
-    <script src="~/js/Key.js"></script>
-}
+    @section Scripts{
+        <script src="~/js/Key.js"></script>
+    }

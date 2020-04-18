@@ -28,10 +28,10 @@ namespace Sunridge.Pages.Admin.Keys
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
             //keep track of all of the owners lots
-            userLots = _unitOfWork.OwnerLot.GetAll(l => l.ApplicationUser.Id == claim.Value);
+            userLots = _unitOfWork.OwnerLot.GetAll(l => l.OwnerId == claim.Value);
 
             //get all keys - we will filter by owner in cshtml page
-            KeyList = _unitOfWork.KeyHistory.GetAll(null,null,null);
+            KeyList = _unitOfWork.KeyHistory.GetAll(null,null,"Key,Lot");
 
         }
     }
