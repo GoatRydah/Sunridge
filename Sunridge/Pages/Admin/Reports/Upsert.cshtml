@@ -15,8 +15,12 @@
                     @for (var i = 0; i < Model.ReportVMObj.LaborHours.Count(); i++)
                     {
                         <input type="hidden" asp-for="ReportVMObj.LaborHours[i].Id" />
+                    }
+                    @for (var i = 0; i < Model.ReportVMObj.EquipmentHours.Count(); i++)
+                    {
                         <input type="hidden" asp-for="ReportVMObj.EquipmentHours[i].Id" />
                     }
+
                 }
                 <div class="col-12 px-3" style="border-bottom: 1px solid #325d88">
                     <h2 class="text-primary">@(Model.ReportVMObj.Report.Id != 0 ? "Update" : "Create") Report</h2>
@@ -55,7 +59,7 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-3">
-                            <label asp-for="ReportVMObj.Report.Suggestion"></label>
+                            <label id="suggestionLabel"asp-for="ReportVMObj.Report.Suggestion"></label>
                         </div>
                         <div class="col-9">
                             <textarea class="form-control" asp-for="ReportVMObj.Report.Suggestion" id="txtSuggestion" style="height:200px"></textarea>
@@ -78,14 +82,6 @@
                             </div>
                         }
                     </div>
-                    <div class="form-group row">
-                        <div class="col-3">
-                            <label asp-for="ReportVMObj.Report.ListingDate"></label>
-                        </div>
-                        <div class="col-9">
-                            <input class="form-control" asp-for="ReportVMObj.Report.ListingDate" />
-                        </div>
-                    </div>
                     @if (User.IsInRole(SD.AdminRole))
                     {
                         <div class="form-group row">
@@ -104,6 +100,7 @@
                         currentSelected.addEventListener("change", function () {
                             choice = document.getElementById("formTypeDropDown").value;
                             if (choice == "Work in kind") {
+                                document.getElementById("suggestionLabel").innerHTML = "Describe Equipment Used";
                                 var x = document.getElementById("labordiv");
                                 if (x.style.display == "none") {
                                     x.style.display = "block";
@@ -115,6 +112,7 @@
                                 }
 
                             } else {
+                                document.getElementById("suggestionLabel").innerHTML = "Suggestion";
                                 var x = document.getElementById("labordiv");
                                 if (x.style.display == "block") {
                                     x.style.display = "none";
@@ -142,7 +140,7 @@
 
                     <div class="form-group row" style="display: none;" id="labordiv">
                         <div>
-                            <button asp-page-handler="laborplus" class="form-control"> 
+                            <button asp-page-handler="laborplus" class="form-control">
                                 <i id="laborButton" class="btn btn-success form-control">Add Labor</i>
                             </button>
                         </div>
@@ -150,7 +148,7 @@
 
                     <div class="form-group row" style="display: none;" id="equipmentdiv">
                         <div>
-                            <button asp-page-handler="equipmentplus" class="form-control"> 
+                            <button asp-page-handler="equipmentplus" class="form-control">
                                 <i id="equipmentButton" class="btn btn-success form-control">Add Equipment</i>
                             </button>
                         </div>
