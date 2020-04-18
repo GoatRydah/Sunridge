@@ -27,18 +27,40 @@ namespace Sunridge.Pages.Admin.HOALots
 
         public void OnGet(int id)
         {
-            var temp = TempData["AnId"];
             int theId = 0;
+            try
+            {
+                string[] temp = (string[])TempData["lotId"];
+                theId = 0;
+                TempData["lotId"] = temp;
 
-            if (id == 0)
-            {
-                theId = Int32.Parse(temp.ToString());
-                LotObj = _unitofWork.Lot.GetFirstOrDefault(s => s.LotId == theId);
-                TempData["lotId"] = LotObj.LotId;
+                if (id == 0)
+                {
+                    theId = Int32.Parse(temp[0].ToString());
+                    LotObj = _unitofWork.Lot.GetFirstOrDefault(s => s.LotId == theId);
+                    TempData["lotId"] = LotObj.LotId;
+                }
+                else
+                {
+                    LotObj = _unitofWork.Lot.GetFirstOrDefault(s => s.LotId == id);
+                }
             }
-            else
+            catch
             {
-                LotObj = _unitofWork.Lot.GetFirstOrDefault(s => s.LotId == id);
+                string temp = TempData["lotId"].ToString();
+                theId = Int32.Parse(temp);
+                TempData["lotId"] = temp;
+
+                if (id == 0)
+                {
+                    theId = Int32.Parse(temp.ToString());
+                    LotObj = _unitofWork.Lot.GetFirstOrDefault(s => s.LotId == theId);
+                    TempData["lotId"] = LotObj.LotId;
+                }
+                else
+                {
+                    LotObj = _unitofWork.Lot.GetFirstOrDefault(s => s.LotId == id);
+                }
             }
         }
     }

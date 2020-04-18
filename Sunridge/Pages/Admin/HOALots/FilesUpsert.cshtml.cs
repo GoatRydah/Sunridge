@@ -19,6 +19,8 @@ namespace Sunridge.Pages.Admin.HOALots
         //binds the model to the page
         [BindProperty]
         public Sunridge.Models.File file { get; set; }
+        [BindProperty]
+        public string LotId { get; set; }
 
         public FilesUpsertModel(IUnitOfWork unitofWork, IWebHostEnvironment hostingEnvironment)
         {
@@ -28,6 +30,18 @@ namespace Sunridge.Pages.Admin.HOALots
 
         public IActionResult OnGet(int id)
         {
+            try
+            {
+                string[] temp = (string[])TempData["lotId"];
+                LotId = temp[0];
+                TempData["lotId"] = LotId;
+            }
+            catch
+            {
+                string temp = TempData["lotId"].ToString();
+                LotId = temp;
+                TempData["lotId"] = id;
+            }
             file = new Sunridge.Models.File();
 
             if (id != 0)
@@ -43,27 +57,6 @@ namespace Sunridge.Pages.Admin.HOALots
             string webRootPath = _hostingEnvironment.WebRootPath;
             //Grab the file(s) from the form
             var files = HttpContext.Request.Form.Files;
-
-            //if (file.FileId == 0) //new file object
-            //{
-            //    //rename file user submits for image
-            //    string fileName = Guid.NewGuid().ToString();
-            //    //upload file to the path
-            //    var uploads = Path.Combine(webRootPath, @"docs\lotFiles");
-            //    //preserve our extension
-            //    var extension = Path.GetExtension(file.FileURL);
-
-            //    using (var filestream = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
-            //    {
-            //        files[0].CopyTo(filestream); //files variable comes from the razor page files id
-            //    }
-
-            //    file.FileURL = @"\docs\lotFiles\" + fileName + extension;
-
-            //    _unitofWork.File.Add(file.FileURL);
-            //}
-            //else //else we edit
-            //{
 
             //checks if there are files submitted
             if (files.Count > 0)
@@ -106,11 +99,10 @@ namespace Sunridge.Pages.Admin.HOALots
                 _unitofWork.File.Add(file);
 
             _unitofWork.Save();
-            //}
 
-            TempData["AnId"] = file.LotId;
+            TempData["lotId"] = file.LotId;
 
-            return RedirectToPage($"./FilesIndex");
+            return RedirectToPage($"./FilesIndex", new { id = file.Lot });
         }
     }
 }
