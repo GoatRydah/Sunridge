@@ -53,5 +53,6 @@ namespace Sunridge.Data
         public DbSet<ScheduledEvent> ScheduledEvent { get; set; }
         public DbSet<Transaction> Transaction { get; set; }
         public DbSet<TransactionType> TransactionType { get; set; }
+        public DbSet<PropDamageClaimReport> PropDamageClaimReport { get; set; }
     }
 }
