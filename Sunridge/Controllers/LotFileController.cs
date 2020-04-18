@@ -36,6 +36,7 @@ namespace Sunridge.Controllers
             {
                 string id = TempData["lotId"].ToString();
                 theId = Int32.Parse(id);
+                TempData["lotId"] = id;
                 if (theId == 0)
                     return Json(new { data = 0 });
             }
