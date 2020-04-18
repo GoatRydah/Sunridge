@@ -63,7 +63,7 @@ namespace Sunridge.Pages.Admin.Owners
                 return Page();
             }
 
-            return RedirectToAction("./Index");
+            return RedirectToPage("./Index");
         }
     }
 }

@@ -116,7 +116,7 @@ namespace Sunridge.Pages.Admin.Reports
             {
                 return Page();
             }
-
+            ReportVMObj.Report.ListingDate = DateTime.Now.ToString();
            
             
             if (ReportVMObj.Report.Id == 0) //new  item
