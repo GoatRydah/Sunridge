@@ -39,6 +39,7 @@ namespace Sunridge.DataAccess.Data.Repository
             objFromDb.listingDate = propDamageClaimReport.listingDate;
             objFromDb.resolved = propDamageClaimReport.resolved;
             objFromDb.comments = propDamageClaimReport.comments;
+            objFromDb.resolveddate = propDamageClaimReport.resolveddate;
 
             _db.SaveChanges();
         }
