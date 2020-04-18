@@ -3,7 +3,9 @@ using System.IO;
 using Sunridge.DataAccess.Data.Repository.IRepository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-
+using Sunridge.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Sunridge.Controllers
 {
@@ -43,6 +45,11 @@ namespace Sunridge.Controllers
                 }
 
                 _unitOfWork.ClassifiedListing.Remove(objFromDb);
+                List<ClassifiedImage> imagesFromDB = _unitOfWork.ClassifiedImage.GetAll().Where(u => u.ClassifiedListingId == id).ToList();
+                foreach (var image in imagesFromDB)
+                {
+                    _unitOfWork.ClassifiedImage.Remove(image);
+                }
                 _unitOfWork.Save();
             }
             catch (Exception)

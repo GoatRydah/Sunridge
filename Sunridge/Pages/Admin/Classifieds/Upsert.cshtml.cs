@@ -124,9 +124,10 @@ namespace Sunridge.Pages.Admin.Classifieds
                 //checks if there are files submitted
                 if (files.Count > 0)
                 {
+                    List<ClassifiedImage> classifiedImages = _unitofWork.ClassifiedImage.GetAll().Where(u => u.ClassifiedListingId == ClassifiedObj.ClassifiedListing.ClassifiedListingId).ToList();
                     for (int i = 0; i < files.Count(); i++)
                     {
-                        ClassifiedImage tempImage = new ClassifiedImage();
+                        //ClassifiedImage tempImage = new ClassifiedImage();
                         //rename file user submits for image
                         string fileName = Guid.NewGuid().ToString();
                         //upload file to the path
@@ -145,12 +146,15 @@ namespace Sunridge.Pages.Admin.Classifieds
                         {
                             files[0].CopyTo(filestream);
                         }
+                        ClassifiedObj.ClassifiedListing.Image = @"\images\classifieds\" + fileName + extension;
 
-                        if (i == 0)
-                        {
-                            tempImage.IsMainImage = true;
-                        }
-                        _unitofWork.ClassifiedImage.Add(tempImage);
+                        classifiedImages.ElementAt(i).ImageURL = ClassifiedObj.ClassifiedListing.Image;
+                        //if (i == 0)
+                        //{
+                        //    tempImage.IsMainImage = true;
+                        //}
+                        //ClassifiedObj.ImagesList.Add(tempImage);
+                        _unitofWork.ClassifiedImage.Update(classifiedImages.ElementAt(i));
                     }
                 }
                 else
