@@ -14,7 +14,7 @@
 
 @if (User.IsInRole(SD.AdminRole) || User.IsInRole(SD.OwnerRole))
 {
-    <div class="border backgroundWhite container mt-5 pt-3">
+    <div class="border backgroundWhite container mt-5 pt-3 pb-3">
         @if (Model.file.FileId == 0)
         {
             <h1 class="text-primary">New Document</h1>

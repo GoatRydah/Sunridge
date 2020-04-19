@@ -13,9 +13,9 @@ h1, h2, h3, h4, h5, h6 {
         padding-bottom: 12rem
     }
 
-        header.masthead h1 {
+        /*header.masthead h1 {
             font-size: 3rem
-        }
+        }*/
 }
 
 .showcase .showcase-text {
@@ -46,13 +46,13 @@ h1, h2, h3, h4, h5, h6 {
             height: 7rem
         }
 
-            .features-icons .features-icons-item .features-icons-icon i {
+            /*.features-icons .features-icons-item .features-icons-icon i {
                 font-size: 4.5rem
             }
 
         .features-icons .features-icons-item:hover .features-icons-icon i {
             font-size: 5rem
-        }
+        }*/
 
 .testimonials {
     margin-bottom: 12%;
@@ -91,10 +91,10 @@ h1, h2, h3, h4, h5, h6 {
         opacity: .3
     }
 
-footer.footer {
+/*footer.footer {
     padding-top: 4rem;
     padding-bottom: 4rem
-}
+}*/
 
 .nav-link {
     color: black;
@@ -109,10 +109,10 @@ footer.footer {
         opacity: 0.5;
     }
 
-nav {
+/*nav {
     font-size: 14pt;
     color: black;
-}
+}*/
 
 .main-icons {
     width: 40%;
@@ -166,7 +166,7 @@ img.masthead9 {
     max-width: 800px;
     margin: 25px auto;
     color: #888;
-    font-size: 18px;
+    /*font-size: 18px;*/
 }
 
 .tz-gallery {
@@ -220,13 +220,13 @@ img.masthead9 {
 }
 
 @media only screen and (max-width: 600px) {
-    .index-info > h1 {
+    /*.index-info > h1 {
         font-size: 12pt;
     }
 
         .index-info > h1 > p {
             font-size: 10pt;
-        }
+        }*/
 }
 
 @media only screen and (max-width: 768px) {
