@@ -11,7 +11,6 @@ using Sunridge.Utility;
 
 namespace Sunridge.Pages.Admin.Classifieds.Services
 {
-    [Authorize(Roles = SD.AdminRole)]
     public class IndexModel : PageModel
     {
         private readonly IUnitOfWork _unitOfWork;

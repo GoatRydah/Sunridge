@@ -13,7 +13,6 @@ using Sunridge.Utility;
 
 namespace Sunridge.Pages.Admin.Classifieds.Services
 {
-    [Authorize(Roles = SD.AdminRole)]
     public class UpsertModel : PageModel
     {
 

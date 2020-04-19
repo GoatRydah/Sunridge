@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Classifieds Index";
 }
-@if (User.IsInRole(SD.AdminRole))
+@if (User.IsInRole(SD.AdminRole) || User.IsInRole(SD.OwnerRole))
 {
     <div class="border backgroundWhite container mt-5 pt-3">
 

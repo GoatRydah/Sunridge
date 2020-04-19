@@ -15,7 +15,6 @@ using Sunridge.Utility;
 
 namespace Sunridge.Pages.Admin.Classifieds
 {
-    [Authorize(Roles = SD.AdminRole)]
     public class UpsertModel : PageModel
     {
         private readonly IUnitOfWork _unitofWork;

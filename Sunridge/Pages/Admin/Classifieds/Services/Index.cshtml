@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Classifieds Index";
 }
-@if (User.IsInRole(SD.AdminRole))
+@if (User.IsInRole(SD.AdminRole) || User.IsInRole(SD.OwnerRole))
 {
     <h2>Admin Classified Services</h2>
 
