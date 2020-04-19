@@ -18,9 +18,9 @@
                 <div class="carousel-item active">
                     <img class="masthead9 bg-primary" src="..@Html.DisplayFor(modelItem => item.Image)" />
                     <header class="text-white text-center" id="bannerHeader">
-                        <div id="carouselTextBox" class="container w-4 p-4">
+                        <div id="carouselTextBox" class="container w-4 p-4 pre-scrollable" style="overflow-y: auto;">
                             <h1>@Html.DisplayFor(modelItem => item.Header)</h1>
-                            <p style="font-size: 18pt;" id="bannerBody">
+                            <p style="font-size: 18pt;" id="bannerBody" class="text-wrap">
                                 @Html.Raw(item.Body)
                             </p>
                         </div>
@@ -32,10 +32,10 @@
                 <div class="carousel-item">
                     <img class="masthead9 bg-primary" src="..@Html.DisplayFor(modelItem => item.Image)" />
                     <header class="text-white text-center" id="bannerHeader">
-                        <div id="carouselTextBox" class="container w-4 p-4">
+                        <div id="carouselTextBox" class="container w-4 p-4 pre-scrollable" style="overflow-y: auto;">
                             <h1>@Html.DisplayFor(modelItem => item.Header)</h1>
-                            <p style="font-size: 18pt;">
-                                @Html.DisplayFor(modelItem => item.Body)
+                            <p style="font-size: 18pt;" class="text-wrap">
+                                @Html.Raw(item.Body)
                             </p>
                         </div>
                     </header>
@@ -74,7 +74,7 @@
             <div class="col-lg-4">
                 <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
                     <div class="features-icons-icon d-flex">
-                        <img style="margin: 0 auto;" src="~/img/index-icons/computer-icon.svg" alt="rules-icon">
+                        <img style="margin: 0 auto; " src="~/img/index-icons/computer-icon.svg" alt="rules-icon">
                     </div>
                     <h3>Classifieds &amp; Ads</h3>
                     <p class="lead">Buy &amp; Sell Property or Advertise a service at Sundridge</p>

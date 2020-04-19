@@ -1,7 +1,7 @@
 ﻿@using Sunridge.Utility;
 
 <!-- Bootstrap NavBar -->
-<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top" style="max-height:300px; overflow:auto; margin-bottom:200px;">
     <button class="navbar-toggler navbar-toggler-right" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -55,41 +55,12 @@
             <li class="nav-item">
                 <a class="nav-link" asp-area="" asp-page="/LostAndFound/Index">Lost And Found</a>
             </li>
-            <li class="nav-item">
+            @*<li class="nav-item">
                 <a class="nav-link" asp-area="" asp-page="/ChatRoom/Index">Chat Room</a>
-            </li>
+            </li>*@
             <li class="nav-item">
                 <a class="nav-link" asp-area="" asp-page="/Photos/Index">Photo Gallery</a>
             </li>
-
-            <!-- This menu is hidden in bigger devices with d-sm-none.
-    The sidebar isn't proper for smaller screens imo, so this dropdown menu can keep all the useful sidebar itens exclusively for smaller screens  -->
-            <li class="nav-item dropdown d-sm-block d-md-none">
-                <a class="nav-link dropdown-toggle" href="#" id="smallerscreenmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dashboard Menu
-                </a>
-                <div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
-                    <a class="dropdown-item" asp-area="Owner" asp-controller="Lots" asp-action="MyLots">My Lots</a>
-                    <a class="dropdown-item" asp-area="Owner" asp-controller="Classifieds" asp-action="MyClassifieds">My Classifieds</a>
-                    <a class="dropdown-item" href="~/OwnerPhotos/MyPhotos">My Photos</a>
-                    <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Forms">Forms</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" asp-area="Admin" asp-controller="Owners" asp-action="Index">Owners</a>
-                    <a class="dropdown-item" asp-area="Admin" asp-controller="Keys" asp-action="Index">Keys</a>
-                    <a class="dropdown-item" asp-area="Admin" asp-controller="KeyHistory" asp-action="Index">Key History</a>
-                    <a class="dropdown-item" asp-area="Owner" asp-controller="Lots" asp-action="Index">HOA Lots</a>
-                    <a class="dropdown-item" asp-area="Owner" asp-controller="Forms" asp-action="Index">Reports</a>
-                    <a class="dropdown-item" asp-area="Admin" asp-controller="CommonAreaAssets" asp-action="Index">Common Area Assets</a>
-                    <a class="dropdown-item" asp-area="Owner" asp-controller="Classifieds" asp-action="Index">Classifieds</a>
-                    <a class="dropdown-item" href="~/Admin/Photos/Index">Photos</a>
-                    <a class="dropdown-item" asp-area="Admin" asp-controller="Inventories" asp-action="Index">Inventory Items</a>
-                    <a class="dropdown-item" asp-area="Admin" asp-controller="Banner" asp-action="Index">Banner Items</a>
-                    <a class="dropdown-item" href="~/NewsItem/Index">News Items</a>
-                    <a class="dropdown-item" asp-area="Admin" asp-controller="ScheduledEvents" asp-action="Index">Scheduled Events</a>
-
-                </div>
-            </li><!-- Smaller devices menu END -->
-
         </ul>
     </div>
     <div>

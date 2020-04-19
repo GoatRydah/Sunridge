@@ -8,11 +8,11 @@
 <br />
 @if (User.IsInRole(SD.AdminRole) || User.IsInRole(SD.OwnerRole))
 {
-    <div class="border backgroundWhite container mt-5 pt-3">
+    <div class="border backgroundWhite container mt-5 pt-3 pb-3">
 
         <h2 class="text-primary">Add new Service</h2>
         <hr />
-        @*<table id="DT_load" class="table table-striped table-bordered" style="width:100%">
+        @*<table id="DT_load" class="table pb-3 table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
                         <th>Description</th>
@@ -43,7 +43,7 @@
                         <button type="submit" class="btn btn-primary form-control" onclick="return ValidInput()">Create</button>
                     </div>
                     <div class="col-md-6 p-4">
-                        <a asp-page="../Index" type="submit" class="btn btn-success form-control">Back to List</a>
+                        <a asp-page="./Index" type="submit" class="btn btn-success form-control">Back to List</a>
                     </div>
                 </div>
             </div>

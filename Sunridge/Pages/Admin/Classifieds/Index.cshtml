@@ -6,7 +6,7 @@
 }
 @if (User.IsInRole(SD.AdminRole) || User.IsInRole(SD.OwnerRole))
 {
-    <div class="border backgroundWhite container mt-5 pt-3">
+    <div class="border backgroundWhite container mt-5 pt-3 pb-3">
 
         <div class="row">
             <div class="col-md-6">
@@ -14,13 +14,13 @@
             </div>
             <div class="col-md-6">
                 <a asp-page="/Admin/Classifieds/Upsert" class="btn btn-primary btn-sm mr-3">Add New Classified</a>
-                <a asp-page="/Admin/Classifieds/Services/Index" class="btn btn-primary btn-sm">Add New Service</a>
-                <a asp-page="/Admin/Dashboard" class="btn btn-success text-center float-right">Back to Dashboard</a>
+                <a asp-page="/Admin/Classifieds/Services/Index" class="btn btn-primary btn-sm">Manage Services</a>
+                <a asp-page="/Admin/Dashboard" class="btn btn-success text-center float-right">Back to Admin Portal</a>
             </div>
         </div>
         <div class="table-responsive-sm">
 
-            <table id="DT_Load" class="table table-striped table-bordered" style="width:100%">
+            <table id="DT_Load" class="table pb-3 table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
                         <th>Category</th>

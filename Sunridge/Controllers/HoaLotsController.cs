@@ -31,8 +31,32 @@ namespace Sunridge.Controllers
         public IActionResult Get(int id)
         {
             HoaLots = new List<HOALotVM>();
+            List<Models.Lot> theLots = new List<Models.Lot>();
 
-            var theLots = _unitOfWork.Lot.GetAll(null, null, null);
+            if (User.IsInRole(SD.AdminRole))
+            {
+                var eachLot = _unitOfWork.Lot.GetAll(null, null, null);
+
+                foreach (var lot in eachLot)
+                {
+                    theLots.Add(lot);
+                }
+            }
+            else
+            {
+                var ownerLots = _unitOfWork.OwnerLot.GetAll(s => s.OwnerId == ClaimTypes.NameIdentifier);
+
+                foreach (var lot in ownerLots)
+                {
+                    var eachLot = _unitOfWork.Lot.GetAll(s => s.LotId == lot.LotId, null, null);
+
+                    foreach (var l in eachLot)
+                    {
+                        theLots.Add(l);
+                    }
+                }
+
+            }
             HOALotVM tempModel;
 
             foreach(var lot in theLots)

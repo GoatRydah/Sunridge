@@ -1083,6 +1083,42 @@ namespace Sunridge.DataAccess.Migrations
                     b.ToTable("PhotoCategories");
                 });
 
+            modelBuilder.Entity("Sunridge.Models.PropDamageClaimReport", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("comments")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("listingDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("resolved")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("resolveddate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("username")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("PropDamageClaimReport");
+                });
+
             modelBuilder.Entity("Sunridge.Models.Report", b =>
                 {
                     b.Property<int>("Id")

@@ -43,6 +43,7 @@ namespace Sunridge.DataAccess.Data.Repository.IRepository
         IScheduledEventsRepository ScheduledEvents { get; }
         ITransactionRepository Transaction { get; }
         ITransactionTypeRepository TransactionType { get; }
+        IPropDamageClaimReportRepository PropDamageClaimReport { get; }
 
         void Save();
     }
