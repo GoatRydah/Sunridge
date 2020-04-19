@@ -15,7 +15,14 @@
             </div>
             <div class="col-md-6 pb-3 pt-2 text-right">
                 <a asp-page="/Admin/Photos/Upsert" class="btn btn-primary ml-5">Add New Photo</a>
-                <a asp-page="/Admin/Dashboard" class="btn btn-success text-center float-right ml-2">Back to Dashboard</a>
+                @if (User.IsInRole(SD.AdminRole))
+                {
+                    <a asp-page="/Admin/Dashboard" class="btn btn-success text-center float-right ml-2">Back to Admin Portal</a>
+                }
+                else
+                {
+                    <a asp-page="/Admin/Dashboard" class="btn btn-success text-center float-right ml-2">Back to Owner Portal</a>
+                }
             </div>
         </div>
 

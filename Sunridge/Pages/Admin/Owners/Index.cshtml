@@ -17,11 +17,11 @@
             @if (User.IsInRole(SD.AdminRole))
             {
                 <a asp-page="/Admin/Owners/Upsert" class="btn btn-primary m-2 ml-5">Create New Owner</a>
-                <a asp-page="/Admin/Dashboard" class="btn btn-success text-center float-right m-2">Back to Dashboard</a>
+                <a asp-page="/Admin/Dashboard" class="btn btn-success text-center float-right m-2">Back to Admin Portal</a>
             }
             else
             {
-                <a asp-page="/Admin/Dashboard" class="btn btn-success text-center float-right m-2">Back to Dashboard</a>
+                <a asp-page="/Admin/Dashboard" class="btn btn-success text-center float-right m-2">Back to Owner Portal</a>
             }
         </div>
 
