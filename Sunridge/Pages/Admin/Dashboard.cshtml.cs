@@ -14,6 +14,7 @@ namespace Sunridge.Pages.Admin
         private readonly IUnitOfWork _unitOfWork;
 
         public IEnumerable<Report> ReportsList { get; set; }
+        public IEnumerable<PropDamageClaimReport> ClaimReportList { get; set; }
 
         public DashboardModel(IUnitOfWork unitOfWork)
         {
@@ -22,6 +23,7 @@ namespace Sunridge.Pages.Admin
         public void OnGet()
         {
             ReportsList = _unitOfWork.ReportItem.GetAll(u=> u.Resolved == false);
+            ClaimReportList = _unitOfWork.PropDamageClaimReport.GetAll(u=> u.resolved == false);
         }
     }
 }

@@ -12,32 +12,34 @@
     <div id="accordion">
         @foreach (var year in Model.numYears)
         {
-            <div class="card">
-                <div class="card-header" id="@year">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse + @year" aria-expanded="true" aria-controls="collapse + @year">
-                            @year
-                        </button>
-                    </h5>
-                </div>
+        <div class="card">
+            <div class="card-header" id="@year">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse + @year" aria-expanded="true" aria-controls="collapse + @year">
+                        @year
+                    </button>
+                </h5>
+            </div>
+            <div id="collapse + @year" class="collapse hide" aria-labelledby="@year" data-parent="#accordion" style="">
+
                 @foreach (var item in Model.NewsItemList.Where(i => i.Year == year))
                 {
-                    <div id="collapse + @year" class="collapse hide" aria-labelledby="@year" data-parent="#accordion" style="">
-                        <div class="card-body">
-                            <hr class="mt-5 mb-5">
-                            <h2>@Html.Raw(item.Header)</h2>
-                            <p>@Html.Raw(item.Content)</p>
+                    <div class="card-body">
+                        <hr class="mt-5 mb-5">
+                        <h2>@Html.Raw(item.Header)</h2>
+                        <p>@Html.Raw(item.Content)</p>
 
-                            @if (item.FilePath != null)
-                            {
-                                <div style="box-shadow: 10px 10px 8px 10px #888888;" class="col-sm-12 text-center mb-5">
-                                    <a class="lightbox" href="@item.FilePath" target="_blank">@item.FileName</a>
-                                </div>
-                            }
-                        </div>
+                        @if (item.FilePath != null)
+                        {
+                            <div style="box-shadow: 10px 10px 8px 10px #888888;" class="col-sm-12 text-center mb-5">
+                                <a class="lightbox" href="@item.FilePath" target="_blank">@item.FileName</a>
+                            </div>
+                        }
                     </div>
                 }
             </div>
+
+        </div>
         }
     </div>
 </div>

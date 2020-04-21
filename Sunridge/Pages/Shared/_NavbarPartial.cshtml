@@ -1,7 +1,9 @@
-﻿@using Sunridge.Utility;
+﻿@using Sunridge.Utility
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
 <!-- Bootstrap NavBar -->
-<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top" style="max-height:300px; overflow:auto; margin-bottom:200px;">
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top" id="top-nav">
     <button class="navbar-toggler navbar-toggler-right" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -56,8 +58,8 @@
                 <a class="nav-link" asp-area="" asp-page="/LostAndFound/Index">Lost And Found</a>
             </li>
             @*<li class="nav-item">
-                <a class="nav-link" asp-area="" asp-page="/ChatRoom/Index">Chat Room</a>
-            </li>*@
+                    <a class="nav-link" asp-area="" asp-page="/ChatRoom/Index">Chat Room</a>
+                </li>*@
             <li class="nav-item">
                 <a class="nav-link" asp-area="" asp-page="/Photos/Index">Photo Gallery</a>
             </li>
