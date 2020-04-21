@@ -26,7 +26,7 @@
                             <label asp-for="KeyHistoryObj.KeyHistory.KeyId"></label>
                         </div>
                         <div class="col-9">
-                            @Html.DropDownListFor(m => m.KeyHistoryObj.KeyHistory.KeyId, Model.KeyHistoryObj.KeyList, "-Please select a Key", new { @class = "form-control" })
+                            @Html.DropDownListFor(m => m.KeyHistoryObj.KeyHistory.KeyId, Model.KeyHistoryObj.KeyList, "-Please select a Key", new { @class = "form-control selectpicker" })
                             <span class="text-danger" asp-validation-for="KeyHistoryObj.KeyHistory.KeyId"></span>
                         </div>
                     </div>
@@ -35,7 +35,7 @@
                             <label asp-for="KeyHistoryObj.KeyHistory.LotId"></label>
                         </div>
                         <div class="col-9">
-                            @Html.DropDownListFor(m => m.KeyHistoryObj.KeyHistory.LotId, Model.KeyHistoryObj.LotList, "-Please select a Lot", new { @class = "form-control" })
+                            @Html.DropDownListFor(m => m.KeyHistoryObj.KeyHistory.LotId, Model.KeyHistoryObj.LotList, "-Please select a Lot", new { @class = "form-control selectpicker" })
                             <span class="text-danger" asp-validation-for="KeyHistoryObj.KeyHistory.LotId"></span>
                         </div>
                     </div>
@@ -111,7 +111,7 @@ else
 @section Scripts{
     <script>
         $(function () {
-            $(".datepicker").datepicker({  });
+            $(".datepicker").datepicker({});
         });
 
 
@@ -126,6 +126,10 @@ else
             return true;
         }
 
+        $.fn.selectpicker.Constructor.BootstrapVersion = '4';
+
+        $('.selectpicker').attr('data-show-subtext', true);
+        $('.selectpicker').attr('data-live-search', true);
     </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 

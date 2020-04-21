@@ -32,8 +32,8 @@ namespace Sunridge.Pages.Admin.KeysHistory
             //populate the lists for dropdowns
             KeyHistoryObj = new KeyHistoryViewModel()
             {
-                KeyList = _unitOfWork.Key.GetCategoryListOrDropdown(),
-                LotList = _unitOfWork.Lot.GetLotListOrDropdown(),
+                KeyList = _unitOfWork.Key.GetCategoryListOrDropdown().OrderBy(k => k.Value),
+                LotList = _unitOfWork.Lot.GetLotListOrDropdown().OrderBy(k => k.Value),
                 KeyHistory = new KeyHistory()
             };
 
