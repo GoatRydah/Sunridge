@@ -7,7 +7,7 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-@if (User.IsInRole(SD.AdminRole))
+@if (User.IsInRole(SD.AdminRole) || User.IsInRole(SD.OwnerRole))
 {
     <div class="border backgroundWhite container mt-5 pt-3 pb-3">
         <h1 class="ml-3 text-primary">Create Owner</h1>
@@ -121,7 +121,7 @@
                         <label asp-for="AddressObj.State"></label>
                     </div>
                     <div class="col-9">
-                        <input class="form-control" asp-for="AddressObj.State" id="txtState" placeholder="required..." />
+                        <input class="form-control" asp-for="AddressObj.State" id="txtState" value="UT" placeholder="required..." />
                     </div>
                 </div>
                 <div class="form-group row">
