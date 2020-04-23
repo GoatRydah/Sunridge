@@ -5,6 +5,10 @@ using System.Threading.Tasks;
 using Sunridge.DataAccess.Data.Repository.IRepository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Sunridge.Utility;
+using System.Security.Claims;
+using Sunridge.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Sunridge.Controllers
 {

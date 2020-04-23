@@ -1,0 +1,94 @@
+﻿@page
+@model Sunridge.Pages.Admin.Keys.OwnerUpsertModel
+@using Sunridge.Utility
+
+<link rel="Stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" type="text/css" />
+
+
+@if (User.IsInRole(SD.AdminRole) || User.IsInRole(SD.OwnerRole))
+{
+    <form method="post" asp-action="OwnerUpsert" enctype="multipart/form-data">
+        <div class="container mt-5">
+            <div class="row px-2 mx-2 backgroundWhite border">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                @if (Model.KeyHistoryObj.KeyHistoryId != 0)
+                {
+                    <input type="hidden" asp-for="KeyHistoryObj.KeyHistoryId" />
+                }
+                <div class="col-12 px-3" style="border-bottom: 1px solid #325d88">
+                    <h2 class="text-primary">@(Model.KeyHistoryObj.KeyHistoryId != 0 ? "Update" : "Add") Keys</h2>
+                </div>
+                <div class="col-8 pt-3">
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label>(I am trying to display the key number here)</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-3">
+                            <label asp-for="KeyHistoryObj.Status"></label>
+                        </div>
+                        <div class="col-9">
+                            <input class="form-control" asp-for="KeyHistoryObj.Status" />
+                            <span class="text-danger" asp-validation-for="KeyHistoryObj.Status"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-9 offset-3">
+                            <div class="row">
+                                <div class="col-6">
+                                    @if (Model.KeyHistoryObj.KeyHistoryId != 0)
+                                    {
+                                        <button type="submit" class="btn btn-primary form-control">Update</button>
+                                    }
+                                    else
+                                    {
+                                        <button type="submit" class="btn btn-primary form-control" onclick="return ValidateInput()">Add</button>
+                                    }
+                                </div>
+                                <div class="col-6">
+                                    <a asp-page="/Admin/Keys/Index" class="btn btn-success form-control">Back to Keys</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+}
+else
+{
+    <div>
+        <h1 class="m-3">You must be logged in as an Admin to view this page.</h1>
+    </div>
+}
+
+@section Scripts{
+    <script>
+        $(function () {
+            $(".datepicker").datepicker({});
+        });
+
+
+        function validateInput() {
+            var dt = document.getElementById("datepicker").value;
+
+            if (dt.toString() == '') {
+                swal("Error", "Please select Date", "error");
+                return false;
+            }
+
+            return true;
+        }
+
+        $.fn.selectpicker.Constructor.BootstrapVersion = '4';
+
+        $('.selectpicker').attr('data-show-subtext', true);
+        $('.selectpicker').attr('data-live-search', true);
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+}

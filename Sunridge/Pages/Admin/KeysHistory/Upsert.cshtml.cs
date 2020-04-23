@@ -63,8 +63,6 @@ namespace Sunridge.Pages.Admin.KeysHistory
             }
             if (KeyHistoryObj.KeyHistory.KeyHistoryId == 0) //new entry
             {
-
-
                 KeyHistoryObj.KeyHistory.Status = "Active";
                 KeyHistoryObj.KeyHistory.IsArchive = false;
                 KeyHistoryObj.KeyHistory.LastModifiedBy = claim.Value;
