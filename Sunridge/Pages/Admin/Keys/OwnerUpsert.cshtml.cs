@@ -28,19 +28,21 @@ namespace Sunridge.Pages.Admin.Keys
 
         public Key OwnerKey { get; set; }
 
+        //[BindProperty]
+        //public Lot OwnerLot { get; set; }
 
         public IActionResult OnGet(int? id)  //id is optional
         {
-            if(KeyHistoryObj == null)
-            {
-                KeyHistoryObj = new KeyHistory();
-            }
+            KeyHistoryObj = new KeyHistory();
 
             if (id != null) //edit
             {
                 KeyHistoryObj = _unitOfWork.KeyHistory.GetFirstOrDefault(u => u.KeyHistoryId == id);
 
                 OwnerKey = _unitOfWork.Key.GetFirstOrDefault(u => u.KeyId == KeyHistoryObj.KeyId);
+
+                //OwnerLot = _unitOfWork.Lot.GetFirstOrDefault(u => u.LotId == KeyHistoryObj.LotId);
+
 
                 if (KeyHistoryObj == null)
                 {
@@ -61,11 +63,20 @@ namespace Sunridge.Pages.Admin.Keys
             {
                 return Page();
             }
-
-            KeyHistoryObj.LastModifiedBy = claim.Value;
-            KeyHistoryObj.LastModifiedDate = DateTime.Now;
-            _unitOfWork.KeyHistory.Update(KeyHistoryObj);
-
+            if (KeyHistoryObj.KeyHistoryId == 0) //new entry
+            {
+                KeyHistoryObj.Status = "Active";
+                KeyHistoryObj.IsArchive = false;
+                KeyHistoryObj.LastModifiedBy = claim.Value;
+                KeyHistoryObj.LastModifiedDate = DateTime.Now;
+                _unitOfWork.KeyHistory.Add(KeyHistoryObj);
+            }
+            else // (edit)
+            {
+                KeyHistoryObj.LastModifiedBy = claim.Value;
+                KeyHistoryObj.LastModifiedDate = DateTime.Now;
+                _unitOfWork.KeyHistory.Update(KeyHistoryObj);
+            }
 
             //commit changes to the db
             _unitOfWork.Save();
