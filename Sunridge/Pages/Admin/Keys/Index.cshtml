@@ -38,13 +38,15 @@ else if (User.IsInRole(SD.OwnerRole))
         </div>
 
         <div class="row">
-            <div class="col-9">
+            <div class="col-12">
                 <table class="table-striped table-bordered col-12 mt-4">
                     <thead>
-                    <th><h5>Serial Number</h5></th>
-                    <th><h5>Date Issued</h5></th>
-                    <th>Status</th>
-                    <th></th>
+                        <tr>
+                            <th><h5>Serial Number</h5></th>
+                            <th><h5>Date Issued</h5></th>
+                            <th><h5>Status</h5></th>
+                            <th></th>
+                        </tr>
                     </thead>
                     <tbody>
 
@@ -58,7 +60,7 @@ else if (User.IsInRole(SD.OwnerRole))
                                         <td><h6>@key.Key.FullSerial</h6></td>
                                         <td><h6>@key.DateIssued</h6></td>
                                         <td><h6>@key.Status</h6></td>
-                                        <td><a href="/Admin/Keys/ownerUpsert?id=@key.KeyHistoryId" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
+                                        <td class="justify-content-center text-center"><a href="/Admin/Keys/ownerUpsert?id=@key.KeyHistoryId" class="btn btn-success text-white" style="cursor:pointer; width:100px;">
                                         <i class="far fa-edit"></i> Edit</a></td>
                                     </tr>
                                 }

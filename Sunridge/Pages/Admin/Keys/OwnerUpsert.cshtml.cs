@@ -23,18 +23,24 @@ namespace Sunridge.Pages.Admin.Keys
             _unitOfWork = unitOfWork;
         }
 
-                [BindProperty]
-
+        [BindProperty]
         public KeyHistory KeyHistoryObj { get; set; }
+
+        public Key OwnerKey { get; set; }
 
 
         public IActionResult OnGet(int? id)  //id is optional
         {
-            KeyHistoryObj = new KeyHistory();
+            if(KeyHistoryObj == null)
+            {
+                KeyHistoryObj = new KeyHistory();
+            }
 
             if (id != null) //edit
             {
                 KeyHistoryObj = _unitOfWork.KeyHistory.GetFirstOrDefault(u => u.KeyHistoryId == id);
+
+                OwnerKey = _unitOfWork.Key.GetFirstOrDefault(u => u.KeyId == KeyHistoryObj.KeyId);
 
                 if (KeyHistoryObj == null)
                 {
@@ -56,9 +62,9 @@ namespace Sunridge.Pages.Admin.Keys
                 return Page();
             }
 
-                KeyHistoryObj.LastModifiedBy = claim.Value;
-                KeyHistoryObj.LastModifiedDate = DateTime.Now;
-                _unitOfWork.KeyHistory.Update(KeyHistoryObj);
+            KeyHistoryObj.LastModifiedBy = claim.Value;
+            KeyHistoryObj.LastModifiedDate = DateTime.Now;
+            _unitOfWork.KeyHistory.Update(KeyHistoryObj);
 
 
             //commit changes to the db
