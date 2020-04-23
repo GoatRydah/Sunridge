@@ -9,6 +9,8 @@
     <Compile Remove="Migrations\20200416134307_addClassifieds.Designer.cs" />
     <Compile Remove="Migrations\20200416135451_updateClassifiedVM.cs" />
     <Compile Remove="Migrations\20200416135451_updateClassifiedVM.Designer.cs" />
+    <Compile Remove="Migrations\20200422135230_addRequired.cs" />
+    <Compile Remove="Migrations\20200422135230_addRequired.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

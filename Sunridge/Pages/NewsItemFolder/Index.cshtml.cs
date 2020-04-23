@@ -22,7 +22,7 @@ namespace Sunridge.Pages.NewsItemFolder
 
         public void OnGet()
         {
-            NewsItemList = _unitOfWork.NewsItem.GetAll(null, null, null);
+            NewsItemList = _unitOfWork.NewsItem.GetAll(null, q => q.OrderByDescending(c => c.Year), null);
             numYears = new List<int>();
             foreach(var item in NewsItemList)
             {

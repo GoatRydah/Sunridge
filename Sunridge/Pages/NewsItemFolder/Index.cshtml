@@ -20,24 +20,48 @@
                     </button>
                 </h5>
             </div>
-            <div id="collapse + @year" class="collapse hide" aria-labelledby="@year" data-parent="#accordion" style="">
+            @if (@year == DateTime.Today.Year)
+            {
+                <div id="collapse + @year" class="collapse show" aria-labelledby="@year" data-parent="#accordion" style="">
 
-                @foreach (var item in Model.NewsItemList.Where(i => i.Year == year))
-                {
-                    <div class="card-body">
-                        <hr class="mt-5 mb-5">
-                        <h2>@Html.Raw(item.Header)</h2>
-                        <p>@Html.Raw(item.Content)</p>
+                    @foreach (var item in Model.NewsItemList.Where(i => i.Year == year))
+                    {
+                        <div class="card-body">
+                            <hr class="mt-5 mb-5">
+                            <h2>@Html.Raw(item.Header)</h2>
+                            <p>@Html.Raw(item.Content)</p>
 
-                        @if (item.FilePath != null)
-                        {
-                            <div style="box-shadow: 10px 10px 8px 10px #888888;" class="col-sm-12 text-center mb-5">
-                                <a class="lightbox" href="@item.FilePath" target="_blank">@item.FileName</a>
-                            </div>
-                        }
-                    </div>
-                }
-            </div>
+                            @if (item.FilePath != null)
+                            {
+                                <div style="box-shadow: 10px 10px 8px 10px #888888;" class="col-sm-12 text-center mb-5">
+                                    <a class="lightbox" href="@item.FilePath" target="_blank">@item.FileName</a>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div id="collapse + @year" class="collapse hide" aria-labelledby="@year" data-parent="#accordion" style="">
+
+                    @foreach (var item in Model.NewsItemList.Where(i => i.Year == year))
+                    {
+                        <div class="card-body">
+                            <hr class="mt-5 mb-5">
+                            <h2>@Html.Raw(item.Header)</h2>
+                            <p>@Html.Raw(item.Content)</p>
+
+                            @if (item.FilePath != null)
+                            {
+                                <div style="box-shadow: 10px 10px 8px 10px #888888;" class="col-sm-12 text-center mb-5">
+                                    <a class="lightbox" href="@item.FilePath" target="_blank">@item.FileName</a>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            }
 
         </div>
         }
